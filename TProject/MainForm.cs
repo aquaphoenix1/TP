@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace TProject
 {
@@ -7,27 +9,68 @@ namespace TProject
         public MainForm()
         {
             InitializeComponent();
-            mas.Add(rect = new Rectangle(20, 20, 50, 50));
-            mas.Add(new Rectangle(40, 20, 50, 50));
+
+            vp = new VertexPoints(10, new Pen(Color.Black));
+            vp.AddVertexPoint(new Rectangle(20, 15, 10, 10));
+            vp.AddVertexPoint(new Rectangle(45, 20, 10, 10));
+            vp.AddVertexPoint(new Rectangle(42, 25, 10, 10));
+            vp.AddVertexPoint(new Rectangle(90, 30, 10, 10));
+            vp.AddVertexPoint(new Rectangle(100, 40, 10, 10));
+            vp.AddVertexPoint(new Rectangle(80, 80, 10, 10));
+            vp.AddVertexPoint(new Rectangle(70, 65, 10, 10));
+            vp.AddVertexPoint(new Rectangle(65, 15, 10, 10));
+            vp.AddVertexPoint(new Rectangle(55, 30, 10, 10));
+            vp.AddVertexPoint(new Rectangle(45, 40, 10, 10));
+            vp.AddVertexPoint(new Rectangle(20, 24, 10, 10));
+            vp.AddVertexPoint(new Rectangle(30, 25, 10, 10));
         }
-        Rectangle rect;
-        List<Rectangle> mas = new List<System.Drawing.Rectangle>();
+        class VertexPoints
+        {
+            public Pen Brush { get; private set; }
+            private List<Rectangle> vertexPointList;
+            private int radius;
+            public VertexPoints(int radius, Pen pen)
+            {
+                this.radius = radius;
+                Brush = pen;
+                vertexPointList = new List<Rectangle>();
+            }
+            public void AddVertexPoint(Rectangle rectangle)
+            {
+                vertexPointList.Add(rectangle);
+            }
+            public Rectangle SearhVertexPoint(int x, int y)
+            {
+                return vertexPointList.Find(o => x < o.X + o.Width && x > o.X && y < o.Y + o.Height && y > o.Y);
+            }
+            public void RemoveVertexPoint(Rectangle rectangle)
+            {
+                vertexPointList.Remove(rectangle);
+            }
+            public List<Rectangle> GetVertexPointList()
+            {
+                return vertexPointList;
+            }
+        }
+
+        private int dX, dY;
+        private bool isClicked = false;
+        private VertexPoints vp;
+        Rectangle re;
+
+
+
         private void pictureBoxMap_Paint(object sender, PaintEventArgs e)
         {
-
-            Pen pen = new Pen(Color.Black);
-            e.Graphics.DrawEllipse(pen, re);
-            foreach (var r in mas)
-                e.Graphics.DrawEllipse(pen, r);
+            e.Graphics.DrawEllipse(vp.Brush, re);
+            foreach (var r in vp.GetVertexPointList())
+                e.Graphics.DrawEllipse(vp.Brush, r);
         }
-
-        int dX, dY;
-        bool isClicked = false;
 
         private void pictureBoxMap_MouseUp(object sender, MouseEventArgs e)
         {
             isClicked = false;
-            mas.Add(re);
+            vp.AddVertexPoint(re);
         }
 
         private void pictureBoxMap_MouseMove(object sender, MouseEventArgs e)
@@ -39,13 +82,12 @@ namespace TProject
                 pictureBoxMap.Invalidate();
             }
         }
-        Rectangle re;
         private void pictureBoxMap_MouseDown(object sender, MouseEventArgs e)
         {
-            re = mas.Find(o => e.X < o.X + o.Width && e.X > o.X && e.Y < o.Y + o.Height && e.Y > o.Y);
-            if (re  != null)
+            re = vp.SearhVertexPoint(e.X, e.Y);
+            if (re != null)
             {
-                mas.Remove(re);
+                vp.RemoveVertexPoint(re);
                 isClicked = true;
                 dX = e.X - re.X;
                 dY = e.Y - re.Y;
