@@ -46,10 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Arc.cs" />
+    <Compile Include="AbstractCollection.cs" />
+    <Compile Include="Edge.cs" />
     <Compile Include="Coefficient.cs" />
     <Compile Include="Coordinate.cs" />
     <Compile Include="Driver.cs" />
+    <Compile Include="EdgeCollection.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -63,6 +65,7 @@
     <Compile Include="TrafficLight.cs" />
     <Compile Include="Type.cs" />
     <Compile Include="Vertex.cs" />
+    <Compile Include="VertexCollection.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

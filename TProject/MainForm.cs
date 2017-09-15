@@ -10,87 +10,125 @@ namespace TProject
         {
             InitializeComponent();
 
-            vp = new VertexPoints(10, new Pen(Color.Black));
-            vp.AddVertexPoint(new Rectangle(20, 15, 10, 10));
-            vp.AddVertexPoint(new Rectangle(45, 20, 10, 10));
-            vp.AddVertexPoint(new Rectangle(42, 25, 10, 10));
-            vp.AddVertexPoint(new Rectangle(90, 30, 10, 10));
-            vp.AddVertexPoint(new Rectangle(100, 40, 10, 10));
-            vp.AddVertexPoint(new Rectangle(80, 80, 10, 10));
-            vp.AddVertexPoint(new Rectangle(70, 65, 10, 10));
-            vp.AddVertexPoint(new Rectangle(65, 15, 10, 10));
-            vp.AddVertexPoint(new Rectangle(55, 30, 10, 10));
-            vp.AddVertexPoint(new Rectangle(45, 40, 10, 10));
-            vp.AddVertexPoint(new Rectangle(20, 24, 10, 10));
-            vp.AddVertexPoint(new Rectangle(30, 25, 10, 10));
-        }
-        class VertexPoints
-        {
-            public Pen Brush { get; private set; }
-            private List<Rectangle> vertexPointList;
-            private int radius;
-            public VertexPoints(int radius, Pen pen)
-            {
-                this.radius = radius;
-                Brush = pen;
-                vertexPointList = new List<Rectangle>();
-            }
-            public void AddVertexPoint(Rectangle rectangle)
-            {
-                vertexPointList.Add(rectangle);
-            }
-            public Rectangle SearhVertexPoint(int x, int y)
-            {
-                return vertexPointList.Find(o => x < o.X + o.Width && x > o.X && y < o.Y + o.Height && y > o.Y);
-            }
-            public void RemoveVertexPoint(Rectangle rectangle)
-            {
-                vertexPointList.Remove(rectangle);
-            }
-            public List<Rectangle> GetVertexPointList()
-            {
-                return vertexPointList;
-            }
+            vertexList = new VertexCollection();
+            edgeList = new EdgeCollection();
         }
 
         private int dX, dY;
         private bool isClicked = false;
-        private VertexPoints vp;
-        Rectangle re;
+
+        //Работа с вершинами
+        private VertexCollection vertexList;
+        private EdgeCollection edgeList;
+
+        private Rectangle rectOfselectedVertex;
+        private Vertex selectedVertex;
+        private MouseEventArgs lastEvent;
+
+        private void AddNewVertex()
+        {
+            vertexList.AddElement(new Vertex(lastEvent.X, lastEvent.Y));
+            pictureBoxMap.Invalidate();
+        }
+        private void DrawAllVertex(PaintEventArgs e)
+        {
+            if (selectedVertex != null)
+                e.Graphics.DrawEllipse(Vertex.Brush, rectOfselectedVertex);
+            foreach (var r in vertexList.GetElementsList())
+                e.Graphics.DrawEllipse(Vertex.Brush, r.PointOnMap);
+        }
+        private void DropeVertex()
+        {
+            if (selectedVertex != null)
+            {
+                selectedVertex.PointOnMap = rectOfselectedVertex;
+                vertexList.AddElement(selectedVertex);
+            }
+        }
+        private void MoveVertex(MouseEventArgs e)
+        {
+            rectOfselectedVertex.X = e.X - dX;
+            rectOfselectedVertex.Y = e.Y - dY;
+        }
+        private bool SelectVertex(MouseEventArgs e)
+        {
+            bool res = false;
+            selectedVertex = vertexList.SearhVertexPoint(e.X, e.Y);
+            if (res = selectedVertex != null)
+            {
+                rectOfselectedVertex = selectedVertex.PointOnMap;
+                vertexList.RemoveElement(selectedVertex);
+
+                isClicked = true;
+                dX = e.X - rectOfselectedVertex.X;
+                dY = e.Y - rectOfselectedVertex.Y;
+            }
+            return res;
+        }
 
 
-
+        //События формы
         private void pictureBoxMap_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawEllipse(vp.Brush, re);
-            foreach (var r in vp.GetVertexPointList())
-                e.Graphics.DrawEllipse(vp.Brush, r);
+            DrawAllVertex(e);
         }
 
         private void pictureBoxMap_MouseUp(object sender, MouseEventArgs e)
         {
             isClicked = false;
-            vp.AddVertexPoint(re);
+            DropeVertex();
         }
 
         private void pictureBoxMap_MouseMove(object sender, MouseEventArgs e)
         {
             if (isClicked)
             {
-                re.X = e.X - dX;
-                re.Y = e.Y - dY;
+                MoveVertex(e);
                 pictureBoxMap.Invalidate();
             }
         }
+
+        private void addVertexToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            AddNewVertex();
+        }
+        private void editVertexToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void addEdgeToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
         private void pictureBoxMap_MouseDown(object sender, MouseEventArgs e)
         {
-            re = vp.SearhVertexPoint(e.X, e.Y);
-            if (re != null)
+            bool isSelectedVertex = SelectVertex(e);
+
+            if (e.Button == MouseButtons.Right)
             {
-                vp.RemoveVertexPoint(re);
-                isClicked = true;
-                dX = e.X - re.X;
-                dY = e.Y - re.Y;
+                lastEvent = e;
+                isClicked = false;
+
+                addVertexToolStripMenuItem.Enabled = !isSelectedVertex;
+                editVertexToolStripMenuItem.Visible = isSelectedVertex;
+                addEdgeToolStripMenuItem.Enabled = isSelectedVertex & vertexList.GetCountElements() > 0; ////???????
+
+                #region это работает(на всякий случай)
+                //if (!isSelectedVertex && vertexList.GetCountElements() > 1)
+                //{
+                //    addVertexToolStripMenuItem.Enabled = true;
+                //    addEdgeToolStripMenuItem.Enabled = false;
+                //    editVertexToolStripMenuItem.Visible = false;
+                //}
+                //if (isSelectedVertex)
+                //{
+                //    addVertexToolStripMenuItem.Enabled = false;
+                //    addEdgeToolStripMenuItem.Enabled = true;
+                //    editVertexToolStripMenuItem.Visible = true;
+                //}
+#endregion
             }
         }
     }

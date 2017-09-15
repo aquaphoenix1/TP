@@ -1,6 +1,6 @@
 ﻿namespace TProject
 {
-    class Arc
+    class Edge
     {
         public string Direction { get; set; }
 
@@ -48,11 +48,11 @@
             this.VertexTwo = B;
         }
 
-        private Arc() { }
+        private Edge() { }
 
-        public static Arc CreateArc(string Direction, Vertex A, Vertex B, int length, string nameStreet, Coating coat)
+        public static Edge CreateArc(string Direction, Vertex A, Vertex B, int length, string nameStreet, Coating coat)
         {
-            Arc arc = new Arc();
+            Edge arc = new Edge();
             arc.Direction = Direction;
             arc.Length = length;
             arc.SetVertex(A, B);
