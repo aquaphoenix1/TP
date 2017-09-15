@@ -8,14 +8,14 @@
         {
             public Fuel CarFuel { get; set; }
 
-            public class Fuel
+            public class Fuel : Type
             {
-                public string NameFuel { get; }
+                public string Type { get; set; }
                 public double Price { get; }
 
-                public Fuel(string nameFuel, double price)
+                public Fuel(string type, double price)
                 {
-                    this.NameFuel = nameFuel;
+                    this.Type = type;
                     this.Price = price;
                 }
             }
