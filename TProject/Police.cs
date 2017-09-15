@@ -23,7 +23,7 @@
 
             public Fine(string name, int count)
             {
-                this.name = name;
+                this.name = name;//отвратительно :)
                 this.count = count;
             }
         }
