@@ -9,8 +9,8 @@ namespace TProject
         public long Id { get; }
         public TrafficLight TrafficLight { get; set; }
 
-        public static int Radius { get; private set; }
-        public static Pen Brush { get; private set; }
+        public static int Radius { get; set; }
+        public static Pen Brush { get; set; }
 
         public Rectangle PointOnMap {
             get { return pointOnMap; }

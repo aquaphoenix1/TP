@@ -39,9 +39,9 @@
             this.pictureBoxMap = new System.Windows.Forms.PictureBox();
             this.contextMenuStripPictBox = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addVertexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabControlMain = new System.Windows.Forms.TabControl();
             this.addEdgeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editVertexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabControlMain = new System.Windows.Forms.TabControl();
             this.menuStrip.SuspendLayout();
             this.tabPageMap.SuspendLayout();
             this.panelRightMenu.SuspendLayout();
@@ -125,11 +125,12 @@
             // 
             // pictureBoxMap
             // 
-            this.pictureBoxMap.BackColor = System.Drawing.Color.White;
+            this.pictureBoxMap.BackColor = System.Drawing.Color.Maroon;
             this.pictureBoxMap.ContextMenuStrip = this.contextMenuStripPictBox;
-            this.pictureBoxMap.Location = new System.Drawing.Point(48, 3);
+            this.pictureBoxMap.Location = new System.Drawing.Point(-2, 3);
             this.pictureBoxMap.Name = "pictureBoxMap";
-            this.pictureBoxMap.Size = new System.Drawing.Size(410, 275);
+            this.pictureBoxMap.Size = new System.Drawing.Size(738, 392);
+            this.pictureBoxMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxMap.TabIndex = 0;
             this.pictureBoxMap.TabStop = false;
             this.pictureBoxMap.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxMap_Paint);
@@ -144,7 +145,7 @@
             this.addEdgeToolStripMenuItem,
             this.editVertexToolStripMenuItem});
             this.contextMenuStripPictBox.Name = "contextMenuStripPictBox";
-            this.contextMenuStripPictBox.Size = new System.Drawing.Size(210, 92);
+            this.contextMenuStripPictBox.Size = new System.Drawing.Size(210, 70);
             // 
             // addVertexToolStripMenuItem
             // 
@@ -152,16 +153,6 @@
             this.addVertexToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.addVertexToolStripMenuItem.Text = "Добавить перекресток";
             this.addVertexToolStripMenuItem.Click += new System.EventHandler(this.addVertexToolStripMenuItem_Click);
-            // 
-            // tabControlMain
-            // 
-            this.tabControlMain.Controls.Add(this.tabPageMap);
-            this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlMain.Location = new System.Drawing.Point(0, 24);
-            this.tabControlMain.Name = "tabControlMain";
-            this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(775, 345);
-            this.tabControlMain.TabIndex = 2;
             // 
             // addEdgeToolStripMenuItem
             // 
@@ -178,6 +169,16 @@
             this.editVertexToolStripMenuItem.Text = "Параметры перекрестка";
             this.editVertexToolStripMenuItem.Visible = false;
             this.editVertexToolStripMenuItem.Click += new System.EventHandler(this.editVertexToolStripMenuItem_Click);
+            // 
+            // tabControlMain
+            // 
+            this.tabControlMain.Controls.Add(this.tabPageMap);
+            this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlMain.Location = new System.Drawing.Point(0, 24);
+            this.tabControlMain.Name = "tabControlMain";
+            this.tabControlMain.SelectedIndex = 0;
+            this.tabControlMain.Size = new System.Drawing.Size(775, 345);
+            this.tabControlMain.TabIndex = 2;
             // 
             // MainForm
             // 

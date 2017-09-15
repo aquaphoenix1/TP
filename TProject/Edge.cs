@@ -48,7 +48,13 @@
             this.VertexTwo = B;
         }
 
-        private Edge() { }
+        public Edge() { }
+
+        public Edge(Vertex v1, Vertex v2)
+        {
+            VertexOne = v1;
+            VertexTwo = v2;
+        }
 
         public static Edge CreateArc(string Direction, Vertex A, Vertex B, int length, string nameStreet, Coating coat)
         {
