@@ -1,31 +1,33 @@
 ﻿namespace TProject
 {
-    class Police : Coordinate
+    class Police : Coordinate, Type, Coefficient
     {
-        public PoliceType Type { get; set; }
-        public double Coefficient { get; set; }
+        public string Type { get; set; }
+        public double Coeff { get; set; }
         public Fine FineValue { get; set; }
 
-        public class PoliceType
-        {
-            string type;
-
-            public PoliceType(string type)
-            {
-                this.type = type;
-            }
-        }
+        public int X { get; set; }
+        public int Y { get; set; }
 
         public class Fine
         {
-            string name;
-            int count;
+            public string Name { get; set; }
+            public int Count { get; set; }
 
             public Fine(string name, int count)
             {
-                this.name = name;//отвратительно :)
-                this.count = count;
+                this.Name = name;
+                this.Count = count;
             }
+        }
+
+        public Police(string type, double coefficient, Fine fine, int x, int y)
+        {
+            this.Type = Type;
+            this.Coeff = coefficient;
+            this.FineValue = fine;
+            this.X = x;
+            this.Y = y;
         }
     }
 }

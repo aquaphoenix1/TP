@@ -1,8 +1,8 @@
 ﻿namespace TProject
 {
-    class Coordinate
+    interface Coordinate
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        int X { get; set; }
+        int Y { get; set; }
     }
 }
