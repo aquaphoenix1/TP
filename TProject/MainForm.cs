@@ -119,14 +119,41 @@ namespace TProject
         {
             AddNewVertex();
         }
-        private void editVertexToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-
-        }
 
         private void addEdgeToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             isCreatingEdge = true;
+        }
+
+        private void добавитьСветофорToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            if (selectedVertex != null && selectedVertex.TrafficLight == null)
+            {
+                AddTrafficLightForm form = new AddTrafficLightForm();
+                form.ShowDialog();
+                if(form.AcceptButton.DialogResult == DialogResult.OK)
+                    selectedVertex.TrafficLight = new TrafficLight(form.GetGreenSeconds(), form.GetRedSeconds());
+            }
+        }
+
+        private void удалитьСветофорToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            if (selectedVertex != null && selectedVertex.TrafficLight != null)
+                selectedVertex.TrafficLight = null;
+        }
+
+        private void редактироватьСветофорToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            if (selectedVertex != null && selectedVertex.TrafficLight != null)
+            {
+                AddTrafficLightForm form = new AddTrafficLightForm(selectedVertex.TrafficLight.GreenSeconds, selectedVertex.TrafficLight.RedSeconds);
+                form.ShowDialog();
+                if (form.AcceptButton.DialogResult == DialogResult.OK)
+                {
+                    selectedVertex.TrafficLight.GreenSeconds = form.GetGreenSeconds();
+                    selectedVertex.TrafficLight.RedSeconds = form.GetRedSeconds();
+                }
+            }
         }
 
         private void pictureBoxMap_MouseDown(object sender, MouseEventArgs e)

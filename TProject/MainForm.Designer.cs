@@ -41,7 +41,10 @@
             this.addVertexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addEdgeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editVertexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.добавитьСветофорToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.удалитьСветофорToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlMain = new System.Windows.Forms.TabControl();
+            this.редактироватьСветофорToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.tabPageMap.SuspendLayout();
             this.panelRightMenu.SuspendLayout();
@@ -64,7 +67,7 @@
             // файлToolStripMenuItem
             // 
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.файлToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
             this.файлToolStripMenuItem.Text = "Файл";
             // 
             // tabPageMap
@@ -145,12 +148,12 @@
             this.addEdgeToolStripMenuItem,
             this.editVertexToolStripMenuItem});
             this.contextMenuStripPictBox.Name = "contextMenuStripPictBox";
-            this.contextMenuStripPictBox.Size = new System.Drawing.Size(210, 70);
+            this.contextMenuStripPictBox.Size = new System.Drawing.Size(200, 92);
             // 
             // addVertexToolStripMenuItem
             // 
             this.addVertexToolStripMenuItem.Name = "addVertexToolStripMenuItem";
-            this.addVertexToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.addVertexToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.addVertexToolStripMenuItem.Text = "Добавить перекресток";
             this.addVertexToolStripMenuItem.Click += new System.EventHandler(this.addVertexToolStripMenuItem_Click);
             // 
@@ -158,17 +161,34 @@
             // 
             this.addEdgeToolStripMenuItem.Enabled = false;
             this.addEdgeToolStripMenuItem.Name = "addEdgeToolStripMenuItem";
-            this.addEdgeToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.addEdgeToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.addEdgeToolStripMenuItem.Text = "Добавить перегон";
             this.addEdgeToolStripMenuItem.Click += new System.EventHandler(this.addEdgeToolStripMenuItem_Click);
             // 
             // editVertexToolStripMenuItem
             // 
+            this.editVertexToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.добавитьСветофорToolStripMenuItem,
+            this.удалитьСветофорToolStripMenuItem,
+            this.редактироватьСветофорToolStripMenuItem});
             this.editVertexToolStripMenuItem.Name = "editVertexToolStripMenuItem";
-            this.editVertexToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.editVertexToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.editVertexToolStripMenuItem.Text = "Параметры перекрестка";
             this.editVertexToolStripMenuItem.Visible = false;
-            this.editVertexToolStripMenuItem.Click += new System.EventHandler(this.editVertexToolStripMenuItem_Click);
+            // 
+            // добавитьСветофорToolStripMenuItem
+            // 
+            this.добавитьСветофорToolStripMenuItem.Name = "добавитьСветофорToolStripMenuItem";
+            this.добавитьСветофорToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.добавитьСветофорToolStripMenuItem.Text = "Добавить светофор";
+            this.добавитьСветофорToolStripMenuItem.Click += new System.EventHandler(this.добавитьСветофорToolStripMenuItem_Click);
+            // 
+            // удалитьСветофорToolStripMenuItem
+            // 
+            this.удалитьСветофорToolStripMenuItem.Name = "удалитьСветофорToolStripMenuItem";
+            this.удалитьСветофорToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.удалитьСветофорToolStripMenuItem.Text = "Удалить светофор";
+            this.удалитьСветофорToolStripMenuItem.Click += new System.EventHandler(this.удалитьСветофорToolStripMenuItem_Click);
             // 
             // tabControlMain
             // 
@@ -179,6 +199,13 @@
             this.tabControlMain.SelectedIndex = 0;
             this.tabControlMain.Size = new System.Drawing.Size(775, 345);
             this.tabControlMain.TabIndex = 2;
+            // 
+            // редактироватьСветофорToolStripMenuItem
+            // 
+            this.редактироватьСветофорToolStripMenuItem.Name = "редактироватьСветофорToolStripMenuItem";
+            this.редактироватьСветофорToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.редактироватьСветофорToolStripMenuItem.Text = "Редактировать светофор";
+            this.редактироватьСветофорToolStripMenuItem.Click += new System.EventHandler(this.редактироватьСветофорToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -218,6 +245,9 @@
         private System.Windows.Forms.ToolStripMenuItem addVertexToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addEdgeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editVertexToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem добавитьСветофорToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem удалитьСветофорToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem редактироватьСветофорToolStripMenuItem;
     }
 }
 

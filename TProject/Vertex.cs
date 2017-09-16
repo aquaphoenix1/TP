@@ -46,5 +46,4 @@ namespace TProject
             this.TrafficLight = trafficLight;
         }
     }
-
 }
