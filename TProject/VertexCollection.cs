@@ -11,6 +11,15 @@ namespace TProject
     class VertexCollection:AbstractCollection<Vertex>
     {
         /// <summary>
+        /// Область выбранной вершины
+        /// </summary>
+        public Rectangle SelRect { get; set; }
+        /// <summary>
+        /// Выбранная вершины
+        /// </summary>
+        public Vertex SelVertex { get; set; }
+
+        /// <summary>
         /// Возвращает вершину, лежащую радиусе Radius от указанной точки
         /// </summary>
         /// <param name="x"></param>
@@ -40,40 +49,32 @@ namespace TProject
            == null;
         }
 
-        public override void DrawAllOnPicture(PaintEventArgs e)
+        public bool SelectVertex(int x, int y, ref int dX, ref int dY)
+        {
+            bool res = false;
+            SelVertex = SearhVertexPoint(x, y);
+            if (res = SelVertex != null)
+            {
+                SelRect = SelVertex.GetRect();
+
+                dX = x - SelRect.X;
+                dY = y - SelRect.Y;
+            }
+            return res;
+        }
+
+        public void DrawAllOnPicture(PaintEventArgs e)
         { 
             foreach (var r in ElementsList)
             {
                 e.Graphics.DrawEllipse(Vertex.GeneralVertex, r.GetRect());
             }
         }
+
+        public void MoveSelVertex(int x, int y, int dX, int dY)
+        {
+            SelVertex.GetRect().X = x - dX;
+            SelVertex.GetRect().Y = y - dY;
+        }
     }
 }
-
-
-//private List<Vertex> vertexPointList;
-
-//public int GetCountVertex()
-//{
-//    return vertexPointList.Count();
-//}
-//public VertexCollection()
-//{
-//    vertexPointList = new List<Vertex>();
-//}
-//public void AddVertexPoint(Vertex rectangle)
-//{
-//    vertexPointList.Add(rectangle);
-//}
-//public Vertex SearhVertexPoint(int x, int y)
-//{
-//    return vertexPointList.Find(o => (x < o.X + o.PointOnMap.Width) && (x > o.X) && (y < o.Y + o.PointOnMap.Height) && (y > o.Y));
-//}
-//public void RemoveVertexPoint(Vertex rectangle)
-//{
-//    vertexPointList.Remove(rectangle);
-//}
-//public List<Vertex> GetVertexPointList()
-//{
-//    return vertexPointList;
-//}

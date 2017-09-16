@@ -22,9 +22,26 @@ namespace TProject
             return ElementsList.Find(o => o.VertexOne.Id == vertex.Id || o.VertexTwo.Id == vertex.Id);
         }
 
-        public override void DrawAllOnPicture(PaintEventArgs e)
+        /// <summary>
+        /// Отрисовка коллекции
+        /// </summary>
+        /// <param name="e"></param>
+        /// <param name="dX"></param>
+        /// <param name="dY"></param>
+        /// <param name="x"> координата из которой строится линия в тек момент</param>
+        /// <param name="y"> координата из которой строится линия в тек момент</param>
+        /// <param name="vertexes"> список вершин</param>
+        /// <param name="isCreatingEdge"> строится ли линия в данный момент</param>
+        public void DrawAllOnPicture(PaintEventArgs e, int dX, int dY, int x, int y, VertexCollection vertexes, bool isCreatingEdge)
         {
-            throw new NotImplementedException();
+            if (isCreatingEdge)
+                e.Graphics.DrawLine(Vertex.ActivVertex, vertexes.SelRect.X + dX + 1, vertexes.SelRect.Y + dY, x, y);
+
+            foreach (var r in ElementsList)
+                e.Graphics.DrawLine(Vertex.GeneralVertex,
+                    r.GetVertexA().X + Vertex.Radius / 2, r.GetVertexA().Y + Vertex.Radius / 2,
+                    r.GetVertexB().X + Vertex.Radius / 2, r.GetVertexB().Y + Vertex.Radius / 2
+                    );
         }
     }
 }

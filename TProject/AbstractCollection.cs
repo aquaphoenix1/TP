@@ -16,7 +16,6 @@ namespace TProject
         /// Paint
         /// </summary>
         /// <param name="e"></param>
-        public abstract void  DrawAllOnPicture(PaintEventArgs e);
 
         public int GetCountElements()
         {
