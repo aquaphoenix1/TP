@@ -9,6 +9,20 @@ namespace TProject
         public long Id { get; }
         public TrafficLight TrafficLight { get; set; }
 
+        static private Pen activVertex;
+        static private Pen generalVertex;
+        static public Pen ActivVertex
+        {
+            get { return activVertex; }
+            set { activVertex = value; }
+        }
+        static public Pen GeneralVertex
+        {
+            get { return generalVertex; }
+            set { generalVertex = value; }
+        }
+
+
         public static int Radius { get; set; }
         public static Pen Brush { get; set; }
 
@@ -31,6 +45,8 @@ namespace TProject
         {
             Brush = new Pen(Color.Black);
             Radius = 10;
+            generalVertex = new Pen(Brushes.DarkBlue, Vertex.Radius / 2);
+            activVertex = new Pen(Color.Aqua, Vertex.Radius / 2);
         }
         public Vertex(int x, int y)
         {

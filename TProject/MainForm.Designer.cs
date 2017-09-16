@@ -128,7 +128,7 @@
             // 
             // pictureBoxMap
             // 
-            this.pictureBoxMap.BackColor = System.Drawing.Color.Maroon;
+            this.pictureBoxMap.BackColor = System.Drawing.Color.Silver;
             this.pictureBoxMap.ContextMenuStrip = this.contextMenuStripPictBox;
             this.pictureBoxMap.Location = new System.Drawing.Point(-2, 3);
             this.pictureBoxMap.Name = "pictureBoxMap";
@@ -136,6 +136,7 @@
             this.pictureBoxMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxMap.TabIndex = 0;
             this.pictureBoxMap.TabStop = false;
+            this.DoubleBuffered = true;
             this.pictureBoxMap.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxMap_Paint);
             this.pictureBoxMap.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMap_MouseDown);
             this.pictureBoxMap.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMap_MouseMove);

@@ -14,9 +14,6 @@ namespace TProject
         }
 
         //кисти для расскраски
-        private Pen activVertex = new Pen(Color.Aqua, Vertex.Radius / 2);
-        private Pen generalVertex = new Pen(Brushes.DarkBlue, Vertex.Radius / 2);
-
         private int dX, dY;
         private bool isClicked = false;
         private bool isCreatingEdge = false;
@@ -29,33 +26,27 @@ namespace TProject
         private Vertex selectedVertex;
         private MouseEventArgs lastEvent;
 
+
         private void AddNewVertex()
         {
             vertexList.AddElement(new Vertex(lastEvent.X, lastEvent.Y));
-            pictureBoxMap.Invalidate();
+           // pictureBoxMap.Invalidate();
         }
         private void DrawAdllEdge(PaintEventArgs e)
         {
             if (isCreatingEdge)
-                e.Graphics.DrawLine(activVertex,
+                e.Graphics.DrawLine(Vertex.ActivVertex,
                      rectOfselectedVertex.X + dX + 1, rectOfselectedVertex.Y + dY,
                      lastEvent.X, lastEvent.Y
                      );
 
             foreach (var r in edgeList.GetElementsList())
-                e.Graphics.DrawLine(generalVertex, 
+                e.Graphics.DrawLine(Vertex.GeneralVertex, 
                     r.GetVertexA().X + Vertex.Radius / 2, r.GetVertexA().Y + Vertex.Radius / 2,
                     r.GetVertexB().X + Vertex.Radius / 2, r.GetVertexB().Y + Vertex.Radius / 2
                     );
         }
-        private void DrawAllVertex(PaintEventArgs e)
-        {
-            foreach (var r in vertexList.GetElementsList())
-            {
-                e.Graphics.DrawEllipse(generalVertex, r.GetRect());
-            }
-                
-        }
+       
       
         private void MoveVertex(MouseEventArgs e)
         {
@@ -85,8 +76,8 @@ namespace TProject
         //События pictureBoxMap
         private void pictureBoxMap_Paint(object sender, PaintEventArgs e)
         {
-            DrawAllVertex(e);
             DrawAdllEdge(e);
+            vertexList.DrawAllOnPicture(e);
         }
         private void pictureBoxMap_MouseUp(object sender, MouseEventArgs e)
         {
@@ -116,7 +107,7 @@ namespace TProject
                 lastEvent = e;
                 isClicked = false;
 
-                addVertexToolStripMenuItem.Enabled = !isSelectedVertex;
+                addVertexToolStripMenuItem.Enabled = !isSelectedVertex && vertexList.IsAllowedRadius(lastEvent.X, lastEvent.Y);
                 editVertexToolStripMenuItem.Visible = isSelectedVertex;
                 addEdgeToolStripMenuItem.Enabled = isSelectedVertex & vertexList.GetCountElements() > 0; ////???????
 
@@ -172,6 +163,8 @@ namespace TProject
             if (selectedVertex != null && selectedVertex.TrafficLight != null)
                 selectedVertex.TrafficLight = null;
         }
+
+
         private void редактироватьСветофорToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             if (selectedVertex != null && selectedVertex.TrafficLight != null)

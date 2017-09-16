@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace TProject
 {
@@ -19,6 +20,11 @@ namespace TProject
         {
             //////////
             return ElementsList.Find(o => o.VertexOne.Id == vertex.Id || o.VertexTwo.Id == vertex.Id);
+        }
+
+        public override void DrawAllOnPicture(PaintEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace TProject
 {
-    class AbstractCollection<T>
+    abstract class AbstractCollection<T>
     {
         public List<T> ElementsList { get; set; }
+
+        /// <summary>
+        /// Отрисовывает элементы коллекции на объекте, для которого вызвано событие 
+        /// Paint
+        /// </summary>
+        /// <param name="e"></param>
+        public abstract void  DrawAllOnPicture(PaintEventArgs e);
 
         public int GetCountElements()
         {

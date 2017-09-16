@@ -10,6 +10,12 @@ namespace TProject
 {
     class VertexCollection:AbstractCollection<Vertex>
     {
+        /// <summary>
+        /// Возвращает вершину, лежащую радиусе Radius от указанной точки
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
         public Vertex SearhVertexPoint(int x, int y)
         {
             Vertex v = null;
@@ -19,6 +25,27 @@ namespace TProject
                     v = o;
             }
             return v;
+        }
+
+        /// <summary>
+        /// Проверяет наличие вершин в радиусе Radius^2 от указанной точки
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        public bool IsAllowedRadius(int x, int y)
+        {
+           return ElementsList.Find(o =>(
+                Math.Pow(x - o.X, 2) + Math.Pow(y - o.Y, 2) < Math.Pow(Vertex.Radius * 2, 2)))
+           == null;
+        }
+
+        public override void DrawAllOnPicture(PaintEventArgs e)
+        { 
+            foreach (var r in ElementsList)
+            {
+                e.Graphics.DrawEllipse(Vertex.GeneralVertex, r.GetRect());
+            }
         }
     }
 }
