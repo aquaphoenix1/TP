@@ -4,8 +4,8 @@
     {
         public string Direction { get; set; }
 
-        private Vertex VertexOne;
-        private Vertex VertexTwo;
+        public Vertex VertexOne { get; set; }
+        public Vertex VertexTwo { get; set; } 
 
         public Police Policemen { get; set; }
 
@@ -13,7 +13,18 @@
 
         private int Length;
 
+
+
         public Coating Coat { get; set; }
+
+        public void SetVertexA(Vertex A)
+        {
+            VertexOne = A;
+        }
+        public void SetVertexB(Vertex B)
+        {
+             VertexTwo = B;
+        }
 
         public Vertex GetVertexA()
         {

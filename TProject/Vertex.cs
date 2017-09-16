@@ -12,18 +12,18 @@ namespace TProject
         public static int Radius { get; set; }
         public static Pen Brush { get; set; }
 
-        public Rectangle PointOnMap {
-            get { return pointOnMap; }
-            set { pointOnMap = value; }
+        public ref Rectangle GetRect()
+        {
+            return ref pointOnMap;
         }
         private Rectangle pointOnMap;
 
         public int X {
-            get { return PointOnMap.X; }
+            get { return pointOnMap.X; }
             set { pointOnMap.X = value; }
         }
         public int Y {
-            get { return PointOnMap.Y; }
+            get { return pointOnMap.Y; }
             set { pointOnMap.Y = value; }
         }
 
@@ -35,14 +35,14 @@ namespace TProject
         public Vertex(int x, int y)
         {
             Id = ++curMaxId;
-            PointOnMap = new Rectangle(x, y, Radius, Radius);
+            pointOnMap = new Rectangle(x, y, Radius, Radius);
             this.TrafficLight = null;
         }
 
         public Vertex(int x, int y, TrafficLight trafficLight)
         {
             Id = ++curMaxId;
-            PointOnMap = new Rectangle(x, y, Radius, Radius);
+            pointOnMap = new Rectangle(x, y, Radius, Radius);
             this.TrafficLight = trafficLight;
         }
     }

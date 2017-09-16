@@ -12,7 +12,13 @@ namespace TProject
     {
         public Vertex SearhVertexPoint(int x, int y)
         {
-            return ElementsList.Find(o => (x < o.X + o.PointOnMap.Width) && (x > o.X) && (y < o.Y + o.PointOnMap.Height) && (y > o.Y));
+            Vertex v = null;
+            foreach (var o in ElementsList)
+            {
+                if ((x < o.X + o.GetRect().Width) && (x > o.X) && (y < o.Y + o.GetRect().Height) && (y > o.Y))
+                    v = o;
+            }
+            return v;
         }
     }
 }

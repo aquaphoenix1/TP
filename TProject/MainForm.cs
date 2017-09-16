@@ -50,23 +50,18 @@ namespace TProject
         }
         private void DrawAllVertex(PaintEventArgs e)
         {
-            if (selectedVertex != null)
-                e.Graphics.DrawEllipse(activVertex, rectOfselectedVertex);
             foreach (var r in vertexList.GetElementsList())
-                e.Graphics.DrawEllipse(generalVertex, r.PointOnMap);
-        }
-        private void DropeVertex()
-        {
-            if (selectedVertex != null)
             {
-                selectedVertex.PointOnMap = rectOfselectedVertex;
-                vertexList.AddElement(selectedVertex);
+                e.Graphics.DrawEllipse(generalVertex, r.GetRect());
             }
+                
         }
+      
         private void MoveVertex(MouseEventArgs e)
         {
-            rectOfselectedVertex.X = e.X - dX;
-            rectOfselectedVertex.Y = e.Y - dY;
+            selectedVertex.GetRect().X = e.X - dX;
+            selectedVertex.GetRect().Y = e.Y - dY;
+            pictureBoxMap.Invalidate();
         }
         private void MoveCursor(MouseEventArgs e)
         {
@@ -78,8 +73,7 @@ namespace TProject
             selectedVertex = vertexList.SearhVertexPoint(e.X, e.Y);
             if (res = selectedVertex != null)
             {
-                rectOfselectedVertex = selectedVertex.PointOnMap;
-                vertexList.RemoveElement(selectedVertex);
+                rectOfselectedVertex = selectedVertex.GetRect();
 
                 isClicked = true;
                 dX = e.X - rectOfselectedVertex.X;
@@ -88,20 +82,17 @@ namespace TProject
             return res;
         }
 
-        //События формы
+        //События pictureBoxMap
         private void pictureBoxMap_Paint(object sender, PaintEventArgs e)
         {
             DrawAllVertex(e);
             DrawAdllEdge(e);
         }
-
         private void pictureBoxMap_MouseUp(object sender, MouseEventArgs e)
         {
             isClicked = false;
-            isCreatingEdge &= false; 
-            DropeVertex();
+            isCreatingEdge = false; 
         }
-
         private void pictureBoxMap_MouseMove(object sender, MouseEventArgs e)
         {
             if (isClicked)
@@ -114,48 +105,6 @@ namespace TProject
             }
             pictureBoxMap.Invalidate();
         }
-
-        private void addVertexToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            AddNewVertex();
-        }
-
-        private void addEdgeToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            isCreatingEdge = true;
-        }
-
-        private void добавитьСветофорToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            if (selectedVertex != null && selectedVertex.TrafficLight == null)
-            {
-                AddTrafficLightForm form = new AddTrafficLightForm();
-                form.ShowDialog();
-                if(form.AcceptButton.DialogResult == DialogResult.OK)
-                    selectedVertex.TrafficLight = new TrafficLight(form.GetGreenSeconds(), form.GetRedSeconds());
-            }
-        }
-
-        private void удалитьСветофорToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            if (selectedVertex != null && selectedVertex.TrafficLight != null)
-                selectedVertex.TrafficLight = null;
-        }
-
-        private void редактироватьСветофорToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            if (selectedVertex != null && selectedVertex.TrafficLight != null)
-            {
-                AddTrafficLightForm form = new AddTrafficLightForm(selectedVertex.TrafficLight.GreenSeconds, selectedVertex.TrafficLight.RedSeconds);
-                form.ShowDialog();
-                if (form.AcceptButton.DialogResult == DialogResult.OK)
-                {
-                    selectedVertex.TrafficLight.GreenSeconds = form.GetGreenSeconds();
-                    selectedVertex.TrafficLight.RedSeconds = form.GetRedSeconds();
-                }
-            }
-        }
-
         private void pictureBoxMap_MouseDown(object sender, MouseEventArgs e)
         {
             Vertex v1 = selectedVertex;
@@ -184,7 +133,7 @@ namespace TProject
                 //    addEdgeToolStripMenuItem.Enabled = true;
                 //    editVertexToolStripMenuItem.Visible = true;
                 //}
-#endregion
+                #endregion
             }
             else
             {
@@ -195,5 +144,48 @@ namespace TProject
                 }
             }
         }
+
+
+        //События Вершины и ребра
+        private void addVertexToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            AddNewVertex();
+        }
+        private void addEdgeToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            isCreatingEdge = true;
+        }
+
+        //события светофоры
+        private void добавитьСветофорToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            if (selectedVertex != null && selectedVertex.TrafficLight == null)
+            {
+                AddTrafficLightForm form = new AddTrafficLightForm();
+                form.ShowDialog();
+                if(form.AcceptButton.DialogResult == DialogResult.OK)
+                    selectedVertex.TrafficLight = new TrafficLight(form.GetGreenSeconds(), form.GetRedSeconds());
+            }
+        }
+        private void удалитьСветофорToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            if (selectedVertex != null && selectedVertex.TrafficLight != null)
+                selectedVertex.TrafficLight = null;
+        }
+        private void редактироватьСветофорToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            if (selectedVertex != null && selectedVertex.TrafficLight != null)
+            {
+                AddTrafficLightForm form = new AddTrafficLightForm(selectedVertex.TrafficLight.GreenSeconds, selectedVertex.TrafficLight.RedSeconds);
+                form.ShowDialog();
+                if (form.AcceptButton.DialogResult == DialogResult.OK)
+                {
+                    selectedVertex.TrafficLight.GreenSeconds = form.GetGreenSeconds();
+                    selectedVertex.TrafficLight.RedSeconds = form.GetRedSeconds();
+                }
+            }
+        }
+
+      
     }
 }
