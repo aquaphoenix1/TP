@@ -51,8 +51,9 @@ namespace TProject
            == null;
         }
 
-        public bool SelectVertex(int x, int y, int dX, int dY)
+        public bool SelectVertex(int x, int y, out int dX, out int dY)
         {
+            dX = 0; dY = 0;
             bool res = false;
             SelVertex = SearhVertexPoint(x, y);
             if (res = SelVertex != null)

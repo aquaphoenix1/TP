@@ -19,10 +19,12 @@ namespace TProject
         //Используемые коллекции
         private VertexCollection vertexes;
         private EdgeCollection edges;
+        private Image sourceImage;
 
         public MainForm()
         {
             InitializeComponent();
+            DoubleBuffered = true;
             vertexes = new VertexCollection();
             vertexes.eventUpdateList += pictureBoxMap.Invalidate;
             edges = new EdgeCollection();
@@ -43,7 +45,6 @@ namespace TProject
             if (lastMouseEvent != null)
                 edges.DrawAllOnPicture(g, dX, dY, lastMouseEvent.X, lastMouseEvent.Y, vertexes, isCreatingEdge);
             vertexes.DrawAllOnPicture(g);
-
         }
         private void pictureBoxMap_MouseUp(object sender, MouseEventArgs e)
         {
@@ -66,7 +67,7 @@ namespace TProject
         private void pictureBoxMap_MouseDown(object sender, MouseEventArgs e)
         {
             Vertex v1 = vertexes.SelVertex;
-            isClickedOnVertex = vertexes.SelectVertex(e.X.Scaling(), e.Y.Scaling(), dX, dY);
+            isClickedOnVertex = vertexes.SelectVertex(e.X.Scaling(), e.Y.Scaling(),out dX, out dY);
 
             bool isSelectedVertex = isClickedOnVertex;
 
@@ -96,6 +97,7 @@ namespace TProject
         {
                 zoomCurValue += e.Delta > 0 ? 0.1 : -0.1;
                 Vertex.Scale = zoomCurValue;
+                pictureBoxMap.Image = new Bitmap(sourceImage, new Size(startWidthPB.UnScaling(), startHeightPB.UnScaling()));
                 pictureBoxMap.Size = new Size(startWidthPB.UnScaling(), startHeightPB.UnScaling());
         }
 
@@ -113,15 +115,14 @@ namespace TProject
         {
             if (openSubMapFileDialog.ShowDialog() == DialogResult.OK)
             {
-                this.DoubleBuffered = true;
-
                 System.IO.FileStream fs = new System.IO.FileStream(openSubMapFileDialog.FileName, System.IO.FileMode.Open);
-                System.Drawing.Image img = System.Drawing.Image.FromStream(fs);
+                Image img = Image.FromStream(fs);
                 fs.Close();
-                startHeightPB = img.Height;
-                startWidthPB = img.Width;
-                pictureBoxMap.Width = startWidthPB;
-                pictureBoxMap.Height = startHeightPB;
+
+                sourceImage = img;
+
+                pictureBoxMap.Width = startWidthPB = img.Width;
+                pictureBoxMap.Height = startHeightPB = img.Height;
 
                 pictureBoxMap.Image = img;
                 Vertex.Scale = 1;
