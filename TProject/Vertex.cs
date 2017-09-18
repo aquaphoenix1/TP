@@ -20,7 +20,7 @@ namespace TProject
             pointOnMap.Y = y;
         }
 
-        public  Rectangle GetRect()
+        public Rectangle GetRect()
         {
             return pointOnMap;
         }

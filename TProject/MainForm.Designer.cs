@@ -49,6 +49,8 @@
             this.редактироватьСветофорToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.openSubMapFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip.SuspendLayout();
             this.tabPageMap.SuspendLayout();
             this.panelRightMenu.SuspendLayout();
@@ -56,6 +58,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMap)).BeginInit();
             this.contextMenuStripPictBox.SuspendLayout();
             this.tabControlMain.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -105,7 +108,7 @@
             this.tabPageMap.Location = new System.Drawing.Point(4, 22);
             this.tabPageMap.Name = "tabPageMap";
             this.tabPageMap.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageMap.Size = new System.Drawing.Size(767, 319);
+            this.tabPageMap.Size = new System.Drawing.Size(767, 304);
             this.tabPageMap.TabIndex = 0;
             this.tabPageMap.Text = "Карта";
             this.tabPageMap.UseVisualStyleBackColor = true;
@@ -118,7 +121,7 @@
             this.panelRightMenu.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelRightMenu.Location = new System.Drawing.Point(583, 3);
             this.panelRightMenu.Name = "panelRightMenu";
-            this.panelRightMenu.Size = new System.Drawing.Size(181, 313);
+            this.panelRightMenu.Size = new System.Drawing.Size(181, 298);
             this.panelRightMenu.TabIndex = 1;
             // 
             // button1
@@ -151,7 +154,7 @@
             this.panelMapSubstrate.Controls.Add(this.pictureBoxMap);
             this.panelMapSubstrate.Location = new System.Drawing.Point(3, 3);
             this.panelMapSubstrate.Name = "panelMapSubstrate";
-            this.panelMapSubstrate.Size = new System.Drawing.Size(574, 310);
+            this.panelMapSubstrate.Size = new System.Drawing.Size(574, 298);
             this.panelMapSubstrate.TabIndex = 0;
             this.panelMapSubstrate.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMap_Zoom);
             // 
@@ -228,23 +231,42 @@
             // 
             // tabControlMain
             // 
+            this.tabControlMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControlMain.Controls.Add(this.tabPageMap);
-            this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlMain.Location = new System.Drawing.Point(0, 24);
+            this.tabControlMain.Location = new System.Drawing.Point(2, 27);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(775, 345);
+            this.tabControlMain.Size = new System.Drawing.Size(775, 330);
             this.tabControlMain.TabIndex = 2;
             // 
             // openSubMapFileDialog
             // 
             this.openSubMapFileDialog.Filter = "JPEG|*.JPG|JPEG|*.JPEG";
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 360);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(775, 22);
+            this.statusStrip1.TabIndex = 3;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(38, 17);
+            this.toolStripStatusLabel1.Text = "Готов";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(775, 369);
+            this.ClientSize = new System.Drawing.Size(775, 382);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.menuStrip);
             this.DoubleBuffered = true;
@@ -260,6 +282,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMap)).EndInit();
             this.contextMenuStripPictBox.ResumeLayout(false);
             this.tabControlMain.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -286,6 +310,8 @@
         private System.Windows.Forms.ToolStripMenuItem openMapToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem subMapToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openSubMapFileDialog;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
 
