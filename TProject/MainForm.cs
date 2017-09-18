@@ -66,7 +66,7 @@ namespace TProject
         private void pictureBoxMap_MouseDown(object sender, MouseEventArgs e)
         {
             Vertex v1 = vertexes.SelVertex;
-            isClickedOnVertex = vertexes.SelectVertex(e.X.Scaling(), e.Y.Scaling(), ref dX, ref dY);
+            isClickedOnVertex = vertexes.SelectVertex(e.X.Scaling(), e.Y.Scaling(), dX, dY);
 
             bool isSelectedVertex = isClickedOnVertex;
 

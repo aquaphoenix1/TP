@@ -51,7 +51,7 @@ namespace TProject
            == null;
         }
 
-        public bool SelectVertex(int x, int y, ref int dX, ref int dY)
+        public bool SelectVertex(int x, int y, int dX, int dY)
         {
             bool res = false;
             SelVertex = SearhVertexPoint(x, y);
@@ -85,8 +85,8 @@ namespace TProject
 
         public void MoveSelVertex(int x, int y, int dX, int dY)
         {
-            SelVertex.GetRect().X = x - dX;
-            SelVertex.GetRect().Y = y - dY;
+            SelVertex.SetRectX(x - dX);
+            SelVertex.SetRectY(y - dY);
         }
     }
 }

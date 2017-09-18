@@ -14,9 +14,18 @@ namespace TProject
         public static int Radius_2 { get; set; }
         public static Pen Brush { get; set; }
 
-        public ref Rectangle GetRect()
+        public void SetRectX(int x)
         {
-            return ref pointOnMap;
+            pointOnMap.X = x;
+        }
+        public void SetRectY(int y)
+        {
+            pointOnMap.Y = y;
+        }
+
+        public  Rectangle GetRect()
+        {
+            return pointOnMap;
         }
         private Rectangle pointOnMap;
 
