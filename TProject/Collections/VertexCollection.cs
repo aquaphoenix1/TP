@@ -85,8 +85,7 @@ namespace TProject
 
         public void MoveSelVertex(int x, int y, int dX, int dY)
         {
-            SelVertex.SetRectX(x - dX);
-            SelVertex.SetRectY(y - dY);
+            SelVertex.SetRectXY(x - dX, y - dY);
         }
     }
 }

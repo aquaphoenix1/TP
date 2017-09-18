@@ -14,12 +14,9 @@ namespace TProject
         public static int Radius_2 { get; set; }
         public static Pen Brush { get; set; }
 
-        public void SetRectX(int x)
+        public void SetRectXY(int x, int y)
         {
             pointOnMap.X = x;
-        }
-        public void SetRectY(int y)
-        {
             pointOnMap.Y = y;
         }
 
