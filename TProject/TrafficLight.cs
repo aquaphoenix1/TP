@@ -1,6 +1,6 @@
 ﻿namespace TProject
 {
-    class TrafficLight
+    class TrafficLight:Entity
     {
         public int GreenSeconds { get; set; }
         public int RedSeconds { get; set; }

@@ -16,6 +16,8 @@ namespace TProject
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            //if (!DAOLibrary.DAO.IsExistDataBase())
+                DAOLibrary.DAO.CreateDataBase();
             Application.Run(new MainForm());
         }
     }
