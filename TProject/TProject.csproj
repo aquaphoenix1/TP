@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbstractCollection.cs" />
+    <Compile Include="Collections\AbstractCollection.cs" />
     <Compile Include="AddTrafficLightForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -57,7 +57,7 @@
     <Compile Include="Coefficient.cs" />
     <Compile Include="Coordinate.cs" />
     <Compile Include="Driver.cs" />
-    <Compile Include="EdgeCollection.cs" />
+    <Compile Include="Collections\EdgeCollection.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -68,12 +68,17 @@
     <Compile Include="Police.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="TooLowSecondsException.cs" />
     <Compile Include="TooManySecondsException.cs" />
     <Compile Include="TrafficLight.cs" />
     <Compile Include="Type.cs" />
     <Compile Include="Vertex.cs" />
-    <Compile Include="VertexCollection.cs" />
+    <Compile Include="Collections\VertexCollection.cs" />
     <Compile Include="VertexInfoControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -88,13 +93,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="VertexInfoControl.resx">
       <DependentUpon>VertexInfoControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -113,9 +114,20 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="icon\greenLight.jpg" />
+    <None Include="icon\greenLight2.jpg" />
+    <None Include="icon\nonLight.jpg" />
+    <None Include="icon\greenLight3.jpg" />
+    <None Include="icon\nonLight3.jpg" />
     <Content Include="icon\point.jpg" />
+    <None Include="Resources\Image1.png" />
+    <None Include="icon\VertexIcon.tif" />
+    <None Include="icon\redLight.jpg" />
+    <None Include="icon\redLight2.jpg" />
+    <None Include="icon\redLight3.jpg" />
     <Content Include="Properties\DataSources\point.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

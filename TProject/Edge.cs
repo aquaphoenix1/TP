@@ -1,4 +1,6 @@
-﻿namespace TProject
+﻿using System;
+
+namespace TProject
 {
     class Edge
     {

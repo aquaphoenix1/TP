@@ -9,6 +9,8 @@ namespace TProject
         public long Id { get; }
         public TrafficLight TrafficLight { get; set; }
 
+        public static double Scale { get; set; }
+
         static private Pen activVertex;
         static private Pen generalVertex;
         static public Pen ActivVertex
@@ -24,6 +26,7 @@ namespace TProject
 
 
         public static int Radius { get; set; }
+        public static int Radius_2 { get; set; }
         public static Pen Brush { get; set; }
 
         public ref Rectangle GetRect()
@@ -31,6 +34,7 @@ namespace TProject
             return ref pointOnMap;
         }
         private Rectangle pointOnMap;
+
 
         public int X {
             get { return pointOnMap.X; }
@@ -44,7 +48,8 @@ namespace TProject
         static Vertex()
         {
             Brush = new Pen(Color.Black);
-            Radius = 10;
+            Radius = 20;
+            Radius_2 = Radius / 2;
             generalVertex = new Pen(Brushes.DarkBlue, Vertex.Radius / 2);
             activVertex = new Pen(Color.Aqua, Vertex.Radius / 2);
         }
@@ -57,6 +62,9 @@ namespace TProject
 
         public Vertex(int x, int y, TrafficLight trafficLight)
         {
+            x = (int)(x / Scale);
+            x = (int)(y / Scale);
+
             Id = ++curMaxId;
             pointOnMap = new Rectangle(x, y, Radius, Radius);
             this.TrafficLight = trafficLight;

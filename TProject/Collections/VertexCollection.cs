@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TProject.Properties;
 
 namespace TProject
 {
@@ -49,6 +51,7 @@ namespace TProject
            == null;
         }
 
+
         public bool SelectVertex(int x, int y, ref int dX, ref int dY)
         {
             bool res = false;
@@ -63,11 +66,22 @@ namespace TProject
             return res;
         }
 
-        public void DrawAllOnPicture(PaintEventArgs e)
-        { 
+        public void DrawAllOnPicture(Graphics e)
+        {
+            int x, y, width, height;
+
             foreach (var r in ElementsList)
             {
-                e.Graphics.DrawEllipse(Vertex.GeneralVertex, r.GetRect());
+                x = r.GetRect().X.UnScaling();
+                y = r.GetRect().Y.UnScaling();
+                width = (int)(r.GetRect().Width.UnScaling()) - 4;
+                width = width - 4 < 4 ? 5 : width - 4;
+
+                e.FillEllipse(new SolidBrush(Color.Blue), x + 2, y + 2, width, width);
+              //  e.DrawEllipse(new Pen(Color.OrangeRed, 4), x + 2, y + 1, width - 2, height - 2);
+
+                if (r.TrafficLight != null)
+                    e.DrawImage(Resources.nonLight3, new Point[] { new Point(x + Vertex.Radius + 3, y), new Point(x + (Vertex.Radius + 18), y), new Point(x + 3 + Vertex.Radius, y + 30) });
             }
         }
 

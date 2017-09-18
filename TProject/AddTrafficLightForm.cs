@@ -52,10 +52,10 @@ namespace TProject
                 redSeconds = Int16.Parse(textBoxRedSeconds.Text);
                 greenSeconds = Int16.Parse(textBoxGreenSeconds.Text);
 
-                if (redSeconds > 100) throw new TooManySecondsException("красного");
-                if (greenSeconds > 30) throw new TooManySecondsException("зеленого");
+                if (redSeconds > 70) throw new TooManySecondsException("красного");
+                if (greenSeconds > 40) throw new TooManySecondsException("зеленого");
 
-                if (redSeconds < 30) throw new TooLowSecondsException("красного");
+                if (redSeconds < 20) throw new TooLowSecondsException("красного");
                 if (greenSeconds < 10) throw new TooLowSecondsException("зеленого");
 
                 this.AcceptButton.DialogResult = DialogResult.OK;

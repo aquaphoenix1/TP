@@ -45,6 +45,10 @@
             this.удалитьСветофорToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.редактироватьСветофорToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlMain = new System.Windows.Forms.TabControl();
+            this.открытьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.subMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openSubMapFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip.SuspendLayout();
             this.tabPageMap.SuspendLayout();
             this.panelRightMenu.SuspendLayout();
@@ -66,6 +70,8 @@
             // 
             // файлToolStripMenuItem
             // 
+            this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.открытьToolStripMenuItem});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.файлToolStripMenuItem.Text = "Файл";
@@ -125,6 +131,7 @@
             this.panelMapSubstrate.Name = "panelMapSubstrate";
             this.panelMapSubstrate.Size = new System.Drawing.Size(574, 310);
             this.panelMapSubstrate.TabIndex = 0;
+            this.panelMapSubstrate.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMap_Zoom);
             // 
             // pictureBoxMap
             // 
@@ -136,7 +143,6 @@
             this.pictureBoxMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxMap.TabIndex = 0;
             this.pictureBoxMap.TabStop = false;
-            this.DoubleBuffered = true;
             this.pictureBoxMap.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxMap_Paint);
             this.pictureBoxMap.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMap_MouseDown);
             this.pictureBoxMap.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMap_MouseMove);
@@ -208,6 +214,32 @@
             this.tabControlMain.Size = new System.Drawing.Size(775, 345);
             this.tabControlMain.TabIndex = 2;
             // 
+            // открытьToolStripMenuItem
+            // 
+            this.открытьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openMapToolStripMenuItem,
+            this.subMapToolStripMenuItem});
+            this.открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
+            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.открытьToolStripMenuItem.Text = "Открыть..";
+            // 
+            // openMapToolStripMenuItem
+            // 
+            this.openMapToolStripMenuItem.Name = "openMapToolStripMenuItem";
+            this.openMapToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openMapToolStripMenuItem.Text = "Карту";
+            // 
+            // subMapToolStripMenuItem
+            // 
+            this.subMapToolStripMenuItem.Name = "subMapToolStripMenuItem";
+            this.subMapToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.subMapToolStripMenuItem.Text = "Подложку";
+            this.subMapToolStripMenuItem.Click += new System.EventHandler(this.subMapToolStripMenuItem_Click);
+            // 
+            // openSubMapFileDialog
+            // 
+            this.openSubMapFileDialog.Filter = "JPEG|*.JPEG|JPEG|*.JPG";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -215,6 +247,7 @@
             this.ClientSize = new System.Drawing.Size(775, 369);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.menuStrip);
+            this.DoubleBuffered = true;
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainForm";
             this.Text = "3GIS";
@@ -249,6 +282,10 @@
         private System.Windows.Forms.ToolStripMenuItem добавитьСветофорToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem удалитьСветофорToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem редактироватьСветофорToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem открытьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openMapToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem subMapToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog openSubMapFileDialog;
     }
 }
 
