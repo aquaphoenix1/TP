@@ -55,7 +55,6 @@
     </Compile>
     <Compile Include="Edge.cs" />
     <Compile Include="Coefficient.cs" />
-    <Compile Include="Coordinate.cs" />
     <Compile Include="Driver.cs" />
     <Compile Include="Collections\EdgeCollection.cs" />
     <Compile Include="Entity.cs" />
@@ -65,6 +64,7 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PensCase.cs" />
     <Compile Include="Police.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

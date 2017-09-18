@@ -1,6 +1,6 @@
 ﻿namespace TProject
 {
-    class Police : Coordinate, Type, Coefficient
+    class Police : Entity, Type, Coefficient
     {
         public string Type { get; set; }
         public double Coeff { get; set; }

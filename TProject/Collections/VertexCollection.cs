@@ -47,10 +47,9 @@ namespace TProject
         public bool IsAllowedRadius(int x, int y)
         {
            return ElementsList.Find(o =>(
-                Math.Pow(x - o.X, 2) + Math.Pow(y - o.Y, 2) < Math.Pow(Vertex.Radius * 2, 2)))
+                Math.Pow(x.UnScaling() - o.X, 2) + Math.Pow(y.UnScaling() - o.Y, 2) < Math.Pow(Vertex.Radius * 1.5, 2)))
            == null;
         }
-
 
         public bool SelectVertex(int x, int y, ref int dX, ref int dY)
         {
@@ -68,7 +67,7 @@ namespace TProject
 
         public void DrawAllOnPicture(Graphics e)
         {
-            int x, y, width, height;
+            int x, y, width;
 
             foreach (var r in ElementsList)
             {
@@ -77,8 +76,7 @@ namespace TProject
                 width = (int)(r.GetRect().Width.UnScaling()) - 4;
                 width = width - 4 < 4 ? 5 : width - 4;
 
-                e.FillEllipse(new SolidBrush(Color.Blue), x + 2, y + 2, width, width);
-              //  e.DrawEllipse(new Pen(Color.OrangeRed, 4), x + 2, y + 1, width - 2, height - 2);
+                e.FillEllipse(PensCase.Point, x + 2, y + 2, width, width);
 
                 if (r.TrafficLight != null)
                     e.DrawImage(Resources.nonLight3, new Point[] { new Point(x + Vertex.Radius + 3, y), new Point(x + (Vertex.Radius + 18), y), new Point(x + 3 + Vertex.Radius, y + 30) });

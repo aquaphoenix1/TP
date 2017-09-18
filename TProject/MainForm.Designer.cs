@@ -31,6 +31,9 @@
             this.components = new System.ComponentModel.Container();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.открытьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.subMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPageMap = new System.Windows.Forms.TabPage();
             this.panelRightMenu = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
@@ -45,9 +48,6 @@
             this.удалитьСветофорToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.редактироватьСветофорToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlMain = new System.Windows.Forms.TabControl();
-            this.открытьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.subMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openSubMapFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip.SuspendLayout();
             this.tabPageMap.SuspendLayout();
@@ -75,6 +75,28 @@
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.файлToolStripMenuItem.Text = "Файл";
+            // 
+            // открытьToolStripMenuItem
+            // 
+            this.открытьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openMapToolStripMenuItem,
+            this.subMapToolStripMenuItem});
+            this.открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
+            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.открытьToolStripMenuItem.Text = "Открыть..";
+            // 
+            // openMapToolStripMenuItem
+            // 
+            this.openMapToolStripMenuItem.Name = "openMapToolStripMenuItem";
+            this.openMapToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.openMapToolStripMenuItem.Text = "Карту";
+            // 
+            // subMapToolStripMenuItem
+            // 
+            this.subMapToolStripMenuItem.Name = "subMapToolStripMenuItem";
+            this.subMapToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.subMapToolStripMenuItem.Text = "Подложку";
+            this.subMapToolStripMenuItem.Click += new System.EventHandler(this.subMapToolStripMenuItem_Click);
             // 
             // tabPageMap
             // 
@@ -214,31 +236,9 @@
             this.tabControlMain.Size = new System.Drawing.Size(775, 345);
             this.tabControlMain.TabIndex = 2;
             // 
-            // открытьToolStripMenuItem
-            // 
-            this.открытьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openMapToolStripMenuItem,
-            this.subMapToolStripMenuItem});
-            this.открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
-            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.открытьToolStripMenuItem.Text = "Открыть..";
-            // 
-            // openMapToolStripMenuItem
-            // 
-            this.openMapToolStripMenuItem.Name = "openMapToolStripMenuItem";
-            this.openMapToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.openMapToolStripMenuItem.Text = "Карту";
-            // 
-            // subMapToolStripMenuItem
-            // 
-            this.subMapToolStripMenuItem.Name = "subMapToolStripMenuItem";
-            this.subMapToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.subMapToolStripMenuItem.Text = "Подложку";
-            this.subMapToolStripMenuItem.Click += new System.EventHandler(this.subMapToolStripMenuItem_Click);
-            // 
             // openSubMapFileDialog
             // 
-            this.openSubMapFileDialog.Filter = "JPEG|*.JPEG|JPEG|*.JPG";
+            this.openSubMapFileDialog.Filter = "JPEG|*.JPG|JPEG|*.JPEG";
             // 
             // MainForm
             // 

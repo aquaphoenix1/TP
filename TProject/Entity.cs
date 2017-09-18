@@ -1,7 +1,7 @@
 ﻿namespace TProject
 {
-    class Entity
+    abstract class Entity
     {
-        public int ID { get; set; }
+        public long ID { get; set; }
     }
 }

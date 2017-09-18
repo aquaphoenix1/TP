@@ -11,11 +11,8 @@ namespace TProject
     {
         public List<T> ElementsList { get; set; }
 
-        /// <summary>
-        /// Отрисовывает элементы коллекции на объекте, для которого вызвано событие 
-        /// Paint
-        /// </summary>
-        /// <param name="e"></param>
+        public delegate void UpdateList();
+        public event UpdateList eventUpdateList;
 
         public int GetCountElements()
         {
@@ -27,10 +24,12 @@ namespace TProject
         }
         public void AddElement(T elem)
         {
+            eventUpdateList();
             ElementsList.Add(elem);
         }
         public void RemoveElement(T elem)
         {
+            eventUpdateList();
             ElementsList.Remove(elem);
         }
         public List<T> GetElementsList()

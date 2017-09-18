@@ -15,9 +15,7 @@ namespace TProject
 
         private double zoomCurValue;
         private MouseEventArgs lastMouseEvent;
-        PaintEventArgs lastPaintEvents;
 
-       
         //Используемые коллекции
         private VertexCollection vertexes;
         private EdgeCollection edges;
@@ -26,25 +24,26 @@ namespace TProject
         {
             InitializeComponent();
             vertexes = new VertexCollection();
+            vertexes.eventUpdateList += pictureBoxMap.Invalidate;
             edges = new EdgeCollection();
+            edges.eventUpdateList += pictureBoxMap.Invalidate;
             zoomCurValue = 1;
             startWidthPB = pictureBoxMap.Width;
             startHeightPB = pictureBoxMap.Height;
 
             Vertex.Scale = 1;
-
-
+            PensCase.Initialize();
             pictureBoxMap.Invalidate();
         }
 
-      
         //События pictureBoxMap
         private void pictureBoxMap_Paint(object sender, PaintEventArgs e)
         {
-            lastPaintEvents = e;
+            Graphics g = e.Graphics;
             if (lastMouseEvent != null)
-                edges.DrawAllOnPicture(e, dX, dY, lastMouseEvent.X, lastMouseEvent.Y, vertexes, isCreatingEdge);
-            vertexes.DrawAllOnPicture(e.Graphics);
+                edges.DrawAllOnPicture(g, dX, dY, lastMouseEvent.X, lastMouseEvent.Y, vertexes, isCreatingEdge);
+            vertexes.DrawAllOnPicture(g);
+
         }
         private void pictureBoxMap_MouseUp(object sender, MouseEventArgs e)
         {
@@ -56,16 +55,16 @@ namespace TProject
             if (isClickedOnVertex && !isCreatingEdge)
             {
                 vertexes.MoveSelVertex(e.X.Scaling(), e.Y.Scaling(), dX, dY);
+                pictureBoxMap.Invalidate();
             }
             if (isCreatingEdge)
             {
                 lastMouseEvent = e;
+                pictureBoxMap.Invalidate();
             }
-            pictureBoxMap.Invalidate();
         }
         private void pictureBoxMap_MouseDown(object sender, MouseEventArgs e)
         {
-
             Vertex v1 = vertexes.SelVertex;
             isClickedOnVertex = vertexes.SelectVertex(e.X.Scaling(), e.Y.Scaling(), ref dX, ref dY);
 
@@ -78,7 +77,7 @@ namespace TProject
 
                 addVertexToolStripMenuItem.Enabled = !isSelectedVertex && vertexes.IsAllowedRadius(lastMouseEvent.X.Scaling(), lastMouseEvent.Y.Scaling());
                 editVertexToolStripMenuItem.Visible = isSelectedVertex;
-                addEdgeToolStripMenuItem.Enabled = isSelectedVertex & vertexes.GetCountElements() > 0; 
+                addEdgeToolStripMenuItem.Enabled = isSelectedVertex & vertexes.GetCountElements() > 0;
             }
             else
             {
@@ -87,22 +86,17 @@ namespace TProject
                     isClickedOnVertex = false;
                     isCreatingEdge = false;
 
-                    if (v1.Id != vertexes.SelVertex.Id)
+                    if (v1.ID != vertexes.SelVertex.ID)
                         edges.AddElement(new Edge(v1, vertexes.SelVertex));
-                    pictureBoxMap.Invalidate();
                 }
             }
         }
         
         private void pictureBoxMap_Zoom(object sender, MouseEventArgs e)
         {
-            //if (zoomCurValue >= 1 || e.Delta > 0)
-            {
                 zoomCurValue += e.Delta > 0 ? 0.1 : -0.1;
                 Vertex.Scale = zoomCurValue;
-
-                pictureBoxMap.Size = new Size((int)(startWidthPB * zoomCurValue), (int)(startHeightPB * zoomCurValue));
-            }
+                pictureBoxMap.Size = new Size(startWidthPB.UnScaling(), startHeightPB.UnScaling());
         }
 
 
@@ -115,7 +109,6 @@ namespace TProject
         {
             isCreatingEdge = true;
         }
-
         private void subMapToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (openSubMapFileDialog.ShowDialog() == DialogResult.OK)
@@ -144,12 +137,14 @@ namespace TProject
                 form.ShowDialog();
                 if(form.AcceptButton.DialogResult == DialogResult.OK)
                     vertexes.SelVertex.TrafficLight = new TrafficLight(form.GetGreenSeconds(), form.GetRedSeconds());
+                pictureBoxMap.Invalidate();
             }
         }
         private void удалитьСветофорToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             if (vertexes.SelVertex != null && vertexes.SelVertex.TrafficLight != null)
                 vertexes.SelVertex.TrafficLight = null;
+            pictureBoxMap.Invalidate();
         }
         private void редактироватьСветофорToolStripMenuItem_Click(object sender, System.EventArgs e)
         {

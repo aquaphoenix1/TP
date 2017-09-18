@@ -8,7 +8,7 @@
         {
             public Fuel CarFuel { get; set; }
 
-            public class Fuel : Type
+            public class Fuel : Entity, Type
             {
                 public string Type { get; set; }
                 public double Price { get; }
