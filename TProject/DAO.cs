@@ -44,8 +44,8 @@ namespace TProject
                 return false;
             else
             {
-                new SQLiteCommand("Create table TrafficLight ([ID]Integer primary key autoincrement, [GreenSeconds] Integer not null, [RedSeconds] Integer not null)", GetConnection()).ExecuteNonQuery();
-                new SQLiteCommand().ExecuteNonQuery();
+                new SQLiteCommand("Create table TrafficLight ([ID]Integer primary key autoincrement, [GreenSeconds] Integer not null, [RedSeconds] Integer not null)", connection).ExecuteNonQuery();
+                //new SQLiteCommand().ExecuteNonQuery();
                 return true;
             }
         }

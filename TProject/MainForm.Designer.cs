@@ -51,6 +51,7 @@
             this.openSubMapFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.button2 = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.tabPageMap.SuspendLayout();
             this.panelRightMenu.SuspendLayout();
@@ -76,7 +77,7 @@
             this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.открытьToolStripMenuItem});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.файлToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
             this.файлToolStripMenuItem.Text = "Файл";
             // 
             // открытьToolStripMenuItem
@@ -85,19 +86,19 @@
             this.openMapToolStripMenuItem,
             this.subMapToolStripMenuItem});
             this.открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
-            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.открытьToolStripMenuItem.Text = "Открыть..";
             // 
             // openMapToolStripMenuItem
             // 
             this.openMapToolStripMenuItem.Name = "openMapToolStripMenuItem";
-            this.openMapToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.openMapToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.openMapToolStripMenuItem.Text = "Карту";
             // 
             // subMapToolStripMenuItem
             // 
             this.subMapToolStripMenuItem.Name = "subMapToolStripMenuItem";
-            this.subMapToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.subMapToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.subMapToolStripMenuItem.Text = "Подложку";
             this.subMapToolStripMenuItem.Click += new System.EventHandler(this.subMapToolStripMenuItem_Click);
             // 
@@ -180,12 +181,12 @@
             this.addEdgeToolStripMenuItem,
             this.editVertexToolStripMenuItem});
             this.contextMenuStripPictBox.Name = "contextMenuStripPictBox";
-            this.contextMenuStripPictBox.Size = new System.Drawing.Size(210, 70);
+            this.contextMenuStripPictBox.Size = new System.Drawing.Size(200, 70);
             // 
             // addVertexToolStripMenuItem
             // 
             this.addVertexToolStripMenuItem.Name = "addVertexToolStripMenuItem";
-            this.addVertexToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.addVertexToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.addVertexToolStripMenuItem.Text = "Добавить перекресток";
             this.addVertexToolStripMenuItem.Click += new System.EventHandler(this.addVertexToolStripMenuItem_Click);
             // 
@@ -193,7 +194,7 @@
             // 
             this.addEdgeToolStripMenuItem.Enabled = false;
             this.addEdgeToolStripMenuItem.Name = "addEdgeToolStripMenuItem";
-            this.addEdgeToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.addEdgeToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.addEdgeToolStripMenuItem.Text = "Добавить перегон";
             this.addEdgeToolStripMenuItem.Click += new System.EventHandler(this.addEdgeToolStripMenuItem_Click);
             // 
@@ -204,28 +205,28 @@
             this.удалитьСветофорToolStripMenuItem,
             this.редактироватьСветофорToolStripMenuItem});
             this.editVertexToolStripMenuItem.Name = "editVertexToolStripMenuItem";
-            this.editVertexToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.editVertexToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.editVertexToolStripMenuItem.Text = "Параметры перекрестка";
             this.editVertexToolStripMenuItem.Visible = false;
             // 
             // добавитьСветофорToolStripMenuItem
             // 
             this.добавитьСветофорToolStripMenuItem.Name = "добавитьСветофорToolStripMenuItem";
-            this.добавитьСветофорToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.добавитьСветофорToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.добавитьСветофорToolStripMenuItem.Text = "Добавить светофор";
             this.добавитьСветофорToolStripMenuItem.Click += new System.EventHandler(this.добавитьСветофорToolStripMenuItem_Click);
             // 
             // удалитьСветофорToolStripMenuItem
             // 
             this.удалитьСветофорToolStripMenuItem.Name = "удалитьСветофорToolStripMenuItem";
-            this.удалитьСветофорToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.удалитьСветофорToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.удалитьСветофорToolStripMenuItem.Text = "Удалить светофор";
             this.удалитьСветофорToolStripMenuItem.Click += new System.EventHandler(this.удалитьСветофорToolStripMenuItem_Click);
             // 
             // редактироватьСветофорToolStripMenuItem
             // 
             this.редактироватьСветофорToolStripMenuItem.Name = "редактироватьСветофорToolStripMenuItem";
-            this.редактироватьСветофорToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.редактироватьСветофорToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.редактироватьСветофорToolStripMenuItem.Text = "Редактировать светофор";
             this.редактироватьСветофорToolStripMenuItem.Click += new System.EventHandler(this.редактироватьСветофорToolStripMenuItem_Click);
             // 
@@ -258,14 +259,25 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(38, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(37, 17);
             this.toolStripStatusLabel1.Text = "Готов";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(547, 1);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(775, 382);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.menuStrip);
@@ -312,6 +324,7 @@
         private System.Windows.Forms.OpenFileDialog openSubMapFileDialog;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.Button button2;
     }
 }
 

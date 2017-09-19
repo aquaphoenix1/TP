@@ -15,8 +15,6 @@ namespace TProject
 
         private int Length;
 
-
-
         public Coating Coat { get; set; }
 
         public void SetVertexA(Vertex A)
@@ -78,6 +76,6 @@ namespace TProject
             arc.NameStreet = nameStreet;
             arc.Coat = coat;
             return arc;
-        } 
+        }
     }
 }
