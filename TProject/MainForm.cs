@@ -147,6 +147,12 @@ namespace TProject
                 vertexes.SelVertex.TrafficLight = null;
             pictureBoxMap.Invalidate();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            FindMinLengthWay();
+        }
+
         private void редактироватьСветофорToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             if (vertexes.SelVertex != null && vertexes.SelVertex.TrafficLight != null)
@@ -161,7 +167,32 @@ namespace TProject
             }
         }
 
-       
+        private Edge GetEdge(Vertex one, Vertex two)
+        {
+            List<Edge> list = edges.GetElementsList();
+            for (int i = 0; i < list.Count; i++)
+                if (list[i].VertexOne == one && list[i].VertexTwo == two)
+                    return list[i];
+            return null;
+        }
+
+       private int FindMinLengthWay()
+        {
+            int length = 0,
+                count = vertexes.GetCountElements();
+
+            int[,] array = new int[count, count];
+
+            List<Vertex> vertexList = vertexes.GetElementsList();
+
+            for (int i = 0; i < count; i++)
+                for (int j = 0; j < count; j++)
+                {
+                    Edge edge = GetEdge(vertexList[i], vertexList[j]);
+                    array[i, j] = (i == j) ? 0 : (edge != null) ? edge.GetLength() : Int32.MaxValue;
+                }
+            return length;
+        }
     }
     public static class Extendets
     {
