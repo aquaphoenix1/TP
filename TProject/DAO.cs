@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data.SQLite;
 
-namespace DAOLibrary
+namespace TProject
 {
     public class DAO
     {
@@ -18,7 +18,8 @@ namespace DAOLibrary
                 try
                 {
                     string path = System.IO.Directory.GetCurrentDirectory() + "\\" + DataBaseName;
-                    connection = new SQLiteConnection("DataSource=" + path);
+                    connection = new SQLiteConnection("Data Source=" + path);
+                    connection.Open();
                 }
                 catch
                 {
@@ -44,9 +45,9 @@ namespace DAOLibrary
             else
             {
                 new SQLiteCommand("Create table TrafficLight ([ID]Integer primary key autoincrement, [GreenSeconds] Integer not null, [RedSeconds] Integer not null)", GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand().ExecuteNonQuery();
                 return true;
             }
         }
     }
 }
-
