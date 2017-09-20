@@ -134,7 +134,7 @@ namespace TProject
                     lastY = e.Y;
                 }
             }
-
+            pictureBoxMap.Invalidate();
         }
 
 
@@ -206,15 +206,12 @@ namespace TProject
 
         private void editVertexToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (isClickedOnVertex)
+            using (EditVertex form = new EditVertex(vertexes.SelVertex))
             {
-                using (EditVertex form = new EditVertex(vertexes.SelVertex))
-                {
-                    form.Owner = this;
-                    form.ShowDialog();
-                    vertexes.SelVertex = form.Vertex;
-                    pictureBoxMap.Invalidate();
-                }
+                form.Owner = this;
+                form.ShowDialog();
+                vertexes.SelVertex = form.Vertex;
+                pictureBoxMap.Invalidate();
             }
         }
 
