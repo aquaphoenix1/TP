@@ -47,7 +47,8 @@ namespace TProject
                 #region SQLCommands
 
                 new SQLiteCommand("Create table Vertex ([IDVertex] Integer primary key autoincrement, [XVertex] Integer not null,[YVertex]Integer not null)", GetConnection()).ExecuteNonQuery();
-                new SQLiteCommand("Create table TrafficLight ([ID]Integer primary key autoincrement, [GreenSeconds] Integer not null, [RedSeconds] Integer not null, [IDVertex] Integer References Vertex ([IDVertex]))", GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand("Create  table LimitTraficLight ([ColorTrafficLight] char(10) primary key), [Min] Integer not null, [Max] Integer not null)", GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand("Create table TrafficLight ([ID]Integer primary key autoincrement, [GreenSeconds] Integer not null, [RedSeconds] Integer not null, [IDVertex] Integer References Vertex ([IDVertex]),[ColorTrafficLight] char(10) References LimitTrafficLight ([ColorTrafficLight]))", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Sign ([NameSign] char(20) primary key, [XSign] Integer not null, [YSign]Integer not null)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Street ([IDStreet] integer primary key autoincrement, [NameStreet] char(40) not null)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Surface ([NameSurface] char(20) primary key, [KoefSurface] real not null)", GetConnection()).ExecuteNonQuery();
@@ -59,7 +60,6 @@ namespace TProject
                 new SQLiteCommand("Create table Auto ([IDAuto] Integer primary key autoincrement, [NameFuel] char(20) References Fuel ([NameFuel]), [Model] char(10), [Сonsumption] Integer, [Speed] Integer)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Fine ([NameFine] char(20) primary key, [CostFine] Integer not null)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Offense ([IDAuto] Integer References Auto ([IDAuto]), [IDPolicemen] Integer References Policemen ([IDPolicemen]), [NameFine] char(20) References Fine ([NameFine]), [SumFine] Integer, Constraint PK primary key (IDAuto,IDPolicemen, NameFine))", GetConnection()).ExecuteNonQuery();
-
                 #endregion SQLCommands
             }
             catch (SQLiteException) { throw new SQLiteException(String.Format("Невозможно подключиться к файлу базы данных {0}", path)); }
