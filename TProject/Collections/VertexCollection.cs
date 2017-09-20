@@ -11,7 +11,7 @@ using TProject.Properties;
 
 namespace TProject
 {
-    class VertexCollection:AbstractCollection<Vertex>
+    public class VertexCollection:AbstractCollection<Vertex>
     {
         /// <summary>
         /// Область выбранной вершины

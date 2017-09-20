@@ -9,7 +9,7 @@ using TProject.Graph;
 
 namespace TProject
 {
-    class EdgeCollection : AbstractCollection<Edge>
+    public class EdgeCollection : AbstractCollection<Edge>
     {
 
         public Edge SelEdge { get; set; }
