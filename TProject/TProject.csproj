@@ -116,6 +116,7 @@
     <Compile Include="VertexInfoControl.Designer.cs">
       <DependentUpon>VertexInfoControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Way.cs" />
     <EmbeddedResource Include="EditEdge.resx">
       <DependentUpon>EditEdge.cs</DependentUpon>
     </EmbeddedResource>

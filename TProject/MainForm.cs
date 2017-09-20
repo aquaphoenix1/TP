@@ -20,6 +20,8 @@ namespace TProject
         private double zoomCurValue;
         private MouseEventArgs lastMouseEvent;
 
+        Way way = new Way();
+
         //Используемые коллекции
         private VertexCollection vertexes;
         private EdgeCollection edges;
@@ -45,6 +47,21 @@ namespace TProject
 
         }
 
+        private void DrawFlag(Graphics e, int x, int y, Color color, int width)
+        {
+            x = x + Vertex.Radius_2 - 2;
+            Point[] p = new Point[]
+            {
+                new Point(x, y),
+                new Point(x - 5, y - 7),
+                new Point(x - 5, y - 14),
+                new Point(x + 5, y - 14),
+                new Point(x + 5, y - 7),
+            };
+
+            e.DrawPolygon(new Pen(color, width), p);
+        }
+
         //События pictureBoxMap
         private void pictureBoxMap_Paint(object sender, PaintEventArgs e)
         {
@@ -52,6 +69,17 @@ namespace TProject
             if (lastMouseEvent != null)
                 edges.DrawAllOnPicture(g, dX, dY, lastMouseEvent.X, lastMouseEvent.Y, vertexes, isCreatingEdge);
             vertexes.DrawAllOnPicture(g);
+
+            if (way.Start != null)
+            {
+                DrawFlag(g, way.Start.X, way.Start.Y, Color.Black, 12);
+                DrawFlag(g, way.Start.X, way.Start.Y, Color.Sienna, 10);
+            }
+            if (way.End != null)
+            {
+                DrawFlag(g, way.End.X, way.End.Y, Color.Black, 12);
+                DrawFlag(g, way.End.X, way.End.Y, Color.Red, 10);
+            }
         }
         private void pictureBoxMap_MouseUp(object sender, MouseEventArgs e)
         {
@@ -136,9 +164,6 @@ namespace TProject
             }
             pictureBoxMap.Invalidate();
         }
-
-
-
         private void pictureBoxMap_Zoom(object sender, MouseEventArgs e)
         {
             panelMapSubstrate.AutoScroll = false;
@@ -201,7 +226,21 @@ namespace TProject
 
         private void button2_Click(object sender, EventArgs e)
         {
-            FindMinLengthWay(0, 3);
+            int start = vertexes.ElementsList.FindIndex(o => o.ID == way.Start.ID);
+            int end = vertexes.ElementsList.FindIndex(o => o.ID == way.End.ID);
+            FindMinLengthWay(start, end);
+        }
+
+        private void маршрутИзToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            way.Start = vertexes.SelVertex;
+            pictureBoxMap.Invalidate();
+        }
+
+        private void маршрутВToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            way.End = vertexes.SelVertex;
+            pictureBoxMap.Invalidate();
         }
 
         private void editVertexToolStripMenuItem_Click(object sender, EventArgs e)
