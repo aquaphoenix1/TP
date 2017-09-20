@@ -27,7 +27,7 @@ namespace TProject
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public Vertex SearhVertexPoint(int x, int y)
+        public override Vertex SearhElementWithCoord(int x, int y)
         {
             Vertex v = null;
             foreach (var o in ElementsList)
@@ -55,7 +55,7 @@ namespace TProject
         {
             dX = 0; dY = 0;
             bool res = false;
-            SelVertex = SearhVertexPoint(x, y);
+            SelVertex = SearhElementWithCoord(x, y);
             if (res = SelVertex != null)
             {
                 SelRect = SelVertex.GetRect();
@@ -70,18 +70,24 @@ namespace TProject
         {
             int x, y, width;
 
+            width = (int)(Vertex.Radius.UnScaling()) - 4;
+            width = width - 4 < 4 ? 5 : width - 4;
+
             foreach (var r in ElementsList)
             {
                 x = r.GetRect().X.UnScaling();
                 y = r.GetRect().Y.UnScaling();
-                width = (int)(r.GetRect().Width.UnScaling()) - 4;
-                width = width - 4 < 4 ? 5 : width - 4;
+             
+                Brush p = PensCase.Point;
+                if (r == SelVertex)
+                    p = PensCase.SelectedVertex;
 
-                e.FillEllipse(PensCase.Point, x + 2, y + 2, width, width);
+               e.FillEllipse(p, x + 2, y + 2, width, width);
 
                 if (r.TrafficLight != null)
                     e.DrawImage(Resources.nonLight3, new Point[] { new Point(x + Vertex.Radius + 3, y), new Point(x + (Vertex.Radius + 18), y), new Point(x + 3 + Vertex.Radius, y + 30) });
             }
+            //return true;
         }
 
         public void MoveSelVertex(int x, int y, int dX, int dY)

@@ -2,7 +2,7 @@
 
 namespace TProject
 {
-    class Vertex : Entity
+    public class Vertex : Entity
     {
         private static long curMaxId = 0;
 

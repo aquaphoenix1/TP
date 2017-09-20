@@ -14,6 +14,8 @@ namespace TProject
         public delegate void UpdateList();
         public event UpdateList eventUpdateList;
 
+        public abstract T SearhElementWithCoord(int x, int y);
+
         public int GetCountElements()
         {
             return ElementsList.Count();

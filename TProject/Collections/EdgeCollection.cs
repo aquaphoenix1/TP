@@ -11,16 +11,24 @@ namespace TProject
     class EdgeCollection : AbstractCollection<Edge>
     {
 
-        public Edge SearhEdgeWithPoint(int x, int y)
-        {    //((x_3 - x_1) / (x_2 - x_1) == (y_3 - y_1) / (y_2 - y_1))
-            return ElementsList.Find(o => (
-                (int)(o.GetVertexB().X - o.GetVertexA().X) / (x - o.GetVertexA().X) == (int)(o.GetVertexB().Y - o.GetVertexA().Y) / (y - o.GetVertexA().Y))
-            );
-        }
-        public Edge SearhAllEdge(Vertex vertex)
+        public Edge SelEdge { get; set; }
+
+        public override Edge SearhElementWithCoord(int x, int y)
         {
-            return ElementsList.Find(o => o.VertexOne.ID == vertex.ID || o.VertexTwo.ID == vertex.ID);
+            Edge e = null;
+
+            foreach (var o in ElementsList)
+            {
+                int val = (x - o.GetHead().X) * (o.GetEnd().Y - o.GetHead().Y) / (o.GetEnd().X - o.GetHead().X) + o.GetHead().Y;
+                if (val + Vertex.Radius > y && val - Vertex.Radius < y && x < Math.Max(o.GetHead().X, o.GetEnd().X) && x > Math.Min(o.GetHead().X, o.GetEnd().X))
+                    e = o;
+            }
+            return e;
         }
+        //public Edge SearhAllEdge(Vertex vertex)
+        //{
+        //    return ElementsList.Find(o => o.GetHead().ID == vertex.ID || o.GetEnd().ID == vertex.ID);
+        //}
 
         /// <summary>
         /// Отрисовка коллекции
@@ -34,12 +42,16 @@ namespace TProject
         /// <param name="isCreatingEdge"> строится ли линия в данный момент</param>
         public void DrawAllOnPicture(Graphics e, int dX, int dY, int x, int y, VertexCollection vertexes, bool isCreatingEdge)
         {
+            int width = (int)(Vertex.Radius.UnScaling()) - 4;
+            width = width - 4 < 4 ? 5 : width - 4;
+
             foreach (var r in ElementsList)
             {
-                e.DrawLine(PensCase.Reversible,
-                    (r.GetVertexA().X + Vertex.Radius_2).UnScaling(), (r.GetVertexA().Y + Vertex.Radius_2).UnScaling(),
-                    (r.GetVertexB().X + Vertex.Radius_2).UnScaling(), (r.GetVertexB().Y + Vertex.Radius_2).UnScaling());
+                e.DrawLine(PensCase.GetPenForEdge(r == SelEdge, r.IsBilateral, width),
+                    (r.GetHead().X + Vertex.Radius_2).UnScaling(), (r.GetHead().Y + Vertex.Radius_2).UnScaling(),
+                    (r.GetEnd().X + Vertex.Radius_2).UnScaling(), (r.GetEnd().Y + Vertex.Radius_2).UnScaling());
             }
+                
             if (isCreatingEdge)
                 e.DrawLine(PensCase.Createble, (vertexes.SelRect.X + Vertex.Radius_2).UnScaling(), (vertexes.SelRect.Y + Vertex.Radius_2).UnScaling(), x, y);
          }

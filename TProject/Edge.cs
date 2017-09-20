@@ -2,45 +2,68 @@
 
 namespace TProject
 {
-    class Edge
+    public class Edge: Entity
     {
-        public string Direction { get; set; }
+        private int Length;
 
-        public Vertex VertexOne { get; set; }
-        public Vertex VertexTwo { get; set; } 
+        private static long curMaxId = 0;
+        private Vertex HeadVertex { get; set; }
+        private Vertex EndVertex { get; set; }
+        public bool IsBilateral { get; set; }
+        public Sign Signs { get; set; }
 
         public Police Policemen { get; set; }
 
         public string NameStreet { get; set; }
 
-        private int Length;
-
         public Coating Coat { get; set; }
 
-        public void SetVertexA(Vertex A)
+
+        public void Revers()
         {
-            VertexOne = A;
+            var c = HeadVertex;
+            HeadVertex = EndVertex;
+            EndVertex = c;
         }
-        public void SetVertexB(Vertex B)
+     
+
+        public void SetHead(Vertex A)
         {
-             VertexTwo = B;
+            HeadVertex = A;
+        }
+        public void SetEnd(Vertex B)
+        {
+            EndVertex = B;
         }
 
-        public Vertex GetVertexA()
+        private void SetVertex(Vertex A, Vertex B)
         {
-            return this.VertexOne;
+            HeadVertex = A;
+            EndVertex = B;
         }
 
-        public Vertex GetVertexB()
+        public Vertex GetHead()
         {
-            return this.VertexTwo;
+            return HeadVertex;
+        }
+        public Vertex GetEnd()
+        {
+            return EndVertex;
         }
 
         public int GetLength()
         {
-            return this.Length;
+            return Length;
+        }
+        public void SetLength(int _len)
+        {
+            Length = _len;
         }
 
+        public class Sign
+        {
+            public Sign() { }
+        }
         public class Coating : Type, Coefficient
         {
             public string Type { get; set; }
@@ -51,30 +74,37 @@ namespace TProject
                 this.Type = type;
                 this.Coeff = coefficient;
             }
-        }
-
-        private void SetVertex(Vertex A, Vertex B)
-        {
-            this.VertexOne = A;
-            this.VertexTwo = B;
+            public Coating() { }
         }
 
         public Edge() { }
 
         public Edge(Vertex v1, Vertex v2)
         {
-            VertexOne = v1;
-            VertexTwo = v2;
+            ID = ++curMaxId;
+            HeadVertex = v1;
+            EndVertex = v2;
+        }
+
+        public Edge InitThisEdge(int length, string nameStreet, Coating coat, bool isBiLate)
+        {
+
+            Length = length;
+            NameStreet = nameStreet;
+            Coat = coat;
+            IsBilateral = isBiLate; 
+            return this;
         }
 
         public static Edge CreateArc(string Direction, Vertex A, Vertex B, int length, string nameStreet, Coating coat)
         {
             Edge arc = new Edge();
-            arc.Direction = Direction;
             arc.Length = length;
-            arc.SetVertex(A, B);
+            arc.HeadVertex = A;
+            arc.EndVertex = B;
             arc.NameStreet = nameStreet;
             arc.Coat = coat;
+            arc.ID = ++curMaxId;
             return arc;
         }
     }
