@@ -28,174 +28,171 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.labelLength = new System.Windows.Forms.Label();
+            this.buttonAccept = new System.Windows.Forms.Button();
+            this.buttonMirror = new System.Windows.Forms.Button();
+            this.groupBoxWay = new System.Windows.Forms.GroupBox();
+            this.checkBoxWay = new System.Windows.Forms.CheckBox();
+            this.numericUpDownLength = new System.Windows.Forms.NumericUpDown();
+            this.labelName = new System.Windows.Forms.Label();
+            this.labelID = new System.Windows.Forms.Label();
+            this.linkLabelID = new System.Windows.Forms.LinkLabel();
+            this.comboBoxCoat = new System.Windows.Forms.ComboBox();
+            this.labelCoat = new System.Windows.Forms.Label();
+            this.textBoxName = new System.Windows.Forms.TextBox();
+            this.labelSign = new System.Windows.Forms.Label();
+            this.comboBoxSign = new System.Windows.Forms.ComboBox();
+            this.groupBoxWay.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLength)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // labelLength
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 76);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Протяженность:";
+            this.labelLength.AutoSize = true;
+            this.labelLength.Location = new System.Drawing.Point(9, 76);
+            this.labelLength.Name = "labelLength";
+            this.labelLength.Size = new System.Drawing.Size(90, 13);
+            this.labelLength.TabIndex = 0;
+            this.labelLength.Text = "Протяженность:";
             // 
-            // button1
+            // buttonAccept
             // 
-            this.button1.Location = new System.Drawing.Point(197, 232);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Ок";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonAccept.Location = new System.Drawing.Point(197, 232);
+            this.buttonAccept.Name = "buttonAccept";
+            this.buttonAccept.Size = new System.Drawing.Size(75, 23);
+            this.buttonAccept.TabIndex = 1;
+            this.buttonAccept.Text = "Ок";
+            this.buttonAccept.UseVisualStyleBackColor = true;
+            this.buttonAccept.Click += new System.EventHandler(this.buttonAccept_Click);
             // 
-            // button2
+            // buttonMirror
             // 
-            this.button2.Location = new System.Drawing.Point(103, 43);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(80, 24);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Отразить";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.buttonMirror.Location = new System.Drawing.Point(103, 43);
+            this.buttonMirror.Name = "buttonMirror";
+            this.buttonMirror.Size = new System.Drawing.Size(80, 24);
+            this.buttonMirror.TabIndex = 2;
+            this.buttonMirror.Text = "Отразить";
+            this.buttonMirror.UseVisualStyleBackColor = true;
+            this.buttonMirror.Click += new System.EventHandler(this.buttonMirror_Click);
             // 
-            // groupBox1
+            // groupBoxWay
             // 
-            this.groupBox1.Controls.Add(this.checkBox1);
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Location = new System.Drawing.Point(2, 189);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(189, 73);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Направление";
+            this.groupBoxWay.Controls.Add(this.checkBoxWay);
+            this.groupBoxWay.Controls.Add(this.buttonMirror);
+            this.groupBoxWay.Location = new System.Drawing.Point(2, 189);
+            this.groupBoxWay.Name = "groupBoxWay";
+            this.groupBoxWay.Size = new System.Drawing.Size(189, 73);
+            this.groupBoxWay.TabIndex = 3;
+            this.groupBoxWay.TabStop = false;
+            this.groupBoxWay.Text = "Направление";
             // 
-            // checkBox1
+            // checkBoxWay
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(10, 19);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(137, 17);
-            this.checkBox1.TabIndex = 4;
-            this.checkBox1.Text = "Двусторонняя дорога";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.checkBoxWay.AutoSize = true;
+            this.checkBoxWay.Location = new System.Drawing.Point(10, 19);
+            this.checkBoxWay.Name = "checkBoxWay";
+            this.checkBoxWay.Size = new System.Drawing.Size(137, 17);
+            this.checkBoxWay.TabIndex = 4;
+            this.checkBoxWay.Text = "Двусторонняя дорога";
+            this.checkBoxWay.UseVisualStyleBackColor = true;
+            this.checkBoxWay.CheckedChanged += new System.EventHandler(this.checkBoxWay_CheckedChanged);
             // 
-            // numericUpDown1
+            // numericUpDownLength
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(106, 74);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(166, 20);
-            this.numericUpDown1.TabIndex = 4;
+            this.numericUpDownLength.Location = new System.Drawing.Point(106, 74);
+            this.numericUpDownLength.Name = "numericUpDownLength";
+            this.numericUpDownLength.Size = new System.Drawing.Size(166, 20);
+            this.numericUpDownLength.TabIndex = 4;
             // 
-            // label2
+            // labelName
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 48);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Название:";
+            this.labelName.AutoSize = true;
+            this.labelName.Location = new System.Drawing.Point(9, 48);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(60, 13);
+            this.labelName.TabIndex = 5;
+            this.labelName.Text = "Название:";
             // 
-            // label3
+            // labelID
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(95, 9);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(90, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Идентификатор:";
+            this.labelID.AutoSize = true;
+            this.labelID.Location = new System.Drawing.Point(95, 9);
+            this.labelID.Name = "labelID";
+            this.labelID.Size = new System.Drawing.Size(90, 13);
+            this.labelID.TabIndex = 6;
+            this.labelID.Text = "Идентификатор:";
             // 
-            // linkLabel1
+            // linkLabelID
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(194, 9);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(55, 13);
-            this.linkLabel1.TabIndex = 7;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "linkLabel1";
-            this.linkLabel1.VisitedLinkColor = System.Drawing.Color.Blue;
+            this.linkLabelID.AutoSize = true;
+            this.linkLabelID.Location = new System.Drawing.Point(194, 9);
+            this.linkLabelID.Name = "linkLabelID";
+            this.linkLabelID.Size = new System.Drawing.Size(0, 13);
+            this.linkLabelID.TabIndex = 7;
+            this.linkLabelID.VisitedLinkColor = System.Drawing.Color.Blue;
             // 
-            // comboBox1
+            // comboBoxCoat
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(106, 101);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(166, 21);
-            this.comboBox1.TabIndex = 8;
-            this.comboBox1.Text = "не указано";
+            this.comboBoxCoat.FormattingEnabled = true;
+            this.comboBoxCoat.Location = new System.Drawing.Point(106, 101);
+            this.comboBoxCoat.Name = "comboBoxCoat";
+            this.comboBoxCoat.Size = new System.Drawing.Size(166, 21);
+            this.comboBoxCoat.TabIndex = 8;
+            this.comboBoxCoat.Text = "не указано";
             // 
-            // label4
+            // labelCoat
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 104);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(67, 13);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Покарытие:";
+            this.labelCoat.AutoSize = true;
+            this.labelCoat.Location = new System.Drawing.Point(12, 104);
+            this.labelCoat.Name = "labelCoat";
+            this.labelCoat.Size = new System.Drawing.Size(61, 13);
+            this.labelCoat.TabIndex = 9;
+            this.labelCoat.Text = "Покрытие:";
             // 
-            // textBox1
+            // textBoxName
             // 
-            this.textBox1.Location = new System.Drawing.Point(75, 45);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(197, 20);
-            this.textBox1.TabIndex = 10;
-            this.textBox1.Text = "Введите название улицы...";
+            this.textBoxName.Location = new System.Drawing.Point(75, 45);
+            this.textBoxName.Name = "textBoxName";
+            this.textBoxName.Size = new System.Drawing.Size(197, 20);
+            this.textBoxName.TabIndex = 10;
+            this.textBoxName.Text = "Введите название улицы...";
             // 
-            // label5
+            // labelSign
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 131);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 13);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Знак:";
+            this.labelSign.AutoSize = true;
+            this.labelSign.Location = new System.Drawing.Point(12, 131);
+            this.labelSign.Name = "labelSign";
+            this.labelSign.Size = new System.Drawing.Size(35, 13);
+            this.labelSign.TabIndex = 12;
+            this.labelSign.Text = "Знак:";
             // 
-            // comboBox2
+            // comboBoxSign
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(106, 128);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(166, 21);
-            this.comboBox2.TabIndex = 11;
-            this.comboBox2.Text = "не указано";
+            this.comboBoxSign.FormattingEnabled = true;
+            this.comboBoxSign.Location = new System.Drawing.Point(106, 128);
+            this.comboBoxSign.Name = "comboBoxSign";
+            this.comboBoxSign.Size = new System.Drawing.Size(166, 21);
+            this.comboBoxSign.TabIndex = 11;
+            this.comboBoxSign.Text = "не указано";
             // 
             // EditEdge
             // 
-            this.AcceptButton = this.button1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(292, 273);
             this.ControlBox = false;
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.linkLabel1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelSign);
+            this.Controls.Add(this.comboBoxSign);
+            this.Controls.Add(this.textBoxName);
+            this.Controls.Add(this.labelCoat);
+            this.Controls.Add(this.comboBoxCoat);
+            this.Controls.Add(this.linkLabelID);
+            this.Controls.Add(this.labelID);
+            this.Controls.Add(this.labelName);
+            this.Controls.Add(this.numericUpDownLength);
+            this.Controls.Add(this.groupBoxWay);
+            this.Controls.Add(this.buttonAccept);
+            this.Controls.Add(this.labelLength);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(300, 300);
             this.MinimizeBox = false;
@@ -203,10 +200,12 @@
             this.Name = "EditEdge";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Параметры перегона";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.Load += new System.EventHandler(this.EditEdge_Load);
+            this.groupBoxWay.ResumeLayout(false);
+            this.groupBoxWay.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLength)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -214,19 +213,19 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Label labelLength;
+        private System.Windows.Forms.Button buttonAccept;
+        private System.Windows.Forms.Button buttonMirror;
+        private System.Windows.Forms.GroupBox groupBoxWay;
+        private System.Windows.Forms.CheckBox checkBoxWay;
+        private System.Windows.Forms.NumericUpDown numericUpDownLength;
+        private System.Windows.Forms.Label labelName;
+        private System.Windows.Forms.Label labelID;
+        private System.Windows.Forms.LinkLabel linkLabelID;
+        private System.Windows.Forms.ComboBox comboBoxCoat;
+        private System.Windows.Forms.Label labelCoat;
+        private System.Windows.Forms.TextBox textBoxName;
+        private System.Windows.Forms.Label labelSign;
+        private System.Windows.Forms.ComboBox comboBoxSign;
     }
 }

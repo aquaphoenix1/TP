@@ -42,28 +42,25 @@ namespace TProject
             this.button1 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.panelMapSubstrate = new System.Windows.Forms.Panel();
-            this.pictureBoxMap = new System.Windows.Forms.PictureBox();
             this.contextMenuStripPictBox = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addVertexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addEdgeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editVertexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.добавитьСветофорToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.удалитьСветофорToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.редактироватьСветофорToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editEdgeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.openSubMapFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.button2 = new System.Windows.Forms.Button();
-            this.editEdgeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureBoxMap = new System.Windows.Forms.PictureBox();
             this.menuStrip.SuspendLayout();
             this.tabPageMap.SuspendLayout();
             this.panelRightMenu.SuspendLayout();
             this.panelMapSubstrate.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMap)).BeginInit();
             this.contextMenuStripPictBox.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMap)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -81,7 +78,7 @@ namespace TProject
             this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.открытьToolStripMenuItem});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.файлToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
             this.файлToolStripMenuItem.Text = "Файл";
             // 
             // открытьToolStripMenuItem
@@ -90,19 +87,19 @@ namespace TProject
             this.openMapToolStripMenuItem,
             this.subMapToolStripMenuItem});
             this.открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
-            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.открытьToolStripMenuItem.Text = "Открыть..";
             // 
             // openMapToolStripMenuItem
             // 
             this.openMapToolStripMenuItem.Name = "openMapToolStripMenuItem";
-            this.openMapToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.openMapToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.openMapToolStripMenuItem.Text = "Карту";
             // 
             // subMapToolStripMenuItem
             // 
             this.subMapToolStripMenuItem.Name = "subMapToolStripMenuItem";
-            this.subMapToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.subMapToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.subMapToolStripMenuItem.Text = "Подложку";
             this.subMapToolStripMenuItem.Click += new System.EventHandler(this.subMapToolStripMenuItem_Click);
             // 
@@ -163,21 +160,6 @@ namespace TProject
             this.panelMapSubstrate.TabIndex = 0;
             this.panelMapSubstrate.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMap_Zoom);
             // 
-            // pictureBoxMap
-            // 
-            this.pictureBoxMap.BackColor = System.Drawing.Color.Silver;
-            this.pictureBoxMap.ContextMenuStrip = this.contextMenuStripPictBox;
-            this.pictureBoxMap.Location = new System.Drawing.Point(-2, 3);
-            this.pictureBoxMap.Name = "pictureBoxMap";
-            this.pictureBoxMap.Size = new System.Drawing.Size(738, 392);
-            this.pictureBoxMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxMap.TabIndex = 0;
-            this.pictureBoxMap.TabStop = false;
-            this.pictureBoxMap.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxMap_Paint);
-            this.pictureBoxMap.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMap_MouseDown);
-            this.pictureBoxMap.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMap_MouseMove);
-            this.pictureBoxMap.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMap_MouseUp);
-            // 
             // contextMenuStripPictBox
             // 
             this.contextMenuStripPictBox.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -186,12 +168,12 @@ namespace TProject
             this.editVertexToolStripMenuItem,
             this.editEdgeToolStripMenuItem});
             this.contextMenuStripPictBox.Name = "contextMenuStripPictBox";
-            this.contextMenuStripPictBox.Size = new System.Drawing.Size(210, 114);
+            this.contextMenuStripPictBox.Size = new System.Drawing.Size(200, 92);
             // 
             // addVertexToolStripMenuItem
             // 
             this.addVertexToolStripMenuItem.Name = "addVertexToolStripMenuItem";
-            this.addVertexToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.addVertexToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.addVertexToolStripMenuItem.Text = "Добавить перекресток";
             this.addVertexToolStripMenuItem.Click += new System.EventHandler(this.addVertexToolStripMenuItem_Click);
             // 
@@ -199,42 +181,26 @@ namespace TProject
             // 
             this.addEdgeToolStripMenuItem.Enabled = false;
             this.addEdgeToolStripMenuItem.Name = "addEdgeToolStripMenuItem";
-            this.addEdgeToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.addEdgeToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.addEdgeToolStripMenuItem.Text = "Добавить перегон";
             this.addEdgeToolStripMenuItem.Click += new System.EventHandler(this.addEdgeToolStripMenuItem_Click);
             // 
             // editVertexToolStripMenuItem
             // 
-            this.editVertexToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.добавитьСветофорToolStripMenuItem,
-            this.удалитьСветофорToolStripMenuItem,
-            this.редактироватьСветофорToolStripMenuItem});
             this.editVertexToolStripMenuItem.Enabled = false;
             this.editVertexToolStripMenuItem.Name = "editVertexToolStripMenuItem";
-            this.editVertexToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.editVertexToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.editVertexToolStripMenuItem.Text = "Параметры перекрестка";
             this.editVertexToolStripMenuItem.Visible = false;
+            this.editVertexToolStripMenuItem.Click += new System.EventHandler(this.editVertexToolStripMenuItem_Click);
             // 
-            // добавитьСветофорToolStripMenuItem
+            // editEdgeToolStripMenuItem
             // 
-            this.добавитьСветофорToolStripMenuItem.Name = "добавитьСветофорToolStripMenuItem";
-            this.добавитьСветофорToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
-            this.добавитьСветофорToolStripMenuItem.Text = "Добавить светофор";
-            this.добавитьСветофорToolStripMenuItem.Click += new System.EventHandler(this.добавитьСветофорToolStripMenuItem_Click);
-            // 
-            // удалитьСветофорToolStripMenuItem
-            // 
-            this.удалитьСветофорToolStripMenuItem.Name = "удалитьСветофорToolStripMenuItem";
-            this.удалитьСветофорToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
-            this.удалитьСветофорToolStripMenuItem.Text = "Удалить светофор";
-            this.удалитьСветофорToolStripMenuItem.Click += new System.EventHandler(this.удалитьСветофорToolStripMenuItem_Click);
-            // 
-            // редактироватьСветофорToolStripMenuItem
-            // 
-            this.редактироватьСветофорToolStripMenuItem.Name = "редактироватьСветофорToolStripMenuItem";
-            this.редактироватьСветофорToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
-            this.редактироватьСветофорToolStripMenuItem.Text = "Редактировать светофор";
-            this.редактироватьСветофорToolStripMenuItem.Click += new System.EventHandler(this.редактироватьСветофорToolStripMenuItem_Click);
+            this.editEdgeToolStripMenuItem.Enabled = false;
+            this.editEdgeToolStripMenuItem.Name = "editEdgeToolStripMenuItem";
+            this.editEdgeToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.editEdgeToolStripMenuItem.Text = "Параметры улицы";
+            this.editEdgeToolStripMenuItem.Click += new System.EventHandler(this.editEdgeToolStripMenuItem_Click);
             // 
             // tabControlMain
             // 
@@ -265,7 +231,7 @@ namespace TProject
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(38, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(37, 17);
             this.toolStripStatusLabel1.Text = "Готов";
             // 
             // button2
@@ -278,13 +244,20 @@ namespace TProject
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // editEdgeToolStripMenuItem
+            // pictureBoxMap
             // 
-            this.editEdgeToolStripMenuItem.Enabled = false;
-            this.editEdgeToolStripMenuItem.Name = "editEdgeToolStripMenuItem";
-            this.editEdgeToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
-            this.editEdgeToolStripMenuItem.Text = "Параметры улицы";
-            this.editEdgeToolStripMenuItem.Click += new System.EventHandler(this.editEdgeToolStripMenuItem_Click);
+            this.pictureBoxMap.BackColor = System.Drawing.Color.Silver;
+            this.pictureBoxMap.ContextMenuStrip = this.contextMenuStripPictBox;
+            this.pictureBoxMap.Location = new System.Drawing.Point(-2, 3);
+            this.pictureBoxMap.Name = "pictureBoxMap";
+            this.pictureBoxMap.Size = new System.Drawing.Size(738, 392);
+            this.pictureBoxMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxMap.TabIndex = 0;
+            this.pictureBoxMap.TabStop = false;
+            this.pictureBoxMap.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxMap_Paint);
+            this.pictureBoxMap.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMap_MouseDown);
+            this.pictureBoxMap.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMap_MouseMove);
+            this.pictureBoxMap.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMap_MouseUp);
             // 
             // MainForm
             // 
@@ -305,11 +278,11 @@ namespace TProject
             this.panelRightMenu.ResumeLayout(false);
             this.panelRightMenu.PerformLayout();
             this.panelMapSubstrate.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMap)).EndInit();
             this.contextMenuStripPictBox.ResumeLayout(false);
             this.tabControlMain.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMap)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -329,9 +302,6 @@ namespace TProject
         private System.Windows.Forms.ToolStripMenuItem addVertexToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addEdgeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editVertexToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem добавитьСветофорToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem удалитьСветофорToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem редактироватьСветофорToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem открытьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openMapToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem subMapToolStripMenuItem;

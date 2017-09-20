@@ -185,21 +185,6 @@ namespace TProject
             pictureBoxMap.Invalidate();
         }
 
-        //события светофоры
-        private void добавитьСветофорToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            if (vertexes.SelVertex != null && vertexes.SelVertex.TrafficLight == null)
-            {
-                using (AddTrafficLightForm form = new AddTrafficLightForm())
-                {
-                    form.ShowDialog();
-                    if (form.AcceptButton.DialogResult == DialogResult.OK)
-                        vertexes.SelVertex.TrafficLight = new TrafficLight(form.GetGreenSeconds(), form.GetRedSeconds());
-                    pictureBoxMap.Invalidate();
-                }
-            }
-        }
-
         private void editEdgeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (isClickedOnEdge)
@@ -215,28 +200,22 @@ namespace TProject
             }
         }
 
-        private void удалитьСветофорToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            if (vertexes.SelVertex != null && vertexes.SelVertex.TrafficLight != null)
-                vertexes.SelVertex.TrafficLight = null;
-            pictureBoxMap.Invalidate();
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             FindMinLengthWay(0, 3);
         }
 
-        private void редактироватьСветофорToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void editVertexToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (vertexes.SelVertex != null && vertexes.SelVertex.TrafficLight != null)
+            if (isClickedOnVertex)
             {
-                AddTrafficLightForm form = new AddTrafficLightForm(vertexes.SelVertex.TrafficLight.GreenSeconds, vertexes.SelVertex.TrafficLight.RedSeconds);
-                form.ShowDialog();
-                if (form.AcceptButton.DialogResult == DialogResult.OK)
+                using (EditVertex form = new EditVertex(vertexes.selSelEdge))
                 {
-                    vertexes.SelVertex.TrafficLight.GreenSeconds = form.GetGreenSeconds();
-                    vertexes.SelVertex.TrafficLight.RedSeconds = form.GetRedSeconds();
+                    form.Owner = this;
+                    form.ShowDialog();
+                    if (form.AcceptButton.DialogResult == DialogResult.OK)
+                        edges.SelEdge = form.Edge;
+                    pictureBoxMap.Invalidate();
                 }
             }
         }

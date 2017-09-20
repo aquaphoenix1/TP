@@ -71,12 +71,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collections\AbstractCollection.cs" />
-    <Compile Include="AddTrafficLightForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddTrafficLightForm.Designer.cs">
-      <DependentUpon>AddTrafficLightForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="DAO.cs" />
     <Compile Include="Edge.cs" />
     <Compile Include="Coefficient.cs" />
@@ -87,6 +81,12 @@
     </Compile>
     <Compile Include="EditEdge.Designer.cs">
       <DependentUpon>EditEdge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditVertex.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditVertex.Designer.cs">
+      <DependentUpon>EditVertex.cs</DependentUpon>
     </Compile>
     <Compile Include="Entity.cs" />
     <Compile Include="MainForm.cs">
@@ -116,11 +116,11 @@
     <Compile Include="VertexInfoControl.Designer.cs">
       <DependentUpon>VertexInfoControl.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AddTrafficLightForm.resx">
-      <DependentUpon>AddTrafficLightForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="EditEdge.resx">
       <DependentUpon>EditEdge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditVertex.resx">
+      <DependentUpon>EditVertex.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

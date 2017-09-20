@@ -14,6 +14,8 @@ namespace TProject
         public static int Radius_2 { get; set; }
         public static Pen Brush { get; set; }
 
+        public bool IsRegular { get { return (TrafficLight != null); } }
+
         public void SetRectXY(int x, int y)
         {
             pointOnMap.X = x;
