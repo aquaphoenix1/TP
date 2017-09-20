@@ -287,7 +287,7 @@ namespace TProject
                             parents[i, j] = k;
                         }
 
-            List<int> way = GetWay(0, 3, parents);
+            List<int> way = GetWay(fromVertex, toVertex, parents);
             string s = String.Empty;
 
             for (int i = 0; i < way.Count; i++)
