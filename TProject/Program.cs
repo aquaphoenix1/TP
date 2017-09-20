@@ -13,9 +13,15 @@ namespace TProject
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //if (!DAOLibrary.DAO.IsExistDataBase())
-                DAO.CreateDataBase();
-            Application.Run(new MainForm());
+            try
+            {
+                if (!DAO.IsExistDataBase())
+                    DAO.CreateDataBase();
+
+                Application.Run(new MainForm());
+            }
+            catch (System.Data.SQLite.SQLiteException ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
     }
 }
