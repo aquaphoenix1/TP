@@ -193,8 +193,7 @@ namespace TProject
                 {
                     form.Owner = this;
                     form.ShowDialog();
-                    if (form.AcceptButton.DialogResult == DialogResult.OK)
-                        edges.SelEdge = form.Edge;
+                    edges.SelEdge = form.Edge;
                     pictureBoxMap.Invalidate();
                 }
             }
@@ -209,12 +208,11 @@ namespace TProject
         {
             if (isClickedOnVertex)
             {
-                using (EditVertex form = new EditVertex(vertexes.selSelEdge))
+                using (EditVertex form = new EditVertex(vertexes.SelVertex))
                 {
                     form.Owner = this;
                     form.ShowDialog();
-                    if (form.AcceptButton.DialogResult == DialogResult.OK)
-                        edges.SelEdge = form.Edge;
+                    vertexes.SelVertex = form.Vertex;
                     pictureBoxMap.Invalidate();
                 }
             }
