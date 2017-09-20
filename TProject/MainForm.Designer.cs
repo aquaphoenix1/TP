@@ -52,11 +52,12 @@ namespace TProject
             this.маршрутИзToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.маршрутВToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlMain = new System.Windows.Forms.TabControl();
+            this.tabPageWorkWithBD = new System.Windows.Forms.TabPage();
             this.openSubMapFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.timerTrafficLight = new System.Windows.Forms.Timer(this.components);
-            this.tabPageWorkWithBD = new System.Windows.Forms.TabPage();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuStrip.SuspendLayout();
             this.tabPageMap.SuspendLayout();
             this.panelRightMenu.SuspendLayout();
@@ -64,6 +65,7 @@ namespace TProject
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMap)).BeginInit();
             this.contextMenuStripPictBox.SuspendLayout();
             this.tabControlMain.SuspendLayout();
+            this.tabPageWorkWithBD.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -262,6 +264,17 @@ namespace TProject
             this.tabControlMain.Size = new System.Drawing.Size(775, 330);
             this.tabControlMain.TabIndex = 2;
             // 
+            // tabPageWorkWithBD
+            // 
+            this.tabPageWorkWithBD.Controls.Add(this.menuStrip1);
+            this.tabPageWorkWithBD.Location = new System.Drawing.Point(4, 22);
+            this.tabPageWorkWithBD.Name = "tabPageWorkWithBD";
+            this.tabPageWorkWithBD.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageWorkWithBD.Size = new System.Drawing.Size(767, 304);
+            this.tabPageWorkWithBD.TabIndex = 1;
+            this.tabPageWorkWithBD.Text = "Работа с БД";
+            this.tabPageWorkWithBD.UseVisualStyleBackColor = true;
+            // 
             // openSubMapFileDialog
             // 
             this.openSubMapFileDialog.Filter = "JPEG|*.JPG|JPEG|*.JPEG";
@@ -282,15 +295,13 @@ namespace TProject
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(38, 17);
             this.toolStripStatusLabel1.Text = "Готов";
             // 
-            // tabPageWorkWithBD
+            // menuStrip1
             // 
-            this.tabPageWorkWithBD.Location = new System.Drawing.Point(4, 22);
-            this.tabPageWorkWithBD.Name = "tabPageWorkWithBD";
-            this.tabPageWorkWithBD.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageWorkWithBD.Size = new System.Drawing.Size(767, 304);
-            this.tabPageWorkWithBD.TabIndex = 1;
-            this.tabPageWorkWithBD.Text = "Работа с БД";
-            this.tabPageWorkWithBD.UseVisualStyleBackColor = true;
+            this.menuStrip1.Location = new System.Drawing.Point(3, 3);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(761, 24);
+            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.Text = "menuStrip1";
             // 
             // MainForm
             // 
@@ -313,6 +324,8 @@ namespace TProject
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMap)).EndInit();
             this.contextMenuStripPictBox.ResumeLayout(false);
             this.tabControlMain.ResumeLayout(false);
+            this.tabPageWorkWithBD.ResumeLayout(false);
+            this.tabPageWorkWithBD.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -346,6 +359,7 @@ namespace TProject
         private System.Windows.Forms.ToolStripMenuItem маршрутВToolStripMenuItem;
         private System.Windows.Forms.Timer timerTrafficLight;
         private System.Windows.Forms.TabPage tabPageWorkWithBD;
+        private System.Windows.Forms.MenuStrip menuStrip1;
     }
 }
 
