@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TProject.Graph;
 using TProject.Properties;
+using TProject.Way;
 
 namespace TProject
 {
@@ -21,6 +22,14 @@ namespace TProject
         /// Выбранная вершины
         /// </summary>
         public Vertex SelVertex { get; set; }
+
+        public static List<TrafficLight> tlList = new List<TrafficLight>();
+
+        public static void tickTL(object obj, EventArgs e)
+        {
+            foreach (var o in tlList)
+                o.Inc();
+        }
 
         /// <summary>
         /// Возвращает вершину, лежащую радиусе Radius от указанной точки
@@ -66,8 +75,8 @@ namespace TProject
             }
             return res;
         }
-
-        public void DrawAllOnPicture(Graphics e)
+        
+        public void DrawAllOnPicture(Graphics e, bool tlNotInit)
         {
             int x, y, width;
 
@@ -78,15 +87,22 @@ namespace TProject
             {
                 x = r.GetRect().X.UnScaling();
                 y = r.GetRect().Y.UnScaling();
-             
+
                 Brush p = PensCase.Point;
                 if (r == SelVertex)
                     p = PensCase.SelectedVertex;
 
-               e.FillEllipse(p, x + 2, y + 2, width, width);
+                e.FillEllipse(p, x + 2, y + 2, width, width);
 
                 if (r.TrafficLight != null)
-                    e.DrawImage(Resources.nonLight3, new Point[] { new Point(x + Vertex.Radius + 3, y), new Point(x + (Vertex.Radius + 18), y), new Point(x + 3 + Vertex.Radius, y + 30) });
+                {
+                    if(tlNotInit)
+                        e.DrawImage(Resources.nonLight3, new Point[] { new Point(x + Vertex.Radius + 3, y), new Point(x + (Vertex.Radius + 18), y), new Point(x + 3 + Vertex.Radius, y + 30) });
+                    else if (r.TrafficLight.isGreen)
+                            e.DrawImage(Resources.greenLight3, new Point[] { new Point(x + Vertex.Radius + 3, y), new Point(x + (Vertex.Radius + 18), y), new Point(x + 3 + Vertex.Radius, y + 30) });
+                        else
+                            e.DrawImage(Resources.redLight3, new Point[] { new Point(x + Vertex.Radius + 3, y), new Point(x + (Vertex.Radius + 18), y), new Point(x + 3 + Vertex.Radius, y + 30) });
+                }
             }
             //return true;
         }

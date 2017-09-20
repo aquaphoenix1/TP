@@ -17,13 +17,13 @@ namespace TProject
         private bool isClickedOnVertex = false,
                      isClickedOnEdge = false,
                      isCreatingEdge = false,
-                     isMoved = false;
+                     isMoved = false,
+                     tlNotInit = true;
 
         private double zoomCurValue;
         private MouseEventArgs lastMouseEvent;
 
         Route way = new Route();
-
         //Используемые коллекции
         private VertexCollection vertexes;
         private EdgeCollection edges;
@@ -39,8 +39,9 @@ namespace TProject
             Coating.Init();
             PensCase.Initialize();
 
-            DoubleBuffered = true;
+            TrafficLight.tLightTurn += RePaint;
 
+            DoubleBuffered = true;
             vertexes = new VertexCollection();
             vertexes.eventUpdateList += pictureBoxMap.Invalidate;
             edges = new EdgeCollection();
@@ -65,7 +66,6 @@ namespace TProject
                 new Point(x + 5, y - 14),
                 new Point(x + 5, y - 7),
             };
-
             e.DrawPolygon(new Pen(color, width), p);
         }
 
@@ -75,7 +75,7 @@ namespace TProject
             Graphics g = e.Graphics;
             if (lastMouseEvent != null)
                 edges.DrawAllOnPicture(g, dX, dY, lastMouseEvent.X, lastMouseEvent.Y, vertexes, isCreatingEdge);
-            vertexes.DrawAllOnPicture(g);
+            vertexes.DrawAllOnPicture(g, tlNotInit);
 
             if (way.Start != null)
             {
@@ -216,9 +216,9 @@ namespace TProject
         {
             pictureBoxMap.Invalidate();
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
+            tlNotInit = false;
             timerTrafficLight.Enabled = true;
         }
 
@@ -262,6 +262,8 @@ namespace TProject
                 form.Owner = this;
                 form.ShowDialog();
                 vertexes.SelVertex = form.Vertex;
+                if (vertexes.SelVertex.TrafficLight != null)
+                    VertexCollection.tlList.Add(vertexes.SelVertex.TrafficLight);
                 pictureBoxMap.Invalidate();
             }
         }
