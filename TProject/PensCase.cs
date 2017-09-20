@@ -13,6 +13,8 @@ namespace TProject
         public static Brush GeneralVertex { get; set; }
         public static Pen SelectedEdgeBilater { get; set; }
         public static Pen SelectedEdgeAtoB { get; set; }
+        public static Pen CustomAtoB { get; set; }
+        public static Pen CustomBilat{ get; set; }
 
         public static Pen GeneralEdge { get; set; }
 
@@ -37,9 +39,14 @@ namespace TProject
                   genEdge = Color.DarkBlue,
                   SelectedEdge = Color.DarkMagenta;
 
+            Color custom = Color.Black;
+
             GeneralVertex = new SolidBrush(generalVert);
             GeneralEdge = new Pen(genEdge, Vertex.Radius_2);
             SelectedVertex = new SolidBrush(selectedVertex);
+
+            CustomAtoB = new Pen(custom, Vertex.Radius_2);
+            CustomBilat = new Pen(custom, Vertex.Radius_2);
 
             SelectedEdgeAtoB = new Pen(generealEdgeColor, GeneralEdge.Width);
             SelectedEdgeAtoB.Color = SelectedEdge;
@@ -55,10 +62,21 @@ namespace TProject
             Createble.StartCap = Createble.EndCap = System.Drawing.Drawing2D.LineCap.RoundAnchor;
 
             SelectedEdgeBilater.EndCap = SelectedEdgeBilater.StartCap = SelectedEdgeAtoB.EndCap =
-                GeneralEdgeAtoB.EndCap = GeneralEdgeBilater.StartCap =
+                GeneralEdgeAtoB.EndCap = GeneralEdgeBilater.StartCap = CustomAtoB.EndCap = CustomBilat.EndCap = CustomBilat.StartCap =
                 GeneralEdgeBilater.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
 
-            GeneralEdgeAtoB.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+            GeneralEdgeAtoB.StartCap = CustomAtoB.StartCap = SelectedEdgeAtoB.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+        }
+        public static Pen GetCustomPen(bool isBiLat, int w)
+        {
+            if (isBiLat)
+            {
+                CustomBilat.Width = w;
+                return CustomBilat;
+            }
+
+            CustomAtoB.Width = w;
+            return CustomAtoB;
         }
         public static Pen GetPenForEdge(bool isSelected, bool isBiLat, int w)
         {

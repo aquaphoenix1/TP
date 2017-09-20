@@ -19,9 +19,19 @@ namespace TProject
 
             foreach (var o in ElementsList)
             {
-                int val = (x - o.GetHead().X) * (o.GetEnd().Y - o.GetHead().Y) / (o.GetEnd().X - o.GetHead().X) + o.GetHead().Y;
-                if (val + Vertex.Radius > y && val - Vertex.Radius < y && x < Math.Max(o.GetHead().X, o.GetEnd().X) && x > Math.Min(o.GetHead().X, o.GetEnd().X))
-                    e = o;
+                int dif = o.GetEnd().X - o.GetHead().X;
+
+                if (dif != 0)
+                {
+                    int val = (x - o.GetHead().X) * (o.GetEnd().Y - o.GetHead().Y) / (dif) + o.GetHead().Y;
+                    if (val + Vertex.Radius > y && val - Vertex.Radius < y && x < Math.Max(o.GetHead().X, o.GetEnd().X) && x > Math.Min(o.GetHead().X, o.GetEnd().X))
+                        e = o;
+                }
+                else
+                {
+                    if (y < Math.Max(o.GetHead().Y, o.GetEnd().Y) && y > Math.Min(o.GetHead().Y, o.GetEnd().Y))
+                        e = o;
+                }
             }
             return e;
         }
@@ -47,9 +57,15 @@ namespace TProject
 
             foreach (var r in ElementsList)
             {
-                e.DrawLine(PensCase.GetPenForEdge(r == SelEdge, r.IsBilateral, width),
+               
+
+                e.DrawLine(PensCase.GetCustomPen(r.IsBilateral, width - 2),
                     (r.GetHead().X + Vertex.Radius_2).UnScaling(), (r.GetHead().Y + Vertex.Radius_2).UnScaling(),
                     (r.GetEnd().X + Vertex.Radius_2).UnScaling(), (r.GetEnd().Y + Vertex.Radius_2).UnScaling());
+
+                e.DrawLine(PensCase.GetPenForEdge(r == SelEdge, r.IsBilateral, width - 4),
+                   (r.GetHead().X + Vertex.Radius_2).UnScaling(), (r.GetHead().Y + Vertex.Radius_2).UnScaling(),
+                   (r.GetEnd().X + Vertex.Radius_2).UnScaling(), (r.GetEnd().Y + Vertex.Radius_2).UnScaling());
             }
                 
             if (isCreatingEdge)
