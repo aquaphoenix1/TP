@@ -228,7 +228,8 @@ namespace TProject
         {
             int start = vertexes.ElementsList.FindIndex(o => o.ID == way.Start.ID);
             int end = vertexes.ElementsList.FindIndex(o => o.ID == way.End.ID);
-            FindMinLengthWay(start, end);
+            List<long> wayIDs;
+            FindMinLengthWay(start, end, out wayIDs);
         }
 
         private void маршрутИзToolStripMenuItem_Click(object sender, EventArgs e)
@@ -305,17 +306,12 @@ namespace TProject
             return array;
         }
 
-        private int FindMinLengthWay(int fromVertex, int toVertex)
+        private int FindMinLengthWay(int fromVertex, int toVertex, out List<long> way)
         {
             int[,] parents;
             long[] IDs;
             int[,] matrix = GetMatrixWay(out parents, out IDs);
             int size = (int)Math.Sqrt(matrix.Length);
-
-            int length = 0;
-
-            List<int> vertexes = new List<int>();
-            List<int> edges = new List<int>();
 
             for (int k = 0; k < size; ++k)
                 for (int i = 0; i < size; ++i)
@@ -325,35 +321,40 @@ namespace TProject
                             matrix[i, j] = matrix[i, k] + matrix[k, j];
                             parents[i, j] = k;
                         }
+            if (matrix[fromVertex, toVertex] == Int32.MaxValue)
+            {
+                way = null;
+                return -1;
+            }
+            else
+            {
+                List<int> wayList = GetWay(fromVertex, toVertex, parents);
+                
+                way = new List<long>(wayList.Count);
 
-            List<int> way = GetWay(fromVertex, toVertex, parents);
-            string s = String.Empty;
-
-            for (int i = 0; i < way.Count; i++)
-                s += IDs[way[i]].ToString() + "\n";
-
-            MessageBox.Show(s);
-
-            return length;
+                for (int i = 0; i < wayList.Count; i++)
+                    way.Add(IDs[wayList[i]]);
+                
+                return matrix[fromVertex, toVertex];
+            }
         }
 
         public List<int> GetWay(int from, int to, int[,] arrayOfParents)
         {
             List<int> list = new List<int>();
-            list.Add(to);
-
             int vert = arrayOfParents[from, to];
 
-            while (vert != 0)
+            while (true)
             {
                 list.Add(vert);
-
-                vert = arrayOfParents[from, vert];
+                int last = vert;
+                vert = arrayOfParents[vert, to];
+                if (vert == last)
+                    break;
             }
-
-            list.Add(from);
-
-            list.Reverse();
+            if(list[0] != from)
+                list.Insert(0, from);
+            list.Add(to);
 
             return list;
         }
