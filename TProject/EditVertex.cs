@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
+using TProject.Graph;
+using TProject.Way;
 
 namespace TProject
 {

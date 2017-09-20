@@ -1,7 +1,12 @@
 ﻿namespace TProject
 {
-    interface Type
+    public class Type : Entity
     {
-        string Type { get; set; }
+        public string TypeName { get; set; }
+        public Type():base(){}
+        public Type(string typeName) : base()
+        {
+            TypeName = typeName;
+        }
     }
 }

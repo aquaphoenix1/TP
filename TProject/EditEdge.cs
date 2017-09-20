@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using TProject.Graph;
+using TProject.Way;
 
 namespace TProject
 {
@@ -30,10 +33,9 @@ namespace TProject
             Edge.SetLength((int)numericUpDownLength.Value);
             Edge.NameStreet = textBoxName.Text;
 
-            if (comboBoxCoat.SelectedValue == null)
-                Edge.Coat = new Edge.Coating();
-            if (comboBoxSign.SelectedValue == null)
-                Edge.Signs = new Edge.Sign();
+
+            Edge.Signs = (Sign)comboBoxSign.SelectedItem;
+            Edge.Coat = (Coating)comboBoxCoat.SelectedItem;
             
             Close();
         }
@@ -43,9 +45,9 @@ namespace TProject
             linkLabelID.Text = Edge.ID.ToString();
             textBoxName.Text = Edge.NameStreet;
             numericUpDownLength.Value = Edge.GetLength();
-            //comboBoxCoat.DataSource = Edge.Coat;
-            if(!(Edge.Signs == null))
-                comboBoxSign.DataSource = Edge.Signs;
+            comboBoxCoat.DataSource = Coating.collection;
+
+            comboBoxSign.DataSource = Sign.collection;
             checkBoxWay.Checked = Edge.IsBilateral;
         }
     }

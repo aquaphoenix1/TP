@@ -1,19 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using TProject.Way;
 
-namespace TProject
+namespace TProject.Graph
 {
     public class Edge: Entity
     {
         private int Length;
 
-        private static long curMaxId = 0;
         private Vertex HeadVertex { get; set; }
         private Vertex EndVertex { get; set; }
         public bool IsBilateral { get; set; }
         public Sign Signs { get; set; }
-
         public Police Policemen { get; set; }
-
         public string NameStreet { get; set; }
 
         public Coating Coat { get; set; }
@@ -60,39 +59,23 @@ namespace TProject
             Length = _len;
         }
 
-        public class Sign
-        {
-            public Sign() { }
-        }
-        public class Coating : Type, Coefficient
-        {
-            public string Type { get; set; }
-            public double Coeff { get; set; }
+       
+      
+        public Edge():base() { }
 
-            public Coating(string type, double coefficient)
-            {
-                this.Type = type;
-                this.Coeff = coefficient;
-            }
-            public Coating() { }
-        }
-
-        public Edge() { }
-
-        public Edge(Vertex v1, Vertex v2)
+        public Edge(Vertex v1, Vertex v2):base()
         {
-            ID = ++curMaxId;
             HeadVertex = v1;
             EndVertex = v2;
         }
 
-        public Edge InitThisEdge(int length, string nameStreet, Coating coat, bool isBiLate)
+        public Edge InitThisEdge(string nameStreet, int length, Coating coat, bool isBiLate)
         {
-
             Length = length;
             NameStreet = nameStreet;
             Coat = coat;
             IsBilateral = isBiLate; 
+
             return this;
         }
 
@@ -109,7 +92,6 @@ namespace TProject
             arc.EndVertex = B;
             arc.NameStreet = nameStreet;
             arc.Coat = coat;
-            arc.ID = ++curMaxId;
             return arc;
         }
     }

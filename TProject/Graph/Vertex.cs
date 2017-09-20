@@ -1,18 +1,16 @@
 ﻿using System.Drawing;
+using TProject.Way;
 
-namespace TProject
+namespace TProject.Graph
 {
     public class Vertex : Entity
     {
-        private static long curMaxId = 0;
-
         public TrafficLight TrafficLight { get; set; }
 
         public static double Scale { get; set; }
 
         public static int Radius { get; set; }
         public static int Radius_2 { get; set; }
-        public static Pen Brush { get; set; }
 
         public bool IsRegular { get { return (TrafficLight != null); } }
 
@@ -43,11 +41,10 @@ namespace TProject
             Radius = 20;
             Radius_2 = Radius / 2;
         }
-        public Vertex(int x, int y)
+        public Vertex(int x, int y):base()
         {
-            ID = ++curMaxId;
             pointOnMap = new Rectangle(x, y, Radius, Radius);
-            this.TrafficLight = null;
+            TrafficLight = null;
         }
     }
 }

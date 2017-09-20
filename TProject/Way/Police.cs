@@ -1,9 +1,9 @@
-﻿namespace TProject
+﻿namespace TProject.Way
 {
-    public class Police : Entity, Type, Coefficient
+    public class Police : Type
     {
-        public string Type { get; set; }
         public double Coeff { get; set; }
+
         public Fine FineValue { get; set; }
 
         public int X { get; set; }
@@ -21,9 +21,8 @@
             }
         }
 
-        public Police(string type, double coefficient, Fine fine, int x, int y)
+        public Police(string typeName, double coefficient, Fine fine, int x, int y):base(typeName)
         {
-            this.Type = Type;
             this.Coeff = coefficient;
             this.FineValue = fine;
             this.X = x;
