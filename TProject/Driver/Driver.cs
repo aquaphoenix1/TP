@@ -6,10 +6,12 @@
         public string DriverName { get; set; }
 
         public int OverSpeed { get; set; }
-        public bool isViolateTL { get; set; }
+        public bool IsViolateTL { get; set; }
 
-        public Driver(string typeName, string driverName,Car car):base(typeName)
+        public Driver(string typeName, string driverName, bool isViolateTL, int overSpeed, Car car):base(typeName)
         {
+            OverSpeed = overSpeed;
+            IsViolateTL = isViolateTL;
             Car = car;
             DriverName = driverName;
         }

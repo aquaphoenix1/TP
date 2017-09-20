@@ -37,6 +37,7 @@ namespace TProject
 
             Sign.Init();
             Coating.Init();
+            PensCase.Initialize();
 
             DoubleBuffered = true;
 
@@ -44,14 +45,13 @@ namespace TProject
             vertexes.eventUpdateList += pictureBoxMap.Invalidate;
             edges = new EdgeCollection();
             edges.eventUpdateList += pictureBoxMap.Invalidate;
+
             zoomCurValue = 1;
+            Vertex.Scale = 1;
             startWidthPB = pictureBoxMap.Width;
             startHeightPB = pictureBoxMap.Height;
 
-            Vertex.Scale = 1;
-            PensCase.Initialize();
             pictureBoxMap.Invalidate();
-
         }
 
         private void DrawFlag(Graphics e, int x, int y, Color color, int width)
@@ -215,6 +215,11 @@ namespace TProject
         public void RePaint()
         {
             pictureBoxMap.Invalidate();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            timerTrafficLight.Enabled = true;
         }
 
         private void editEdgeToolStripMenuItem_Click(object sender, EventArgs e)
