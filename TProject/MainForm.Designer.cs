@@ -72,16 +72,19 @@ namespace TProject
             // 
             // menuStrip
             // 
+            this.menuStrip.BackColor = System.Drawing.Color.Transparent;
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.файлToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
+            this.menuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.menuStrip.Size = new System.Drawing.Size(775, 24);
             this.menuStrip.TabIndex = 1;
             this.menuStrip.Text = "menuStrip1";
             // 
             // файлToolStripMenuItem
             // 
+            this.файлToolStripMenuItem.BackColor = System.Drawing.Color.Transparent;
             this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.открытьToolStripMenuItem});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
@@ -94,19 +97,19 @@ namespace TProject
             this.openMapToolStripMenuItem,
             this.subMapToolStripMenuItem});
             this.открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
-            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.открытьToolStripMenuItem.Text = "Открыть..";
             // 
             // openMapToolStripMenuItem
             // 
             this.openMapToolStripMenuItem.Name = "openMapToolStripMenuItem";
-            this.openMapToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.openMapToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openMapToolStripMenuItem.Text = "Карту";
             // 
             // subMapToolStripMenuItem
             // 
             this.subMapToolStripMenuItem.Name = "subMapToolStripMenuItem";
-            this.subMapToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.subMapToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.subMapToolStripMenuItem.Text = "Подложку";
             this.subMapToolStripMenuItem.Click += new System.EventHandler(this.subMapToolStripMenuItem_Click);
             // 
@@ -171,13 +174,13 @@ namespace TProject
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelMapSubstrate.AutoScroll = true;
+            this.panelMapSubstrate.BackColor = System.Drawing.Color.Honeydew;
             this.panelMapSubstrate.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelMapSubstrate.Controls.Add(this.pictureBoxMap);
             this.panelMapSubstrate.Location = new System.Drawing.Point(3, 3);
             this.panelMapSubstrate.Name = "panelMapSubstrate";
             this.panelMapSubstrate.Size = new System.Drawing.Size(574, 298);
             this.panelMapSubstrate.TabIndex = 0;
-            this.panelMapSubstrate.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMap_Zoom);
             // 
             // pictureBoxMap
             // 
@@ -189,10 +192,6 @@ namespace TProject
             this.pictureBoxMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxMap.TabIndex = 0;
             this.pictureBoxMap.TabStop = false;
-            this.pictureBoxMap.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxMap_Paint);
-            this.pictureBoxMap.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMap_MouseDown);
-            this.pictureBoxMap.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMap_MouseMove);
-            this.pictureBoxMap.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMap_MouseUp);
             // 
             // contextMenuStripPictBox
             // 
@@ -243,14 +242,14 @@ namespace TProject
             this.маршрутИзToolStripMenuItem.Name = "маршрутИзToolStripMenuItem";
             this.маршрутИзToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.маршрутИзToolStripMenuItem.Text = "Маршрут из...";
-            this.маршрутИзToolStripMenuItem.Click += new System.EventHandler(this.маршрутИзToolStripMenuItem_Click);
+            this.маршрутИзToolStripMenuItem.Click += new System.EventHandler(this.wayFromToolStripMenuItem_Click);
             // 
             // маршрутВToolStripMenuItem
             // 
             this.маршрутВToolStripMenuItem.Name = "маршрутВToolStripMenuItem";
             this.маршрутВToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.маршрутВToolStripMenuItem.Text = "Маршрут в...";
-            this.маршрутВToolStripMenuItem.Click += new System.EventHandler(this.маршрутВToolStripMenuItem_Click);
+            this.маршрутВToolStripMenuItem.Click += new System.EventHandler(this.wayToToolStripMenuItem_Click);
             // 
             // tabControlMain
             // 
@@ -290,6 +289,7 @@ namespace TProject
             // 
             // statusStrip1
             // 
+            this.statusStrip1.BackColor = System.Drawing.Color.Transparent;
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 360);
@@ -304,14 +304,11 @@ namespace TProject
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(38, 17);
             this.toolStripStatusLabel1.Text = "Готов";
             // 
-            // timerTrafficLight
-            // 
-            this.timerTrafficLight.Tick += new System.EventHandler(VertexCollection.tickTL);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(775, 382);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tabControlMain);

@@ -158,6 +158,7 @@
     <None Include="icon\nonLight.jpg" />
     <None Include="icon\greenLight3.jpg" />
     <None Include="icon\nonLight3.jpg" />
+    <None Include="icon\load.gif" />
     <Content Include="icon\point.jpg" />
     <None Include="Resources\Image1.png" />
     <None Include="icon\VertexIcon.tif" />

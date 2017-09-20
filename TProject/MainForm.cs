@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TProject.Graph;
+using TProject.Properties;
 using TProject.Way;
 
 namespace TProject
@@ -12,8 +13,7 @@ namespace TProject
     public partial class MainForm : Form
     {
         //Управление интерфейсом
-        private int dX, dY;
-        private int startWidthPB, startHeightPB;
+        private int dX, dY, startWidthPB, startHeightPB;
         private bool isClickedOnVertex = false,
                      isClickedOnEdge = false,
                      isCreatingEdge = false,
@@ -28,32 +28,38 @@ namespace TProject
         private VertexCollection vertexes;
         private EdgeCollection edges;
         private Image sourceImage;
-        private int lastX;
-        private int lastY;
+        private int lastPBLocationX;
+        private int lastPBLocationtY;
 
         public MainForm()
         {
             InitializeComponent();
 
+            pictureBoxMap.Hide();
+            pictureBoxMap.Enabled = false;
+            vertexes = new VertexCollection();
+            edges = new EdgeCollection();
+
             Sign.Init();
             Coating.Init();
             PensCase.Initialize();
 
-            TrafficLight.tLightTurn += RePaint;
-
             DoubleBuffered = true;
-            vertexes = new VertexCollection();
-            vertexes.eventUpdateList += pictureBoxMap.Invalidate;
-            edges = new EdgeCollection();
-            edges.eventUpdateList += pictureBoxMap.Invalidate;
 
             zoomCurValue = 1;
             Vertex.Scale = 1;
             startWidthPB = pictureBoxMap.Width;
             startHeightPB = pictureBoxMap.Height;
 
+            TrafficLight.tLightTurn += pictureBoxMap.Invalidate;
+            timerTrafficLight.Tick += vertexes.tickTL;
+            vertexes.eventUpdateList += pictureBoxMap.Invalidate;
+            edges.eventUpdateList += pictureBoxMap.Invalidate;
+
             pictureBoxMap.Invalidate();
         }
+
+
 
         private void DrawFlag(Graphics e, int x, int y, Color color, int width)
         {
@@ -69,10 +75,29 @@ namespace TProject
             e.DrawPolygon(new Pen(color, width), p);
         }
 
+        public void RePaint()
+        {
+            pictureBoxMap.Invalidate();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            tlNotInit = false;
+            timerTrafficLight.Enabled = true;
+            pictureBoxMap.Invalidate();
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int start = vertexes.ElementsList.FindIndex(o => o.ID == way.Start.ID);
+            int end = vertexes.ElementsList.FindIndex(o => o.ID == way.End.ID);
+            way.FindMinLengthWay(start, end, vertexes, edges);
+        }
+
         //События pictureBoxMap
         private void pictureBoxMap_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             if (lastMouseEvent != null)
                 edges.DrawAllOnPicture(g, dX, dY, lastMouseEvent.X, lastMouseEvent.Y, vertexes, isCreatingEdge);
             vertexes.DrawAllOnPicture(g, tlNotInit);
@@ -96,10 +121,9 @@ namespace TProject
         }
         private void pictureBoxMap_MouseMove(object sender, MouseEventArgs e)
         {
-
             if (isMoved && e.Button == MouseButtons.Middle)
             {
-                pictureBoxMap.Location = new Point(pictureBoxMap.Location.X + e.X - lastX, pictureBoxMap.Location.Y + e.Y - lastY);
+                pictureBoxMap.Location = new Point(pictureBoxMap.Location.X + e.X - lastPBLocationX, pictureBoxMap.Location.Y + e.Y - lastPBLocationtY);
             }
             else
             {
@@ -165,23 +189,44 @@ namespace TProject
                 else
                 {
                     isMoved = true;
-                    lastX = e.X;
-                    lastY = e.Y;
+                    lastPBLocationX = e.X;
+                    lastPBLocationtY = e.Y;
                 }
             }
             pictureBoxMap.Invalidate();
         }
+
+
+        private SortedList<double, Bitmap> res;
+
+
+        private void toList()
+        {
+                for (double i = 0.6; i < 1.5; i = i + 0.2)
+                    res.Add(Math.Round(i,1), (new Bitmap(sourceImage, new Size((int)(startWidthPB * i), (int)(startHeightPB * i)))));
+        }
+
         private void pictureBoxMap_Zoom(object sender, MouseEventArgs e)
         {
-            panelMapSubstrate.AutoScroll = false;
+            if (e.Delta > 0 && zoomCurValue <= 2 || e.Delta < 0 && zoomCurValue >= 0.6)
+            {
+                panelMapSubstrate.AutoScroll = false;
+                zoomCurValue += e.Delta > 0 ? 0.2 : -0.2;
+                Vertex.Scale = zoomCurValue = Math.Round(zoomCurValue, 1);
 
-            zoomCurValue += e.Delta > 0 ? 0.1 : -0.1;
-            Vertex.Scale = zoomCurValue;
+                if (res.ContainsKey(zoomCurValue))
+                    pictureBoxMap.Image = res[zoomCurValue];
+                else
+                {
+                    Bitmap a = new Bitmap(sourceImage, new Size(startWidthPB.UnScaling(), startHeightPB.UnScaling()));
+                    pictureBoxMap.Image = a;
+                    res.Add(zoomCurValue, a);
+                }
+                pictureBoxMap.Size = pictureBoxMap.Image.Size; 
 
-            pictureBoxMap.Image = new Bitmap(sourceImage, new Size(startWidthPB.UnScaling(), startHeightPB.UnScaling()));
-
-            pictureBoxMap.Size = new Size(startWidthPB.UnScaling(), startHeightPB.UnScaling());
-            panelMapSubstrate.AutoScroll = true;
+                panelMapSubstrate.AutoScroll = true;
+            }
+          
         }
 
 
@@ -209,19 +254,47 @@ namespace TProject
 
                 pictureBoxMap.Image = img;
                 Vertex.Scale = 1;
-            }
-        }
 
-        public void RePaint()
+                res = new SortedList<double, Bitmap>();
+                toList();
+
+                panelMapSubstrate.MouseWheel += new MouseEventHandler(pictureBoxMap_Zoom);
+                pictureBoxMap.Paint += new PaintEventHandler(pictureBoxMap_Paint);
+                pictureBoxMap.MouseDown += new MouseEventHandler(pictureBoxMap_MouseDown);
+                pictureBoxMap.MouseMove += new MouseEventHandler(pictureBoxMap_MouseMove);
+                pictureBoxMap.MouseUp += new MouseEventHandler(pictureBoxMap_MouseUp);
+                pictureBoxMap.Enabled = true;
+                pictureBoxMap.Show();
+            }
+        }   
+
+       
+
+       
+
+
+        /// <summary>
+        /// Маршрут из
+        /// </summary>
+        private void wayFromToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            way.Start = vertexes.SelVertex;
             pictureBoxMap.Invalidate();
         }
-        private void button1_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Маршрут в
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void wayToToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            tlNotInit = false;
-            timerTrafficLight.Enabled = true;
+            way.End = vertexes.SelVertex;
+            pictureBoxMap.Invalidate();
         }
 
+        /// <summary>
+        /// Редактирование параметров перегона
+        /// </summary>
         private void editEdgeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (isClickedOnEdge)
@@ -235,26 +308,9 @@ namespace TProject
                 }
             }
         }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            int start = vertexes.ElementsList.FindIndex(o => o.ID == way.Start.ID);
-            int end = vertexes.ElementsList.FindIndex(o => o.ID == way.End.ID);
-            way.FindMinLengthWay(start, end, vertexes, edges);
-        }
-
-        private void маршрутИзToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            way.Start = vertexes.SelVertex;
-            pictureBoxMap.Invalidate();
-        }
-
-        private void маршрутВToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            way.End = vertexes.SelVertex;
-            pictureBoxMap.Invalidate();
-        }
-
+        /// <summary>
+        /// Редактирование параметров перекрестка
+        /// </summary>
         private void editVertexToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (EditVertex form = new EditVertex(vertexes.SelVertex))
@@ -263,7 +319,7 @@ namespace TProject
                 form.ShowDialog();
                 vertexes.SelVertex = form.Vertex;
                 if (vertexes.SelVertex.TrafficLight != null)
-                    VertexCollection.tlList.Add(vertexes.SelVertex.TrafficLight);
+                    vertexes.tlList.Add(vertexes.SelVertex.TrafficLight);
                 pictureBoxMap.Invalidate();
             }
         }

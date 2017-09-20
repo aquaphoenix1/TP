@@ -57,7 +57,7 @@ namespace TProject
         public void DrawAllOnPicture(Graphics e, int dX, int dY, int x, int y, VertexCollection vertexes, bool isCreatingEdge)
         {
             int width = (int)(Vertex.Radius.UnScaling()) - 4;
-            width = width - 4 < 4 ? 5 : width - 4;
+            width = width - 6 < 8 ? 6 : width - 4;
 
             foreach (var r in ElementsList)
             {

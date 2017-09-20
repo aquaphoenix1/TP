@@ -23,9 +23,9 @@ namespace TProject
         /// </summary>
         public Vertex SelVertex { get; set; }
 
-        public static List<TrafficLight> tlList = new List<TrafficLight>();
+        public List<TrafficLight> tlList = new List<TrafficLight>();
 
-        public static void tickTL(object obj, EventArgs e)
+        public void tickTL(object obj, EventArgs e)
         {
             foreach (var o in tlList)
                 o.Inc();
@@ -81,7 +81,7 @@ namespace TProject
             int x, y, width;
 
             width = (int)(Vertex.Radius.UnScaling()) - 4;
-            width = width - 4 < 4 ? 5 : width - 4;
+            width = width - 4 < 10 ? 10 : width - 6;
 
             foreach (var r in ElementsList)
             {
@@ -104,7 +104,6 @@ namespace TProject
                             e.DrawImage(Resources.redLight3, new Point[] { new Point(x + Vertex.Radius + 3, y), new Point(x + (Vertex.Radius + 18), y), new Point(x + 3 + Vertex.Radius, y + 30) });
                 }
             }
-            //return true;
         }
 
         public void MoveSelVertex(int x, int y, int dX, int dY)
