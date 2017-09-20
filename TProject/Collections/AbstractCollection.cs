@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace TProject
 {
-    abstract class AbstractCollection<T>
+    public abstract class AbstractCollection<T>
     {
         public List<T> ElementsList { get; set; }
 

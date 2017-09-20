@@ -40,6 +40,7 @@ namespace TProject
             this.tabPageMap = new System.Windows.Forms.TabPage();
             this.panelRightMenu = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.panelMapSubstrate = new System.Windows.Forms.Panel();
             this.pictureBoxMap = new System.Windows.Forms.PictureBox();
@@ -48,13 +49,14 @@ namespace TProject
             this.addEdgeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editVertexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editEdgeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.маршрутИзToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.маршрутВToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.openSubMapFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.маршрутИзToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.маршрутВToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.timerTrafficLight = new System.Windows.Forms.Timer(this.components);
+            this.tabPageWorkWithBD = new System.Windows.Forms.TabPage();
             this.menuStrip.SuspendLayout();
             this.tabPageMap.SuspendLayout();
             this.panelRightMenu.SuspendLayout();
@@ -137,6 +139,17 @@ namespace TProject
             this.button1.TabIndex = 2;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(24, 143);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // checkBox1
             // 
@@ -222,12 +235,27 @@ namespace TProject
             this.editEdgeToolStripMenuItem.Text = "Параметры улицы";
             this.editEdgeToolStripMenuItem.Click += new System.EventHandler(this.editEdgeToolStripMenuItem_Click);
             // 
+            // маршрутИзToolStripMenuItem
+            // 
+            this.маршрутИзToolStripMenuItem.Name = "маршрутИзToolStripMenuItem";
+            this.маршрутИзToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.маршрутИзToolStripMenuItem.Text = "Маршрут из...";
+            this.маршрутИзToolStripMenuItem.Click += new System.EventHandler(this.маршрутИзToolStripMenuItem_Click);
+            // 
+            // маршрутВToolStripMenuItem
+            // 
+            this.маршрутВToolStripMenuItem.Name = "маршрутВToolStripMenuItem";
+            this.маршрутВToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.маршрутВToolStripMenuItem.Text = "Маршрут в...";
+            this.маршрутВToolStripMenuItem.Click += new System.EventHandler(this.маршрутВToolStripMenuItem_Click);
+            // 
             // tabControlMain
             // 
             this.tabControlMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControlMain.Controls.Add(this.tabPageMap);
+            this.tabControlMain.Controls.Add(this.tabPageWorkWithBD);
             this.tabControlMain.Location = new System.Drawing.Point(2, 27);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
@@ -254,29 +282,15 @@ namespace TProject
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(38, 17);
             this.toolStripStatusLabel1.Text = "Готов";
             // 
-            // button2
+            // tabPageWorkWithBD
             // 
-            this.button2.Location = new System.Drawing.Point(24, 143);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // маршрутИзToolStripMenuItem
-            // 
-            this.маршрутИзToolStripMenuItem.Name = "маршрутИзToolStripMenuItem";
-            this.маршрутИзToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
-            this.маршрутИзToolStripMenuItem.Text = "Маршрут из...";
-            this.маршрутИзToolStripMenuItem.Click += new System.EventHandler(this.маршрутИзToolStripMenuItem_Click);
-            // 
-            // маршрутВToolStripMenuItem
-            // 
-            this.маршрутВToolStripMenuItem.Name = "маршрутВToolStripMenuItem";
-            this.маршрутВToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
-            this.маршрутВToolStripMenuItem.Text = "Маршрут в...";
-            this.маршрутВToolStripMenuItem.Click += new System.EventHandler(this.маршрутВToolStripMenuItem_Click);
+            this.tabPageWorkWithBD.Location = new System.Drawing.Point(4, 22);
+            this.tabPageWorkWithBD.Name = "tabPageWorkWithBD";
+            this.tabPageWorkWithBD.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageWorkWithBD.Size = new System.Drawing.Size(767, 304);
+            this.tabPageWorkWithBD.TabIndex = 1;
+            this.tabPageWorkWithBD.Text = "Работа с БД";
+            this.tabPageWorkWithBD.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -330,6 +344,8 @@ namespace TProject
         private System.Windows.Forms.ToolStripMenuItem editEdgeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem маршрутИзToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem маршрутВToolStripMenuItem;
+        private System.Windows.Forms.Timer timerTrafficLight;
+        private System.Windows.Forms.TabPage tabPageWorkWithBD;
     }
 }
 
