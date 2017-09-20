@@ -96,6 +96,11 @@ namespace TProject
             return this;
         }
 
+        public bool isConnected(Vertex vertex)
+        {
+            return this.EndVertex == vertex;
+        }
+
         public static Edge CreateArc(string Direction, Vertex A, Vertex B, int length, string nameStreet, Coating coat)
         {
             Edge arc = new Edge();
