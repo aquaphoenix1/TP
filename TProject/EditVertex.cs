@@ -42,13 +42,13 @@ namespace TProject
         {
             if (checkBoxWay.Checked)
             {
-                numericUpDownRed.Enabled = false;
-                numericUpDownGreen.Enabled = false;
+                numericUpDownRed.Enabled = true;
+                numericUpDownGreen.Enabled = true;
             }
             else
             {
-                numericUpDownRed.Enabled = true;
-                numericUpDownGreen.Enabled = true;
+                numericUpDownRed.Enabled = false;
+                numericUpDownGreen.Enabled = false;
             }
         }
     }
