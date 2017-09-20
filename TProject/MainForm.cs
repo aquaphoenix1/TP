@@ -4,6 +4,8 @@ using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TProject.Graph;
+using TProject.Way;
 
 namespace TProject
 {
@@ -20,7 +22,7 @@ namespace TProject
         private double zoomCurValue;
         private MouseEventArgs lastMouseEvent;
 
-        Way way = new Way();
+        Route way = new Route();
 
         //Используемые коллекции
         private VertexCollection vertexes;
@@ -32,6 +34,9 @@ namespace TProject
         public MainForm()
         {
             InitializeComponent();
+
+            Sign.Init();
+            Coating.Init();
             DoubleBuffered = true;
             vertexes = new VertexCollection();
             vertexes.eventUpdateList += pictureBoxMap.Invalidate;

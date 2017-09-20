@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TProject.Graph;
 using TProject.Properties;
 
 namespace TProject

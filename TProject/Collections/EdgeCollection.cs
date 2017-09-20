@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TProject.Graph;
 
 namespace TProject
 {
@@ -16,6 +17,9 @@ namespace TProject
         public override Edge SearhElementWithCoord(int x, int y)
         {
             Edge e = null;
+
+            x = x - Vertex.Radius_2;
+            y = y - 10;// Vertex.Radius_2;
 
             foreach (var o in ElementsList)
             {
@@ -57,8 +61,6 @@ namespace TProject
 
             foreach (var r in ElementsList)
             {
-               
-
                 e.DrawLine(PensCase.GetCustomPen(r.IsBilateral, width - 2),
                     (r.GetHead().X + Vertex.Radius_2).UnScaling(), (r.GetHead().Y + Vertex.Radius_2).UnScaling(),
                     (r.GetEnd().X + Vertex.Radius_2).UnScaling(), (r.GetEnd().Y + Vertex.Radius_2).UnScaling());
