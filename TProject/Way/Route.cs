@@ -48,7 +48,7 @@ namespace TProject.Way
 
             int vert = arrayOfParents[from, to];
 
-            while (vert != 0)
+            while (vert != 0) 
             { 
                 list.Add(vert);
 
