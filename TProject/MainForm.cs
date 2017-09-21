@@ -25,6 +25,7 @@ namespace TProject
 
         Route way = new Route();
         //Используемые коллекции
+        private SortedList<double, Image> cache;
         private VertexCollection vertexes;
         private EdgeCollection edges;
         private Image sourceImage;
@@ -104,13 +105,13 @@ namespace TProject
 
             if (way.Start != null)
             {
-                DrawFlag(g, way.Start.X, way.Start.Y, Color.Black, 12);
-                DrawFlag(g, way.Start.X, way.Start.Y, Color.Sienna, 10);
+                DrawFlag(g, way.Start.X.UnScaling(), way.Start.Y.UnScaling(), Color.Black, 12);
+                DrawFlag(g, way.Start.X.UnScaling(), way.Start.Y.UnScaling(), Color.Sienna, 10);
             }
             if (way.End != null)
             {
-                DrawFlag(g, way.End.X, way.End.Y, Color.Black, 12);
-                DrawFlag(g, way.End.X, way.End.Y, Color.Red, 10);
+                DrawFlag(g, way.End.X.UnScaling(), way.End.Y.UnScaling(), Color.Black, 12);
+                DrawFlag(g, way.End.X.UnScaling(), way.End.Y.UnScaling(), Color.Red, 10);
             }
         }
         private void pictureBoxMap_MouseUp(object sender, MouseEventArgs e)
@@ -197,13 +198,13 @@ namespace TProject
         }
 
 
-        private SortedList<double, Bitmap> res;
+
 
 
         private void toList()
         {
                 for (double i = 0.6; i < 1.5; i = i + 0.2)
-                    res.Add(Math.Round(i,1), (new Bitmap(sourceImage, new Size((int)(startWidthPB * i), (int)(startHeightPB * i)))));
+                    cache.Add(Math.Round(i,1), (new Bitmap(sourceImage, new Size((int)(startWidthPB * i), (int)(startHeightPB * i)))));
         }
 
         private void pictureBoxMap_Zoom(object sender, MouseEventArgs e)
@@ -214,13 +215,13 @@ namespace TProject
                 zoomCurValue += e.Delta > 0 ? 0.2 : -0.2;
                 Vertex.Scale = zoomCurValue = Math.Round(zoomCurValue, 1);
 
-                if (res.ContainsKey(zoomCurValue))
-                    pictureBoxMap.Image = res[zoomCurValue];
+                if (cache.ContainsKey(zoomCurValue))
+                    pictureBoxMap.Image = cache[zoomCurValue];
                 else
                 {
-                    Bitmap a = new Bitmap(sourceImage, new Size(startWidthPB.UnScaling(), startHeightPB.UnScaling()));
+                    Image a = new Bitmap(sourceImage, new Size(startWidthPB.UnScaling(), startHeightPB.UnScaling()));
                     pictureBoxMap.Image = a;
-                    res.Add(zoomCurValue, a);
+                    cache.Add(zoomCurValue, a);
                 }
                 pictureBoxMap.Size = pictureBoxMap.Image.Size; 
 
@@ -255,7 +256,7 @@ namespace TProject
                 pictureBoxMap.Image = img;
                 Vertex.Scale = 1;
 
-                res = new SortedList<double, Bitmap>();
+                cache = new SortedList<double, Image>();
                 toList();
 
                 panelMapSubstrate.MouseWheel += new MouseEventHandler(pictureBoxMap_Zoom);
