@@ -13,11 +13,11 @@ namespace TProject.Way
         public Vertex Start { get; set; }
         public Vertex End { get; set; }
 
-        public int[,] GetMatrixWay(out int[,] parents, out long[] arrayOfID, VertexCollection vertexes, EdgeCollection edges)
+        public double[,] GetMatrixWay(out int[,] parents, out long[] arrayOfID, VertexCollection vertexes, EdgeCollection edges)
         {
             int count = vertexes.GetCountElements();
 
-            int[,] array = new int[count, count];
+            double[,] array = new double[count, count];
 
             parents = new int[count, count];
 
@@ -33,7 +33,7 @@ namespace TProject.Way
                     else
                     {
                         Edge edge = GetEdge(vertexList[i], vertexList[j], edges);
-                        array[i, j] = (edge != null) ? edge.GetLength() : Int32.MaxValue;
+                        array[i, j] = (edge != null) ? edge.GetCriterialValue() : Double.MaxValue;// edge.GetLength() : Double.MaxValue;
                     }
                     parents[i, j] = i;
                 }
@@ -44,54 +44,57 @@ namespace TProject.Way
         public List<int> GetWay(int from, int to, int[,] arrayOfParents)
         {
             List<int> list = new List<int>();
-            list.Add(to);
 
             int vert = arrayOfParents[from, to];
 
-            while (vert != 0) 
-            { 
-                list.Add(vert);
-
+            while (true) 
+            {
+                int last = vert;
                 vert = arrayOfParents[from, vert];
+
+                if (vert == last)
+                    break;
             }
 
-            list.Add(from);
-
-            list.Reverse();
+            if (list[0] != from)
+                list.Insert(0, from);
+            list.Add(to);
 
             return list;
         }
 
-        public int FindMinLengthWay(int fromVertex, int toVertex, VertexCollection vertColl, EdgeCollection edgColl)
+        public double FindMinLengthWay(int fromVertex, int toVertex, VertexCollection vertColl, EdgeCollection edgColl, out List<long> way)
         {
             int[,] parents;
             long[] IDs;
-            int[,] matrix = GetMatrixWay(out parents, out IDs, vertColl, edgColl);
+            double[,] matrix = GetMatrixWay(out parents, out IDs, vertColl, edgColl);
             int size = (int)Math.Sqrt(matrix.Length);
-
-            int length = 0;
-
-            List<int> vertexes = new List<int>();
-            List<int> edges = new List<int>();
 
             for (int k = 0; k < size; ++k)
                 for (int i = 0; i < size; ++i)
                     for (int j = 0; j < size; ++j)
-                        if (matrix[i, k] < Int32.MaxValue && matrix[k, j] < Int32.MaxValue && matrix[i, k] + matrix[k, j] < matrix[i, j])
+                        if (matrix[i, k] < Double.MaxValue && matrix[k, j] < Double.MaxValue && matrix[i, k] + matrix[k, j] < matrix[i, j])
                         {
                             matrix[i, j] = matrix[i, k] + matrix[k, j];
                             parents[i, j] = k;
                         }
 
-            List<int> way = GetWay(fromVertex, toVertex, parents);
-            string s = String.Empty;
+            if (matrix[fromVertex, toVertex] == Double.MaxValue)
+            {
+                way = null;
+                return -1;
+            }
+            else
+            {
+                List<int> wayList = GetWay(fromVertex, toVertex, parents);
 
-            for (int i = 0; i < way.Count; i++)
-                s += IDs[way[i]].ToString() + "\n";
+                way = new List<long>(wayList.Count);
 
-            MessageBox.Show(s);
+                for (int i = 0; i < wayList.Count; i++)
+                    way.Add(IDs[wayList[i]]);
 
-            return length;
+                return matrix[fromVertex, toVertex];
+            }
         }
 
         public Edge GetEdge(Vertex one, Vertex two, EdgeCollection edges)
