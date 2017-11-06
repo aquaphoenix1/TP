@@ -60,6 +60,7 @@ namespace TProject.Way
             list.Reverse();
 
             return list;
+
         }
 
         public int FindMinLengthWay(int fromVertex, int toVertex, VertexCollection vertColl, EdgeCollection edgColl)
