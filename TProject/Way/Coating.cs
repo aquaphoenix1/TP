@@ -8,7 +8,8 @@ namespace TProject.Way
 {
     public class Coating : Type
     {
-        public static List<Coating> collection;
+        public static List<List<object>> ListSurface { get; set; }
+        //public static List<Coating> collection;
 
         public double Coeff { get; set; }
 
@@ -16,21 +17,21 @@ namespace TProject.Way
 
         static Coating()
         {
-            collection = new List<Coating>();
-            collection.Add(new Coating("Асфальтовое покрытие", 1));
-            collection.Add(new Coating("Грунтовка покрытие", 0.4));
-            collection.Add(new Coating("Бетон", 0.8));
-            collection.Add(new Coating("Щебень", 0.2));
+            /* collection = new List<Coating>();
+             collection.Add(new Coating("Асфальтовое покрытие", 1));
+             collection.Add(new Coating("Грунтовка покрытие", 0.4));
+             collection.Add(new Coating("Бетон", 0.8));
+             collection.Add(new Coating("Щебень", 0.2));*/
         }
 
-        public Coating(string typeName, double coefficient):base(typeName)
+        public Coating(string typeName, double coefficient) : base(typeName)
         {
             Coeff = coefficient;
         }
 
         public override string ToString()
         {
-            return String.Format(TypeName + 
+            return String.Format(TypeName +
                 " c коэффициентом торможения: {0}", Coeff);
         }
     }

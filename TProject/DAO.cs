@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SQLite;
 
 namespace TProject
@@ -12,7 +13,9 @@ namespace TProject
         private static SQLiteConnection GetConnection()
         {
             if (connection != null)
+            {
                 return connection;
+            }
             else
             {
                 try
@@ -41,13 +44,15 @@ namespace TProject
             try
             {
                 if (GetConnection() == null)
+                {
                     throw new SQLiteException();
-                SQLiteConnection.CreateFile(path);
+                }
+                // SQLiteConnection.CreateFile(path);
 
                 #region SQLCommands
 
                 new SQLiteCommand("Create table Vertex ([IDVertex] Integer primary key autoincrement, [XVertex] Integer not null,[YVertex]Integer not null)", GetConnection()).ExecuteNonQuery();
-                new SQLiteCommand("Create  table LimitTraficLight ([ColorTrafficLight] char(10) primary key), [Min] Integer not null, [Max] Integer not null)", GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand("Create  table LimitTraficLight ([ColorTrafficLight] char(10) primary key, [Min] Integer not null, [Max] Integer not null)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table TrafficLight ([ID]Integer primary key autoincrement, [GreenSeconds] Integer not null, [RedSeconds] Integer not null, [IDVertex] Integer References Vertex ([IDVertex]),[ColorTrafficLight] char(10) References LimitTrafficLight ([ColorTrafficLight]))", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Sign ([NameSign] char(20) primary key, [XSign] Integer not null, [YSign]Integer not null)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Street ([IDStreet] integer primary key autoincrement, [NameStreet] char(40) not null)", GetConnection()).ExecuteNonQuery();
@@ -64,6 +69,26 @@ namespace TProject
             }
             catch (SQLiteException) { throw new SQLiteException(String.Format("Невозможно подключиться к файлу базы данных {0}", path)); }
             catch (Exception) { throw new Exception(String.Format("Не найден файл {0}, и отсутствует возможность его создать.", path)); }
+        }
+
+        public static List<List<object>> getAll(string table)
+        {
+            List<List<object>> list = new List<List<object>>();
+
+            SQLiteDataReader reader = new SQLiteCommand(string.Format("SELECT * FROM {0}", table), GetConnection()).ExecuteReader();
+
+            while (reader.Read())
+            {
+                List<object> curList = new List<object>();
+                for (int i = 0; i < reader.FieldCount; i++)
+                {
+                    curList.Add(reader[i].ToString());
+                }
+
+                list.Add(curList);
+            }
+
+            return list;
         }
     }
 }

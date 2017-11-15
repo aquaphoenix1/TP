@@ -1,7 +1,10 @@
-﻿namespace TProject.Driver
+﻿using System.Collections.Generic;
+
+namespace TProject.Driver
 {
     class Driver : Type
     {
+        public static List<List<object>> ListDriver { get; set; }
         public Car Car { get; set; }
         public string DriverName { get; set; }
 

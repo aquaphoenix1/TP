@@ -8,6 +8,7 @@ namespace TProject.Driver
 {
     public class Car : Type
     {
+        public static List<List<object>> ListAuto { get; set; }
         public Fuel CarFuel { get; set; }
         public int MaxSpeed { get; set; }
         public int FuelConsumption { get; set; }

@@ -1,7 +1,10 @@
-﻿namespace TProject.Way
+﻿using System.Collections.Generic;
+
+namespace TProject.Way
 {
     public class Police : Type
     {
+        public static List<List<object>> ListTypePolicemen { get; set; }
         public double Coeff { get; set; }
 
         public Fine FineValue { get; set; }
@@ -11,6 +14,7 @@
 
         public class Fine
         {
+            public static List<List<object>> ListFine { get; set; }
             public string Name { get; set; }
             public int Count { get; set; }
 
@@ -21,7 +25,7 @@
             }
         }
 
-        public Police(string typeName, double coefficient, Fine fine, int x, int y):base(typeName)
+        public Police(string typeName, double coefficient, Fine fine, int x, int y) : base(typeName)
         {
             this.Coeff = coefficient;
             this.FineValue = fine;

@@ -54,6 +54,9 @@ namespace TProject
             this.маршрутВToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageWorkWithBD = new System.Windows.Forms.TabPage();
+            this.comboBoxSelectTable = new System.Windows.Forms.ComboBox();
+            this.labelSelectTable = new System.Windows.Forms.Label();
+            this.dataGridViewDataBase = new System.Windows.Forms.DataGridView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.openSubMapFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -67,6 +70,7 @@ namespace TProject
             this.contextMenuStripPictBox.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageWorkWithBD.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDataBase)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -97,19 +101,19 @@ namespace TProject
             this.openMapToolStripMenuItem,
             this.subMapToolStripMenuItem});
             this.открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
-            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.открытьToolStripMenuItem.Text = "Открыть..";
             // 
             // openMapToolStripMenuItem
             // 
             this.openMapToolStripMenuItem.Name = "openMapToolStripMenuItem";
-            this.openMapToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openMapToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.openMapToolStripMenuItem.Text = "Карту";
             // 
             // subMapToolStripMenuItem
             // 
             this.subMapToolStripMenuItem.Name = "subMapToolStripMenuItem";
-            this.subMapToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.subMapToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.subMapToolStripMenuItem.Text = "Подложку";
             this.subMapToolStripMenuItem.Click += new System.EventHandler(this.subMapToolStripMenuItem_Click);
             // 
@@ -263,9 +267,13 @@ namespace TProject
             this.tabControlMain.SelectedIndex = 0;
             this.tabControlMain.Size = new System.Drawing.Size(775, 330);
             this.tabControlMain.TabIndex = 2;
+            this.tabControlMain.SelectedIndexChanged += new System.EventHandler(this.tabControlMain_SelectedIndexChanged);
             // 
             // tabPageWorkWithBD
             // 
+            this.tabPageWorkWithBD.Controls.Add(this.comboBoxSelectTable);
+            this.tabPageWorkWithBD.Controls.Add(this.labelSelectTable);
+            this.tabPageWorkWithBD.Controls.Add(this.dataGridViewDataBase);
             this.tabPageWorkWithBD.Controls.Add(this.menuStrip1);
             this.tabPageWorkWithBD.Location = new System.Drawing.Point(4, 22);
             this.tabPageWorkWithBD.Name = "tabPageWorkWithBD";
@@ -274,6 +282,45 @@ namespace TProject
             this.tabPageWorkWithBD.TabIndex = 1;
             this.tabPageWorkWithBD.Text = "Работа с БД";
             this.tabPageWorkWithBD.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxSelectTable
+            // 
+            this.comboBoxSelectTable.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSelectTable.FormattingEnabled = true;
+            this.comboBoxSelectTable.Items.AddRange(new object[] {
+            "Ограничения на светофоры",
+            "Типы полицейских",
+            "Дорожные покрытия",
+            "Топливо",
+            "Автомобили",
+            "Штрафы"});
+            this.comboBoxSelectTable.Location = new System.Drawing.Point(613, 35);
+            this.comboBoxSelectTable.Name = "comboBoxSelectTable";
+            this.comboBoxSelectTable.Size = new System.Drawing.Size(144, 21);
+            this.comboBoxSelectTable.TabIndex = 3;
+            this.comboBoxSelectTable.SelectedIndexChanged += new System.EventHandler(this.comboBoxSelectTable_SelectedIndexChanged);
+            // 
+            // labelSelectTable
+            // 
+            this.labelSelectTable.AutoSize = true;
+            this.labelSelectTable.Location = new System.Drawing.Point(613, 6);
+            this.labelSelectTable.Name = "labelSelectTable";
+            this.labelSelectTable.Size = new System.Drawing.Size(144, 26);
+            this.labelSelectTable.TabIndex = 2;
+            this.labelSelectTable.Text = "Выберите таблицу для\r\nредактирования из списка";
+            // 
+            // dataGridViewDataBase
+            // 
+            this.dataGridViewDataBase.AllowUserToAddRows = false;
+            this.dataGridViewDataBase.AllowUserToDeleteRows = false;
+            this.dataGridViewDataBase.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewDataBase.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewDataBase.Location = new System.Drawing.Point(3, 6);
+            this.dataGridViewDataBase.MultiSelect = false;
+            this.dataGridViewDataBase.Name = "dataGridViewDataBase";
+            this.dataGridViewDataBase.ReadOnly = true;
+            this.dataGridViewDataBase.Size = new System.Drawing.Size(604, 295);
+            this.dataGridViewDataBase.TabIndex = 1;
             // 
             // menuStrip1
             // 
@@ -328,6 +375,7 @@ namespace TProject
             this.tabControlMain.ResumeLayout(false);
             this.tabPageWorkWithBD.ResumeLayout(false);
             this.tabPageWorkWithBD.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDataBase)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -362,6 +410,9 @@ namespace TProject
         private System.Windows.Forms.Timer timerTrafficLight;
         private System.Windows.Forms.TabPage tabPageWorkWithBD;
         private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.DataGridView dataGridViewDataBase;
+        private System.Windows.Forms.ComboBox comboBoxSelectTable;
+        private System.Windows.Forms.Label labelSelectTable;
     }
 }
 

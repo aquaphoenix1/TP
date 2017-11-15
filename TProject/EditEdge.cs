@@ -36,7 +36,7 @@ namespace TProject
 
             Edge.Signs = (Sign)comboBoxSign.SelectedItem;
             Edge.Coat = (Coating)comboBoxCoat.SelectedItem;
-            
+
             Close();
         }
 
@@ -45,8 +45,8 @@ namespace TProject
             linkLabelID.Text = Edge.ID.ToString();
             textBoxName.Text = Edge.NameStreet;
             numericUpDownLength.Value = Edge.GetLength();
-            comboBoxCoat.DataSource = Coating.collection;
-
+            //comboBoxCoat.DataSource = Coating.collection;
+            comboBoxCoat.DataSource = Coating.ListSurface;
             comboBoxSign.DataSource = Sign.collection;
             checkBoxWay.Checked = Edge.IsBilateral;
         }

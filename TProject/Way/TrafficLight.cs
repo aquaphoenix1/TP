@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TProject.Way
 {
-    public class TrafficLight: Entity
+    public class TrafficLight : Entity
     {
+        public static List<List<object>> ListLimitTrafficLight { get; set; }
         public int GreenSeconds { get; set; }
         public int RedSeconds { get; set; }
 
@@ -15,8 +17,8 @@ namespace TProject.Way
         public bool isGreen { get; set; }
 
         private int CurrentTime { get; set; }
-        
-        public TrafficLight(int greenSeconds, int redSeconds):base()
+
+        public TrafficLight(int greenSeconds, int redSeconds) : base()
         {
             Random rand = new Random();
             CurrentTime = rand.Next();
@@ -24,7 +26,7 @@ namespace TProject.Way
 
             this.GreenSeconds = greenSeconds;
             this.RedSeconds = redSeconds;
-            this.CurrentTime = 0; 
+            this.CurrentTime = 0;
         }
 
         public void Inc()
