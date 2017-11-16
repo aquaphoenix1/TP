@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TProject.Graph;
 
-namespace TProject.Collection2._0
+namespace TProject.Coll
 {
     class Edges : AbstractCollection<Edge>
     {

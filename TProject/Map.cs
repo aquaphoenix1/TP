@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TProject.Collection2._0;
+using TProject.Coll;
 using TProject.Graph;
 
 namespace TProject

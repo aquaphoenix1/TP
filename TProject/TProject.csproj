@@ -71,6 +71,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collections\AbstractCollection.cs" />
+    <Compile Include="Coll\AbstractCollection.cs" />
+    <Compile Include="Coll\Edges.cs" />
+    <Compile Include="Coll\Vertexes.cs" />
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Map.cs" />
     <Compile Include="TypeDAO\CoatingDAO.cs" />
     <Compile Include="TypeDAO\DAO.cs" />
     <Compile Include="TypeDAO\ITypeDAO.cs" />
@@ -100,6 +110,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PensCase.cs" />
+    <Compile Include="Viewer.cs" />
     <Compile Include="Way\Fine.cs" />
     <Compile Include="Way\Police.cs" />
     <Compile Include="Program.cs" />
@@ -129,6 +140,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditVertex.resx">
       <DependentUpon>EditVertex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -171,6 +185,7 @@
     <None Include="icon\redLight3.jpg" />
     <Content Include="Properties\DataSources\point.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.105.2\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.105.2\build\net451\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace TProject.Collection2._0
+namespace TProject.Coll
 {
     class AbstractCollection<T>
     {

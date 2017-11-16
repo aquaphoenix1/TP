@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using TProject.Graph;
 
-namespace TProject.Collection2._0
+namespace TProject.Coll
 {
     class Vertexes : AbstractCollection<Vertex>
     {
