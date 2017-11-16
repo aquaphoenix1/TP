@@ -91,7 +91,7 @@ namespace TProject
         {
             int start = vertexes.ElementsList.FindIndex(o => o.ID == way.Start.ID);
             int end = vertexes.ElementsList.FindIndex(o => o.ID == way.End.ID);
-            way.FindMinLengthWay(start, end, vertexes, edges);
+            //       way.FindMinLengthWay(start, end, vertexes, edges);
         }
 
         //События pictureBoxMap
@@ -159,7 +159,6 @@ namespace TProject
 
                     if (e.Button == MouseButtons.Right)
                     {
-
                         lastMouseEvent = e;
 
                         editEdgeToolStripMenuItem.Enabled = isClickedOnEdge;
@@ -203,8 +202,8 @@ namespace TProject
 
         private void toList()
         {
-                for (double i = 0.6; i < 1.5; i = i + 0.2)
-                    cache.Add(Math.Round(i,1), (new Bitmap(sourceImage, new Size((int)(startWidthPB * i), (int)(startHeightPB * i)))));
+            for (double i = 0.6; i < 1.5; i = i + 0.2)
+                cache.Add(Math.Round(i, 1), (new Bitmap(sourceImage, new Size((int)(startWidthPB * i), (int)(startHeightPB * i)))));
         }
 
         private void pictureBoxMap_Zoom(object sender, MouseEventArgs e)
@@ -223,11 +222,10 @@ namespace TProject
                     pictureBoxMap.Image = a;
                     cache.Add(zoomCurValue, a);
                 }
-                pictureBoxMap.Size = pictureBoxMap.Image.Size; 
+                pictureBoxMap.Size = pictureBoxMap.Image.Size;
 
                 panelMapSubstrate.AutoScroll = true;
             }
-          
         }
 
 
@@ -267,11 +265,7 @@ namespace TProject
                 pictureBoxMap.Enabled = true;
                 pictureBoxMap.Show();
             }
-        }   
-
-       
-
-       
+        }
 
 
         /// <summary>

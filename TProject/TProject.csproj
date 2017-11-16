@@ -70,6 +70,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collection2.0\AbstractCollection.cs" />
+    <Compile Include="Collection2.0\Edges.cs" />
+    <Compile Include="Collection2.0\Vertexes.cs" />
     <Compile Include="Collections\AbstractCollection.cs" />
     <Compile Include="DAO.cs" />
     <Compile Include="Driver\Car.cs" />
@@ -90,13 +93,21 @@
       <DependentUpon>EditVertex.cs</DependentUpon>
     </Compile>
     <Compile Include="Entity.cs" />
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Map.cs" />
     <Compile Include="PensCase.cs" />
+    <Compile Include="Viewer.cs" />
     <Compile Include="Way\Police.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -125,6 +136,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditVertex.resx">
       <DependentUpon>EditVertex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

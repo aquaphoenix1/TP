@@ -33,7 +33,7 @@ namespace TProject.Way
                     else
                     {
                         Edge edge = GetEdge(vertexList[i], vertexList[j], edges);
-                        array[i, j] = (edge != null) ? edge.GetCriterialValue() : Double.MaxValue;// edge.GetLength() : Double.MaxValue;
+                       // array[i, j] = (edge != null) ? edge.GetCriterialValue() : Double.MaxValue;// edge.GetLength() : Double.MaxValue;
                     }
                     parents[i, j] = i;
                 }

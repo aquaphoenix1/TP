@@ -18,7 +18,7 @@ namespace TProject
                 if (!DAO.IsExistDataBase())
                     DAO.CreateDataBase();
 
-                Application.Run(new MainForm());
+                Application.Run(new Main());
             }
             catch (System.Data.SQLite.SQLiteException ex) { MessageBox.Show(ex.Message); }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
