@@ -62,6 +62,10 @@ namespace TProject
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.timerTrafficLight = new System.Windows.Forms.Timer(this.components);
+            this.groupBoxEditor = new System.Windows.Forms.GroupBox();
+            this.buttonAdd = new System.Windows.Forms.Button();
+            this.buttonEdit = new System.Windows.Forms.Button();
+            this.buttonDelete = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.tabPageMap.SuspendLayout();
             this.panelRightMenu.SuspendLayout();
@@ -72,6 +76,7 @@ namespace TProject
             this.tabPageWorkWithBD.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDataBase)).BeginInit();
             this.statusStrip1.SuspendLayout();
+            this.groupBoxEditor.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -271,6 +276,7 @@ namespace TProject
             // 
             // tabPageWorkWithBD
             // 
+            this.tabPageWorkWithBD.Controls.Add(this.groupBoxEditor);
             this.tabPageWorkWithBD.Controls.Add(this.comboBoxSelectTable);
             this.tabPageWorkWithBD.Controls.Add(this.labelSelectTable);
             this.tabPageWorkWithBD.Controls.Add(this.dataGridViewDataBase);
@@ -288,22 +294,23 @@ namespace TProject
             this.comboBoxSelectTable.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSelectTable.FormattingEnabled = true;
             this.comboBoxSelectTable.Items.AddRange(new object[] {
-            "Ограничения на светофоры",
             "Типы полицейских",
             "Дорожные покрытия",
             "Топливо",
             "Автомобили",
-            "Штрафы"});
-            this.comboBoxSelectTable.Location = new System.Drawing.Point(613, 35);
+            "Штрафы",
+            "Дорожные знаки",
+            "Водители"});
+            this.comboBoxSelectTable.Location = new System.Drawing.Point(597, 35);
             this.comboBoxSelectTable.Name = "comboBoxSelectTable";
-            this.comboBoxSelectTable.Size = new System.Drawing.Size(144, 21);
+            this.comboBoxSelectTable.Size = new System.Drawing.Size(160, 21);
             this.comboBoxSelectTable.TabIndex = 3;
             this.comboBoxSelectTable.SelectedIndexChanged += new System.EventHandler(this.comboBoxSelectTable_SelectedIndexChanged);
             // 
             // labelSelectTable
             // 
             this.labelSelectTable.AutoSize = true;
-            this.labelSelectTable.Location = new System.Drawing.Point(613, 6);
+            this.labelSelectTable.Location = new System.Drawing.Point(597, 6);
             this.labelSelectTable.Name = "labelSelectTable";
             this.labelSelectTable.Size = new System.Drawing.Size(144, 26);
             this.labelSelectTable.TabIndex = 2;
@@ -319,7 +326,8 @@ namespace TProject
             this.dataGridViewDataBase.MultiSelect = false;
             this.dataGridViewDataBase.Name = "dataGridViewDataBase";
             this.dataGridViewDataBase.ReadOnly = true;
-            this.dataGridViewDataBase.Size = new System.Drawing.Size(604, 295);
+            this.dataGridViewDataBase.RowHeadersVisible = false;
+            this.dataGridViewDataBase.Size = new System.Drawing.Size(588, 295);
             this.dataGridViewDataBase.TabIndex = 1;
             // 
             // menuStrip1
@@ -351,6 +359,47 @@ namespace TProject
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(38, 17);
             this.toolStripStatusLabel1.Text = "Готов";
             // 
+            // groupBoxEditor
+            // 
+            this.groupBoxEditor.Controls.Add(this.buttonDelete);
+            this.groupBoxEditor.Controls.Add(this.buttonEdit);
+            this.groupBoxEditor.Controls.Add(this.buttonAdd);
+            this.groupBoxEditor.Location = new System.Drawing.Point(597, 79);
+            this.groupBoxEditor.Name = "groupBoxEditor";
+            this.groupBoxEditor.Size = new System.Drawing.Size(160, 108);
+            this.groupBoxEditor.TabIndex = 4;
+            this.groupBoxEditor.TabStop = false;
+            this.groupBoxEditor.Text = "Редактирование записей";
+            // 
+            // buttonAdd
+            // 
+            this.buttonAdd.Location = new System.Drawing.Point(7, 20);
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.Size = new System.Drawing.Size(147, 23);
+            this.buttonAdd.TabIndex = 0;
+            this.buttonAdd.Text = "Добавить";
+            this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
+            // 
+            // buttonEdit
+            // 
+            this.buttonEdit.Location = new System.Drawing.Point(7, 49);
+            this.buttonEdit.Name = "buttonEdit";
+            this.buttonEdit.Size = new System.Drawing.Size(147, 23);
+            this.buttonEdit.TabIndex = 1;
+            this.buttonEdit.Text = "Редактировать";
+            this.buttonEdit.UseVisualStyleBackColor = true;
+            // 
+            // buttonDelete
+            // 
+            this.buttonDelete.Location = new System.Drawing.Point(7, 78);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(147, 23);
+            this.buttonDelete.TabIndex = 2;
+            this.buttonDelete.Text = "Удалить";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -378,6 +427,7 @@ namespace TProject
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDataBase)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.groupBoxEditor.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -413,6 +463,10 @@ namespace TProject
         private System.Windows.Forms.DataGridView dataGridViewDataBase;
         private System.Windows.Forms.ComboBox comboBoxSelectTable;
         private System.Windows.Forms.Label labelSelectTable;
+        private System.Windows.Forms.GroupBox groupBoxEditor;
+        private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Button buttonEdit;
+        private System.Windows.Forms.Button buttonAdd;
     }
 }
 

@@ -42,8 +42,8 @@ namespace TProject
             vertexes = new VertexCollection();
             edges = new EdgeCollection();
 
-            Sign.Init();
-            Coating.Init();
+            //Sign.Init();
+            //Coating.Init();
             PensCase.Initialize();
 
             DoubleBuffered = true;
@@ -60,17 +60,26 @@ namespace TProject
 
             pictureBoxMap.Invalidate();
 
-            FillAllLists();
+            Initialize();
         }
 
-        private void FillAllLists()
+        private void Initialize()
         {
-            TrafficLight.ListLimitTrafficLight = DAO.getAll("LimitTraficLight");
-            Coating.ListSurface = DAO.getAll("Surface");
-            Police.Fine.ListFine = DAO.getAll("Fine");
-            Car.ListAuto = DAO.getAll("Auto");
-            Fuel.ListFuel = DAO.getAll("Fuel");
-            Police.ListTypePolicemen = DAO.getAll("TypePolicemen");
+            Police.CurrentMaxID = DAO.GetMaxID("Policemen");
+            Coating.curMaxId = DAO.GetMaxID("Surface");
+            Fine.curMaxId = DAO.GetMaxID("Fine");
+            Car.curMaxId = DAO.GetMaxID("Auto");
+            Fuel.curMaxId = DAO.GetMaxID("Fuel");
+            Driver.Driver.curMaxId = DAO.GetMaxID("Driver");
+            Sign.curMaxId = DAO.GetMaxID("Sign");
+
+            Coating.ListSurface = DAO.GetAll("Surface");
+            Fine.ListFine = DAO.GetAll("Fine");
+            Car.ListAuto = DAO.GetAll("Auto");
+            Fuel.ListFuel = DAO.GetAll("Fuel");
+            Police.ListTypePolicemen = DAO.GetAll("Policemen");
+            Driver.Driver.ListDriver = DAO.GetAll("Driver");
+            Sign.ListSigns = DAO.GetAll("Sign");
         }
 
         private void DrawFlag(Graphics e, int x, int y, Color color, int width)
@@ -265,18 +274,9 @@ namespace TProject
                 clearDataGrid();
                 switch (comboBoxSelectTable.SelectedItem.ToString())
                 {
-                    case "Ограничения на светофоры":
-                        {
-                            dataGridViewDataBase.Columns.Add("color", "Цвет фазы");
-                            dataGridViewDataBase.Columns.Add("min", "Минимальное время");
-                            dataGridViewDataBase.Columns.Add("max", "Максимальное время");
-
-                            TrafficLight.ListLimitTrafficLight.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
-
-                            break;
-                        }
                     case "Дорожные покрытия":
                         {
+                            dataGridViewDataBase.Columns.Add("ID", "ID покрытия");
                             dataGridViewDataBase.Columns.Add("name", "Название покрытия");
                             dataGridViewDataBase.Columns.Add("koefficient", "Коэффициент торможения");
 
@@ -286,6 +286,7 @@ namespace TProject
                         }
                     case "Типы полицейских":
                         {
+                            dataGridViewDataBase.Columns.Add("id", "ID полицейского");
                             dataGridViewDataBase.Columns.Add("type", "Тип полицейского");
                             dataGridViewDataBase.Columns.Add("koefficient", "Коэффициент жадности полицейского");
 
@@ -295,6 +296,7 @@ namespace TProject
                         }
                     case "Топливо":
                         {
+                            dataGridViewDataBase.Columns.Add("id", "ID топлива");
                             dataGridViewDataBase.Columns.Add("nameFuel", "Название топлива");
                             dataGridViewDataBase.Columns.Add("cost", "Цена");
 
@@ -305,10 +307,9 @@ namespace TProject
                     case "Автомобили":
                         {
                             dataGridViewDataBase.Columns.Add("id", "Номер автомобиля");
-                            dataGridViewDataBase.Columns.Add("fuel", "Топливо");
                             dataGridViewDataBase.Columns.Add("model", "Модель");
+                            dataGridViewDataBase.Columns.Add("id", "ID топлива");
                             dataGridViewDataBase.Columns.Add("consumption", "Потребление");
-                            dataGridViewDataBase.Columns.Add("speed", "Скорость");
 
                             Car.ListAuto.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
 
@@ -316,10 +317,31 @@ namespace TProject
                         }
                     case "Штрафы":
                         {
+                            dataGridViewDataBase.Columns.Add("ID", "ID штрафа");
                             dataGridViewDataBase.Columns.Add("name", "Название штрафа");
                             dataGridViewDataBase.Columns.Add("cost", "Цена");
 
-                            Police.Fine.ListFine.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            Fine.ListFine.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+
+                            break;
+                        }
+                    case "Водители":
+                        {
+                            dataGridViewDataBase.Columns.Add("ID", "ID водителя");
+                            dataGridViewDataBase.Columns.Add("name", "Тип водителя");
+                            dataGridViewDataBase.Columns.Add("IDauto", "ID автомобиля");
+
+                            Driver.Driver.ListDriver.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+
+                            break;
+                        }
+                    case "Дорожные знаки":
+                        {
+                            dataGridViewDataBase.Columns.Add("ID", "ID знака");
+                            dataGridViewDataBase.Columns.Add("type", "Тип знака");
+                            dataGridViewDataBase.Columns.Add("value", "Значение");
+
+                            Sign.ListSigns.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
 
                             break;
                         }
@@ -333,6 +355,53 @@ namespace TProject
             {
                 clearDataGrid();
                 comboBoxSelectTable.SelectedItem = null;
+            }
+        }
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            if(comboBoxSelectTable.SelectedItem != null)
+            {
+                switch (comboBoxSelectTable.SelectedItem)
+                {
+                    case "Типы полицейских":
+                        {
+                            
+                            Police p = new Police("qwe", 5);
+                            if (new PoliceDAO().Insert(p))
+                            {
+                                List<object> list = new List<object>();
+                                list.Add(p.ID);
+                                list.Add(p.TypeName);
+                                list.Add(p.Coeff);
+                                Police.ListTypePolicemen.Add(list);
+                                dataGridViewDataBase.Rows.Add(list.ToArray());
+                            }
+                            break;
+                        }
+                }
+            }
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            if (comboBoxSelectTable.SelectedItem != null)
+            {
+                switch (comboBoxSelectTable.SelectedItem)
+                {
+                    case "Типы полицейских":
+                        {
+                            if (new PoliceDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
+                            {
+                                dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Невозможно удалить");
+                            }
+                            break;
+                        }
+                }
             }
         }
 

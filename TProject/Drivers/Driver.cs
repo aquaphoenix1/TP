@@ -2,21 +2,16 @@
 
 namespace TProject.Driver
 {
-    class Driver : Type
+    class Driver : Entity
     {
         public static List<List<object>> ListDriver { get; set; }
         public Car Car { get; set; }
-        public string DriverName { get; set; }
-
-        public int OverSpeed { get; set; }
         public bool IsViolateTL { get; set; }
 
-        public Driver(string typeName, string driverName, bool isViolateTL, int overSpeed, Car car):base(typeName)
+        public Driver(bool isViolateTL, Car car)
         {
-            OverSpeed = overSpeed;
             IsViolateTL = isViolateTL;
             Car = car;
-            DriverName = driverName;
         }
     }
 }

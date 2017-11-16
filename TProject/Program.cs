@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using TProject.Way;
 
 namespace TProject
 {
@@ -16,7 +17,9 @@ namespace TProject
             try
             {
                 if (!DAO.IsExistDataBase())
+                {
                     DAO.CreateDataBase();
+                }
 
                 Application.Run(new MainForm());
             }

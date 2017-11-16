@@ -71,11 +71,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collections\AbstractCollection.cs" />
-    <Compile Include="DAO.cs" />
-    <Compile Include="Driver\Car.cs" />
-    <Compile Include="Driver\Fuel.cs" />
+    <Compile Include="TypeDAO\DAO.cs" />
+    <Compile Include="TypeDAO\ITypeDAO.cs" />
+    <Compile Include="TypeDAO\PoliceDAO.cs" />
+    <Compile Include="Drivers\Car.cs" />
+    <Compile Include="Drivers\Fuel.cs" />
     <Compile Include="Graph\Edge.cs" />
-    <Compile Include="Driver\Driver.cs" />
+    <Compile Include="Drivers\Driver.cs" />
     <Compile Include="Collections\EdgeCollection.cs" />
     <Compile Include="EditEdge.cs">
       <SubType>Form</SubType>
@@ -97,6 +99,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PensCase.cs" />
+    <Compile Include="Way\Fine.cs" />
     <Compile Include="Way\Police.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

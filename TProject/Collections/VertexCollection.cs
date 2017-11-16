@@ -106,7 +106,7 @@ namespace TProject
                     {
                         e.DrawImage(Resources.nonLight3, new Point[] { new Point(x + Vertex.Radius + 3, y), new Point(x + (Vertex.Radius + 18), y), new Point(x + 3 + Vertex.Radius, y + 30) });
                     }
-                    else if (r.TrafficLight.isGreen)
+                    else if (r.TrafficLight.IsGreen)
                     {
                         e.DrawImage(Resources.greenLight3, new Point[] { new Point(x + Vertex.Radius + 3, y), new Point(x + (Vertex.Radius + 18), y), new Point(x + 3 + Vertex.Radius, y + 30) });
                     }
