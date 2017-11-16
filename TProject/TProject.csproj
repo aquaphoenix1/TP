@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collections\AbstractCollection.cs" />
+    <Compile Include="TypeDAO\CoatingDAO.cs" />
     <Compile Include="TypeDAO\DAO.cs" />
     <Compile Include="TypeDAO\ITypeDAO.cs" />
     <Compile Include="TypeDAO\PoliceDAO.cs" />

@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using TProject.Driver;
 using TProject.Graph;
 using TProject.Properties;
+using TProject.TypeDAO;
 using TProject.Way;
 
 namespace TProject
@@ -379,6 +380,21 @@ namespace TProject
                             }
                             break;
                         }
+                    case "Дорожные покрытия":
+                        {
+                            
+                            Coating c = new Coating("Топливо1", 3);
+                            if (new CoatingDAO().Insert(c))
+                            {
+                                List<object> list = new List<object>();
+                                list.Add(c.ID);
+                                list.Add(c.TypeName);
+                                list.Add(c.Coeff);
+                                Coating.ListSurface.Add(list);
+                                dataGridViewDataBase.Rows.Add(list.ToArray());
+                            }
+                            break;
+                        }
                 }
             }
         }
@@ -392,6 +408,18 @@ namespace TProject
                     case "Типы полицейских":
                         {
                             if (new PoliceDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
+                            {
+                                dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Невозможно удалить");
+                            }
+                            break;
+                        }
+                    case "Дорожные покрытия":
+                        {
+                            if (new CoatingDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
                             {
                                 dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
                             }
