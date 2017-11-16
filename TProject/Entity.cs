@@ -2,7 +2,7 @@
 {
     public class Entity
     {
-        private static long curMaxId = 0;
+        public static long curMaxId { get; set; }
         public long ID { get; set; }
 
         public Entity()

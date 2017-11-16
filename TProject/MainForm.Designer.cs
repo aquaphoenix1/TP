@@ -54,11 +54,18 @@ namespace TProject
             this.маршрутВToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageWorkWithBD = new System.Windows.Forms.TabPage();
+            this.comboBoxSelectTable = new System.Windows.Forms.ComboBox();
+            this.labelSelectTable = new System.Windows.Forms.Label();
+            this.dataGridViewDataBase = new System.Windows.Forms.DataGridView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.openSubMapFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.timerTrafficLight = new System.Windows.Forms.Timer(this.components);
+            this.groupBoxEditor = new System.Windows.Forms.GroupBox();
+            this.buttonAdd = new System.Windows.Forms.Button();
+            this.buttonEdit = new System.Windows.Forms.Button();
+            this.buttonDelete = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.tabPageMap.SuspendLayout();
             this.panelRightMenu.SuspendLayout();
@@ -67,7 +74,9 @@ namespace TProject
             this.contextMenuStripPictBox.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageWorkWithBD.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDataBase)).BeginInit();
             this.statusStrip1.SuspendLayout();
+            this.groupBoxEditor.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -97,19 +106,19 @@ namespace TProject
             this.openMapToolStripMenuItem,
             this.subMapToolStripMenuItem});
             this.открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
-            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.открытьToolStripMenuItem.Text = "Открыть..";
             // 
             // openMapToolStripMenuItem
             // 
             this.openMapToolStripMenuItem.Name = "openMapToolStripMenuItem";
-            this.openMapToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openMapToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.openMapToolStripMenuItem.Text = "Карту";
             // 
             // subMapToolStripMenuItem
             // 
             this.subMapToolStripMenuItem.Name = "subMapToolStripMenuItem";
-            this.subMapToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.subMapToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.subMapToolStripMenuItem.Text = "Подложку";
             this.subMapToolStripMenuItem.Click += new System.EventHandler(this.subMapToolStripMenuItem_Click);
             // 
@@ -263,9 +272,14 @@ namespace TProject
             this.tabControlMain.SelectedIndex = 0;
             this.tabControlMain.Size = new System.Drawing.Size(775, 330);
             this.tabControlMain.TabIndex = 2;
+            this.tabControlMain.SelectedIndexChanged += new System.EventHandler(this.tabControlMain_SelectedIndexChanged);
             // 
             // tabPageWorkWithBD
             // 
+            this.tabPageWorkWithBD.Controls.Add(this.groupBoxEditor);
+            this.tabPageWorkWithBD.Controls.Add(this.comboBoxSelectTable);
+            this.tabPageWorkWithBD.Controls.Add(this.labelSelectTable);
+            this.tabPageWorkWithBD.Controls.Add(this.dataGridViewDataBase);
             this.tabPageWorkWithBD.Controls.Add(this.menuStrip1);
             this.tabPageWorkWithBD.Location = new System.Drawing.Point(4, 22);
             this.tabPageWorkWithBD.Name = "tabPageWorkWithBD";
@@ -274,6 +288,47 @@ namespace TProject
             this.tabPageWorkWithBD.TabIndex = 1;
             this.tabPageWorkWithBD.Text = "Работа с БД";
             this.tabPageWorkWithBD.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxSelectTable
+            // 
+            this.comboBoxSelectTable.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSelectTable.FormattingEnabled = true;
+            this.comboBoxSelectTable.Items.AddRange(new object[] {
+            "Типы полицейских",
+            "Дорожные покрытия",
+            "Топливо",
+            "Автомобили",
+            "Штрафы",
+            "Дорожные знаки",
+            "Водители"});
+            this.comboBoxSelectTable.Location = new System.Drawing.Point(597, 35);
+            this.comboBoxSelectTable.Name = "comboBoxSelectTable";
+            this.comboBoxSelectTable.Size = new System.Drawing.Size(160, 21);
+            this.comboBoxSelectTable.TabIndex = 3;
+            this.comboBoxSelectTable.SelectedIndexChanged += new System.EventHandler(this.comboBoxSelectTable_SelectedIndexChanged);
+            // 
+            // labelSelectTable
+            // 
+            this.labelSelectTable.AutoSize = true;
+            this.labelSelectTable.Location = new System.Drawing.Point(597, 6);
+            this.labelSelectTable.Name = "labelSelectTable";
+            this.labelSelectTable.Size = new System.Drawing.Size(144, 26);
+            this.labelSelectTable.TabIndex = 2;
+            this.labelSelectTable.Text = "Выберите таблицу для\r\nредактирования из списка";
+            // 
+            // dataGridViewDataBase
+            // 
+            this.dataGridViewDataBase.AllowUserToAddRows = false;
+            this.dataGridViewDataBase.AllowUserToDeleteRows = false;
+            this.dataGridViewDataBase.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewDataBase.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewDataBase.Location = new System.Drawing.Point(3, 6);
+            this.dataGridViewDataBase.MultiSelect = false;
+            this.dataGridViewDataBase.Name = "dataGridViewDataBase";
+            this.dataGridViewDataBase.ReadOnly = true;
+            this.dataGridViewDataBase.RowHeadersVisible = false;
+            this.dataGridViewDataBase.Size = new System.Drawing.Size(588, 295);
+            this.dataGridViewDataBase.TabIndex = 1;
             // 
             // menuStrip1
             // 
@@ -304,6 +359,47 @@ namespace TProject
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(38, 17);
             this.toolStripStatusLabel1.Text = "Готов";
             // 
+            // groupBoxEditor
+            // 
+            this.groupBoxEditor.Controls.Add(this.buttonDelete);
+            this.groupBoxEditor.Controls.Add(this.buttonEdit);
+            this.groupBoxEditor.Controls.Add(this.buttonAdd);
+            this.groupBoxEditor.Location = new System.Drawing.Point(597, 79);
+            this.groupBoxEditor.Name = "groupBoxEditor";
+            this.groupBoxEditor.Size = new System.Drawing.Size(160, 108);
+            this.groupBoxEditor.TabIndex = 4;
+            this.groupBoxEditor.TabStop = false;
+            this.groupBoxEditor.Text = "Редактирование записей";
+            // 
+            // buttonAdd
+            // 
+            this.buttonAdd.Location = new System.Drawing.Point(7, 20);
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.Size = new System.Drawing.Size(147, 23);
+            this.buttonAdd.TabIndex = 0;
+            this.buttonAdd.Text = "Добавить";
+            this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
+            // 
+            // buttonEdit
+            // 
+            this.buttonEdit.Location = new System.Drawing.Point(7, 49);
+            this.buttonEdit.Name = "buttonEdit";
+            this.buttonEdit.Size = new System.Drawing.Size(147, 23);
+            this.buttonEdit.TabIndex = 1;
+            this.buttonEdit.Text = "Редактировать";
+            this.buttonEdit.UseVisualStyleBackColor = true;
+            // 
+            // buttonDelete
+            // 
+            this.buttonDelete.Location = new System.Drawing.Point(7, 78);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(147, 23);
+            this.buttonDelete.TabIndex = 2;
+            this.buttonDelete.Text = "Удалить";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -328,8 +424,10 @@ namespace TProject
             this.tabControlMain.ResumeLayout(false);
             this.tabPageWorkWithBD.ResumeLayout(false);
             this.tabPageWorkWithBD.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDataBase)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.groupBoxEditor.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -362,6 +460,13 @@ namespace TProject
         private System.Windows.Forms.Timer timerTrafficLight;
         private System.Windows.Forms.TabPage tabPageWorkWithBD;
         private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.DataGridView dataGridViewDataBase;
+        private System.Windows.Forms.ComboBox comboBoxSelectTable;
+        private System.Windows.Forms.Label labelSelectTable;
+        private System.Windows.Forms.GroupBox groupBoxEditor;
+        private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Button buttonEdit;
+        private System.Windows.Forms.Button buttonAdd;
     }
 }
 

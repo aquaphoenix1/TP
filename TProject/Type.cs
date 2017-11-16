@@ -4,7 +4,7 @@
     {
         public string TypeName { get; set; }
         public Type():base(){}
-        public Type(string typeName) : base()
+        public Type(string typeName)
         {
             TypeName = typeName;
         }

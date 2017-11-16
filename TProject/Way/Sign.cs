@@ -1,36 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace TProject.Way
 {
-    public class Sign:Type
+    public class Sign : Type
     {
-        public static List<Sign> collection;
+        public static List<List<object>> ListSigns { get; set; }
+        public double Count { get; set; }
 
-        public static string Text = "Ограничение скорости {0} км/ч";
-        public int MaxSpeed;
-
-        public static void Init(){}
-
-        static Sign()
+        public Sign(double count, string text) : base(text)
         {
-            collection = new List<Sign>();
-            collection.Add(new Sign(20));
-            collection.Add(new Sign(40));
-            collection.Add(new Sign(60));
+            this.Count = count;
         }
 
-        public Sign(int speed):base(Text)
+        /*public override string ToString()
         {
-            MaxSpeed = speed;
-        }
-
-        public override string ToString()
-        {
-            return String.Format(Text, MaxSpeed);
-        }
+            return String.Format("Ограничение скорости {0} км/ч", MaxSpeed);
+        }*/
     }
 }

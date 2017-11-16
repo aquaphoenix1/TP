@@ -70,15 +70,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Collection2.0\AbstractCollection.cs" />
-    <Compile Include="Collection2.0\Edges.cs" />
-    <Compile Include="Collection2.0\Vertexes.cs" />
     <Compile Include="Collections\AbstractCollection.cs" />
-    <Compile Include="DAO.cs" />
-    <Compile Include="Driver\Car.cs" />
-    <Compile Include="Driver\Fuel.cs" />
+    <Compile Include="TypeDAO\CoatingDAO.cs" />
+    <Compile Include="TypeDAO\DAO.cs" />
+    <Compile Include="TypeDAO\ITypeDAO.cs" />
+    <Compile Include="TypeDAO\PoliceDAO.cs" />
+    <Compile Include="Drivers\Car.cs" />
+    <Compile Include="Drivers\Fuel.cs" />
     <Compile Include="Graph\Edge.cs" />
-    <Compile Include="Driver\Driver.cs" />
+    <Compile Include="Drivers\Driver.cs" />
     <Compile Include="Collections\EdgeCollection.cs" />
     <Compile Include="EditEdge.cs">
       <SubType>Form</SubType>
@@ -93,21 +93,14 @@
       <DependentUpon>EditVertex.cs</DependentUpon>
     </Compile>
     <Compile Include="Entity.cs" />
-    <Compile Include="Main.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Main.Designer.cs">
-      <DependentUpon>Main.cs</DependentUpon>
-    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Map.cs" />
     <Compile Include="PensCase.cs" />
-    <Compile Include="Viewer.cs" />
+    <Compile Include="Way\Fine.cs" />
     <Compile Include="Way\Police.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -136,9 +129,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditVertex.resx">
       <DependentUpon>EditVertex.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Main.resx">
-      <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

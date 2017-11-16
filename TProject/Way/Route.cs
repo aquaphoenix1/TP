@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using TProject.Graph;
 
 namespace TProject.Way
@@ -29,11 +25,14 @@ namespace TProject.Way
             {
                 for (int j = 0; j < count; j++)
                 {
-                    if (i == j) array[i, j] = 0;
+                    if (i == j)
+                    {
+                        array[i, j] = 0;
+                    }
                     else
                     {
                         Edge edge = GetEdge(vertexList[i], vertexList[j], edges);
-                       // array[i, j] = (edge != null) ? edge.GetCriterialValue() : Double.MaxValue;// edge.GetLength() : Double.MaxValue;
+                        array[i, j] = (edge != null) ? edge.GetLength() : Double.MaxValue;//edge.GetCriterialValue() : Double.MaxValue;// edge.GetLength() : Double.MaxValue;
                     }
                     parents[i, j] = i;
                 }
@@ -47,8 +46,18 @@ namespace TProject.Way
 
             int vert = arrayOfParents[from, to];
 
-            while (true) 
+            list.Add(from);
+            while (vert != from)
             {
+                list.Add(vert);
+                vert = arrayOfParents[from, vert];
+            }
+            list.Add(to);
+
+            /*while (true) 
+            {
+                list.Add(vert);
+
                 int last = vert;
                 vert = arrayOfParents[from, vert];
 
@@ -59,9 +68,8 @@ namespace TProject.Way
             if (list[0] != from)
                 list.Insert(0, from);
             list.Add(to);
-
+            */
             return list;
-
         }
 
         public double FindMinLengthWay(int fromVertex, int toVertex, VertexCollection vertColl, EdgeCollection edgColl, out List<long> way)
@@ -72,13 +80,19 @@ namespace TProject.Way
             int size = (int)Math.Sqrt(matrix.Length);
 
             for (int k = 0; k < size; ++k)
+            {
                 for (int i = 0; i < size; ++i)
+                {
                     for (int j = 0; j < size; ++j)
+                    {
                         if (matrix[i, k] < Double.MaxValue && matrix[k, j] < Double.MaxValue && matrix[i, k] + matrix[k, j] < matrix[i, j])
                         {
                             matrix[i, j] = matrix[i, k] + matrix[k, j];
                             parents[i, j] = k;
                         }
+                    }
+                }
+            }
 
             if (matrix[fromVertex, toVertex] == Double.MaxValue)
             {
@@ -92,7 +106,9 @@ namespace TProject.Way
                 way = new List<long>(wayList.Count);
 
                 for (int i = 0; i < wayList.Count; i++)
+                {
                     way.Add(IDs[wayList[i]]);
+                }
 
                 return matrix[fromVertex, toVertex];
             }
@@ -107,14 +123,18 @@ namespace TProject.Way
                 if (!list[i].IsBilateral)
                 {
                     if (list[i].GetHead() == one && (second = list[i].GetEnd()) == two && list[i].isConnected(second))
+                    {
                         return list[i];
+                    }
                 }
                 else
                 {
                     first = list[i].GetHead();
                     second = list[i].GetEnd();
                     if (((first == one && second == two) || (second == one && first == two)))
+                    {
                         return list[i];
+                    }
                 }
             }
             return null;

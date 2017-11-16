@@ -28,7 +28,9 @@ namespace TProject
         public void tickTL(object obj, EventArgs e)
         {
             foreach (var o in tlList)
+            {
                 o.Inc();
+            }
         }
 
         /// <summary>
@@ -43,7 +45,9 @@ namespace TProject
             foreach (var o in ElementsList)
             {
                 if ((x < o.X + o.GetRect().Width) && (x > o.X) && (y < o.Y + o.GetRect().Height) && (y > o.Y))
+                {
                     v = o;
+                }
             }
             return v;
         }
@@ -90,18 +94,26 @@ namespace TProject
 
                 Brush p = PensCase.Point;
                 if (r == SelVertex)
+                {
                     p = PensCase.SelectedVertex;
+                }
 
                 e.FillEllipse(p, x + 2, y + 2, width, width);
 
                 if (r.TrafficLight != null)
                 {
                     if(tlNotInit)
+                    {
                         e.DrawImage(Resources.nonLight3, new Point[] { new Point(x + Vertex.Radius + 3, y), new Point(x + (Vertex.Radius + 18), y), new Point(x + 3 + Vertex.Radius, y + 30) });
-                    else if (r.TrafficLight.isGreen)
-                            e.DrawImage(Resources.greenLight3, new Point[] { new Point(x + Vertex.Radius + 3, y), new Point(x + (Vertex.Radius + 18), y), new Point(x + 3 + Vertex.Radius, y + 30) });
-                        else
-                            e.DrawImage(Resources.redLight3, new Point[] { new Point(x + Vertex.Radius + 3, y), new Point(x + (Vertex.Radius + 18), y), new Point(x + 3 + Vertex.Radius, y + 30) });
+                    }
+                    else if (r.TrafficLight.IsGreen)
+                    {
+                        e.DrawImage(Resources.greenLight3, new Point[] { new Point(x + Vertex.Radius + 3, y), new Point(x + (Vertex.Radius + 18), y), new Point(x + 3 + Vertex.Radius, y + 30) });
+                    }
+                    else
+                    {
+                        e.DrawImage(Resources.redLight3, new Point[] { new Point(x + Vertex.Radius + 3, y), new Point(x + (Vertex.Radius + 18), y), new Point(x + 3 + Vertex.Radius, y + 30) });
+                    }
                 }
             }
         }

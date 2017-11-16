@@ -4,7 +4,7 @@ using TProject.Way;
 
 namespace TProject.Graph
 {
-    public class Edge: Entity
+    public class Edge : Entity
     {
         private int Length;
 
@@ -24,7 +24,7 @@ namespace TProject.Graph
             HeadVertex = EndVertex;
             EndVertex = c;
         }
-     
+
 
         public void SetHead(Vertex A)
         {
@@ -59,11 +59,11 @@ namespace TProject.Graph
             Length = _len;
         }
 
-       
-      
-        public Edge():base() { }
 
-        public Edge(Vertex v1, Vertex v2):base()
+
+        public Edge() : base() { }
+
+        public Edge(Vertex v1, Vertex v2) : base()
         {
             HeadVertex = v1;
             EndVertex = v2;
@@ -74,7 +74,7 @@ namespace TProject.Graph
             Length = length;
             NameStreet = nameStreet;
             Coat = coat;
-            IsBilateral = isBiLate; 
+            IsBilateral = isBiLate;
 
             return this;
         }

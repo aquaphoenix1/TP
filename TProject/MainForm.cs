@@ -4,8 +4,10 @@ using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TProject.Driver;
 using TProject.Graph;
 using TProject.Properties;
+using TProject.TypeDAO;
 using TProject.Way;
 
 namespace TProject
@@ -41,8 +43,8 @@ namespace TProject
             vertexes = new VertexCollection();
             edges = new EdgeCollection();
 
-            Sign.Init();
-            Coating.Init();
+            //Sign.Init();
+            //Coating.Init();
             PensCase.Initialize();
 
             DoubleBuffered = true;
@@ -58,9 +60,28 @@ namespace TProject
             edges.eventUpdateList += pictureBoxMap.Invalidate;
 
             pictureBoxMap.Invalidate();
+
+            Initialize();
         }
 
+        private void Initialize()
+        {
+            Police.CurrentMaxID = DAO.GetMaxID("Policemen");
+            Coating.curMaxId = DAO.GetMaxID("Surface");
+            Fine.curMaxId = DAO.GetMaxID("Fine");
+            Car.curMaxId = DAO.GetMaxID("Auto");
+            Fuel.curMaxId = DAO.GetMaxID("Fuel");
+            Driver.Driver.curMaxId = DAO.GetMaxID("Driver");
+            Sign.curMaxId = DAO.GetMaxID("Sign");
 
+            Coating.ListSurface = DAO.GetAll("Surface");
+            Fine.ListFine = DAO.GetAll("Fine");
+            Car.ListAuto = DAO.GetAll("Auto");
+            Fuel.ListFuel = DAO.GetAll("Fuel");
+            Police.ListTypePolicemen = DAO.GetAll("Policemen");
+            Driver.Driver.ListDriver = DAO.GetAll("Driver");
+            Sign.ListSigns = DAO.GetAll("Sign");
+        }
 
         private void DrawFlag(Graphics e, int x, int y, Color color, int width)
         {
@@ -91,7 +112,7 @@ namespace TProject
         {
             int start = vertexes.ElementsList.FindIndex(o => o.ID == way.Start.ID);
             int end = vertexes.ElementsList.FindIndex(o => o.ID == way.End.ID);
-            //       way.FindMinLengthWay(start, end, vertexes, edges);
+            way.FindMinLengthWay(start, end, vertexes, edges, out List<long> idS);
         }
 
         //События pictureBoxMap
@@ -99,8 +120,12 @@ namespace TProject
         {
             Graphics g = e.Graphics;
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+
             if (lastMouseEvent != null)
+            {
                 edges.DrawAllOnPicture(g, dX, dY, lastMouseEvent.X, lastMouseEvent.Y, vertexes, isCreatingEdge);
+            }
+
             vertexes.DrawAllOnPicture(g, tlNotInit);
 
             if (way.Start != null)
@@ -159,6 +184,7 @@ namespace TProject
 
                     if (e.Button == MouseButtons.Right)
                     {
+
                         lastMouseEvent = e;
 
                         editEdgeToolStripMenuItem.Enabled = isClickedOnEdge;
@@ -177,7 +203,9 @@ namespace TProject
                             isCreatingEdge = false;
 
                             if (v1.ID != vertexes.SelVertex.ID)
+                            {
                                 edges.AddElement(new Edge(v1, vertexes.SelVertex));
+                            }
                         }
                         else
                         {
@@ -203,7 +231,9 @@ namespace TProject
         private void toList()
         {
             for (double i = 0.6; i < 1.5; i = i + 0.2)
+            {
                 cache.Add(Math.Round(i, 1), (new Bitmap(sourceImage, new Size((int)(startWidthPB * i), (int)(startHeightPB * i)))));
+            }
         }
 
         private void pictureBoxMap_Zoom(object sender, MouseEventArgs e)
@@ -211,11 +241,14 @@ namespace TProject
             if (e.Delta > 0 && zoomCurValue <= 2 || e.Delta < 0 && zoomCurValue >= 0.6)
             {
                 panelMapSubstrate.AutoScroll = false;
+
                 zoomCurValue += e.Delta > 0 ? 0.2 : -0.2;
                 Vertex.Scale = zoomCurValue = Math.Round(zoomCurValue, 1);
 
                 if (cache.ContainsKey(zoomCurValue))
+                {
                     pictureBoxMap.Image = cache[zoomCurValue];
+                }
                 else
                 {
                     Image a = new Bitmap(sourceImage, new Size(startWidthPB.UnScaling(), startHeightPB.UnScaling()));
@@ -225,6 +258,178 @@ namespace TProject
                 pictureBoxMap.Size = pictureBoxMap.Image.Size;
 
                 panelMapSubstrate.AutoScroll = true;
+            }
+
+        }
+
+        private void clearDataGrid()
+        {
+            dataGridViewDataBase.Rows.Clear();
+            dataGridViewDataBase.Columns.Clear();
+        }
+
+        private void comboBoxSelectTable_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControlMain.SelectedIndex == 1)
+            {
+                clearDataGrid();
+                switch (comboBoxSelectTable.SelectedItem.ToString())
+                {
+                    case "Дорожные покрытия":
+                        {
+                            dataGridViewDataBase.Columns.Add("ID", "ID покрытия");
+                            dataGridViewDataBase.Columns.Add("name", "Название покрытия");
+                            dataGridViewDataBase.Columns.Add("koefficient", "Коэффициент торможения");
+
+                            Coating.ListSurface.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+
+                            break;
+                        }
+                    case "Типы полицейских":
+                        {
+                            dataGridViewDataBase.Columns.Add("id", "ID полицейского");
+                            dataGridViewDataBase.Columns.Add("type", "Тип полицейского");
+                            dataGridViewDataBase.Columns.Add("koefficient", "Коэффициент жадности полицейского");
+
+                            Police.ListTypePolicemen.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+
+                            break;
+                        }
+                    case "Топливо":
+                        {
+                            dataGridViewDataBase.Columns.Add("id", "ID топлива");
+                            dataGridViewDataBase.Columns.Add("nameFuel", "Название топлива");
+                            dataGridViewDataBase.Columns.Add("cost", "Цена");
+
+                            Fuel.ListFuel.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+
+                            break;
+                        }
+                    case "Автомобили":
+                        {
+                            dataGridViewDataBase.Columns.Add("id", "Номер автомобиля");
+                            dataGridViewDataBase.Columns.Add("model", "Модель");
+                            dataGridViewDataBase.Columns.Add("id", "ID топлива");
+                            dataGridViewDataBase.Columns.Add("consumption", "Потребление");
+
+                            Car.ListAuto.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+
+                            break;
+                        }
+                    case "Штрафы":
+                        {
+                            dataGridViewDataBase.Columns.Add("ID", "ID штрафа");
+                            dataGridViewDataBase.Columns.Add("name", "Название штрафа");
+                            dataGridViewDataBase.Columns.Add("cost", "Цена");
+
+                            Fine.ListFine.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+
+                            break;
+                        }
+                    case "Водители":
+                        {
+                            dataGridViewDataBase.Columns.Add("ID", "ID водителя");
+                            dataGridViewDataBase.Columns.Add("name", "Тип водителя");
+                            dataGridViewDataBase.Columns.Add("IDauto", "ID автомобиля");
+
+                            Driver.Driver.ListDriver.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+
+                            break;
+                        }
+                    case "Дорожные знаки":
+                        {
+                            dataGridViewDataBase.Columns.Add("ID", "ID знака");
+                            dataGridViewDataBase.Columns.Add("type", "Тип знака");
+                            dataGridViewDataBase.Columns.Add("value", "Значение");
+
+                            Sign.ListSigns.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+
+                            break;
+                        }
+                }
+            }
+        }
+
+        private void tabControlMain_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControlMain.SelectedIndex == 0)
+            {
+                clearDataGrid();
+                comboBoxSelectTable.SelectedItem = null;
+            }
+        }
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            if(comboBoxSelectTable.SelectedItem != null)
+            {
+                switch (comboBoxSelectTable.SelectedItem)
+                {
+                    case "Типы полицейских":
+                        {
+                            
+                            Police p = new Police("qwe", 5);
+                            if (new PoliceDAO().Insert(p))
+                            {
+                                List<object> list = new List<object>();
+                                list.Add(p.ID);
+                                list.Add(p.TypeName);
+                                list.Add(p.Coeff);
+                                Police.ListTypePolicemen.Add(list);
+                                dataGridViewDataBase.Rows.Add(list.ToArray());
+                            }
+                            break;
+                        }
+                    case "Дорожные покрытия":
+                        {
+                            
+                            Coating c = new Coating("Топливо1", 3);
+                            if (new CoatingDAO().Insert(c))
+                            {
+                                List<object> list = new List<object>();
+                                list.Add(c.ID);
+                                list.Add(c.TypeName);
+                                list.Add(c.Coeff);
+                                Coating.ListSurface.Add(list);
+                                dataGridViewDataBase.Rows.Add(list.ToArray());
+                            }
+                            break;
+                        }
+                }
+            }
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            if (comboBoxSelectTable.SelectedItem != null)
+            {
+                switch (comboBoxSelectTable.SelectedItem)
+                {
+                    case "Типы полицейских":
+                        {
+                            if (new PoliceDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
+                            {
+                                dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Невозможно удалить");
+                            }
+                            break;
+                        }
+                    case "Дорожные покрытия":
+                        {
+                            if (new CoatingDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
+                            {
+                                dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Невозможно удалить");
+                            }
+                            break;
+                        }
+                }
             }
         }
 
@@ -266,6 +471,10 @@ namespace TProject
                 pictureBoxMap.Show();
             }
         }
+
+
+
+
 
 
         /// <summary>
@@ -314,7 +523,10 @@ namespace TProject
                 form.ShowDialog();
                 vertexes.SelVertex = form.Vertex;
                 if (vertexes.SelVertex.TrafficLight != null)
+                {
                     vertexes.tlList.Add(vertexes.SelVertex.TrafficLight);
+                }
+
                 pictureBoxMap.Invalidate();
             }
         }
