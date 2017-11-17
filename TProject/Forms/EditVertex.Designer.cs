@@ -48,6 +48,7 @@
             this.okEditCrossroadButton.TabIndex = 5;
             this.okEditCrossroadButton.Text = "Ок";
             this.okEditCrossroadButton.UseVisualStyleBackColor = true;
+            this.okEditCrossroadButton.Click += new System.EventHandler(this.okEditCrossroadButton_Click);
             // 
             // cancelEditCrossroadButton
             // 
