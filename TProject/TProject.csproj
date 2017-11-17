@@ -74,6 +74,36 @@
     <Compile Include="Coll\AbstractCollection.cs" />
     <Compile Include="Coll\Edges.cs" />
     <Compile Include="Coll\Vertexes.cs" />
+    <Compile Include="Forms\DataBaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DataBaseForm.Designer.cs">
+      <DependentUpon>DataBaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ErrorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ErrorForm.Designer.cs">
+      <DependentUpon>ErrorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FirstForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FirstForm.Designer.cs">
+      <DependentUpon>FirstForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ModifyTableForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ModifyTableForm.Designer.cs">
+      <DependentUpon>ModifyTableForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SystemInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SystemInfoForm.Designer.cs">
+      <DependentUpon>SystemInfoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +111,12 @@
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Map.cs" />
+    <Compile Include="Forms\OptionsRouteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OptionsRouteForm.Designer.cs">
+      <DependentUpon>OptionsRouteForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TypeDAO\CoatingDAO.cs" />
     <Compile Include="TypeDAO\DAO.cs" />
     <Compile Include="TypeDAO\ITypeDAO.cs" />
@@ -90,16 +126,16 @@
     <Compile Include="Graph\Edge.cs" />
     <Compile Include="Drivers\Driver.cs" />
     <Compile Include="Collections\EdgeCollection.cs" />
-    <Compile Include="EditEdge.cs">
+    <Compile Include="Forms\EditEdge.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditEdge.Designer.cs">
+    <Compile Include="Forms\EditEdge.Designer.cs">
       <DependentUpon>EditEdge.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditVertex.cs">
+    <Compile Include="Forms\EditVertex.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditVertex.Designer.cs">
+    <Compile Include="Forms\EditVertex.Designer.cs">
       <DependentUpon>EditVertex.cs</DependentUpon>
     </Compile>
     <Compile Include="Entity.cs" />
@@ -135,17 +171,35 @@
     </Compile>
     <Compile Include="Way\Route.cs" />
     <Compile Include="Way\Coating.cs" />
-    <EmbeddedResource Include="EditEdge.resx">
+    <EmbeddedResource Include="Forms\DataBaseForm.resx">
+      <DependentUpon>DataBaseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EditEdge.resx">
       <DependentUpon>EditEdge.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditVertex.resx">
+    <EmbeddedResource Include="Forms\EditVertex.resx">
       <DependentUpon>EditVertex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ErrorForm.resx">
+      <DependentUpon>ErrorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FirstForm.resx">
+      <DependentUpon>FirstForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ModifyTableForm.resx">
+      <DependentUpon>ModifyTableForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SystemInfoForm.resx">
+      <DependentUpon>SystemInfoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OptionsRouteForm.resx">
+      <DependentUpon>OptionsRouteForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
