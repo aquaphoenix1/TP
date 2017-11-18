@@ -35,7 +35,7 @@ namespace TProject
 
 
             Edge.Signs = (Sign)comboBoxSign.SelectedItem;
-            Edge.Coat = (Coating)comboBoxCoat.SelectedItem;
+            Edge.Coat = (Coating)coatingComboBox.SelectedItem;
 
             Close();
         }

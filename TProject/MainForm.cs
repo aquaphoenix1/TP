@@ -112,7 +112,7 @@ namespace TProject
         {
             int start = vertexes.ElementsList.FindIndex(o => o.ID == way.Start.ID);
             int end = vertexes.ElementsList.FindIndex(o => o.ID == way.End.ID);
-            way.FindMinLengthWay(start, end, vertexes, edges, out List<long> idS);
+          //  way.FindMinLengthWay(start, end, vertexes, edges, out List<long> idS);
         }
 
         //События pictureBoxMap
@@ -363,7 +363,7 @@ namespace TProject
         {
             if(comboBoxSelectTable.SelectedItem != null)
             {
-                switch (comboBoxSelectTable.SelectedItem)
+                switch (comboBoxSelectTable.SelectedItem.ToString())
                 {
                     case "Типы полицейских":
                         {
@@ -403,7 +403,7 @@ namespace TProject
         {
             if (comboBoxSelectTable.SelectedItem != null)
             {
-                switch (comboBoxSelectTable.SelectedItem)
+                switch (comboBoxSelectTable.SelectedItem.ToString())
                 {
                     case "Типы полицейских":
                         {
