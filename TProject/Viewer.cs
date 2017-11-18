@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TProject.Graph;
@@ -27,6 +29,10 @@ namespace TProject
 
         public delegate void ReDraw();
 
+
+        private SortedList<double, Image> cache;
+        private Image sourceImage;
+
         /// <summary>
         /// Контейнер основного PictureBox
         /// </summary>
@@ -42,7 +48,7 @@ namespace TProject
         /// <summary>
         /// Высота точки
         /// </summary>
-        public static int Width{ get; private set;}
+        public static int Width { get; private set; }
         /// <summary>
         /// Ширина точки
         /// </summary>
@@ -50,40 +56,12 @@ namespace TProject
         /// <summary>
         /// Текущий масштаб
         /// </summary>
-        private double zoomCurValue;
+        public double ZoomCurValue { private set; get; }
 
         public static Viewer ViewPort = null;
 
         private Vertex selectedVertex = null;
         private Edge selectedEdge = null;
-
-        public void SaveCreatedEdge()
-        {
-            selectedEdge.SetEnd(selectedVertex);
-            Map.edges.Add(selectedEdge);
-
-            selectedVertex = null;
-            selectedEdge = null;
-        }
-
-        public void CreateEdge(int x, int y)
-        {
-            selectedEdge = new Edge(new Vertex(x, y), new Vertex(x, y));
-        }
-
-        public static void CreateViewer(PictureBox pb, Panel panel)
-        {
-            ViewPort = new Viewer(pb, panel);
-        }
-
-        public void Tooo()
-        {
-
-        }
-        public void Invalidate()
-        {
-            view.Invalidate();
-        }
 
         private Viewer(PictureBox pb, Panel panel)
         {
@@ -92,91 +70,270 @@ namespace TProject
                 MapLocationX = 0;
                 MapLocationY = 0;
 
-                Width = 6;
-                Height = 6;
+                Width = 10;
+                Height = 10;
 
-                zoomCurValue = 1;
+                ZoomCurValue = 1;
                 view = pb;
                 substrate = panel;
                 view.Hide();
                 view.Enabled = false;
 
+                Resize();
+
                 view.Paint += Paint;
+                view.MouseWheel += Zoom;
 
                 ViewPort = this;
             }
         }
 
-        public void Paint(object sender, PaintEventArgs e)
+        /// <summary>
+        /// Создает перекресток в указанной позиции
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void CreateVertex(int x, int y)
         {
-            Graphics graph = e.Graphics;
-            graph.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            Map.vertexes.Add(new Vertex(x.Scaling() + dX, y.Scaling() + dY));
+        }
 
-            Brush pen;
-
-            pen = PensCase.Point;
-            foreach (var item in Map.vertexes.List)
-                if(selectedVertex != item)
-                    graph.FillEllipse(pen, item.X, item.Y, Width, Height);
-
-            if (selectedVertex != null)
+#region /////////////Масштабирование
+        /// <summary>
+        /// Происходит при прокрутке колесика мыши
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Zoom(object sender, MouseEventArgs e)
+        {
+            if (e.Delta > 0 && ZoomCurValue <= 2 || e.Delta < 0 && ZoomCurValue >= 0.6)
             {
-                pen = PensCase.SelectedVertex;
-                graph.FillEllipse(pen, selectedVertex.X, selectedVertex.Y, Width, Height);
+                substrate.AutoScroll = false;
+
+                ZoomCurValue += e.Delta > 0 ? 0.2 : -0.2;
+                Vertex.Scale = ZoomCurValue = Math.Round(ZoomCurValue, 1);
+
+                if (cache.ContainsKey(ZoomCurValue))
+                {
+                    view.Image = cache[ZoomCurValue];
+                }
+                else
+                {
+                    Image a = new Bitmap(sourceImage, new Size(startWidthPB.UnScaling(), startHeightPB.UnScaling()));
+                    view.Image = a;
+                    cache.Add(ZoomCurValue, a);
+                }
+                view.Size = view.Image.Size;
+
+                substrate.AutoScroll = true;
             }
+        }
 
-
-            Pen p = PensCase.GeneralEdgeAtoB;
-            if (selectedEdge != null)
-                graph.DrawLine(p, selectedEdge.GetHead().X, selectedEdge.GetHead().Y,
-                    selectedEdge.GetEnd().X, selectedEdge.GetEnd().Y);
-
-            foreach (var item in Map.edges.List)
+        /// <summary>
+        /// Создание кэша отмасштабированных карт
+        /// (для повышения быстродействия масштабирования)
+        /// </summary>
+        private void toList()
+        {
+            for (double i = 0.6; i < 1.5; i = i + 0.2)
             {
-                graph.DrawLine(p, item.GetHead().X, item.GetHead().Y,
-                   item.GetEnd().X, item.GetEnd().Y);
+                Size size = new Size((int)(startWidthPB * i), (int)(startHeightPB * i));
+                cache.Add(Math.Round(i, 1), (new Bitmap(sourceImage, size)));
             }
-
         }
 
-        public void Select(Vertex vertex)
+        /// <summary>
+        /// Пересчитывает величину смещения реальных координат точки, 
+        /// относительно положения курсора
+        /// </summary>
+        public void Resize()
         {
-            selectedVertex = vertex;
+            dX = Width / 2;
+            dY = Height / 2;
         }
-        public void UnSelect()
+#endregion
+
+#region // ///////////// Методы работы с контроллером (инициализация pictureBox для карты и тд.) ///////////////
+        /// <summary>
+        /// Создает объект контроллера отображения
+        /// </summary>
+        /// <param name="pb"></param>
+        /// <param name="panel"></param>
+        public static void CreateViewer(PictureBox pb, Panel panel)
         {
-            selectedVertex = null;
-            selectedEdge = null;
+            ViewPort = new Viewer(pb, panel);
         }
 
-        public void MoveVertex(int x, int y)
+        /// <summary>
+        /// Вызывает перерисовку pictureBox, содержащего карту
+        /// </summary>
+        public void Invalidate()
         {
-            selectedVertex.X = x - Width / 2;
-            selectedVertex.Y = y - Height / 2;
+            view.Invalidate();
         }
 
+        /// <summary>
+        /// Сдвигает pictureBox с картой при перетаскивании
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void MoveViewPort(int x, int y)
         {
             view.Location = new Point(view.Location.X + x - MapLocationX, view.Location.Y + y - MapLocationY);
         }
 
+        /// <summary>
+        /// Открывает Указанный в fname графический файл
+        /// </summary>
+        /// <param name="fname"></param>
         public void OpenPicture(string fname)
         {
             using (FileStream fs = new FileStream(fname, FileMode.Open))
             {
                 Image img = Image.FromStream(fs);
                 view.Image = img;
+                sourceImage = img;
+
+                view.Width = startWidthPB = img.Width;
+                view.Height = startHeightPB = img.Height;
+
+
+                cache = new SortedList<double, Image>();
+                toList();
 
                 view.Enabled = true;
                 view.Visible = true;
             }
         }
 
+#endregion
+
+#region // //////////////////////////////////////// Создание ребра ////////////////////
+        ///
+        /// <summary>
+        /// Создает новое ребро (стрелку с началом в указанной 
+        /// точке и концом в позиции указателя мыши)
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void CreateEdge(int x, int y)
+        {
+            selectedEdge = new Edge(selectedVertex, new Vertex(x.Scaling() + dX, y.Scaling() + dY));
+        }
+        /// <summary>
+        /// Выполняется при визуальном отображении создания нового ребра
+        /// Пересоздает стрелку с концом в точке, в которой находится курсор
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void ModifyCreatedEdge(int x, int y)
         {
-            selectedEdge.SetEnd(new Vertex(x, y));
+            selectedEdge.SetEnd(new Vertex(x.Scaling(), y.Scaling()));
         }
 
+        /// <summary>
+        /// Сохраняет редактируемое ребро 
+        /// и сбрасывает все выделения
+        /// </summary>
+        public void SaveCreatedEdge()
+        {
+            if (selectedVertex.ID != selectedEdge.GetHead().ID)
+            {
+                selectedEdge.SetEnd(selectedVertex);
+                Map.edges.Add(selectedEdge);
+            }
+                selectedVertex = null;
+                selectedEdge = null;
+        }
+
+#endregion
+
+#region // //////////////////// Отрисовка элементов, содержащихся на карте ////////////////////////////////////////
+        /// <summary>
+        /// Происходит при перерисовке pictureBox, содержащего карту
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void Paint(object sender, PaintEventArgs e)
+        {
+            Graphics graph = e.Graphics;
+            graph.SmoothingMode = SmoothingMode.HighQuality;
+            DrawEdges(graph);
+            DrawVertexes(graph);
+        }
+        /// <summary>
+        /// отрисовывает все перегоны, содержащиеся на карте
+        /// </summary>
+        /// <param name="graph"></param>
+        private void DrawEdges(Graphics graph)
+        {
+            foreach (var item in Map.edges.List)
+            {
+                graph.DrawLine(PensCase.GetCustomPen(false, Width.UnScaling() + 3), item.GetHead().X.UnScaling() + dX, item.GetHead().Y.UnScaling() + dY,
+                    item.GetEnd().X.UnScaling() + dX, item.GetEnd().Y.UnScaling() + dY);
+                graph.DrawLine(PensCase.GetPenForEdge(false, false, Width.UnScaling()), item.GetHead().X.UnScaling() + dX, item.GetHead().Y.UnScaling() + dY,
+                    item.GetEnd().X.UnScaling() + dX, item.GetEnd().Y.UnScaling() + dY);
+            }
+            if (selectedEdge != null)
+                graph.DrawLine(PensCase.GetPenForEdge(true, false, Width.UnScaling()), selectedEdge.GetHead().X.UnScaling() + dX, selectedEdge.GetHead().Y.UnScaling() + dY,
+                    selectedEdge.GetEnd().X.UnScaling() + dX, selectedEdge.GetEnd().Y.UnScaling() + dY);
+        }
+        /// <summary>
+        /// Отрисовывает все перекрестки, содержащиеся на карте
+        /// </summary>
+        /// <param name="graph"></param>
+        private void DrawVertexes(Graphics graph)
+        {
+            foreach (var item in Map.vertexes.List)
+            //    if (selectedVertex != item)
+                    graph.FillEllipse(PensCase.Point, item.X.UnScaling(), item.Y.UnScaling(), Width, Height);
+
+            if (selectedVertex != null)
+                graph.FillEllipse(PensCase.SelectedVertex, selectedVertex.X.UnScaling(), selectedVertex.Y.UnScaling(), Width, Height);
+        }
+        #endregion
+
+#region // //////////////////////////// Работа с выделением объектов ////////////////////////////////////////
+        /// <summary>
+        /// Помечает указанную вершину как выбранную
+        /// </summary>
+        /// <param name="vertex"></param>
+        public void SelectVertex(Vertex vertex)
+        {
+            selectedVertex = vertex;
+        }
+        public void SelectEdge(Edge edge)
+        {
+            selectedEdge = edge;
+        }
+        /// <summary>
+        /// Сбрасывает выделенные ребра и вершины
+        /// </summary>
+        public void UnSelect()
+        {
+            selectedVertex = null;
+            selectedEdge = null;
+        }
+        public void UnSelectVertex()
+        {
+            selectedVertex = null;
+        }
+        public void UnSelectEdge()
+        {
+            selectedEdge = null;
+        }
+
+        /// <summary>
+        /// Вызывается при перетаскивании перекрестков на карте
+        /// с помощью указателя мыши
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void MoveVertex(int x, int y)
+        {
+            selectedVertex.X = (x - dX).Scaling();
+            selectedVertex.Y = (y - dY).Scaling();
+        }
         /// <summary>
         /// Определяет, есть ли вершина в заданной точке
         /// </summary>
@@ -187,8 +344,36 @@ namespace TProject
         /// <returns></returns>
         public static bool IsPointInRectangle(int x1, int y1, int x2, int y2)
         {
-            return x1 + Width >= x2 && y1 + Height >= y2 && x2 >= x1 && y2 >= y1;
+            return x1.UnScaling() + Width >= x2 && y1.UnScaling() + Height >= y2 && x2 >= x1.UnScaling() && y2 >= y1.UnScaling();
         }
-
+        public static bool IsPointOnEdge(int x, int y, int x1, int y1, int x2, int y2)
+        {
+            if (x.Scaling() - Width <= Math.Max(x1, x2) && x.Scaling() + Width >= Math.Min(x1, x2) && y.Scaling() - Height <= Math.Max(y1, y2) && y.Scaling() + Height >= Math.Min(y1, y2))
+            {
+                if (x2 == x1)
+                    return x >= x1 - Width && x <= x1 + Width;
+                else if (y2 == y1)
+                    return y >= y1 - Width && y <= y1 + Width;
+                else
+                {
+                    double k = (double)(y2 - y1) / (double)(x2 - x1);
+                    double pointY = k * x.Scaling() + y1 - k * x1;
+                    return pointY - Width <= y.Scaling() && pointY + Width >= y.Scaling();
+                }
+            }
+            return false;
+        }
+    }
+#endregion
+    public static class ReScaling
+    {
+        public static int Scaling(this int value)
+        {
+            return (int)(value / Viewer.ViewPort.ZoomCurValue);
+        }
+        public static int UnScaling(this int value)
+        {
+            return (int)(value * Viewer.ViewPort.ZoomCurValue);
+        }
     }
 }

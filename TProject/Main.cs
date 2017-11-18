@@ -63,13 +63,22 @@ namespace TProject
                         }
                         break;
                     case MouseButtons.Left:
-                        if (isCreatedEdge && (isVertexMoved = Map.vertexes.GetSelected(e.X, e.Y)))
+                        if (isCreatedEdge)
                         {
-                            isVertexMoved = false;
-                            Viewer.ViewPort.SaveCreatedEdge();
+                            if ((isVertexMoved = Map.vertexes.GetSelected(e.X, e.Y)))
+                            {
+                                isVertexMoved = false;
+                                Viewer.ViewPort.SaveCreatedEdge();
+                            }
+                            Cursor = Cursors.Arrow;
+                        }
+                        else if (!(isVertexMoved = Map.vertexes.GetSelected(e.X, e.Y)))
+                        {
+                            Map.edges.GetSelected(e.X, e.Y);
+                            Viewer.ViewPort.UnSelectVertex();
                         }
                         else
-                        isVertexMoved = Map.vertexes.GetSelected(e.X, e.Y);
+                            Viewer.ViewPort.UnSelectEdge();
                         break;
                     case MouseButtons.Middle:
                         Viewer.ViewPort.MapLocationX = e.X;
@@ -78,7 +87,6 @@ namespace TProject
                         break;
                 }
             }
-
             if (isCreatedEdge)
             {
                 isCreatedEdge = false;
@@ -88,26 +96,20 @@ namespace TProject
 
         private void subMapToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //try
-            //{
             Map.InitMap();
             Viewer.CreateViewer(pictureBoxMap, panelMapSubstrate);
+
             Map.vertexes.RePaint += Viewer.ViewPort.Invalidate;
-            Map.edges.RePaint += Viewer.ViewPort.Tooo;
+            Map.edges.RePaint += Viewer.ViewPort.Invalidate;
+
             if (openSubMapFileDialog.ShowDialog() == DialogResult.OK)
                 Viewer.ViewPort.OpenPicture(openSubMapFileDialog.FileName);
             Viewer.ViewPort.Invalidate();
-            //}
-            //catch (Exception exc)
-            //{
-            //   string s = exc.Message;
-            //    /////Ошибка
-            //}
         }
 
         private void addVertexToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Map.vertexes.Add(new Vertex(lastClickCoordX + Viewer.Width / 2, lastClickCoordY + Viewer.Height / 2));
+            Viewer.ViewPort.CreateVertex(lastClickCoordX, lastClickCoordY);
         }
 
         private void pictureBoxMap_MouseMove(object sender, MouseEventArgs e)
@@ -147,6 +149,7 @@ namespace TProject
         {
             isCreatedEdge = true;
             Viewer.ViewPort.CreateEdge(lastClickCoordX, lastClickCoordY);
+            Cursor = Cursors.Cross;
         }
     }
 }

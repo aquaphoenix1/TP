@@ -532,15 +532,15 @@ namespace TProject
         }
     }
 
-    public static class Extendets
-    {
-        public static int Scaling(this int value)
-        {
-            return (int)(value / Vertex.Scale);
-        }
-        public static int UnScaling(this int value)
-        {
-            return (int)(value * Vertex.Scale);
-        }
-    }
+    //public static class Extendets
+    //{
+    //    public static int Scaling(this int value)
+    //    {
+    //        return (int)(value / Vertex.Scale);
+    //    }
+    //    public static int UnScaling(this int value)
+    //    {
+    //        return (int)(value * Vertex.Scale);
+    //    }
+    //}
 }
