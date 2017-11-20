@@ -7,7 +7,7 @@ using TProject.Graph;
 
 namespace TProject.Coll
 {
-    class Edges : AbstractCollection<Edge>
+    public class Edges : AbstractCollection<Edge>
     {
         public bool GetSelected(int x, int y)
         {
@@ -18,7 +18,7 @@ namespace TProject.Coll
                     Viewer.ViewPort.SelectEdge(List.ElementAt(i));
                     return true;
                 }
-            Viewer.ViewPort.UnSelect();
+            Viewer.ViewPort.UnSelectAll();
             return false;
         }
     }

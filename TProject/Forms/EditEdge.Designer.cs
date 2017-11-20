@@ -82,6 +82,7 @@
             this.signMaxSpeedCheckBox.Size = new System.Drawing.Size(15, 14);
             this.signMaxSpeedCheckBox.TabIndex = 9;
             this.signMaxSpeedCheckBox.UseVisualStyleBackColor = true;
+            this.signMaxSpeedCheckBox.CheckedChanged += new System.EventHandler(this.signMaxSpeedCheckBox_CheckedChanged);
             // 
             // signTwoWayCheckBox
             // 
@@ -182,16 +183,19 @@
             this.okEditEgdeButton.TabIndex = 12;
             this.okEditEgdeButton.Text = "Ок";
             this.okEditEgdeButton.UseVisualStyleBackColor = true;
+            this.okEditEgdeButton.Click += new System.EventHandler(this.okEditEgdeButton_Click);
             // 
             // cancelEditEgdeButton
             // 
             this.cancelEditEgdeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cancelEditEgdeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelEditEgdeButton.Location = new System.Drawing.Point(293, 267);
             this.cancelEditEgdeButton.Name = "cancelEditEgdeButton";
             this.cancelEditEgdeButton.Size = new System.Drawing.Size(75, 25);
             this.cancelEditEgdeButton.TabIndex = 10;
             this.cancelEditEgdeButton.Text = "Отмена";
             this.cancelEditEgdeButton.UseVisualStyleBackColor = true;
+            this.cancelEditEgdeButton.Click += new System.EventHandler(this.cancelEditEgdeButton_Click);
             // 
             // policemanGroupBox
             // 
@@ -213,6 +217,7 @@
             this.policemanCheckBox.TabIndex = 4;
             this.policemanCheckBox.Text = "Наличие полицейского";
             this.policemanCheckBox.UseVisualStyleBackColor = true;
+            this.policemanCheckBox.CheckedChanged += new System.EventHandler(this.policemanCheckBox_CheckedChanged);
             // 
             // policemanLabel
             // 
@@ -237,8 +242,10 @@
             // 
             // EditEdge
             // 
+            this.AcceptButton = this.okEditEgdeButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.cancelEditEgdeButton;
             this.ClientSize = new System.Drawing.Size(380, 301);
             this.ControlBox = false;
             this.Controls.Add(this.signGroupBox);

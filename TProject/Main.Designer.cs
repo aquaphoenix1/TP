@@ -30,106 +30,119 @@
         {
             this.components = new System.ComponentModel.Container();
             this.pictureBoxMap = new System.Windows.Forms.PictureBox();
-            this.contextMenuStripPictBox = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.addVertexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuVertex = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addEdgeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editVertexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editEdgeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wayFromToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wayToВToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.openSubMapFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.tabPageWorkWithBD = new System.Windows.Forms.TabPage();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageMap = new System.Windows.Forms.TabPage();
-            this.panelRightMenu = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.panelSlideContainer = new System.Windows.Forms.Panel();
+            this.textBox_CurrentCoefficient = new System.Windows.Forms.TextBox();
+            this.button_Ok_Сalibration = new System.Windows.Forms.Button();
+            this.button_Calibration = new System.Windows.Forms.Button();
+            this.panelSlide = new System.Windows.Forms.Panel();
+            this.label_Layers = new TProject.VerticalLabel();
+            this.labelSlide = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBox_StreetName = new System.Windows.Forms.CheckBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.labelStreetName = new System.Windows.Forms.Label();
+            this.checkBox__TrafficLight = new System.Windows.Forms.CheckBox();
+            this.checkBox_StreetLength = new System.Windows.Forms.CheckBox();
+            this.labelPolicemans = new System.Windows.Forms.Label();
+            this.labelLengthStreet = new System.Windows.Forms.Label();
+            this.checkBox_Police = new System.Windows.Forms.CheckBox();
+            this.checkBox_Sign = new System.Windows.Forms.CheckBox();
+            this.labelRoadSign = new System.Windows.Forms.Label();
             this.panelMapSubstrate = new System.Windows.Forms.Panel();
-            this.subMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.открытьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timerTrafficLight = new System.Windows.Forms.Timer(this.components);
-            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.info = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.выдатьСведенияОРазработчикахToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.выдатьСведенияОСистемеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сохранитьКакToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сменитьПодложкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.базаДанныхToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.маршрутToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuEdge = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuMap = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMap)).BeginInit();
-            this.contextMenuStripPictBox.SuspendLayout();
+            this.contextMenuVertex.SuspendLayout();
             this.statusStrip1.SuspendLayout();
-            this.tabPageWorkWithBD.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageMap.SuspendLayout();
-            this.panelRightMenu.SuspendLayout();
+            this.panelSlideContainer.SuspendLayout();
+            this.panelSlide.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.panelMapSubstrate.SuspendLayout();
-            this.menuStrip.SuspendLayout();
+            this.info.SuspendLayout();
+            this.menuStrip2.SuspendLayout();
+            this.contextMenuEdge.SuspendLayout();
+            this.contextMenuMap.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBoxMap
             // 
             this.pictureBoxMap.BackColor = System.Drawing.Color.Silver;
-            this.pictureBoxMap.ContextMenuStrip = this.contextMenuStripPictBox;
-            this.pictureBoxMap.Location = new System.Drawing.Point(-2, 3);
+            this.pictureBoxMap.ContextMenuStrip = this.contextMenuVertex;
+            this.pictureBoxMap.Location = new System.Drawing.Point(-10, -30);
             this.pictureBoxMap.Name = "pictureBoxMap";
-            this.pictureBoxMap.Size = new System.Drawing.Size(738, 392);
+            this.pictureBoxMap.Size = new System.Drawing.Size(752, 392);
             this.pictureBoxMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxMap.TabIndex = 0;
             this.pictureBoxMap.TabStop = false;
-            this.pictureBoxMap.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMap_MouseDown);
-            this.pictureBoxMap.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMap_MouseMove);
-            this.pictureBoxMap.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMap_MouseUp);
+            this.pictureBoxMap.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureBoxMap_MouseDown);
+            this.pictureBoxMap.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBoxMap_MouseMove);
+            this.pictureBoxMap.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PictureBoxMap_MouseUp);
             // 
-            // contextMenuStripPictBox
+            // contextMenuVertex
             // 
-            this.contextMenuStripPictBox.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addVertexToolStripMenuItem,
+            this.contextMenuVertex.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addEdgeToolStripMenuItem,
             this.editVertexToolStripMenuItem,
-            this.editEdgeToolStripMenuItem,
             this.wayFromToolStripMenuItem,
             this.wayToВToolStripMenuItem});
-            this.contextMenuStripPictBox.Name = "contextMenuStripPictBox";
-            this.contextMenuStripPictBox.Size = new System.Drawing.Size(210, 158);
-            // 
-            // addVertexToolStripMenuItem
-            // 
-            this.addVertexToolStripMenuItem.Name = "addVertexToolStripMenuItem";
-            this.addVertexToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
-            this.addVertexToolStripMenuItem.Text = "Добавить перекресток";
-            this.addVertexToolStripMenuItem.Click += new System.EventHandler(this.addVertexToolStripMenuItem_Click);
+            this.contextMenuVertex.Name = "contextMenuStripPictBox";
+            this.contextMenuVertex.Size = new System.Drawing.Size(210, 92);
             // 
             // addEdgeToolStripMenuItem
             // 
             this.addEdgeToolStripMenuItem.Name = "addEdgeToolStripMenuItem";
             this.addEdgeToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.addEdgeToolStripMenuItem.Text = "Добавить перегон";
-            this.addEdgeToolStripMenuItem.Click += new System.EventHandler(this.addEdgeToolStripMenuItem_Click);
+            this.addEdgeToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenu_AddEdge_Click);
             // 
             // editVertexToolStripMenuItem
             // 
             this.editVertexToolStripMenuItem.Name = "editVertexToolStripMenuItem";
             this.editVertexToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.editVertexToolStripMenuItem.Text = "Параметры перекрестка";
-            this.editVertexToolStripMenuItem.Visible = false;
-            // 
-            // editEdgeToolStripMenuItem
-            // 
-            this.editEdgeToolStripMenuItem.Name = "editEdgeToolStripMenuItem";
-            this.editEdgeToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
-            this.editEdgeToolStripMenuItem.Text = "Параметры улицы";
+            this.editVertexToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenu_EditVertex_Click);
             // 
             // wayFromToolStripMenuItem
             // 
             this.wayFromToolStripMenuItem.Name = "wayFromToolStripMenuItem";
             this.wayFromToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.wayFromToolStripMenuItem.Text = "Маршрут из...";
+            this.wayFromToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenu_WayFrom_Click);
             // 
             // wayToВToolStripMenuItem
             // 
             this.wayToВToolStripMenuItem.Name = "wayToВToolStripMenuItem";
             this.wayToВToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.wayToВToolStripMenuItem.Text = "Маршрут в...";
+            this.wayToВToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenu_WayToВ_Click);
             // 
             // toolStripStatusLabel1
             // 
@@ -152,18 +165,9 @@
             // 
             this.openSubMapFileDialog.Filter = "JPEG|*.JPG|JPEG|*.JPEG";
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Location = new System.Drawing.Point(3, 3);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(761, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
             // tabPageWorkWithBD
             // 
-            this.tabPageWorkWithBD.ContextMenuStrip = this.contextMenuStripPictBox;
-            this.tabPageWorkWithBD.Controls.Add(this.menuStrip1);
+            this.tabPageWorkWithBD.ContextMenuStrip = this.contextMenuVertex;
             this.tabPageWorkWithBD.Location = new System.Drawing.Point(4, 22);
             this.tabPageWorkWithBD.Name = "tabPageWorkWithBD";
             this.tabPageWorkWithBD.Padding = new System.Windows.Forms.Padding(3);
@@ -187,7 +191,7 @@
             // 
             // tabPageMap
             // 
-            this.tabPageMap.Controls.Add(this.panelRightMenu);
+            this.tabPageMap.Controls.Add(this.panelSlideContainer);
             this.tabPageMap.Controls.Add(this.panelMapSubstrate);
             this.tabPageMap.Location = new System.Drawing.Point(4, 22);
             this.tabPageMap.Name = "tabPageMap";
@@ -197,45 +201,216 @@
             this.tabPageMap.Text = "Карта";
             this.tabPageMap.UseVisualStyleBackColor = true;
             // 
-            // panelRightMenu
+            // panelSlideContainer
             // 
-            this.panelRightMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelRightMenu.Controls.Add(this.button1);
-            this.panelRightMenu.Controls.Add(this.button2);
-            this.panelRightMenu.Controls.Add(this.checkBox1);
-            this.panelRightMenu.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelRightMenu.Location = new System.Drawing.Point(583, 3);
-            this.panelRightMenu.Name = "panelRightMenu";
-            this.panelRightMenu.Size = new System.Drawing.Size(181, 298);
-            this.panelRightMenu.TabIndex = 1;
+            this.panelSlideContainer.Controls.Add(this.textBox_CurrentCoefficient);
+            this.panelSlideContainer.Controls.Add(this.button_Ok_Сalibration);
+            this.panelSlideContainer.Controls.Add(this.button_Calibration);
+            this.panelSlideContainer.Controls.Add(this.panelSlide);
+            this.panelSlideContainer.Controls.Add(this.groupBox1);
+            this.panelSlideContainer.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panelSlideContainer.Location = new System.Drawing.Point(739, 3);
+            this.panelSlideContainer.Name = "panelSlideContainer";
+            this.panelSlideContainer.Size = new System.Drawing.Size(25, 298);
+            this.panelSlideContainer.TabIndex = 13;
             // 
-            // button1
+            // textBox_CurrentCoefficient
             // 
-            this.button1.Location = new System.Drawing.Point(61, 86);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.textBox_CurrentCoefficient.Enabled = false;
+            this.textBox_CurrentCoefficient.Location = new System.Drawing.Point(31, 247);
+            this.textBox_CurrentCoefficient.Name = "textBox_CurrentCoefficient";
+            this.textBox_CurrentCoefficient.Size = new System.Drawing.Size(161, 20);
+            this.textBox_CurrentCoefficient.TabIndex = 16;
             // 
-            // button2
+            // button_Ok_Сalibration
             // 
-            this.button2.Location = new System.Drawing.Point(24, 143);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button_Ok_Сalibration.Location = new System.Drawing.Point(161, 274);
+            this.button_Ok_Сalibration.Name = "button_Ok_Сalibration";
+            this.button_Ok_Сalibration.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.button_Ok_Сalibration.Size = new System.Drawing.Size(31, 23);
+            this.button_Ok_Сalibration.TabIndex = 15;
+            this.button_Ok_Сalibration.Text = "Ок";
+            this.button_Ok_Сalibration.UseVisualStyleBackColor = true;
+            this.button_Ok_Сalibration.Click += new System.EventHandler(this.button_Ok_Сalibration_Click);
             // 
-            // checkBox1
+            // button_Calibration
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(24, 33);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(80, 17);
-            this.checkBox1.TabIndex = 3;
-            this.checkBox1.Text = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.button_Calibration.Location = new System.Drawing.Point(29, 273);
+            this.button_Calibration.Name = "button_Calibration";
+            this.button_Calibration.Size = new System.Drawing.Size(131, 25);
+            this.button_Calibration.TabIndex = 14;
+            this.button_Calibration.Text = "Калибровка масштаба";
+            this.button_Calibration.UseVisualStyleBackColor = true;
+            this.button_Calibration.Click += new System.EventHandler(this.Button_Calibration_Click);
+            // 
+            // panelSlide
+            // 
+            this.panelSlide.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.panelSlide.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelSlide.Controls.Add(this.label_Layers);
+            this.panelSlide.Controls.Add(this.labelSlide);
+            this.panelSlide.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelSlide.Location = new System.Drawing.Point(0, 0);
+            this.panelSlide.Name = "panelSlide";
+            this.panelSlide.Size = new System.Drawing.Size(25, 298);
+            this.panelSlide.TabIndex = 1;
+            this.panelSlide.Click += new System.EventHandler(this.PanelSlide_Click);
+            // 
+            // label_Layers
+            // 
+            this.label_Layers.AutoSize = true;
+            this.label_Layers.Location = new System.Drawing.Point(3, 111);
+            this.label_Layers.Name = "label_Layers";
+            this.label_Layers.NewText = null;
+            this.label_Layers.RotateAngle = 0;
+            this.label_Layers.Size = new System.Drawing.Size(73, 13);
+            this.label_Layers.TabIndex = 1;
+            this.label_Layers.Text = "verticalLabel1";
+            // 
+            // labelSlide
+            // 
+            this.labelSlide.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelSlide.AutoSize = true;
+            this.labelSlide.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelSlide.Location = new System.Drawing.Point(1, 278);
+            this.labelSlide.Name = "labelSlide";
+            this.labelSlide.Size = new System.Drawing.Size(21, 13);
+            this.labelSlide.TabIndex = 0;
+            this.labelSlide.Text = "<<";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.checkBox_StreetName);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.labelStreetName);
+            this.groupBox1.Controls.Add(this.checkBox__TrafficLight);
+            this.groupBox1.Controls.Add(this.checkBox_StreetLength);
+            this.groupBox1.Controls.Add(this.labelPolicemans);
+            this.groupBox1.Controls.Add(this.labelLengthStreet);
+            this.groupBox1.Controls.Add(this.checkBox_Police);
+            this.groupBox1.Controls.Add(this.checkBox_Sign);
+            this.groupBox1.Controls.Add(this.labelRoadSign);
+            this.groupBox1.Location = new System.Drawing.Point(29, 16);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(163, 132);
+            this.groupBox1.TabIndex = 13;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Слои";
+            // 
+            // checkBox_StreetName
+            // 
+            this.checkBox_StreetName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkBox_StreetName.AutoSize = true;
+            this.checkBox_StreetName.Checked = true;
+            this.checkBox_StreetName.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_StreetName.Location = new System.Drawing.Point(15, 23);
+            this.checkBox_StreetName.Name = "checkBox_StreetName";
+            this.checkBox_StreetName.Size = new System.Drawing.Size(15, 14);
+            this.checkBox_StreetName.TabIndex = 2;
+            this.checkBox_StreetName.UseVisualStyleBackColor = true;
+            this.checkBox_StreetName.CheckedChanged += new System.EventHandler(this.checkBox_StreetName_CheckedChanged);
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(36, 63);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(65, 13);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Светофоры";
+            // 
+            // labelStreetName
+            // 
+            this.labelStreetName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelStreetName.AutoSize = true;
+            this.labelStreetName.Location = new System.Drawing.Point(36, 23);
+            this.labelStreetName.Name = "labelStreetName";
+            this.labelStreetName.Size = new System.Drawing.Size(91, 13);
+            this.labelStreetName.TabIndex = 3;
+            this.labelStreetName.Text = "Название улицы";
+            // 
+            // checkBox__TrafficLight
+            // 
+            this.checkBox__TrafficLight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkBox__TrafficLight.AutoSize = true;
+            this.checkBox__TrafficLight.Checked = true;
+            this.checkBox__TrafficLight.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox__TrafficLight.Location = new System.Drawing.Point(15, 63);
+            this.checkBox__TrafficLight.Name = "checkBox__TrafficLight";
+            this.checkBox__TrafficLight.Size = new System.Drawing.Size(15, 14);
+            this.checkBox__TrafficLight.TabIndex = 10;
+            this.checkBox__TrafficLight.UseVisualStyleBackColor = true;
+            this.checkBox__TrafficLight.CheckedChanged += new System.EventHandler(this.checkBox__TrafficLight_CheckedChanged);
+            // 
+            // checkBox_StreetLength
+            // 
+            this.checkBox_StreetLength.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkBox_StreetLength.AutoSize = true;
+            this.checkBox_StreetLength.Checked = true;
+            this.checkBox_StreetLength.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_StreetLength.Location = new System.Drawing.Point(15, 43);
+            this.checkBox_StreetLength.Name = "checkBox_StreetLength";
+            this.checkBox_StreetLength.Size = new System.Drawing.Size(15, 14);
+            this.checkBox_StreetLength.TabIndex = 4;
+            this.checkBox_StreetLength.UseVisualStyleBackColor = true;
+            this.checkBox_StreetLength.CheckedChanged += new System.EventHandler(this.checkBox_StreetLength_CheckedChanged);
+            // 
+            // labelPolicemans
+            // 
+            this.labelPolicemans.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelPolicemans.AutoSize = true;
+            this.labelPolicemans.Location = new System.Drawing.Point(36, 83);
+            this.labelPolicemans.Name = "labelPolicemans";
+            this.labelPolicemans.Size = new System.Drawing.Size(75, 13);
+            this.labelPolicemans.TabIndex = 9;
+            this.labelPolicemans.Text = "Полицейские";
+            // 
+            // labelLengthStreet
+            // 
+            this.labelLengthStreet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelLengthStreet.AutoSize = true;
+            this.labelLengthStreet.Location = new System.Drawing.Point(36, 43);
+            this.labelLengthStreet.Name = "labelLengthStreet";
+            this.labelLengthStreet.Size = new System.Drawing.Size(113, 13);
+            this.labelLengthStreet.TabIndex = 5;
+            this.labelLengthStreet.Text = "Протяженности улиц";
+            // 
+            // checkBox_Police
+            // 
+            this.checkBox_Police.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkBox_Police.AutoSize = true;
+            this.checkBox_Police.Checked = true;
+            this.checkBox_Police.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_Police.Location = new System.Drawing.Point(15, 83);
+            this.checkBox_Police.Name = "checkBox_Police";
+            this.checkBox_Police.Size = new System.Drawing.Size(15, 14);
+            this.checkBox_Police.TabIndex = 8;
+            this.checkBox_Police.UseVisualStyleBackColor = true;
+            this.checkBox_Police.CheckedChanged += new System.EventHandler(this.checkBox_Police_CheckedChanged);
+            // 
+            // checkBox_Sign
+            // 
+            this.checkBox_Sign.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkBox_Sign.AutoSize = true;
+            this.checkBox_Sign.Checked = true;
+            this.checkBox_Sign.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_Sign.Location = new System.Drawing.Point(15, 103);
+            this.checkBox_Sign.Name = "checkBox_Sign";
+            this.checkBox_Sign.Size = new System.Drawing.Size(15, 14);
+            this.checkBox_Sign.TabIndex = 6;
+            this.checkBox_Sign.UseVisualStyleBackColor = true;
+            this.checkBox_Sign.CheckedChanged += new System.EventHandler(this.checkBox_Sign_CheckedChanged);
+            // 
+            // labelRoadSign
+            // 
+            this.labelRoadSign.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelRoadSign.AutoSize = true;
+            this.labelRoadSign.Location = new System.Drawing.Point(36, 103);
+            this.labelRoadSign.Name = "labelRoadSign";
+            this.labelRoadSign.Size = new System.Drawing.Size(95, 13);
+            this.labelRoadSign.TabIndex = 7;
+            this.labelRoadSign.Text = "Дорожные знаки";
             // 
             // panelMapSubstrate
             // 
@@ -249,75 +424,155 @@
             this.panelMapSubstrate.Controls.Add(this.pictureBoxMap);
             this.panelMapSubstrate.Location = new System.Drawing.Point(3, 3);
             this.panelMapSubstrate.Name = "panelMapSubstrate";
-            this.panelMapSubstrate.Size = new System.Drawing.Size(574, 298);
+            this.panelMapSubstrate.Size = new System.Drawing.Size(738, 298);
             this.panelMapSubstrate.TabIndex = 0;
             // 
-            // subMapToolStripMenuItem
+            // info
             // 
-            this.subMapToolStripMenuItem.Name = "subMapToolStripMenuItem";
-            this.subMapToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
-            this.subMapToolStripMenuItem.Text = "Подложку";
-            this.subMapToolStripMenuItem.Click += new System.EventHandler(this.subMapToolStripMenuItem_Click);
+            this.info.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.выдатьСведенияОРазработчикахToolStripMenuItem,
+            this.выдатьСведенияОСистемеToolStripMenuItem});
+            this.info.Name = "info";
+            this.info.Size = new System.Drawing.Size(261, 48);
             // 
-            // openMapToolStripMenuItem
+            // выдатьСведенияОРазработчикахToolStripMenuItem
             // 
-            this.openMapToolStripMenuItem.Name = "openMapToolStripMenuItem";
-            this.openMapToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
-            this.openMapToolStripMenuItem.Text = "Карту";
+            this.выдатьСведенияОРазработчикахToolStripMenuItem.Name = "выдатьСведенияОРазработчикахToolStripMenuItem";
+            this.выдатьСведенияОРазработчикахToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.выдатьСведенияОРазработчикахToolStripMenuItem.Text = "Выдать сведения о разработчиках";
             // 
-            // открытьToolStripMenuItem
+            // выдатьСведенияОСистемеToolStripMenuItem
             // 
-            this.открытьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openMapToolStripMenuItem,
-            this.subMapToolStripMenuItem});
-            this.открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
-            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
-            this.открытьToolStripMenuItem.Text = "Открыть..";
+            this.выдатьСведенияОСистемеToolStripMenuItem.Name = "выдатьСведенияОСистемеToolStripMenuItem";
+            this.выдатьСведенияОСистемеToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.выдатьСведенияОСистемеToolStripMenuItem.Text = "Выдать сведения о системе";
             // 
-            // файлToolStripMenuItem
+            // menuStrip2
             // 
-            this.файлToolStripMenuItem.BackColor = System.Drawing.Color.Transparent;
-            this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.открытьToolStripMenuItem});
-            this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
-            this.файлToolStripMenuItem.Text = "Файл";
+            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.базаДанныхToolStripMenuItem,
+            this.справкаToolStripMenuItem,
+            this.маршрутToolStripMenuItem});
+            this.menuStrip2.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip2.Name = "menuStrip2";
+            this.menuStrip2.Size = new System.Drawing.Size(775, 24);
+            this.menuStrip2.TabIndex = 12;
+            this.menuStrip2.Text = "menuStrip1";
             // 
-            // menuStrip
+            // toolStripMenuItem1
             // 
-            this.menuStrip.BackColor = System.Drawing.Color.Transparent;
-            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.файлToolStripMenuItem});
-            this.menuStrip.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip.Name = "menuStrip";
-            this.menuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip.Size = new System.Drawing.Size(775, 24);
-            this.menuStrip.TabIndex = 4;
-            this.menuStrip.Text = "menuStrip1";
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem2,
+            this.сохранитьToolStripMenuItem,
+            this.сохранитьКакToolStripMenuItem,
+            this.сменитьПодложкуToolStripMenuItem});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(48, 20);
+            this.toolStripMenuItem1.Text = "Файл";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem2.Text = "Открыть";
+            // 
+            // сохранитьToolStripMenuItem
+            // 
+            this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сохранитьToolStripMenuItem.Text = "Сохранить";
+            // 
+            // сохранитьКакToolStripMenuItem
+            // 
+            this.сохранитьКакToolStripMenuItem.Name = "сохранитьКакToolStripMenuItem";
+            this.сохранитьКакToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сохранитьКакToolStripMenuItem.Text = "Сохранить как...";
+            // 
+            // сменитьПодложкуToolStripMenuItem
+            // 
+            this.сменитьПодложкуToolStripMenuItem.Name = "сменитьПодложкуToolStripMenuItem";
+            this.сменитьПодложкуToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сменитьПодложкуToolStripMenuItem.Text = "Сменить подложку";
+            this.сменитьПодложкуToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenu_SubMap_Click);
+            // 
+            // базаДанныхToolStripMenuItem
+            // 
+            this.базаДанныхToolStripMenuItem.Name = "базаДанныхToolStripMenuItem";
+            this.базаДанныхToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
+            this.базаДанныхToolStripMenuItem.Text = "База данных";
+            // 
+            // справкаToolStripMenuItem
+            // 
+            this.справкаToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
+            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.справкаToolStripMenuItem.Text = "Справка";
+            // 
+            // маршрутToolStripMenuItem
+            // 
+            this.маршрутToolStripMenuItem.Name = "маршрутToolStripMenuItem";
+            this.маршрутToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
+            this.маршрутToolStripMenuItem.Text = "Маршрут";
+            // 
+            // contextMenuEdge
+            // 
+            this.contextMenuEdge.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem5});
+            this.contextMenuEdge.Name = "contextMenuStripPictBox";
+            this.contextMenuEdge.Size = new System.Drawing.Size(193, 26);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(192, 22);
+            this.toolStripMenuItem5.Text = "Параметры перегона";
+            this.toolStripMenuItem5.Click += new System.EventHandler(this.ToolStripMenu_EditEdge_Click);
+            // 
+            // contextMenuMap
+            // 
+            this.contextMenuMap.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem9});
+            this.contextMenuMap.Name = "contextMenuStripPictBox";
+            this.contextMenuMap.Size = new System.Drawing.Size(199, 26);
+            // 
+            // toolStripMenuItem9
+            // 
+            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(198, 22);
+            this.toolStripMenuItem9.Text = "Добавить перекресток";
+            this.toolStripMenuItem9.Click += new System.EventHandler(this.ToolStripMenu_AddVertex_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(775, 382);
+            this.Controls.Add(this.menuStrip2);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tabControlMain);
-            this.Controls.Add(this.menuStrip);
             this.Name = "Main";
-            this.Text = "Main";
+            this.ShowIcon = false;
+            this.Text = "Поиск оптимального маршрута";
+            this.SizeChanged += new System.EventHandler(this.Main_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMap)).EndInit();
-            this.contextMenuStripPictBox.ResumeLayout(false);
+            this.contextMenuVertex.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.tabPageWorkWithBD.ResumeLayout(false);
-            this.tabPageWorkWithBD.PerformLayout();
             this.tabControlMain.ResumeLayout(false);
             this.tabPageMap.ResumeLayout(false);
-            this.panelRightMenu.ResumeLayout(false);
-            this.panelRightMenu.PerformLayout();
+            this.panelSlideContainer.ResumeLayout(false);
+            this.panelSlideContainer.PerformLayout();
+            this.panelSlide.ResumeLayout(false);
+            this.panelSlide.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.panelMapSubstrate.ResumeLayout(false);
-            this.menuStrip.ResumeLayout(false);
-            this.menuStrip.PerformLayout();
+            this.info.ResumeLayout(false);
+            this.menuStrip2.ResumeLayout(false);
+            this.menuStrip2.PerformLayout();
+            this.contextMenuEdge.ResumeLayout(false);
+            this.contextMenuMap.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -326,30 +581,52 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBoxMap;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStripPictBox;
-        private System.Windows.Forms.ToolStripMenuItem addVertexToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuVertex;
         private System.Windows.Forms.ToolStripMenuItem addEdgeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editVertexToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editEdgeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wayFromToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wayToВToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.OpenFileDialog openSubMapFileDialog;
-        private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.TabPage tabPageWorkWithBD;
         private System.Windows.Forms.TabControl tabControlMain;
         private System.Windows.Forms.TabPage tabPageMap;
-        private System.Windows.Forms.Panel panelRightMenu;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Panel panelMapSubstrate;
-        private System.Windows.Forms.ToolStripMenuItem subMapToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openMapToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem открытьToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
         private System.Windows.Forms.Timer timerTrafficLight;
-        private System.Windows.Forms.MenuStrip menuStrip;
+        private System.Windows.Forms.ContextMenuStrip info;
+        private System.Windows.Forms.ToolStripMenuItem выдатьСведенияОРазработчикахToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem выдатьСведенияОСистемеToolStripMenuItem;
+        private System.Windows.Forms.CheckBox checkBox_StreetName;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label labelStreetName;
+        private System.Windows.Forms.CheckBox checkBox__TrafficLight;
+        private System.Windows.Forms.CheckBox checkBox_StreetLength;
+        private System.Windows.Forms.Label labelPolicemans;
+        private System.Windows.Forms.Label labelLengthStreet;
+        private System.Windows.Forms.CheckBox checkBox_Police;
+        private System.Windows.Forms.Panel panelSlideContainer;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckBox checkBox_Sign;
+        private System.Windows.Forms.Label labelRoadSign;
+        private System.Windows.Forms.Panel panelSlide;
+        private System.Windows.Forms.Label labelSlide;
+        private System.Windows.Forms.MenuStrip menuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem сохранитьКакToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem сменитьПодложкуToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem базаДанныхToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem маршрутToolStripMenuItem;
+        private VerticalLabel label_Layers;
+        private System.Windows.Forms.ContextMenuStrip contextMenuEdge;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
+        private System.Windows.Forms.ContextMenuStrip contextMenuMap;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem9;
+        private System.Windows.Forms.Button button_Calibration;
+        private System.Windows.Forms.Button button_Ok_Сalibration;
+        private System.Windows.Forms.TextBox textBox_CurrentCoefficient;
     }
 }

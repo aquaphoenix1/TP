@@ -3,7 +3,7 @@ using TProject.Graph;
 
 namespace TProject.Coll
 {
-    class Vertexes : AbstractCollection<Vertex>
+    public class Vertexes : AbstractCollection<Vertex>
     {
         public bool GetSelected(int x, int y)
         {
@@ -13,7 +13,7 @@ namespace TProject.Coll
                     Viewer.ViewPort.SelectVertex(List.ElementAt(i));
                     return true;
                 }
-            Viewer.ViewPort.UnSelect();
+            Viewer.ViewPort.UnSelectAll();
             return false;
         }
     }

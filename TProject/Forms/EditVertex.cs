@@ -9,47 +9,53 @@ namespace TProject
     {
         public Vertex Vertex { get; private set; }
 
+        private TrafficLight SaveTF = null;
+
         public EditVertex(Vertex _vertex)
         {
             InitializeComponent();
             Vertex = _vertex;
+            SaveTF = Vertex.TrafficLight;
         }
 
         private void EditVertex_Load(object sender, EventArgs e)
-        {          
+        {
             bool isChecked = Vertex.IsRegular;
             if (isChecked)
             {
-               trafficlightCheckBox.Checked = Vertex.IsRegular;
+                panelContainer.Enabled = true;
+                trafficlightCheckBox.Checked = isChecked;
                 TrafficLight trafficLight = Vertex.TrafficLight;
-               timeRedLightComboBox.SelectedItem = trafficLight.RedSeconds;
+                timeRedLightComboBox.SelectedItem = trafficLight.RedSeconds;
                 timeGreenLightComboBox.SelectedItem = trafficLight.GreenSeconds;
             }
             else
             {
-               timeRedLightComboBox.Enabled = false;
+                panelContainer.Enabled = false;
+                timeRedLightComboBox.Enabled = false;
                 timeGreenLightComboBox.Enabled = false;
             }
         }
 
-        private voidtrafficlightCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void trafficlightCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxWay.Checked)
-            {
-               timeRedLightComboBox.Enabled = true;
-                timeGreenLightComboBox.Enabled = true;
-            }
-            else
-            {
-               timeRedLightComboBox.Enabled = false;
-                timeGreenLightComboBox.Enabled = false;
-            }
+            panelContainer.Enabled = ((CheckBox)sender).Checked;
         }
+
 
         private void okEditCrossroadButton_Click(object sender, EventArgs e)
         {
+            if (trafficlightCheckBox.Checked)
+                Vertex.TrafficLight = null;
+            else
+                Vertex.TrafficLight = new TrafficLight(int.Parse(timeGreenLightComboBox.SelectedItem.ToString()),
+                    int.Parse(timeRedLightComboBox.SelectedItem.ToString()));
+            Close();
+        }
 
-            Vertex.TrafficLight = (trafficlightCheckBox.Checked) ? new TrafficLight((int)timeGreenLightComboBox.SelectedItem, (int)timeGreenLightComboBox.SelectedItem) : null;
+        private void cancelEditCrossroadButton_Click(object sender, EventArgs e)
+        {
+            Vertex.TrafficLight = SaveTF;
             Close();
         }
     }

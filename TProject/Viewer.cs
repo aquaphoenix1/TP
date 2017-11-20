@@ -12,23 +12,33 @@ using TProject.Graph;
 
 namespace TProject
 {
-    class Viewer
+    public class Viewer
     {
         /// <summary>
         /// основной на котором отрисовывается подложка и графPictureBox
         /// </summary>
         private PictureBox view;
+        private Font mainFormFont;
+        public PictureBox View => view;
         /// <summary>
         /// Расположение pb в контейнере до перемещения
         /// </summary>
         public int MapLocationX { get; set; }
         public int MapLocationY { get; set; }
 
+        Brush blackFontBrush = new SolidBrush(Color.Black);
+
+       
+
         public int VertexLocationX { get; set; }
         public int VertexLocationY { get; set; }
 
         public delegate void ReDraw();
 
+        /// <summary>
+        /// Задает отношение метры -> условные единицы
+        /// </summary>
+        public double ScaleCoefficient { get; set; }
 
         private SortedList<double, Image> cache;
         private Image sourceImage;
@@ -58,15 +68,22 @@ namespace TProject
         /// </summary>
         public double ZoomCurValue { private set; get; }
 
+        public bool IsPolice_Visible { get; set; } = true;
+        public bool IsTrafficLight_Visible { get; set; } = true;
+        public bool IsSign_Visible { get; set; } = true;
+        public bool IsStreetName_Visible { get; set; } = true;
+        public bool IsStreetLength_Visible { get; set; } = true;
+
         public static Viewer ViewPort = null;
 
         private Vertex selectedVertex = null;
         private Edge selectedEdge = null;
 
-        private Viewer(PictureBox pb, Panel panel)
+        private Viewer(PictureBox pb, Panel panel, Font font)
         {
             if (ViewPort == null)
             {
+                mainFormFont = font;
                 MapLocationX = 0;
                 MapLocationY = 0;
 
@@ -98,7 +115,19 @@ namespace TProject
             Map.vertexes.Add(new Vertex(x.Scaling() + dX, y.Scaling() + dY));
         }
 
-#region /////////////Масштабирование
+        public void EditVertexOptions()
+        {
+            if (selectedVertex != null)
+                new EditVertex(selectedVertex).Show();
+        }
+        public void EditEdgeOptions()
+        {
+            if (selectedEdge != null)
+                new EditEdge(selectedEdge).Show();
+        }
+
+#region Масштабирование
+
         /// <summary>
         /// Происходит при прокрутке колесика мыши
         /// </summary>
@@ -153,15 +182,16 @@ namespace TProject
         }
 #endregion
 
-#region // ///////////// Методы работы с контроллером (инициализация pictureBox для карты и тд.) ///////////////
+#region Методы работы с контроллером (инициализация pictureBox для карты и тд.)
+
         /// <summary>
         /// Создает объект контроллера отображения
         /// </summary>
         /// <param name="pb"></param>
         /// <param name="panel"></param>
-        public static void CreateViewer(PictureBox pb, Panel panel)
+        public static void CreateViewer(PictureBox pb, Panel panel, Font font)
         {
-            ViewPort = new Viewer(pb, panel);
+            ViewPort = new Viewer(pb, panel, font);
         }
 
         /// <summary>
@@ -208,7 +238,8 @@ namespace TProject
 
 #endregion
 
-#region // //////////////////////////////////////// Создание ребра ////////////////////
+#region Создание ребра
+
         ///
         /// <summary>
         /// Создает новое ребро (стрелку с началом в указанной 
@@ -220,6 +251,7 @@ namespace TProject
         {
             selectedEdge = new Edge(selectedVertex, new Vertex(x.Scaling() + dX, y.Scaling() + dY));
         }
+
         /// <summary>
         /// Выполняется при визуальном отображении создания нового ребра
         /// Пересоздает стрелку с концом в точке, в которой находится курсор
@@ -248,7 +280,7 @@ namespace TProject
 
 #endregion
 
-#region // //////////////////// Отрисовка элементов, содержащихся на карте ////////////////////////////////////////
+#region Отрисовка элементов, содержащихся на карте
         /// <summary>
         /// Происходит при перерисовке pictureBox, содержащего карту
         /// </summary>
@@ -261,6 +293,7 @@ namespace TProject
             DrawEdges(graph);
             DrawVertexes(graph);
         }
+
         /// <summary>
         /// отрисовывает все перегоны, содержащиеся на карте
         /// </summary>
@@ -269,15 +302,33 @@ namespace TProject
         {
             foreach (var item in Map.edges.List)
             {
-                graph.DrawLine(PensCase.GetCustomPen(false, Width.UnScaling() + 3), item.GetHead().X.UnScaling() + dX, item.GetHead().Y.UnScaling() + dY,
-                    item.GetEnd().X.UnScaling() + dX, item.GetEnd().Y.UnScaling() + dY);
-                graph.DrawLine(PensCase.GetPenForEdge(false, false, Width.UnScaling()), item.GetHead().X.UnScaling() + dX, item.GetHead().Y.UnScaling() + dY,
-                    item.GetEnd().X.UnScaling() + dX, item.GetEnd().Y.UnScaling() + dY);
+                if (!item.Equals(selectedEdge))
+                {
+                    graph.DrawLine(PensCase.GetCustomPen(false, Width.UnScaling() + 3), item.GetHead().X.UnScaling() + dX, item.GetHead().Y.UnScaling() + dY,
+                        item.GetEnd().X.UnScaling() + dX, item.GetEnd().Y.UnScaling() + dY);
+                    graph.DrawLine(PensCase.GetPenForEdge(false, false, Width.UnScaling()), item.GetHead().X.UnScaling() + dX, item.GetHead().Y.UnScaling() + dY,
+                        item.GetEnd().X.UnScaling() + dX, item.GetEnd().Y.UnScaling() + dY);
+                    if (IsStreetLength_Visible)
+                    {
+                        graph.DrawString(Math.Round(item.GetLength(ScaleCoefficient), 2).ToString(), new Font(mainFormFont.FontFamily, 10f, FontStyle.Italic | FontStyle.Bold,
+                            GraphicsUnit.Point, mainFormFont.GdiCharSet), blackFontBrush,
+                            (item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 - 25),
+                            (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 10));
+                    }
+                }
             }
             if (selectedEdge != null)
+            {
                 graph.DrawLine(PensCase.GetPenForEdge(true, false, Width.UnScaling()), selectedEdge.GetHead().X.UnScaling() + dX, selectedEdge.GetHead().Y.UnScaling() + dY,
                     selectedEdge.GetEnd().X.UnScaling() + dX, selectedEdge.GetEnd().Y.UnScaling() + dY);
+                if (IsStreetLength_Visible)
+                    graph.DrawString(Math.Round(selectedEdge.GetLength(ScaleCoefficient), 2).ToString(), new Font(mainFormFont.FontFamily, 10f, FontStyle.Italic | FontStyle.Bold,
+                        GraphicsUnit.Point, mainFormFont.GdiCharSet), blackFontBrush,
+                        (selectedEdge.GetHead().X.UnScaling() + (selectedEdge.GetEnd().X.UnScaling() - selectedEdge.GetHead().X.UnScaling()) / 2 - 25),
+                        (selectedEdge.GetHead().Y.UnScaling() + (selectedEdge.GetEnd().Y.UnScaling() - selectedEdge.GetHead().Y.UnScaling()) / 2 - 10));
+            }
         }
+        
         /// <summary>
         /// Отрисовывает все перекрестки, содержащиеся на карте
         /// </summary>
@@ -293,7 +344,8 @@ namespace TProject
         }
         #endregion
 
-#region // //////////////////////////// Работа с выделением объектов ////////////////////////////////////////
+#region Работа с выделением объектов
+
         /// <summary>
         /// Помечает указанную вершину как выбранную
         /// </summary>
@@ -306,10 +358,11 @@ namespace TProject
         {
             selectedEdge = edge;
         }
+
         /// <summary>
         /// Сбрасывает выделенные ребра и вершины
         /// </summary>
-        public void UnSelect()
+        public void UnSelectAll()
         {
             selectedVertex = null;
             selectedEdge = null;
@@ -351,9 +404,9 @@ namespace TProject
             if (x.Scaling() - Width <= Math.Max(x1, x2) && x.Scaling() + Width >= Math.Min(x1, x2) && y.Scaling() - Height <= Math.Max(y1, y2) && y.Scaling() + Height >= Math.Min(y1, y2))
             {
                 if (x2 == x1)
-                    return x >= x1 - Width && x <= x1 + Width;
+                    return x.Scaling() >= x1 - Width && x.Scaling() <= x1 + Width;
                 else if (y2 == y1)
-                    return y >= y1 - Width && y <= y1 + Width;
+                    return y.Scaling() >= y1 - Width && y.Scaling() <= y1 + Width;
                 else
                 {
                     double k = (double)(y2 - y1) / (double)(x2 - x1);
@@ -364,7 +417,8 @@ namespace TProject
             return false;
         }
     }
-#endregion
+    #endregion
+
     public static class ReScaling
     {
         public static int Scaling(this int value)

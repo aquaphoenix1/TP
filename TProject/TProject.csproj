@@ -70,7 +70,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Collections\AbstractCollection.cs" />
     <Compile Include="Coll\AbstractCollection.cs" />
     <Compile Include="Coll\Edges.cs" />
     <Compile Include="Coll\Vertexes.cs" />
@@ -125,7 +124,6 @@
     <Compile Include="Drivers\Fuel.cs" />
     <Compile Include="Graph\Edge.cs" />
     <Compile Include="Drivers\Driver.cs" />
-    <Compile Include="Collections\EdgeCollection.cs" />
     <Compile Include="Forms\EditEdge.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,13 +137,13 @@
       <DependentUpon>EditVertex.cs</DependentUpon>
     </Compile>
     <Compile Include="Entity.cs" />
-    <Compile Include="MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="PensCase.cs" />
+    <Compile Include="VerticalLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="VerticalLabel.Designer.cs">
+      <DependentUpon>VerticalLabel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Viewer.cs" />
     <Compile Include="Way\Fine.cs" />
     <Compile Include="Way\Police.cs" />
@@ -162,7 +160,6 @@
     <Compile Include="Way\TrafficLight.cs" />
     <Compile Include="Type.cs" />
     <Compile Include="Graph\Vertex.cs" />
-    <Compile Include="Collections\VertexCollection.cs" />
     <Compile Include="VertexInfoControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -195,9 +192,6 @@
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\OptionsRouteForm.resx">
       <DependentUpon>OptionsRouteForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -208,6 +202,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="VertexInfoControl.resx">
       <DependentUpon>VertexInfoControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VerticalLabel.resx">
+      <DependentUpon>VerticalLabel.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\MainForm.datasource" />

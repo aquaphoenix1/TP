@@ -10,13 +10,19 @@ namespace TProject.Graph
 
         private Vertex HeadVertex { get; set; }
         private Vertex EndVertex { get; set; }
+
         public bool IsBilateral { get; set; }
+
         public Sign Signs { get; set; }
         public Police Policemen { get; set; }
         public string NameStreet { get; set; }
 
         public Coating Coat { get; set; }
 
+        public double GetLength(double coefficient)
+        {
+            return coefficient * Math.Sqrt(Math.Pow(HeadVertex.X - EndVertex.X, 2) + Math.Pow(HeadVertex.Y - EndVertex.Y, 2));
+        }
 
         public void Revers()
         {
@@ -49,17 +55,6 @@ namespace TProject.Graph
         {
             return EndVertex;
         }
-
-        public int GetLength()
-        {
-            return Length;
-        }
-        public void SetLength(int _len)
-        {
-            Length = _len;
-        }
-
-
 
         public Edge() : base() { }
 

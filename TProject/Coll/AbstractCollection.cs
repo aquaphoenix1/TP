@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace TProject.Coll
 {
-    class AbstractCollection<T>
+    public class AbstractCollection<T>
     {
         /// <summary>
         /// Список элементов
@@ -39,6 +39,10 @@ namespace TProject.Coll
         {
             List.Remove(vertex);
             RePaint();
+        }
+        public int GetCountElements()
+        {
+            return List.Count();
         }
     }
 }
