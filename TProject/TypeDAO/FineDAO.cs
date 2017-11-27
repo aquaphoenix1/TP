@@ -8,22 +8,23 @@ using TProject.Way;
 
 namespace TProject.TypeDAO
 {
-    
-    class CoatingDAO : DAO, TypeDAO.ITypeDAO
+    //Fine [ID] Integer , [NameFine] char(20), [CostFine] real 
+    class FineDAO : DAO
     {
         //Добаваление в бд и в лист ListTypePolicemen
         public bool Insert(Type obj)
         {
             try
             {
-                Coating c = (Coating)obj;
-                new SQLiteCommand(string.Format("Insert into Surface values ({0} , \'{1}\', {2})", c.ID, c.TypeName, c.Coeff), DAO.GetConnection()).ExecuteNonQuery();
+                
+                Fine f = (Fine)obj;
+                new SQLiteCommand(string.Format("Insert into Fine values ({0} , \'{1}\', {2})", f.ID, f.TypeName, f.Count), DAO.GetConnection()).ExecuteNonQuery();
 
                 List<object> list = new List<object>();
-                list.Add(c.ID);
-                list.Add(c.TypeName);
-                list.Add(c.Coeff);
-                Coating.ListSurface.Add(list);
+                list.Add(f.ID);
+                list.Add(f.TypeName);
+                list.Add(f.Count);
+                Fine.ListFine.Add(list);
 
                 return true;
             }
@@ -37,9 +38,9 @@ namespace TProject.TypeDAO
         {
             try
             {
-                new SQLiteCommand(string.Format("DELETE from Surface where ID = {0}", ID), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("DELETE from Fine where ID = {0}", ID), DAO.GetConnection()).ExecuteNonQuery();
 
-                var obj = Coating.ListSurface.RemoveAll(l => l.ElementAt(0).ToString() == ID.ToString());
+                var obj = Fine.ListFine.RemoveAll(l => l.ElementAt(0).ToString() == ID.ToString());
 
                 return true;
             }
@@ -53,14 +54,14 @@ namespace TProject.TypeDAO
         {
             try
             {
-                Coating c = (Coating)obj;
-                new SQLiteCommand(string.Format("UPDATE Surface SET [NameSurface] = '{0}', [KoefSurface] = {1} where ID = {2}", c.TypeName, c.Coeff, c.ID), DAO.GetConnection()).ExecuteNonQuery();
+                Fine f = (Fine)obj;
+                new SQLiteCommand(string.Format("UPDATE Fine SET [NameFine] = '{0}', [CostFine] = {1} where ID = {2}", f.TypeName, f.Count, f.ID), DAO.GetConnection()).ExecuteNonQuery();
 
-                var updatedCoating = Coating.ListSurface.FirstOrDefault(l => l.ElementAt(0).ToString() == c.ID.ToString());
-                if (updatedCoating != null)
+                var updatedFine = Fine.ListFine.FirstOrDefault(l => l.ElementAt(0).ToString() == f.ID.ToString());
+                if (updatedFine != null)
                 {
-                    updatedCoating[1] = c.TypeName;
-                    updatedCoating[2] = c.Coeff;
+                    updatedFine[1] = f.TypeName;
+                    updatedFine[2] = f.Count;
                 }
 
                 return true;

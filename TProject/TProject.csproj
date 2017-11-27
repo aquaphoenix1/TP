@@ -70,9 +70,49 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormModify\CarForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormModify\CarForm.Designer.cs">
+      <DependentUpon>CarForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormModify\CoatingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormModify\CoatingForm.Designer.cs">
+      <DependentUpon>CoatingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Collections\AbstractCollection.cs" />
+    <Compile Include="FormModify\DriverForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormModify\DriverForm.Designer.cs">
+      <DependentUpon>DriverForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormModify\FineForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormModify\FineForm.Designer.cs">
+      <DependentUpon>FineForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormModify\FuelForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormModify\FuelForm.Designer.cs">
+      <DependentUpon>FuelForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormModify\SignForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormModify\SignForm.Designer.cs">
+      <DependentUpon>SignForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TypeDAO\CarDAO.cs" />
     <Compile Include="TypeDAO\CoatingDAO.cs" />
     <Compile Include="TypeDAO\DAO.cs" />
+    <Compile Include="TypeDAO\DriverDAO.cs" />
+    <Compile Include="TypeDAO\FineDAO.cs" />
+    <Compile Include="TypeDAO\FuelDAO.cs" />
     <Compile Include="TypeDAO\ITypeDAO.cs" />
     <Compile Include="TypeDAO\PoliceDAO.cs" />
     <Compile Include="Drivers\Car.cs" />
@@ -100,6 +140,13 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PensCase.cs" />
+    <Compile Include="FormModify\PoliceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormModify\PoliceForm.Designer.cs">
+      <DependentUpon>PoliceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TypeDAO\SignDAO.cs" />
     <Compile Include="Way\Fine.cs" />
     <Compile Include="Way\Police.cs" />
     <Compile Include="Program.cs" />
@@ -124,11 +171,26 @@
     </Compile>
     <Compile Include="Way\Route.cs" />
     <Compile Include="Way\Coating.cs" />
+    <EmbeddedResource Include="FormModify\CarForm.resx">
+      <DependentUpon>CarForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormModify\CoatingForm.resx">
+      <DependentUpon>CoatingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormModify\DriverForm.resx">
+      <DependentUpon>DriverForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditEdge.resx">
       <DependentUpon>EditEdge.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditVertex.resx">
       <DependentUpon>EditVertex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormModify\FineForm.resx">
+      <DependentUpon>FineForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormModify\FuelForm.resx">
+      <DependentUpon>FuelForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -137,6 +199,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormModify\PoliceForm.resx">
+      <DependentUpon>PoliceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormModify\SignForm.resx">
+      <DependentUpon>SignForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VertexInfoControl.resx">
       <DependentUpon>VertexInfoControl.cs</DependentUpon>
