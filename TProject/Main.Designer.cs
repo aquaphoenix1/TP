@@ -46,7 +46,6 @@
             this.button_Ok_Сalibration = new System.Windows.Forms.Button();
             this.button_Calibration = new System.Windows.Forms.Button();
             this.panelSlide = new System.Windows.Forms.Panel();
-            this.label_Layers = new TProject.VerticalLabel();
             this.labelSlide = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkBox_StreetName = new System.Windows.Forms.CheckBox();
@@ -77,9 +76,18 @@
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuMap = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataGridViewDataBase = new System.Windows.Forms.DataGridView();
+            this.comboBoxSelectTable = new System.Windows.Forms.ComboBox();
+            this.labelSelectTable = new System.Windows.Forms.Label();
+            this.labelEditor = new System.Windows.Forms.Label();
+            this.buttonAdd = new System.Windows.Forms.Button();
+            this.buttonEdit = new System.Windows.Forms.Button();
+            this.buttonRemove = new System.Windows.Forms.Button();
+            this.label_Layers = new TProject.VerticalLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMap)).BeginInit();
             this.contextMenuVertex.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.tabPageWorkWithBD.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageMap.SuspendLayout();
             this.panelSlideContainer.SuspendLayout();
@@ -90,6 +98,7 @@
             this.menuStrip2.SuspendLayout();
             this.contextMenuEdge.SuspendLayout();
             this.contextMenuMap.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDataBase)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBoxMap
@@ -168,6 +177,13 @@
             // tabPageWorkWithBD
             // 
             this.tabPageWorkWithBD.ContextMenuStrip = this.contextMenuVertex;
+            this.tabPageWorkWithBD.Controls.Add(this.buttonRemove);
+            this.tabPageWorkWithBD.Controls.Add(this.buttonEdit);
+            this.tabPageWorkWithBD.Controls.Add(this.buttonAdd);
+            this.tabPageWorkWithBD.Controls.Add(this.labelEditor);
+            this.tabPageWorkWithBD.Controls.Add(this.labelSelectTable);
+            this.tabPageWorkWithBD.Controls.Add(this.comboBoxSelectTable);
+            this.tabPageWorkWithBD.Controls.Add(this.dataGridViewDataBase);
             this.tabPageWorkWithBD.Location = new System.Drawing.Point(4, 22);
             this.tabPageWorkWithBD.Name = "tabPageWorkWithBD";
             this.tabPageWorkWithBD.Padding = new System.Windows.Forms.Padding(3);
@@ -188,6 +204,7 @@
             this.tabControlMain.SelectedIndex = 0;
             this.tabControlMain.Size = new System.Drawing.Size(775, 330);
             this.tabControlMain.TabIndex = 5;
+            this.tabControlMain.SelectedIndexChanged += new System.EventHandler(this.tabControlMain_SelectedIndexChanged);
             // 
             // tabPageMap
             // 
@@ -255,17 +272,6 @@
             this.panelSlide.Size = new System.Drawing.Size(25, 298);
             this.panelSlide.TabIndex = 1;
             this.panelSlide.Click += new System.EventHandler(this.PanelSlide_Click);
-            // 
-            // label_Layers
-            // 
-            this.label_Layers.AutoSize = true;
-            this.label_Layers.Location = new System.Drawing.Point(3, 111);
-            this.label_Layers.Name = "label_Layers";
-            this.label_Layers.NewText = null;
-            this.label_Layers.RotateAngle = 0;
-            this.label_Layers.Size = new System.Drawing.Size(73, 13);
-            this.label_Layers.TabIndex = 1;
-            this.label_Layers.Text = "verticalLabel1";
             // 
             // labelSlide
             // 
@@ -543,6 +549,98 @@
             this.toolStripMenuItem9.Text = "Добавить перекресток";
             this.toolStripMenuItem9.Click += new System.EventHandler(this.ToolStripMenu_AddVertex_Click);
             // 
+            // dataGridViewDataBase
+            // 
+            this.dataGridViewDataBase.AllowUserToAddRows = false;
+            this.dataGridViewDataBase.AllowUserToDeleteRows = false;
+            this.dataGridViewDataBase.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewDataBase.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewDataBase.Location = new System.Drawing.Point(6, 6);
+            this.dataGridViewDataBase.MultiSelect = false;
+            this.dataGridViewDataBase.Name = "dataGridViewDataBase";
+            this.dataGridViewDataBase.ReadOnly = true;
+            this.dataGridViewDataBase.RowHeadersVisible = false;
+            this.dataGridViewDataBase.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewDataBase.Size = new System.Drawing.Size(592, 292);
+            this.dataGridViewDataBase.TabIndex = 0;
+            // 
+            // comboBoxSelectTable
+            // 
+            this.comboBoxSelectTable.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSelectTable.FormattingEnabled = true;
+            this.comboBoxSelectTable.Items.AddRange(new object[] {
+            "Дорожные покрытия",
+            "Типы полицейских",
+            "Топливо",
+            "Автомобили",
+            "Штрафы",
+            "Водители",
+            "Дорожные знаки",
+            "Улицы"});
+            this.comboBoxSelectTable.Location = new System.Drawing.Point(604, 36);
+            this.comboBoxSelectTable.Name = "comboBoxSelectTable";
+            this.comboBoxSelectTable.Size = new System.Drawing.Size(154, 21);
+            this.comboBoxSelectTable.TabIndex = 1;
+            this.comboBoxSelectTable.SelectedIndexChanged += new System.EventHandler(this.comboBoxSelectTable_SelectedIndexChanged);
+            // 
+            // labelSelectTable
+            // 
+            this.labelSelectTable.AutoSize = true;
+            this.labelSelectTable.Location = new System.Drawing.Point(601, 7);
+            this.labelSelectTable.Name = "labelSelectTable";
+            this.labelSelectTable.Size = new System.Drawing.Size(147, 26);
+            this.labelSelectTable.TabIndex = 2;
+            this.labelSelectTable.Text = "Выберите таблицу для \r\nредактирования из списка:";
+            // 
+            // labelEditor
+            // 
+            this.labelEditor.AutoSize = true;
+            this.labelEditor.Location = new System.Drawing.Point(601, 60);
+            this.labelEditor.Name = "labelEditor";
+            this.labelEditor.Size = new System.Drawing.Size(136, 13);
+            this.labelEditor.TabIndex = 3;
+            this.labelEditor.Text = "Редактирование записей";
+            // 
+            // buttonAdd
+            // 
+            this.buttonAdd.Location = new System.Drawing.Point(604, 77);
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.Size = new System.Drawing.Size(154, 23);
+            this.buttonAdd.TabIndex = 4;
+            this.buttonAdd.Text = "Добавить";
+            this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
+            // 
+            // buttonEdit
+            // 
+            this.buttonEdit.Location = new System.Drawing.Point(604, 106);
+            this.buttonEdit.Name = "buttonEdit";
+            this.buttonEdit.Size = new System.Drawing.Size(154, 23);
+            this.buttonEdit.TabIndex = 5;
+            this.buttonEdit.Text = "Редактировать";
+            this.buttonEdit.UseVisualStyleBackColor = true;
+            // 
+            // buttonRemove
+            // 
+            this.buttonRemove.Location = new System.Drawing.Point(604, 135);
+            this.buttonRemove.Name = "buttonRemove";
+            this.buttonRemove.Size = new System.Drawing.Size(154, 23);
+            this.buttonRemove.TabIndex = 6;
+            this.buttonRemove.Text = "Удалить";
+            this.buttonRemove.UseVisualStyleBackColor = true;
+            this.buttonRemove.Click += new System.EventHandler(this.buttonDelete_Click);
+            // 
+            // label_Layers
+            // 
+            this.label_Layers.AutoSize = true;
+            this.label_Layers.Location = new System.Drawing.Point(3, 111);
+            this.label_Layers.Name = "label_Layers";
+            this.label_Layers.NewText = null;
+            this.label_Layers.RotateAngle = 0;
+            this.label_Layers.Size = new System.Drawing.Size(73, 13);
+            this.label_Layers.TabIndex = 1;
+            this.label_Layers.Text = "verticalLabel1";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -559,6 +657,8 @@
             this.contextMenuVertex.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.tabPageWorkWithBD.ResumeLayout(false);
+            this.tabPageWorkWithBD.PerformLayout();
             this.tabControlMain.ResumeLayout(false);
             this.tabPageMap.ResumeLayout(false);
             this.panelSlideContainer.ResumeLayout(false);
@@ -573,6 +673,7 @@
             this.menuStrip2.PerformLayout();
             this.contextMenuEdge.ResumeLayout(false);
             this.contextMenuMap.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDataBase)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -628,5 +729,12 @@
         private System.Windows.Forms.Button button_Calibration;
         private System.Windows.Forms.Button button_Ok_Сalibration;
         private System.Windows.Forms.TextBox textBox_CurrentCoefficient;
+        private System.Windows.Forms.DataGridView dataGridViewDataBase;
+        private System.Windows.Forms.Label labelSelectTable;
+        private System.Windows.Forms.ComboBox comboBoxSelectTable;
+        private System.Windows.Forms.Button buttonRemove;
+        private System.Windows.Forms.Button buttonEdit;
+        private System.Windows.Forms.Button buttonAdd;
+        private System.Windows.Forms.Label labelEditor;
     }
 }

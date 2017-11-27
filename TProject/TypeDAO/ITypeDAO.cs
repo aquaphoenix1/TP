@@ -9,7 +9,7 @@ namespace TProject.TypeDAO
     public interface ITypeDAO
     {
 
-        bool Insert(Type obj);
+        bool Insert(object obj);
         bool Delete(long ID);
         //void Delete(Type obj);
         //void Delete(int id);
