@@ -12,7 +12,7 @@ namespace TProject.Graph
         public static int Radius { get; set; }
         public static int Radius_2 { get; set; }
 
-        public bool IsRegular { get => TrafficLight != null; }
+        public bool IsRegular { get { return TrafficLight != null; } }
 
         public void SetRectXY(int x, int y)
         {

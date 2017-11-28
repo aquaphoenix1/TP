@@ -3,7 +3,7 @@ using System.Data.SQLite;
 
 namespace TProject.TypeDAO
 {
-    class StreetDAO : DAO, TypeDAO.ITypeDAO
+    class StreetDAO : DAO
     {
         public bool Insert(object obj)
         {

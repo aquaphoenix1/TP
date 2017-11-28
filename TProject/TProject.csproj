@@ -70,9 +70,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CarForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CarForm.Designer.cs">
+      <DependentUpon>CarForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CoatingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CoatingForm.Designer.cs">
+      <DependentUpon>CoatingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Coll\AbstractCollection.cs" />
     <Compile Include="Coll\Edges.cs" />
     <Compile Include="Coll\Vertexes.cs" />
+    <Compile Include="DriverForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DriverForm.Designer.cs">
+      <DependentUpon>DriverForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FineForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FineForm.Designer.cs">
+      <DependentUpon>FineForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DataBaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +128,12 @@
     <Compile Include="Forms\SystemInfoForm.Designer.cs">
       <DependentUpon>SystemInfoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FuelForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FuelForm.Designer.cs">
+      <DependentUpon>FuelForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,8 +147,24 @@
     <Compile Include="Forms\OptionsRouteForm.Designer.cs">
       <DependentUpon>OptionsRouteForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PoliceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PoliceForm.Designer.cs">
+      <DependentUpon>PoliceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SignForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SignForm.Designer.cs">
+      <DependentUpon>SignForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TypeDAO\CarDAO.cs" />
     <Compile Include="TypeDAO\CoatingDAO.cs" />
     <Compile Include="TypeDAO\DAO.cs" />
+    <Compile Include="TypeDAO\DriverDAO.cs" />
+    <Compile Include="TypeDAO\FineDAO.cs" />
+    <Compile Include="TypeDAO\FuelDAO.cs" />
     <Compile Include="TypeDAO\ITypeDAO.cs" />
     <Compile Include="TypeDAO\PoliceDAO.cs" />
     <Compile Include="Drivers\Car.cs" />
@@ -139,6 +185,7 @@
     </Compile>
     <Compile Include="Entity.cs" />
     <Compile Include="PensCase.cs" />
+    <Compile Include="TypeDAO\SignDAO.cs" />
     <Compile Include="TypeDAO\StreetDAO.cs" />
     <Compile Include="VerticalLabel.cs">
       <SubType>Component</SubType>
@@ -168,6 +215,18 @@
     </Compile>
     <Compile Include="Way\Route.cs" />
     <Compile Include="Way\Coating.cs" />
+    <EmbeddedResource Include="CarForm.resx">
+      <DependentUpon>CarForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CoatingForm.resx">
+      <DependentUpon>CoatingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DriverForm.resx">
+      <DependentUpon>DriverForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FineForm.resx">
+      <DependentUpon>FineForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\DataBaseForm.resx">
       <DependentUpon>DataBaseForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -189,16 +248,25 @@
     <EmbeddedResource Include="Forms\SystemInfoForm.resx">
       <DependentUpon>SystemInfoForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FuelForm.resx">
+      <DependentUpon>FuelForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\OptionsRouteForm.resx">
       <DependentUpon>OptionsRouteForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PoliceForm.resx">
+      <DependentUpon>PoliceForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SignForm.resx">
+      <DependentUpon>SignForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VertexInfoControl.resx">
       <DependentUpon>VertexInfoControl.cs</DependentUpon>

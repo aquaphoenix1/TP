@@ -119,7 +119,7 @@ namespace TProject
                         {
                             dataGridViewDataBase.Columns.Add("id", "Номер автомобиля");
                             dataGridViewDataBase.Columns.Add("model", "Модель");
-                            dataGridViewDataBase.Columns.Add("id", "ID топлива");
+                            dataGridViewDataBase.Columns.Add("IDfuel", "ID топлива");
                             dataGridViewDataBase.Columns.Add("consumption", "Потребление");
 
                             Car.ListAuto.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
@@ -177,49 +177,73 @@ namespace TProject
                 comboBoxSelectTable.SelectedItem = null;
             }
         }
-
+        //Работа с бд кнопка добавить.Даниил
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             if (comboBoxSelectTable.SelectedItem != null)
             {
                 switch (comboBoxSelectTable.SelectedItem.ToString())
                 {
+                    //Правильно работает.Даниил
                     case "Типы полицейских":
                         {
-
-                            Police p = new Police("qwe", 5);
-                            if (new PoliceDAO().Insert(p))
-                            {
-                                List<object> list = new List<object>();
-                                list.Add(p.ID);
-                                list.Add(p.TypeName);
-                                list.Add(p.Coeff);
-                                Police.ListTypePolicemen.Add(list);
-                                dataGridViewDataBase.Rows.Add(list.ToArray());
-                            }
-                            else
-                            {
-                                Police.CurrentMaxID--;
-                            }
+                            PoliceForm f = new PoliceForm(true);
+                            f.ShowDialog();
+                            dataGridViewDataBase.Rows.Clear();
+                            Police.ListTypePolicemen.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
                             break;
                         }
+                    //Правильно работает.Даниил
                     case "Дорожные покрытия":
                         {
-
-                            Coating c = new Coating("Топливо1", 3);
-                            if (new CoatingDAO().Insert(c))
-                            {
-                                List<object> list = new List<object>();
-                                list.Add(c.ID);
-                                list.Add(c.TypeName);
-                                list.Add(c.Coeff);
-                                Coating.ListSurface.Add(list);
-                                dataGridViewDataBase.Rows.Add(list.ToArray());
-                            }
-                            else
-                            {
-                                Coating.curMaxId--;
-                            }
+                            CoatingForm cf = new CoatingForm(true);
+                            cf.ShowDialog();
+                            dataGridViewDataBase.Rows.Clear();
+                            Coating.ListSurface.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            break;
+                        }
+                    //Правильно работает.Даниил
+                    case "Штрафы":
+                        {
+                            FineForm fform = new FineForm(true);
+                            fform.ShowDialog();
+                            dataGridViewDataBase.Rows.Clear();
+                            Fine.ListFine.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            break;
+                        }
+                    //Правильно работает.Даниил
+                    case "Топливо":
+                        {
+                            FuelForm ff = new FuelForm(true);
+                            ff.ShowDialog();
+                            dataGridViewDataBase.Rows.Clear();
+                            Fuel.ListFuel.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            break;
+                        }
+                    //Правильно работает.Даниил
+                    case "Дорожные знаки":
+                        {
+                            SignForm f = new SignForm(true);
+                            f.ShowDialog();
+                            dataGridViewDataBase.Rows.Clear();
+                            Sign.ListSigns.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            break;
+                        }
+                    //Правильно работает.Даниил
+                    case "Автомобили": //отмет
+                        {
+                            CarForm cf = new CarForm(true);
+                            cf.ShowDialog();
+                            dataGridViewDataBase.Rows.Clear();
+                            Car.ListAuto.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            break;
+                        }
+                    case "Водители":
+                        {
+                            DriverForm df = new DriverForm(true);
+                            df.ShowDialog();
+                            dataGridViewDataBase.Rows.Clear();
+                            Driver.Driver.ListDriver.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
                             break;
                         }
                     case "Улицы":
@@ -247,14 +271,15 @@ namespace TProject
                 }
             }
         }
-
+        //Нажата кнопка удалить.Даниил
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             if (comboBoxSelectTable.SelectedItem != null)
             {
                 switch (comboBoxSelectTable.SelectedItem.ToString())
                 {
-                    case "Типы полицейских":
+                    //Работает правильно.Даниил
+                    case "Типы полицейских": 
                         {
                             if (new PoliceDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
                             {
@@ -266,9 +291,75 @@ namespace TProject
                             }
                             break;
                         }
+                    //Работает правильно.Даниил
                     case "Дорожные покрытия":
                         {
                             if (new CoatingDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
+                            {
+                                dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Невозможно удалить");
+                            }
+                            break;
+                        }
+                    //Работает правильно.Даниил
+                    case "Штрафы":
+                        {
+                            if (new FineDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
+                            {
+                                dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Невозможно удалить");
+                            }
+                            break;
+                        }
+                    //Работает правильно.Даниил
+                    case "Топливо":
+                        {
+                            if (new FuelDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
+                            {
+                                dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Невозможно удалить");
+                            }
+                            break;
+                        }
+                    //Работает правильно.Даниил
+                    case "Дорожные знаки":
+                        {
+                            if (new SignDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
+                            {
+                                dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Невозможно удалить");
+                            }
+                            break;
+                        }
+                    //Работает правильно.Даниил
+                    case "Автомобили":
+                        {
+                            if (new CarDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
+                            {
+                                dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Невозможно удалить");
+                            }
+                            break;
+                        }
+                    //Работает правильно.Даниил
+                    case "Водители":
+                        {
+                            if (new DriverDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
                             {
                                 dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
                             }
@@ -550,7 +641,7 @@ namespace TProject
         #endregion
 
 #region Управление слоями
-        private void checkBox_TrafficLight_CheckedChanged(object sender, EventArgs e)
+        private void checkBox__TrafficLight_CheckedChanged(object sender, EventArgs e)
         {
             Viewer.ViewPort.IsTrafficLight_Visible = ((CheckBox)sender).Checked;
             Viewer.ViewPort.Invalidate();
@@ -579,17 +670,125 @@ namespace TProject
             Viewer.ViewPort.IsStreetName_Visible = ((CheckBox)sender).Checked;
             Viewer.ViewPort.Invalidate();
         }
-
         #endregion
 
-        private void ToolStripMenu_DeleteEdge_Click(object sender, EventArgs e)
-        {
-            Viewer.ViewPort.DeleteEdge(lastClickCoordX, lastClickCoordY);
-        }
 
-        private void ToolStripMenuItem_DeleteVertex_Click(object sender, EventArgs e)
+        //Работа с бд.Нажата кнопка изменить.Даниил
+        private void buttonEdit_Click(object sender, EventArgs e)
         {
-            Viewer.ViewPort.DelteVertex(lastClickCoordX, lastClickCoordY);
+            if (comboBoxSelectTable.SelectedItem != null && dataGridViewDataBase.SelectedRows.Count > 0)
+            {
+                switch (comboBoxSelectTable.SelectedItem.ToString())
+                {
+                    //Работает правильно.Даниил
+                    case "Типы полицейских":
+                        {
+                            int id = int.Parse(dataGridViewDataBase.SelectedRows[0].Cells["id"].Value.ToString());
+                            string typePolice = dataGridViewDataBase.SelectedRows[0].Cells["type"].Value.ToString();
+                            double coef = double.Parse(dataGridViewDataBase.SelectedRows[0].Cells["koefficient"].Value.ToString());
+                            PoliceForm f = new PoliceForm(id, typePolice, coef);
+                            f.ShowDialog();
+                            dataGridViewDataBase.Rows.Clear();
+                            Police.ListTypePolicemen.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            break;
+                        }
+                    //Работает правильно.Даниил
+                    case "Дорожные покрытия":
+                        {
+                            int id = int.Parse(dataGridViewDataBase.SelectedRows[0].Cells["ID"].Value.ToString());
+                            string typeCoating = dataGridViewDataBase.SelectedRows[0].Cells["name"].Value.ToString();
+                            double coef = double.Parse(dataGridViewDataBase.SelectedRows[0].Cells["koefficient"].Value.ToString());
+                            CoatingForm f = new CoatingForm(id, typeCoating, coef);
+                            f.ShowDialog();
+                            dataGridViewDataBase.Rows.Clear();
+                            Coating.ListSurface.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            break;
+                        }
+                    //Работает правально.Даниил
+                    case "Штрафы":
+                        {
+                            int id = int.Parse(dataGridViewDataBase.SelectedRows[0].Cells["ID"].Value.ToString());
+                            string NameFine = dataGridViewDataBase.SelectedRows[0].Cells["name"].Value.ToString();
+                            double cost = double.Parse(dataGridViewDataBase.SelectedRows[0].Cells["cost"].Value.ToString());
+                            FineForm f = new FineForm(id, NameFine, cost);
+                            f.ShowDialog();
+                            dataGridViewDataBase.Rows.Clear();
+                            Fine.ListFine.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            break;
+                        }
+                    //Работает правально.Даниил
+                    case "Топливо":
+                        {
+                            int id = int.Parse(dataGridViewDataBase.SelectedRows[0].Cells["id"].Value.ToString());
+                            string NameFuel = dataGridViewDataBase.SelectedRows[0].Cells["nameFuel"].Value.ToString();
+                            double price = double.Parse(dataGridViewDataBase.SelectedRows[0].Cells["cost"].Value.ToString());
+                            FuelForm f = new FuelForm(id, NameFuel, price);
+                            f.ShowDialog();
+                            dataGridViewDataBase.Rows.Clear();
+                            Fuel.ListFuel.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            break;
+                        }
+                    //Работает правально.Даниил
+                    case "Дорожные знаки":
+                        {
+                            int id = int.Parse(dataGridViewDataBase.SelectedRows[0].Cells["ID"].Value.ToString());
+                            string TypeSign = dataGridViewDataBase.SelectedRows[0].Cells["type"].Value.ToString();
+                            double value = double.Parse(dataGridViewDataBase.SelectedRows[0].Cells["value"].Value.ToString());
+                            SignForm f = new SignForm(id, TypeSign, value);
+                            f.ShowDialog();
+                            dataGridViewDataBase.Rows.Clear();
+                            Sign.ListSigns.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            break;
+                        }
+                    //Работает правально.Даниил
+                    case "Автомобили":
+                        {
+                            int id = int.Parse(dataGridViewDataBase.SelectedRows[0].Cells["id"].Value.ToString());
+                            string model = dataGridViewDataBase.SelectedRows[0].Cells["model"].Value.ToString();
+                            //Здесь почему то записывает такое же значение как и в id
+                            int idCarFuel = int.Parse(dataGridViewDataBase.SelectedRows[0].Cells["IDfuel"].Value.ToString());
+                            double consumption = double.Parse(dataGridViewDataBase.SelectedRows[0].Cells["consumption"].Value.ToString());
+                            //Поиск топлива
+                            var findfuel = Fuel.ListFuel.FirstOrDefault(l => l.ElementAt(0).ToString() == idCarFuel.ToString());
+
+
+
+                            Fuel fuel = new Fuel(int.Parse(findfuel[0].ToString()), findfuel[1].ToString(), double.Parse(findfuel[2].ToString()));
+                            CarForm f = new CarForm(id, model, fuel, consumption);
+                            f.ShowDialog();
+                            dataGridViewDataBase.Rows.Clear();
+                            Car.ListAuto.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            break;
+                        }
+                    //Работает правильно.Даниил
+                    case "Водители":
+                        {
+                            bool typedriver;
+
+                            int id = int.Parse(dataGridViewDataBase.SelectedRows[0].Cells["ID"].Value.ToString());
+                            string Name = dataGridViewDataBase.SelectedRows[0].Cells["name"].Value.ToString();
+                            if (Name == "Нет") { typedriver = false; } else { typedriver = true; }
+                            double idauto = double.Parse(dataGridViewDataBase.SelectedRows[0].Cells["IDauto"].Value.ToString());
+
+                            var fcar = Car.ListAuto.FirstOrDefault(l => l.ElementAt(0).ToString() == idauto.ToString());
+                            var ffuel = Fuel.ListFuel.FirstOrDefault(l => l.ElementAt(0).ToString() == fcar[2].ToString());
+
+                            Fuel fuel = new Fuel(int.Parse(ffuel[0].ToString()), ffuel[1].ToString(), double.Parse(ffuel[2].ToString()));
+
+                            Car car = new Car(int.Parse(fcar[0].ToString()), fcar[1].ToString(), fuel, double.Parse(fcar[3].ToString()));
+
+                            if (Name == "Нет") { typedriver = false; } else { typedriver = true; }
+
+
+                            DriverForm f = new DriverForm(id, typedriver, car);
+                            f.ShowDialog();
+                            dataGridViewDataBase.Rows.Clear();
+                            Driver.Driver.ListDriver.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            break;
+                        }
+                }
+            }
+
         }
     }
 }
