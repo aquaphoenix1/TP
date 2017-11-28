@@ -77,6 +77,8 @@
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuMap = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
+            this.удалитьПерегонToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.удалитьПерекрестокToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMap)).BeginInit();
             this.contextMenuVertex.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -112,9 +114,10 @@
             this.addEdgeToolStripMenuItem,
             this.editVertexToolStripMenuItem,
             this.wayFromToolStripMenuItem,
-            this.wayToВToolStripMenuItem});
+            this.wayToВToolStripMenuItem,
+            this.удалитьПерекрестокToolStripMenuItem});
             this.contextMenuVertex.Name = "contextMenuStripPictBox";
-            this.contextMenuVertex.Size = new System.Drawing.Size(210, 92);
+            this.contextMenuVertex.Size = new System.Drawing.Size(210, 136);
             // 
             // addEdgeToolStripMenuItem
             // 
@@ -341,7 +344,7 @@
             this.checkBox__TrafficLight.Size = new System.Drawing.Size(15, 14);
             this.checkBox__TrafficLight.TabIndex = 10;
             this.checkBox__TrafficLight.UseVisualStyleBackColor = true;
-            this.checkBox__TrafficLight.CheckedChanged += new System.EventHandler(this.checkBox__TrafficLight_CheckedChanged);
+            this.checkBox__TrafficLight.CheckedChanged += new System.EventHandler(this.checkBox_TrafficLight_CheckedChanged);
             // 
             // checkBox_StreetLength
             // 
@@ -518,9 +521,10 @@
             // contextMenuEdge
             // 
             this.contextMenuEdge.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem5});
+            this.toolStripMenuItem5,
+            this.удалитьПерегонToolStripMenuItem});
             this.contextMenuEdge.Name = "contextMenuStripPictBox";
-            this.contextMenuEdge.Size = new System.Drawing.Size(193, 26);
+            this.contextMenuEdge.Size = new System.Drawing.Size(193, 48);
             // 
             // toolStripMenuItem5
             // 
@@ -542,6 +546,20 @@
             this.toolStripMenuItem9.Size = new System.Drawing.Size(198, 22);
             this.toolStripMenuItem9.Text = "Добавить перекресток";
             this.toolStripMenuItem9.Click += new System.EventHandler(this.ToolStripMenu_AddVertex_Click);
+            // 
+            // удалитьПерегонToolStripMenuItem
+            // 
+            this.удалитьПерегонToolStripMenuItem.Name = "удалитьПерегонToolStripMenuItem";
+            this.удалитьПерегонToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.удалитьПерегонToolStripMenuItem.Text = "Удалить перегон";
+            this.удалитьПерегонToolStripMenuItem.Click += new System.EventHandler(this.удалитьПерегонToolStripMenuItem_Click);
+            // 
+            // удалитьПерекрестокToolStripMenuItem
+            // 
+            this.удалитьПерекрестокToolStripMenuItem.Name = "удалитьПерекрестокToolStripMenuItem";
+            this.удалитьПерекрестокToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.удалитьПерекрестокToolStripMenuItem.Text = "Удалить перекресток";
+            this.удалитьПерекрестокToolStripMenuItem.Click += new System.EventHandler(this.удалитьПерекрестокToolStripMenuItem_Click);
             // 
             // Main
             // 
@@ -628,5 +646,7 @@
         private System.Windows.Forms.Button button_Calibration;
         private System.Windows.Forms.Button button_Ok_Сalibration;
         private System.Windows.Forms.TextBox textBox_CurrentCoefficient;
+        private System.Windows.Forms.ToolStripMenuItem удалитьПерегонToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem удалитьПерекрестокToolStripMenuItem;
     }
 }

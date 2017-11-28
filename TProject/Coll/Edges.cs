@@ -21,5 +21,8 @@ namespace TProject.Coll
             Viewer.ViewPort.UnSelectAll();
             return false;
         }
+        public void DeleteAllConnection()
+        {
+        }
     }
 }

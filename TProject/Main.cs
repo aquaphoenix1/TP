@@ -319,7 +319,7 @@ namespace TProject
         #endregion
 
 #region Управление слоями
-        private void checkBox__TrafficLight_CheckedChanged(object sender, EventArgs e)
+        private void checkBox_TrafficLight_CheckedChanged(object sender, EventArgs e)
         {
             Viewer.ViewPort.IsTrafficLight_Visible = ((CheckBox)sender).Checked;
             Viewer.ViewPort.Invalidate();
@@ -348,7 +348,15 @@ namespace TProject
             Viewer.ViewPort.IsStreetName_Visible = ((CheckBox)sender).Checked;
             Viewer.ViewPort.Invalidate();
         }
-#endregion
+        #endregion
+        private void удалитьПерегонToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Viewer.ViewPort.DeleteEdge(lastClickCoordX, lastClickCoordY);
+        }
 
+        private void удалитьПерекрестокToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

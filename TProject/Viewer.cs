@@ -252,6 +252,24 @@ namespace TProject
             selectedEdge = new Edge(selectedVertex, new Vertex(x.Scaling() + dX, y.Scaling() + dY));
         }
 
+        public void DeleteEdge(int x, int y)
+        {
+            if(Map.edges.GetSelected(x, y))
+            {
+                Map.edges.Delete(selectedEdge);
+                selectedEdge = null;
+            }
+        }
+
+        public void DelteVertex(int x, int y)
+        {
+            if(Map.vertexes.GetSelected(x, y))
+            {
+                Map.vertexes.Delete(selectedVertex);
+                selectedVertex = null;
+            }
+        }
+
         /// <summary>
         /// Выполняется при визуальном отображении создания нового ребра
         /// Пересоздает стрелку с концом в точке, в которой находится курсор

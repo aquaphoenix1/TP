@@ -91,6 +91,7 @@
     <Compile Include="Forms\FirstForm.Designer.cs">
       <DependentUpon>FirstForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ModifyRecordForm.cs" />
     <Compile Include="Forms\ModifyTableForm.cs">
       <SubType>Form</SubType>
     </Compile>
