@@ -6,7 +6,7 @@ namespace TProject
 {
     class PoliceDAO : DAO, TypeDAO.ITypeDAO
     {
-        public bool Insert(Type obj)
+        public bool Insert(object obj)
         {
             try
             {

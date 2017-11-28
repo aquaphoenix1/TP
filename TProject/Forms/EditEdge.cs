@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using TProject.Graph;
 using TProject.Way;
@@ -10,25 +9,14 @@ namespace TProject
     {
         public Edge Edge { get; private set; }
 
-        private Edge SaveEdge;
-
         public EditEdge(Edge _edge)
         {
             InitializeComponent();
             Edge = _edge;
-
-            SaveEdge = new Edge(Edge.GetHead(), Edge.GetEnd());
-            SaveEdge.Coat = Edge.Coat;
-            SaveEdge.ID = Edge.ID;
-            SaveEdge.IsBilateral = Edge.IsBilateral;
-            SaveEdge.NameStreet = Edge.NameStreet;
-            SaveEdge.Policemen = Edge.Policemen;
-            SaveEdge.Signs = Edge.Signs;
         }
 
         private void checkBoxWay_CheckedChanged(object sender, EventArgs e)
         {
-
             Edge.IsBilateral = signTwoWayCheckBox.Checked;
             Viewer.ViewPort.Invalidate();
         }
@@ -40,7 +28,8 @@ namespace TProject
         }
         private void EditEdge_Load(object sender, EventArgs e)
         {
-            
+            Edge.StreetList.ForEach(var => nameStreetComboBox.Items.Add(var[1]));
+
             nameStreetComboBox.SelectedItem = Edge.NameStreet;
             coatingComboBox.SelectedItem = Edge.Coat;
             policemanComboBox.SelectedItem = Edge.Policemen;
@@ -62,12 +51,6 @@ namespace TProject
 
         private void cancelEditEgdeButton_Click(object sender, EventArgs e)
         {
-            Edge.Coat = SaveEdge.Coat;
-            Edge.ID = SaveEdge.ID;
-            Edge.IsBilateral = SaveEdge.IsBilateral;
-            Edge.NameStreet = SaveEdge.NameStreet;
-            Edge.Policemen = SaveEdge.Policemen;
-            Edge.Signs = SaveEdge.Signs;
             Close();
         }
 

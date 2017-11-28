@@ -139,6 +139,7 @@
     </Compile>
     <Compile Include="Entity.cs" />
     <Compile Include="PensCase.cs" />
+    <Compile Include="TypeDAO\StreetDAO.cs" />
     <Compile Include="VerticalLabel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -156,8 +157,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Way\Sign.cs" />
-    <Compile Include="TooLowSecondsException.cs" />
-    <Compile Include="TooManySecondsException.cs" />
     <Compile Include="Way\TrafficLight.cs" />
     <Compile Include="Type.cs" />
     <Compile Include="Graph\Vertex.cs" />

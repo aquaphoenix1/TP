@@ -6,6 +6,9 @@ namespace TProject.Graph
 {
     public class Edge : Entity
     {
+        public static List<List<object>> StreetList { get; set; }
+        public static long curMaxIdStreet { get; set; }
+
         private int Length;
 
         private Vertex HeadVertex { get; set; }

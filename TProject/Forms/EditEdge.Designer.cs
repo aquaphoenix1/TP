@@ -147,8 +147,6 @@
             // 
             this.nameStreetComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.nameStreetComboBox.FormattingEnabled = true;
-            this.nameStreetComboBox.Items.AddRange(new object[] {
-            "Мичурина"});
             this.nameStreetComboBox.Location = new System.Drawing.Point(160, 13);
             this.nameStreetComboBox.Name = "nameStreetComboBox";
             this.nameStreetComboBox.Size = new System.Drawing.Size(185, 21);

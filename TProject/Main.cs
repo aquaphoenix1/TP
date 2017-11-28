@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using TProject.Driver;
 using TProject.Graph;
+using TProject.TypeDAO;
+using TProject.Way;
 
 namespace TProject
 {
@@ -49,6 +46,239 @@ namespace TProject
             panelSlide.Controls.Add(label_Layers);
 
             DoubleBuffered = true;
+
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            Police.CurrentMaxID = DAO.GetMaxID("Policemen");
+            Coating.curMaxId = DAO.GetMaxID("Surface");
+            Fine.curMaxId = DAO.GetMaxID("Fine");
+            Car.curMaxId = DAO.GetMaxID("Auto");
+            Fuel.curMaxId = DAO.GetMaxID("Fuel");
+            Driver.Driver.curMaxId = DAO.GetMaxID("Driver");
+            Sign.curMaxId = DAO.GetMaxID("Sign");
+            Edge.curMaxIdStreet = DAO.GetMaxID("Street");
+
+            Coating.ListSurface = DAO.GetAll("Surface");
+            Fine.ListFine = DAO.GetAll("Fine");
+            Car.ListAuto = DAO.GetAll("Auto");
+            Fuel.ListFuel = DAO.GetAll("Fuel");
+            Police.ListTypePolicemen = DAO.GetAll("Policemen");
+            Driver.Driver.ListDriver = DAO.GetAll("Driver");
+            Sign.ListSigns = DAO.GetAll("Sign");
+            Edge.StreetList = DAO.GetAll("Street");
+        }
+
+        private void clearDataGrid()
+        {
+            dataGridViewDataBase.Rows.Clear();
+            dataGridViewDataBase.Columns.Clear();
+        }
+
+        private void comboBoxSelectTable_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControlMain.SelectedIndex == 1)
+            {
+                clearDataGrid();
+                switch (comboBoxSelectTable.SelectedItem.ToString())
+                {
+                    case "Дорожные покрытия":
+                        {
+                            dataGridViewDataBase.Columns.Add("ID", "ID покрытия");
+                            dataGridViewDataBase.Columns.Add("name", "Название покрытия");
+                            dataGridViewDataBase.Columns.Add("koefficient", "Коэффициент торможения");
+
+                            Coating.ListSurface.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+
+                            break;
+                        }
+                    case "Типы полицейских":
+                        {
+                            dataGridViewDataBase.Columns.Add("id", "ID полицейского");
+                            dataGridViewDataBase.Columns.Add("type", "Тип полицейского");
+                            dataGridViewDataBase.Columns.Add("koefficient", "Коэффициент жадности полицейского");
+
+                            Police.ListTypePolicemen.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+
+                            break;
+                        }
+                    case "Топливо":
+                        {
+                            dataGridViewDataBase.Columns.Add("id", "ID топлива");
+                            dataGridViewDataBase.Columns.Add("nameFuel", "Название топлива");
+                            dataGridViewDataBase.Columns.Add("cost", "Цена");
+
+                            Fuel.ListFuel.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+
+                            break;
+                        }
+                    case "Автомобили":
+                        {
+                            dataGridViewDataBase.Columns.Add("id", "Номер автомобиля");
+                            dataGridViewDataBase.Columns.Add("model", "Модель");
+                            dataGridViewDataBase.Columns.Add("id", "ID топлива");
+                            dataGridViewDataBase.Columns.Add("consumption", "Потребление");
+
+                            Car.ListAuto.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+
+                            break;
+                        }
+                    case "Штрафы":
+                        {
+                            dataGridViewDataBase.Columns.Add("ID", "ID штрафа");
+                            dataGridViewDataBase.Columns.Add("name", "Название штрафа");
+                            dataGridViewDataBase.Columns.Add("cost", "Цена");
+
+                            Fine.ListFine.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+
+                            break;
+                        }
+                    case "Водители":
+                        {
+                            dataGridViewDataBase.Columns.Add("ID", "ID водителя");
+                            dataGridViewDataBase.Columns.Add("name", "Тип водителя");
+                            dataGridViewDataBase.Columns.Add("IDauto", "ID автомобиля");
+
+                            Driver.Driver.ListDriver.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+
+                            break;
+                        }
+                    case "Дорожные знаки":
+                        {
+                            dataGridViewDataBase.Columns.Add("ID", "ID знака");
+                            dataGridViewDataBase.Columns.Add("type", "Тип знака");
+                            dataGridViewDataBase.Columns.Add("value", "Значение");
+
+                            Sign.ListSigns.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+
+                            break;
+                        }
+                    case "Улицы":
+                        {
+                            dataGridViewDataBase.Columns.Add("ID", "ID знака");
+                            dataGridViewDataBase.Columns.Add("name", "Название улицы");
+
+                            Edge.StreetList.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+
+                            break;
+                        }
+                }
+            }
+        }
+
+        private void tabControlMain_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControlMain.SelectedIndex == 0)
+            {
+                clearDataGrid();
+                comboBoxSelectTable.SelectedItem = null;
+            }
+        }
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            if (comboBoxSelectTable.SelectedItem != null)
+            {
+                switch (comboBoxSelectTable.SelectedItem.ToString())
+                {
+                    case "Типы полицейских":
+                        {
+
+                            Police p = new Police("qwe", 5);
+                            if (new PoliceDAO().Insert(p))
+                            {
+                                List<object> list = new List<object>();
+                                list.Add(p.ID);
+                                list.Add(p.TypeName);
+                                list.Add(p.Coeff);
+                                Police.ListTypePolicemen.Add(list);
+                                dataGridViewDataBase.Rows.Add(list.ToArray());
+                            }
+                            else
+                            {
+                                Police.CurrentMaxID--;
+                            }
+                            break;
+                        }
+                    case "Дорожные покрытия":
+                        {
+
+                            Coating c = new Coating("Топливо1", 3);
+                            if (new CoatingDAO().Insert(c))
+                            {
+                                List<object> list = new List<object>();
+                                list.Add(c.ID);
+                                list.Add(c.TypeName);
+                                list.Add(c.Coeff);
+                                Coating.ListSurface.Add(list);
+                                dataGridViewDataBase.Rows.Add(list.ToArray());
+                            }
+                            else
+                            {
+                                Coating.curMaxId--;
+                            }
+                            break;
+                        }
+                    case "Улицы":
+                        {
+                            string[] arr = new string[2];
+                            arr[0] = (++Edge.curMaxIdStreet).ToString();
+                            arr[1] = "Московское шоссе";
+
+                            object x = arr;
+                            String s = "Московское шоссе";
+                            if (new StreetDAO().Insert(x))
+                            {
+                                List<object> list = new List<object>();
+                                list.Add(++Edge.curMaxIdStreet);
+                                list.Add(s);
+                                Edge.StreetList.Add(list);
+                                dataGridViewDataBase.Rows.Add(list.ToArray());
+                            }
+                            else
+                            {
+                                Edge.curMaxIdStreet--;
+                            }
+                            break;
+                        }
+                }
+            }
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            if (comboBoxSelectTable.SelectedItem != null)
+            {
+                switch (comboBoxSelectTable.SelectedItem.ToString())
+                {
+                    case "Типы полицейских":
+                        {
+                            if (new PoliceDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
+                            {
+                                dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Невозможно удалить");
+                            }
+                            break;
+                        }
+                    case "Дорожные покрытия":
+                        {
+                            if (new CoatingDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
+                            {
+                                dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Невозможно удалить");
+                            }
+                            break;
+                        }
+                }
+            }
         }
 
         private void Main_SizeChanged(object sender, EventArgs e)

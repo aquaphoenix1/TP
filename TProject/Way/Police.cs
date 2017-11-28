@@ -4,7 +4,7 @@ namespace TProject.Way
 {
     public class Police : Type
     {
-        public static long CurrentMaxID { private get; set; }
+        public static long CurrentMaxID { get; set; }
         public static List<List<object>> ListTypePolicemen { get; set; }
         public double Coeff { get; set; }
 
