@@ -265,6 +265,7 @@ namespace TProject
         {
             if(Map.vertexes.GetSelected(x, y))
             {
+                Map.edges.DeleteAllConnection(selectedVertex);
                 Map.vertexes.Delete(selectedVertex);
                 selectedVertex = null;
             }

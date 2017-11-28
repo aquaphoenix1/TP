@@ -21,8 +21,9 @@ namespace TProject.Coll
             Viewer.ViewPort.UnSelectAll();
             return false;
         }
-        public void DeleteAllConnection()
+        public void DeleteAllConnection(Vertex vertex)
         {
+            List.RemoveAll(o => o.GetHead().Equals(vertex) || o.GetEnd().Equals(vertex));
         }
     }
 }

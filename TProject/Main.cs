@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using TProject.Driver;
 using TProject.Graph;
@@ -578,15 +579,17 @@ namespace TProject
             Viewer.ViewPort.IsStreetName_Visible = ((CheckBox)sender).Checked;
             Viewer.ViewPort.Invalidate();
         }
+
         #endregion
-        private void удалитьПерегонToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void ToolStripMenu_DeleteEdge_Click(object sender, EventArgs e)
         {
             Viewer.ViewPort.DeleteEdge(lastClickCoordX, lastClickCoordY);
         }
 
-        private void удалитьПерекрестокToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ToolStripMenuItem_DeleteVertex_Click(object sender, EventArgs e)
         {
-
+            Viewer.ViewPort.DelteVertex(lastClickCoordX, lastClickCoordY);
         }
     }
 }
