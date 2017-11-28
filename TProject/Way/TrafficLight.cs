@@ -9,7 +9,7 @@ namespace TProject.Way
         public int RedSeconds { get; set; }
 
         public delegate void TLightTurnMethod();
-        public static event TLightTurnMethod tLightTurn;
+        public static event TLightTurnMethod TLightTurn;
 
         public bool IsGreen { get; set; }
 
@@ -31,7 +31,7 @@ namespace TProject.Way
             int time = CurrentTime++;
             if (IsGreen && (time + 1) > GreenSeconds || !IsGreen && (time + 1) > RedSeconds)
             {
-                tLightTurn();
+                TLightTurn();
                 CurrentTime = 0;
                 IsGreen = !IsGreen;
             }

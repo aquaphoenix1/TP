@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TProject.Coll;
 using TProject.Graph;
 
 namespace TProject.Way
@@ -9,7 +10,7 @@ namespace TProject.Way
         public Vertex Start { get; set; }
         public Vertex End { get; set; }
 
-        public double[,] GetMatrixWay(out int[,] parents, out long[] arrayOfID, VertexCollection vertexes, EdgeCollection edges)
+        public double[,] GetMatrixWay(out int[,] parents, out long[] arrayOfID, Vertexes vertexes, Edges edges)
         {
             int count = vertexes.GetCountElements();
 
@@ -19,7 +20,7 @@ namespace TProject.Way
 
             arrayOfID = new long[count];
 
-            List<Vertex> vertexList = vertexes.GetElementsList();
+            List<Vertex> vertexList = vertexes.List;
 
             for (int i = 0; i < count; i++)
             {
@@ -32,7 +33,7 @@ namespace TProject.Way
                     else
                     {
                         Edge edge = GetEdge(vertexList[i], vertexList[j], edges);
-                        array[i, j] = (edge != null) ? edge.GetLength() : Double.MaxValue;//edge.GetCriterialValue() : Double.MaxValue;// edge.GetLength() : Double.MaxValue;
+                        array[i, j] = (edge != null) ? edge.GetLength(Viewer.ViewPort.ScaleCoefficient) : Double.MaxValue;//edge.GetCriterialValue() : Double.MaxValue;// edge.GetLength() : Double.MaxValue;
                     }
                     parents[i, j] = i;
                 }
@@ -72,7 +73,7 @@ namespace TProject.Way
             return list;
         }
 
-        public double FindMinLengthWay(int fromVertex, int toVertex, VertexCollection vertColl, EdgeCollection edgColl, out List<long> way)
+        public double FindMinLengthWay(int fromVertex, int toVertex, Vertexes vertColl, Edges edgColl, out List<long> way)
         {
             int[,] parents;
             long[] IDs;
@@ -114,9 +115,9 @@ namespace TProject.Way
             }
         }
 
-        public Edge GetEdge(Vertex one, Vertex two, EdgeCollection edges)
+        public Edge GetEdge(Vertex one, Vertex two, Edges edges)
         {
-            List<Edge> list = edges.GetElementsList();
+            List<Edge> list = edges.List;
             Vertex first = null, second = null;
             for (int i = 0; i < list.Count; i++)
             {

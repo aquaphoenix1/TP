@@ -70,83 +70,82 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormModify\CarForm.cs">
+    <Compile Include="Coll\AbstractCollection.cs" />
+    <Compile Include="Coll\Edges.cs" />
+    <Compile Include="Coll\Vertexes.cs" />
+    <Compile Include="Forms\DataBaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormModify\CarForm.Designer.cs">
-      <DependentUpon>CarForm.cs</DependentUpon>
+    <Compile Include="Forms\DataBaseForm.Designer.cs">
+      <DependentUpon>DataBaseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormModify\CoatingForm.cs">
+    <Compile Include="Forms\ErrorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormModify\CoatingForm.Designer.cs">
-      <DependentUpon>CoatingForm.cs</DependentUpon>
+    <Compile Include="Forms\ErrorForm.Designer.cs">
+      <DependentUpon>ErrorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Collections\AbstractCollection.cs" />
-    <Compile Include="FormModify\DriverForm.cs">
+    <Compile Include="Forms\FirstForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormModify\DriverForm.Designer.cs">
-      <DependentUpon>DriverForm.cs</DependentUpon>
+    <Compile Include="Forms\FirstForm.Designer.cs">
+      <DependentUpon>FirstForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormModify\FineForm.cs">
+    <Compile Include="Forms\ModifyTableForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormModify\FineForm.Designer.cs">
-      <DependentUpon>FineForm.cs</DependentUpon>
+    <Compile Include="Forms\ModifyTableForm.Designer.cs">
+      <DependentUpon>ModifyTableForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormModify\FuelForm.cs">
+    <Compile Include="Forms\SystemInfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormModify\FuelForm.Designer.cs">
-      <DependentUpon>FuelForm.cs</DependentUpon>
+    <Compile Include="Forms\SystemInfoForm.Designer.cs">
+      <DependentUpon>SystemInfoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormModify\SignForm.cs">
+    <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormModify\SignForm.Designer.cs">
-      <DependentUpon>SignForm.cs</DependentUpon>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="TypeDAO\CarDAO.cs" />
+    <Compile Include="Map.cs" />
+    <Compile Include="Forms\OptionsRouteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OptionsRouteForm.Designer.cs">
+      <DependentUpon>OptionsRouteForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TypeDAO\CoatingDAO.cs" />
     <Compile Include="TypeDAO\DAO.cs" />
-    <Compile Include="TypeDAO\DriverDAO.cs" />
-    <Compile Include="TypeDAO\FineDAO.cs" />
-    <Compile Include="TypeDAO\FuelDAO.cs" />
     <Compile Include="TypeDAO\ITypeDAO.cs" />
     <Compile Include="TypeDAO\PoliceDAO.cs" />
     <Compile Include="Drivers\Car.cs" />
     <Compile Include="Drivers\Fuel.cs" />
     <Compile Include="Graph\Edge.cs" />
     <Compile Include="Drivers\Driver.cs" />
-    <Compile Include="Collections\EdgeCollection.cs" />
-    <Compile Include="EditEdge.cs">
+    <Compile Include="Forms\EditEdge.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditEdge.Designer.cs">
+    <Compile Include="Forms\EditEdge.Designer.cs">
       <DependentUpon>EditEdge.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditVertex.cs">
+    <Compile Include="Forms\EditVertex.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditVertex.Designer.cs">
+    <Compile Include="Forms\EditVertex.Designer.cs">
       <DependentUpon>EditVertex.cs</DependentUpon>
     </Compile>
     <Compile Include="Entity.cs" />
-    <Compile Include="MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="PensCase.cs" />
-    <Compile Include="FormModify\PoliceForm.cs">
-      <SubType>Form</SubType>
+    <Compile Include="TypeDAO\StreetDAO.cs" />
+    <Compile Include="VerticalLabel.cs">
+      <SubType>Component</SubType>
     </Compile>
-    <Compile Include="FormModify\PoliceForm.Designer.cs">
-      <DependentUpon>PoliceForm.cs</DependentUpon>
+    <Compile Include="VerticalLabel.Designer.cs">
+      <DependentUpon>VerticalLabel.cs</DependentUpon>
     </Compile>
-    <Compile Include="TypeDAO\SignDAO.cs" />
+    <Compile Include="Viewer.cs" />
     <Compile Include="Way\Fine.cs" />
     <Compile Include="Way\Police.cs" />
     <Compile Include="Program.cs" />
@@ -157,12 +156,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Way\Sign.cs" />
-    <Compile Include="TooLowSecondsException.cs" />
-    <Compile Include="TooManySecondsException.cs" />
     <Compile Include="Way\TrafficLight.cs" />
     <Compile Include="Type.cs" />
     <Compile Include="Graph\Vertex.cs" />
-    <Compile Include="Collections\VertexCollection.cs" />
     <Compile Include="VertexInfoControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -171,43 +167,43 @@
     </Compile>
     <Compile Include="Way\Route.cs" />
     <Compile Include="Way\Coating.cs" />
-    <EmbeddedResource Include="FormModify\CarForm.resx">
-      <DependentUpon>CarForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\DataBaseForm.resx">
+      <DependentUpon>DataBaseForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormModify\CoatingForm.resx">
-      <DependentUpon>CoatingForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormModify\DriverForm.resx">
-      <DependentUpon>DriverForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditEdge.resx">
+    <EmbeddedResource Include="Forms\EditEdge.resx">
       <DependentUpon>EditEdge.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditVertex.resx">
+    <EmbeddedResource Include="Forms\EditVertex.resx">
       <DependentUpon>EditVertex.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormModify\FineForm.resx">
-      <DependentUpon>FineForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\ErrorForm.resx">
+      <DependentUpon>ErrorForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormModify\FuelForm.resx">
-      <DependentUpon>FuelForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FirstForm.resx">
+      <DependentUpon>FirstForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\ModifyTableForm.resx">
+      <DependentUpon>ModifyTableForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SystemInfoForm.resx">
+      <DependentUpon>SystemInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OptionsRouteForm.resx">
+      <DependentUpon>OptionsRouteForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormModify\PoliceForm.resx">
-      <DependentUpon>PoliceForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormModify\SignForm.resx">
-      <DependentUpon>SignForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="VertexInfoControl.resx">
       <DependentUpon>VertexInfoControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VerticalLabel.resx">
+      <DependentUpon>VerticalLabel.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\MainForm.datasource" />
@@ -239,6 +235,7 @@
     <None Include="icon\redLight3.jpg" />
     <Content Include="Properties\DataSources\point.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.105.2\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.105.2\build\net451\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
