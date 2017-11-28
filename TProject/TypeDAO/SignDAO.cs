@@ -8,10 +8,9 @@ using TProject.Way;
 
 namespace TProject.TypeDAO
 {
-    //Sign [ID] integer, [Type] char(20), [Value] Integer
     class SignDAO : DAO
     {
-        
+
         public bool Insert(Type obj)
         {
             try
@@ -32,7 +31,7 @@ namespace TProject.TypeDAO
                 return false;
             }
         }
-        
+
         public bool Delete(long ID)
         {
             try
@@ -48,7 +47,7 @@ namespace TProject.TypeDAO
                 return false;
             }
         }
-       
+
         public bool Update(Type obj)
         {
             try

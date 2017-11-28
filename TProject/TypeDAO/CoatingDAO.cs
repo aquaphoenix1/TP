@@ -11,7 +11,7 @@ namespace TProject.TypeDAO
     
     class CoatingDAO : DAO, TypeDAO.ITypeDAO
     {
-        //Добаваление в бд и в лист ListTypePolicemen
+        //Добаваление в бд и в лист.Даниил
         public bool Insert(Type obj)
         {
             try
@@ -19,7 +19,7 @@ namespace TProject.TypeDAO
                 Coating c = (Coating)obj;
                 new SQLiteCommand(string.Format("Insert into Surface values ({0} , \'{1}\', {2})", c.ID, c.TypeName, c.Coeff), DAO.GetConnection()).ExecuteNonQuery();
 
-                List<object> list = new List<object>();
+                List<object> list = new List<object>(); //Добавляю в лист.Даниил
                 list.Add(c.ID);
                 list.Add(c.TypeName);
                 list.Add(c.Coeff);
@@ -32,7 +32,7 @@ namespace TProject.TypeDAO
                 return false;
             }
         }
-        //Удаление из бд и из листа ListTypePolicemen
+        //Удаление из бд и из листа.Даниил
         public bool Delete(long ID)
         {
             try
@@ -48,7 +48,7 @@ namespace TProject.TypeDAO
                 return false;
             }
         }
-        //Изменение в бд и в листе ListTypePolicemen
+        //Изменение в бд и в листе.Даниил
         public bool Update(Type obj)
         {
             try

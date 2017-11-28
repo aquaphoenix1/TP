@@ -8,7 +8,7 @@ namespace TProject
 {
     class PoliceDAO : DAO, TypeDAO.ITypeDAO
     {
-        //Добаваление в бд и в лист ListTypePolicemen
+        //Добаваление в бд и в лист.Даниил
         public bool Insert(Type obj)
         {
             try
@@ -29,7 +29,7 @@ namespace TProject
                 return false;
             }
         }
-        //Удаление из бд и из листа ListTypePolicemen
+        //Удаление из бд и из листа.Даниил
         public bool Delete(long ID)
         {
             try
@@ -45,7 +45,7 @@ namespace TProject
                 return false;
             }
         }
-        //Изменение в бд и в листе ListTypePolicemen
+        //Изменение в бд и в листе.Даниил
         public bool Update(Type obj)
         {
             try

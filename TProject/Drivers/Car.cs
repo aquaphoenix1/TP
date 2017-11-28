@@ -12,19 +12,19 @@ namespace TProject.Driver
         public string Model { get; set; }
         public double FuelConsumption { get; set; }
 
-        //Используется в "Работе с БД" для добавления 
+        //Используется в "Работе с БД" для добавления.Даниил
         public Car(string model, Fuel fuel, double consumption) : base(model)
         {
 
             var findcar = Car.ListAuto.Select(i => i[0]).Max();
-            CurrentMaxID = long.Parse(findcar.ToString());
+            if (findcar == null) { CurrentMaxID = 0; } else { CurrentMaxID = long.Parse(findcar.ToString()); }
             this.ID = ++CurrentMaxID;
             this.CarFuel = fuel;
             this.Model = model;
             this.FuelConsumption = consumption;
         }
 
-        //Используется в "Работе с БД" для изменения - так как нужно найти соот-щую запись 
+        //Используется в "Работе с БД" для изменения - так как нужно найти соот-щую запись.Даниил 
         public Car(int id, string model, Fuel fuel, double consumption)
         {
             this.ID = id;

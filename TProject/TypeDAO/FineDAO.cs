@@ -8,7 +8,6 @@ using TProject.Way;
 
 namespace TProject.TypeDAO
 {
-    //Fine [ID] Integer , [NameFine] char(20), [CostFine] real 
     class FineDAO : DAO
     {
         //Добаваление в бд и в лист ListTypePolicemen
@@ -16,7 +15,7 @@ namespace TProject.TypeDAO
         {
             try
             {
-                
+
                 Fine f = (Fine)obj;
                 new SQLiteCommand(string.Format("Insert into Fine values ({0} , \'{1}\', {2})", f.ID, f.TypeName, f.Count), DAO.GetConnection()).ExecuteNonQuery();
 

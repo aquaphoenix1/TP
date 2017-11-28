@@ -4,17 +4,17 @@ namespace TProject.Way
 {
     public class Police : Type
     {
-        public static long CurrentMaxID {  get; set; }             //максимальный id
-        public static List<List<object>> ListTypePolicemen { get; set; }  //лист покрытий
-        public double Coeff { get; set; }                                 // коэффициент
+        public static long CurrentMaxID {  get; set; }                    //максимальный id.Даниил
+        public static List<List<object>> ListTypePolicemen { get; set; }  //лист покрытий.Даниил
+        public double Coeff { get; set; }                                 // коэффициент.Даниил
 
-        //Используется в "Работе с БД" для добавления 
+        //Используется в "Работе с БД" для добавления.Даниил
         public Police(string typeName, double coefficient) : base(typeName)
         {
             this.ID = ++CurrentMaxID;
             this.Coeff = coefficient;
         }
-        //Используется в "Работе с БД" для изменения - так как нужно найти соот-щую запись 
+        //Используется в "Работе с БД" для изменения - так как нужно найти соот-щую запись.Даниил 
         public Police(int id, string typeName, double coefficient)
         {
             this.ID = id;

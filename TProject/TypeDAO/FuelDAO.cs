@@ -8,10 +8,10 @@ using TProject.Driver;
 
 namespace TProject.TypeDAO
 {
-    class FuelDAO : DAO, TypeDAO.ITypeDAO
+    class FuelDAO : DAO 
     {
         //Добаваление в бд и в лист ListTypePolicemen
-        public bool Insert(Type obj)
+        public bool Insert(Type obj) 
         {
             try
             {

@@ -10,16 +10,16 @@ namespace TProject.Driver
         public Car Car { get; set; }
         public bool IsViolateTL { get; set; }
 
-        //Для добавления
+        //Для добавления.Даниил
         public Driver(bool isViolateTL, Car car)
         {
             var driver = Driver.ListDriver.Select(i => i[0]).Max();
-            CurrentMaxID = int.Parse(driver.ToString());
+            if (driver == null) { CurrentMaxID = 0; } else { CurrentMaxID = int.Parse(driver.ToString()); }
             this.ID = ++CurrentMaxID;
             IsViolateTL = isViolateTL;
             Car = car;
         }
-        //для изменения 
+        //для изменения.Даниил
         public Driver(int id, bool isViolateTL, Car car)
         {
             this.ID = id;

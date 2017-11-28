@@ -6,7 +6,7 @@ namespace TProject.Way
 {
     public class Coating : Type
     {
-        public static long CurrentMaxID { private get; set; }      
+        public static long CurrentMaxID { private get; set; }
         public static List<List<object>> ListSurface { get; set; }
         public double Coeff { get; set; }
 
@@ -14,7 +14,8 @@ namespace TProject.Way
         public Coating(string typeName, double coefficient) : base(typeName)
         {
             var coating = Coating.ListSurface.Select(i => i[0]).Max();
-            CurrentMaxID = int.Parse(coating.ToString());
+            if(coating == null) { CurrentMaxID = 0; }
+            else { CurrentMaxID = int.Parse(coating.ToString()); }
             this.Coeff = coefficient;
             this.ID = ++CurrentMaxID;
         }
@@ -27,13 +28,13 @@ namespace TProject.Way
             this.TypeName = typeName;
         }
 
-       /* public override string ToString()
-        {
-            return String.Format(TypeName +
-                " c коэффициентом торможения: {0}", Coeff);
-        }
-        */
-       
+        /* public override string ToString()
+         {
+             return String.Format(TypeName +
+                 " c коэффициентом торможения: {0}", Coeff);
+         }
+         */
+
     }
 
 }

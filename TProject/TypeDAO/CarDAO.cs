@@ -8,18 +8,16 @@ using TProject.Driver;
 
 namespace TProject.TypeDAO
 {
-    //Auto [ID] , [Model] char(30), [IDFuel] Integer , [Сonsumption] real 
-    class CarDAO : DAO, TypeDAO.ITypeDAO
+    class CarDAO : DAO 
     {
-        //Добаваление в бд 
+        //Добаваление в бд.Даниил
         public bool Insert(Type obj)
         {
             try
             {
-                //вроде бы должно работать но у с.ID = 1 а такой ID уже есть страно посмотрел в отладке действительно статическое поле становиться равно 1 -страно 
-                //поэтому здесь нахожу максимальный и прибавляю к нему максимальный.В дальнейшем переделаю.Сейчас так.
+            
                 Car.ListAuto.FirstOrDefault();
-                Car  c = (Car)obj;
+                Car c = (Car)obj;
                 new SQLiteCommand(string.Format("Insert into Auto values ({0},\'{1}\',{2},{3})", c.ID, c.Model, c.CarFuel.ID, c.FuelConsumption), DAO.GetConnection()).ExecuteNonQuery();
 
                 List<object> list = new List<object>();
@@ -36,7 +34,7 @@ namespace TProject.TypeDAO
                 return false;
             }
         }
-        //Удаление из бд и из листа ListTypePolicemen
+        //Удаление из бд и из листа.Даниил
         public bool Delete(long ID)
         {
             try
@@ -52,7 +50,7 @@ namespace TProject.TypeDAO
                 return false;
             }
         }
-        //Изменение в бд и в листе ListTypePolicemen
+        //Изменение в бд и в листе.Даниил
         public bool Update(Type obj)
         {
             try
