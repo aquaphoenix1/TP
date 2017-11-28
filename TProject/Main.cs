@@ -790,5 +790,15 @@ namespace TProject
             }
 
         }
+
+        private void удалитьПерегонToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Viewer.ViewPort.DeleteEdge(lastClickCoordX, lastClickCoordY);
+        }
+
+        private void удалитьПерекрестокToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Viewer.ViewPort.DelteVertex(lastClickCoordX, lastClickCoordY);
+        }
     }
 }
