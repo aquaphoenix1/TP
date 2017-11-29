@@ -481,6 +481,7 @@ namespace TProject
 
 
 
+
     public static class ReScaling
     {
         public static int Scaling(this int value)
