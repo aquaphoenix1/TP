@@ -7,10 +7,10 @@ namespace TProject.Way
 {
     public class Route
     {
-        public static Vertex Start { get; set; }
-        public static Vertex End { get; set; }
+        public Vertex Start { get; set; }
+        public Vertex End { get; set; }
 
-        private double[,] GetMatrixWay(out int[,] parents, out long[] arrayOfID, Vertexes vertexes, Edges edges)
+        public double[,] GetMatrixWay(out int[,] parents, out long[] arrayOfID, Vertexes vertexes, Edges edges)
         {
             int count = vertexes.GetCountElements();
 
@@ -41,9 +41,9 @@ namespace TProject.Way
             }
             return array;
         }
-        private List<long> GetWay(long from, long to, int[,] arrayOfParents)
+        public List<int> GetWay(int from, int to, int[,] arrayOfParents)
         {
-            List<long> list = new List<long>();
+            List<int> list = new List<int>();
 
             int vert = arrayOfParents[from, to];
 
@@ -73,13 +73,9 @@ namespace TProject.Way
             return list;
         }
 
-        public double FindMinLengthWay(Vertexes vertColl, Edges edgColl, out List<long> way)
+        public double FindMinLengthWay(int fromVertex, int toVertex, Vertexes vertColl, Edges edgColl, out List<long> way)
         {
-            long fromVertex = Start.ID;
-            long toVertex = End.ID;
-            int[,] parents;
-            long[] IDs;
-            double[,] matrix = GetMatrixWay(out parents, out IDs, vertColl, edgColl);
+            double[,] matrix = GetMatrixWay(out int[,] parents, out long[] IDs, vertColl, edgColl);
             int size = (int)Math.Sqrt(matrix.Length);
 
             for (int k = 0; k < size; ++k)
@@ -104,7 +100,7 @@ namespace TProject.Way
             }
             else
             {
-                List<long> wayList = GetWay(fromVertex, toVertex, parents);
+                List<int> wayList = GetWay(fromVertex, toVertex, parents);
 
                 way = new List<long>(wayList.Count);
 
@@ -117,7 +113,7 @@ namespace TProject.Way
             }
         }
 
-        private Edge GetEdge(Vertex one, Vertex two, Edges edges)
+        public Edge GetEdge(Vertex one, Vertex two, Edges edges)
         {
             List<Edge> list = edges.List;
             Vertex first = null, second = null;
@@ -125,7 +121,7 @@ namespace TProject.Way
             {
                 if (!list[i].IsBilateral)
                 {
-                    if (list[i].GetHead() == one && (second = list[i].GetEnd()) == two && list[i].isConnected(second))
+                    if (list[i].GetHead() == one && (second = list[i].GetEnd()) == two && list[i].IsConnected(second))
                     {
                         return list[i];
                     }

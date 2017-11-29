@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TProject.Driver;
 
 namespace TProject.TypeDAO
@@ -18,13 +16,15 @@ namespace TProject.TypeDAO
             
                 Car.ListAuto.FirstOrDefault();
                 Car c = (Car)obj;
-                new SQLiteCommand(string.Format("Insert into Auto values ({0},\'{1}\',{2},{3})", c.ID, c.Model, c.CarFuel.ID, c.FuelConsumption), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("Insert into Auto values ({0},\'{1}\',{2},{3})", c.ID, c.TypeName, c.CarFuel.ID, c.FuelConsumption), DAO.GetConnection()).ExecuteNonQuery();
 
-                List<object> list = new List<object>();
-                list.Add(c.ID);
-                list.Add(c.Model);
-                list.Add(c.CarFuel.ID);
-                list.Add(c.FuelConsumption);
+                List<object> list = new List<object>
+                {
+                    c.ID,
+                    c.TypeName,
+                    c.CarFuel.ID,
+                    c.FuelConsumption
+                };
                 Car.ListAuto.Add(list);
 
                 return true;
@@ -56,12 +56,12 @@ namespace TProject.TypeDAO
             try
             {
                 Car c = (Car)obj;
-                new SQLiteCommand(string.Format("UPDATE Auto SET [Model] = '{0}', [IDFuel] = {1}, [Сonsumption] = {2} where ID = {3}", c.Model, c.CarFuel.ID, c.FuelConsumption, c.ID), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("UPDATE Auto SET [Model] = '{0}', [IDFuel] = {1}, [Сonsumption] = {2} where ID = {3}", c.TypeName, c.CarFuel.ID, c.FuelConsumption, c.ID), DAO.GetConnection()).ExecuteNonQuery();
 
                 var updatedCar = Car.ListAuto.FirstOrDefault(l => l.ElementAt(0).ToString() == c.ID.ToString());
                 if (updatedCar != null)
                 {
-                    updatedCar[1] = c.Model;
+                    updatedCar[1] = c.TypeName;
                     updatedCar[2] = c.CarFuel.ID;
                     updatedCar[3] = c.FuelConsumption;
                 }

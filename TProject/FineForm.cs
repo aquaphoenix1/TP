@@ -29,7 +29,7 @@ namespace TProject
             textBoxValueFine.Text = cost.ToString();
         }
 
-        private void buttonAccept_Click(object sender, EventArgs e)
+        private void ButtonAccept_Click(object sender, EventArgs e)
         {
             textBoxNameFine.BackColor = Color.White;
             textBoxValueFine.BackColor = Color.White;
@@ -77,6 +77,7 @@ namespace TProject
             if (new FineDAO().Insert(fine))
             {
                 Main.IsChanged = true;
+                
                 Close();
             }
             else

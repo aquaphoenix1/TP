@@ -13,6 +13,12 @@ namespace TProject.TypeDAO
                 long id = long.Parse(array[0]);
                 new SQLiteCommand(string.Format("Insert into Street values ({0} , \'{1}\')", id, array[1]), DAO.GetConnection()).ExecuteNonQuery();
 
+                System.Collections.Generic.List<object> list = new System.Collections.Generic.List<object>();
+                list.Add(id);
+                list.Add(array[1]);
+
+                Graph.Edge.StreetList.Add(list);
+
                 return true;
             }
             catch (Exception)

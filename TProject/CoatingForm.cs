@@ -29,7 +29,7 @@ namespace TProject
             textBoxCoefficient.Text = coeff.ToString();
         }
         
-        private void buttonAccept_Click(object sender, EventArgs e)
+        private void ButtonAccept_Click(object sender, EventArgs e)
         {
             textBoxCoefficient.BackColor = Color.White;
             textBoxTypeCoating.BackColor = Color.White;
@@ -78,11 +78,12 @@ namespace TProject
             if (new CoatingDAO().Insert(coating))
             {
                 Main.IsChanged = true;
+
                 Close();
             }
             else
             {
-                MessageBox.Show("ОШибка добавления");
+                MessageBox.Show("Ошибка добавления");
                 Coating.CurrentMaxID--;
             }
         }

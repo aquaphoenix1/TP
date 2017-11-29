@@ -43,7 +43,7 @@
             this.buttonOK.TabIndex = 9;
             this.buttonOK.Text = "Применить";
             this.buttonOK.UseVisualStyleBackColor = true;
-            this.buttonOK.Click += new System.EventHandler(this.buttonAccept_Click);
+            this.buttonOK.Click += new System.EventHandler(this.ButtonAccept_Click);
             // 
             // textBoxCoefficient
             // 

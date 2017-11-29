@@ -44,7 +44,7 @@
             this.buttonAccept.TabIndex = 14;
             this.buttonAccept.Text = "Принять";
             this.buttonAccept.UseVisualStyleBackColor = true;
-            this.buttonAccept.Click += new System.EventHandler(this.buttonAccept_Click);
+            this.buttonAccept.Click += new System.EventHandler(this.ButtonAccept_Click);
             // 
             // textBoxCoefficient
             // 

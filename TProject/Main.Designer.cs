@@ -35,7 +35,6 @@
             this.editVertexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wayFromToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wayToВToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.удалитьПерекрестокToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.openSubMapFileDialog = new System.Windows.Forms.OpenFileDialog();
@@ -83,12 +82,10 @@
             this.маршрутToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuEdge = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.удалитьПерегонToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuMap = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
-            this.параметрыМаршрутаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.отобразитьДинамичскиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.отобразитьСтатическиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.удалитьПерегонToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.удалитьПерекрестокToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMap)).BeginInit();
             this.contextMenuVertex.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -129,7 +126,7 @@
             this.wayToВToolStripMenuItem,
             this.удалитьПерекрестокToolStripMenuItem});
             this.contextMenuVertex.Name = "contextMenuStripPictBox";
-            this.contextMenuVertex.Size = new System.Drawing.Size(210, 114);
+            this.contextMenuVertex.Size = new System.Drawing.Size(210, 136);
             // 
             // addEdgeToolStripMenuItem
             // 
@@ -158,13 +155,6 @@
             this.wayToВToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.wayToВToolStripMenuItem.Text = "Маршрут в...";
             this.wayToВToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenu_WayToВ_Click);
-            // 
-            // удалитьПерекрестокToolStripMenuItem
-            // 
-            this.удалитьПерекрестокToolStripMenuItem.Name = "удалитьПерекрестокToolStripMenuItem";
-            this.удалитьПерекрестокToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
-            this.удалитьПерекрестокToolStripMenuItem.Text = "Удалить перекресток";
-            this.удалитьПерекрестокToolStripMenuItem.Click += new System.EventHandler(this.удалитьПерекрестокToolStripMenuItem_Click);
             // 
             // toolStripStatusLabel1
             // 
@@ -213,7 +203,7 @@
             this.buttonRemove.TabIndex = 6;
             this.buttonRemove.Text = "Удалить";
             this.buttonRemove.UseVisualStyleBackColor = true;
-            this.buttonRemove.Click += new System.EventHandler(this.buttonDelete_Click);
+            this.buttonRemove.Click += new System.EventHandler(this.ButtonDelete_Click);
             // 
             // buttonEdit
             // 
@@ -223,7 +213,7 @@
             this.buttonEdit.TabIndex = 5;
             this.buttonEdit.Text = "Редактировать";
             this.buttonEdit.UseVisualStyleBackColor = true;
-            this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
+            this.buttonEdit.Click += new System.EventHandler(this.ButtonEdit_Click);
             // 
             // buttonAdd
             // 
@@ -233,7 +223,7 @@
             this.buttonAdd.TabIndex = 4;
             this.buttonAdd.Text = "Добавить";
             this.buttonAdd.UseVisualStyleBackColor = true;
-            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
+            this.buttonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
             // 
             // labelEditor
             // 
@@ -270,7 +260,7 @@
             this.comboBoxSelectTable.Name = "comboBoxSelectTable";
             this.comboBoxSelectTable.Size = new System.Drawing.Size(154, 21);
             this.comboBoxSelectTable.TabIndex = 1;
-            this.comboBoxSelectTable.SelectedIndexChanged += new System.EventHandler(this.comboBoxSelectTable_SelectedIndexChanged);
+            this.comboBoxSelectTable.SelectedIndexChanged += new System.EventHandler(this.ComboBoxSelectTable_SelectedIndexChanged);
             // 
             // dataGridViewDataBase
             // 
@@ -299,7 +289,7 @@
             this.tabControlMain.SelectedIndex = 0;
             this.tabControlMain.Size = new System.Drawing.Size(775, 330);
             this.tabControlMain.TabIndex = 5;
-            this.tabControlMain.SelectedIndexChanged += new System.EventHandler(this.tabControlMain_SelectedIndexChanged);
+            this.tabControlMain.SelectedIndexChanged += new System.EventHandler(this.TabControlMain_SelectedIndexChanged);
             // 
             // tabPageMap
             // 
@@ -343,7 +333,7 @@
             this.button_Ok_Сalibration.TabIndex = 15;
             this.button_Ok_Сalibration.Text = "Ок";
             this.button_Ok_Сalibration.UseVisualStyleBackColor = true;
-            this.button_Ok_Сalibration.Click += new System.EventHandler(this.button_Ok_Сalibration_Click);
+            this.button_Ok_Сalibration.Click += new System.EventHandler(this.Button_Ok_Сalibration_Click);
             // 
             // button_Calibration
             // 
@@ -420,7 +410,7 @@
             this.checkBox_StreetName.Size = new System.Drawing.Size(15, 14);
             this.checkBox_StreetName.TabIndex = 2;
             this.checkBox_StreetName.UseVisualStyleBackColor = true;
-            this.checkBox_StreetName.CheckedChanged += new System.EventHandler(this.checkBox_StreetName_CheckedChanged);
+            this.checkBox_StreetName.CheckedChanged += new System.EventHandler(this.CheckBox_StreetName_CheckedChanged);
             // 
             // label6
             // 
@@ -453,7 +443,7 @@
             this.checkBox__TrafficLight.Size = new System.Drawing.Size(15, 14);
             this.checkBox__TrafficLight.TabIndex = 10;
             this.checkBox__TrafficLight.UseVisualStyleBackColor = true;
-            this.checkBox__TrafficLight.CheckedChanged += new System.EventHandler(this.checkBox__TrafficLight_CheckedChanged);
+            this.checkBox__TrafficLight.CheckedChanged += new System.EventHandler(this.CheckBox__TrafficLight_CheckedChanged);
             // 
             // checkBox_StreetLength
             // 
@@ -466,7 +456,7 @@
             this.checkBox_StreetLength.Size = new System.Drawing.Size(15, 14);
             this.checkBox_StreetLength.TabIndex = 4;
             this.checkBox_StreetLength.UseVisualStyleBackColor = true;
-            this.checkBox_StreetLength.CheckedChanged += new System.EventHandler(this.checkBox_StreetLength_CheckedChanged);
+            this.checkBox_StreetLength.CheckedChanged += new System.EventHandler(this.CheckBox_StreetLength_CheckedChanged);
             // 
             // labelPolicemans
             // 
@@ -499,7 +489,7 @@
             this.checkBox_Police.Size = new System.Drawing.Size(15, 14);
             this.checkBox_Police.TabIndex = 8;
             this.checkBox_Police.UseVisualStyleBackColor = true;
-            this.checkBox_Police.CheckedChanged += new System.EventHandler(this.checkBox_Police_CheckedChanged);
+            this.checkBox_Police.CheckedChanged += new System.EventHandler(this.CheckBox_Police_CheckedChanged);
             // 
             // checkBox_Sign
             // 
@@ -512,7 +502,7 @@
             this.checkBox_Sign.Size = new System.Drawing.Size(15, 14);
             this.checkBox_Sign.TabIndex = 6;
             this.checkBox_Sign.UseVisualStyleBackColor = true;
-            this.checkBox_Sign.CheckedChanged += new System.EventHandler(this.checkBox_Sign_CheckedChanged);
+            this.checkBox_Sign.CheckedChanged += new System.EventHandler(this.CheckBox_Sign_CheckedChanged);
             // 
             // labelRoadSign
             // 
@@ -623,10 +613,6 @@
             // 
             // маршрутToolStripMenuItem
             // 
-            this.маршрутToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.параметрыМаршрутаToolStripMenuItem,
-            this.отобразитьДинамичскиToolStripMenuItem,
-            this.отобразитьСтатическиToolStripMenuItem});
             this.маршрутToolStripMenuItem.Name = "маршрутToolStripMenuItem";
             this.маршрутToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
             this.маршрутToolStripMenuItem.Text = "Маршрут";
@@ -646,13 +632,6 @@
             this.toolStripMenuItem5.Text = "Параметры перегона";
             this.toolStripMenuItem5.Click += new System.EventHandler(this.ToolStripMenu_EditEdge_Click);
             // 
-            // удалитьПерегонToolStripMenuItem
-            // 
-            this.удалитьПерегонToolStripMenuItem.Name = "удалитьПерегонToolStripMenuItem";
-            this.удалитьПерегонToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            this.удалитьПерегонToolStripMenuItem.Text = "Удалить перегон";
-            this.удалитьПерегонToolStripMenuItem.Click += new System.EventHandler(this.удалитьПерегонToolStripMenuItem_Click);
-            // 
             // contextMenuMap
             // 
             this.contextMenuMap.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -667,24 +646,19 @@
             this.toolStripMenuItem9.Text = "Добавить перекресток";
             this.toolStripMenuItem9.Click += new System.EventHandler(this.ToolStripMenu_AddVertex_Click);
             // 
-            // параметрыМаршрутаToolStripMenuItem
+            // удалитьПерегонToolStripMenuItem
             // 
-            this.параметрыМаршрутаToolStripMenuItem.Name = "параметрыМаршрутаToolStripMenuItem";
-            this.параметрыМаршрутаToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
-            this.параметрыМаршрутаToolStripMenuItem.Text = "Параметры маршрута";
+            this.удалитьПерегонToolStripMenuItem.Name = "удалитьПерегонToolStripMenuItem";
+            this.удалитьПерегонToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.удалитьПерегонToolStripMenuItem.Text = "Удалить перегон";
+            this.удалитьПерегонToolStripMenuItem.Click += new System.EventHandler(this.УдалитьПерегонToolStripMenuItem_Click);
             // 
-            // отобразитьДинамичскиToolStripMenuItem
+            // удалитьПерекрестокToolStripMenuItem
             // 
-            this.отобразитьДинамичскиToolStripMenuItem.Name = "отобразитьДинамичскиToolStripMenuItem";
-            this.отобразитьДинамичскиToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
-            this.отобразитьДинамичскиToolStripMenuItem.Text = "Отобразить динамически";
-            // 
-            // отобразитьСтатическиToolStripMenuItem
-            // 
-            this.отобразитьСтатическиToolStripMenuItem.Name = "отобразитьСтатическиToolStripMenuItem";
-            this.отобразитьСтатическиToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
-            this.отобразитьСтатическиToolStripMenuItem.Text = "Отобразить статически";
-            this.отобразитьСтатическиToolStripMenuItem.Click += new System.EventHandler(this.отобразитьСтатическиToolStripMenuItem_Click);
+            this.удалитьПерекрестокToolStripMenuItem.Name = "удалитьПерекрестокToolStripMenuItem";
+            this.удалитьПерекрестокToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.удалитьПерекрестокToolStripMenuItem.Text = "Удалить перекресток";
+            this.удалитьПерекрестокToolStripMenuItem.Click += new System.EventHandler(this.УдалитьПерекрестокToolStripMenuItem_Click);
             // 
             // Main
             // 
@@ -783,8 +757,5 @@
         private System.Windows.Forms.Label labelEditor;
         private System.Windows.Forms.ToolStripMenuItem удалитьПерегонToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem удалитьПерекрестокToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem параметрыМаршрутаToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem отобразитьДинамичскиToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem отобразитьСтатическиToolStripMenuItem;
     }
 }

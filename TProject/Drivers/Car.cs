@@ -3,34 +3,31 @@ using System.Linq;
 
 namespace TProject.Driver
 {
-    //Auto ([ID] Integer, [Model] char(30), [IDFuel] Integer, [Сonsumption] real 
     public class Car : Type
     {
-        public static long CurrentMaxID { private get; set; }
+        public static long CurrentMaxID { get; set; }
         public static List<List<object>> ListAuto { get; set; }
         public Fuel CarFuel { get; set; }
-        public string Model { get; set; }
         public double FuelConsumption { get; set; }
-
-        //Используется в "Работе с БД" для добавления.Даниил
+        
         public Car(string model, Fuel fuel, double consumption) : base(model)
         {
-
-            var findcar = Car.ListAuto.Select(i => i[0]).Max();
-            if (findcar == null) { CurrentMaxID = 0; } else { CurrentMaxID = long.Parse(findcar.ToString()); }
             this.ID = ++CurrentMaxID;
             this.CarFuel = fuel;
-            this.Model = model;
             this.FuelConsumption = consumption;
         }
 
-        //Используется в "Работе с БД" для изменения - так как нужно найти соот-щую запись.Даниил 
-        public Car(int id, string model, Fuel fuel, double consumption)
+        private Car() { }
+
+        public static Car CreateCar(long id, string model, Fuel fuel, double consumption)
         {
-            this.ID = id;
-            this.Model = model;
-            this.CarFuel = fuel;
-            this.FuelConsumption = consumption;
+            return new Car
+            {
+                ID = id,
+                TypeName = model,
+                CarFuel = fuel,
+                FuelConsumption = consumption
+            };
         }
     }
 }
