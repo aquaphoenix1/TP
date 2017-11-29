@@ -7,8 +7,8 @@ namespace TProject.Way
 {
     public class Route
     {
-        public static Vertex Start { get; set; }
-        public static Vertex End { get; set; }
+        public static Vertex Start;
+        public static Vertex End;
 
         public double[,] GetMatrixWay(out int[,] parents, out long[] arrayOfID, Vertexes vertexes, Edges edges)
         {

@@ -552,7 +552,7 @@ namespace TProject
 
         private void ToolStripMenu_WayToВ_Click(object sender, EventArgs e)
         {
-            Viewer.ViewPort.SelectEndVertex(lastClickCoordX, lastClickCoordX);
+            Viewer.ViewPort.SelectEndVertex(lastClickCoordX, lastClickCoordY);
         }
 
         private void PanelSlide_Click(object sender, EventArgs e)

@@ -30,8 +30,6 @@ namespace TProject.Coll
                     return true;
                 }
             }
-
-            Viewer.ViewPort.UnSelectAll();
             return false;
         }
         public Vertex GetForId(long id)
