@@ -7,10 +7,10 @@ namespace TProject.Way
 {
     public class Route
     {
-        public Vertex Start { get; set; }
-        public Vertex End { get; set; }
+        public static Vertex Start { get; set; }
+        public static Vertex End { get; set; }
 
-        public double[,] GetMatrixWay(out int[,] parents, out long[] arrayOfID, Vertexes vertexes, Edges edges)
+        private double[,] GetMatrixWay(out int[,] parents, out long[] arrayOfID, Vertexes vertexes, Edges edges)
         {
             int count = vertexes.GetCountElements();
 
@@ -41,7 +41,7 @@ namespace TProject.Way
             }
             return array;
         }
-        public List<int> GetWay(int from, int to, int[,] arrayOfParents)
+        private List<int> GetWay(int from, int to, int[,] arrayOfParents)
         {
             List<int> list = new List<int>();
 
@@ -115,7 +115,9 @@ namespace TProject.Way
             }
         }
 
-        public Edge GetEdge(Vertex one, Vertex two, Edges edges)
+
+
+        private Edge GetEdge(Vertex one, Vertex two, Edges edges)
         {
             List<Edge> list = edges.List;
             Vertex first = null, second = null;

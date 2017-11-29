@@ -524,12 +524,12 @@ namespace TProject
 
         private void ToolStripMenu_WayFrom_Click(object sender, EventArgs e)
         {
-
+            Viewer.ViewPort.SelectStartVertex(lastClickCoordX, lastClickCoordY);
         }
 
         private void ToolStripMenu_WayToВ_Click(object sender, EventArgs e)
         {
-
+            Viewer.ViewPort.SelectEndVertex(lastClickCoordX, lastClickCoordX);
         }
 
         private void PanelSlide_Click(object sender, EventArgs e)
@@ -813,6 +813,11 @@ namespace TProject
         private void удалитьПерекрестокToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Viewer.ViewPort.DelteVertex(lastClickCoordX, lastClickCoordY);
+        }
+
+        private void отобразитьСтатическиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Viewer.ViewPort.DrawRoute();
         }
     }
 }

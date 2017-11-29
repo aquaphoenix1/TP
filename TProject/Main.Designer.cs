@@ -35,6 +35,7 @@
             this.editVertexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wayFromToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wayToВToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.удалитьПерекрестокToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.openSubMapFileDialog = new System.Windows.Forms.OpenFileDialog();
@@ -82,10 +83,12 @@
             this.маршрутToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuEdge = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.удалитьПерегонToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuMap = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
-            this.удалитьПерегонToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.удалитьПерекрестокToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.параметрыМаршрутаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.отобразитьДинамичскиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.отобразитьСтатическиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMap)).BeginInit();
             this.contextMenuVertex.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -126,7 +129,7 @@
             this.wayToВToolStripMenuItem,
             this.удалитьПерекрестокToolStripMenuItem});
             this.contextMenuVertex.Name = "contextMenuStripPictBox";
-            this.contextMenuVertex.Size = new System.Drawing.Size(210, 136);
+            this.contextMenuVertex.Size = new System.Drawing.Size(210, 114);
             // 
             // addEdgeToolStripMenuItem
             // 
@@ -155,6 +158,13 @@
             this.wayToВToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.wayToВToolStripMenuItem.Text = "Маршрут в...";
             this.wayToВToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenu_WayToВ_Click);
+            // 
+            // удалитьПерекрестокToolStripMenuItem
+            // 
+            this.удалитьПерекрестокToolStripMenuItem.Name = "удалитьПерекрестокToolStripMenuItem";
+            this.удалитьПерекрестокToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.удалитьПерекрестокToolStripMenuItem.Text = "Удалить перекресток";
+            this.удалитьПерекрестокToolStripMenuItem.Click += new System.EventHandler(this.удалитьПерекрестокToolStripMenuItem_Click);
             // 
             // toolStripStatusLabel1
             // 
@@ -613,6 +623,10 @@
             // 
             // маршрутToolStripMenuItem
             // 
+            this.маршрутToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.параметрыМаршрутаToolStripMenuItem,
+            this.отобразитьДинамичскиToolStripMenuItem,
+            this.отобразитьСтатическиToolStripMenuItem});
             this.маршрутToolStripMenuItem.Name = "маршрутToolStripMenuItem";
             this.маршрутToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
             this.маршрутToolStripMenuItem.Text = "Маршрут";
@@ -632,6 +646,13 @@
             this.toolStripMenuItem5.Text = "Параметры перегона";
             this.toolStripMenuItem5.Click += new System.EventHandler(this.ToolStripMenu_EditEdge_Click);
             // 
+            // удалитьПерегонToolStripMenuItem
+            // 
+            this.удалитьПерегонToolStripMenuItem.Name = "удалитьПерегонToolStripMenuItem";
+            this.удалитьПерегонToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.удалитьПерегонToolStripMenuItem.Text = "Удалить перегон";
+            this.удалитьПерегонToolStripMenuItem.Click += new System.EventHandler(this.удалитьПерегонToolStripMenuItem_Click);
+            // 
             // contextMenuMap
             // 
             this.contextMenuMap.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -646,19 +667,24 @@
             this.toolStripMenuItem9.Text = "Добавить перекресток";
             this.toolStripMenuItem9.Click += new System.EventHandler(this.ToolStripMenu_AddVertex_Click);
             // 
-            // удалитьПерегонToolStripMenuItem
+            // параметрыМаршрутаToolStripMenuItem
             // 
-            this.удалитьПерегонToolStripMenuItem.Name = "удалитьПерегонToolStripMenuItem";
-            this.удалитьПерегонToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            this.удалитьПерегонToolStripMenuItem.Text = "Удалить перегон";
-            this.удалитьПерегонToolStripMenuItem.Click += new System.EventHandler(this.удалитьПерегонToolStripMenuItem_Click);
+            this.параметрыМаршрутаToolStripMenuItem.Name = "параметрыМаршрутаToolStripMenuItem";
+            this.параметрыМаршрутаToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+            this.параметрыМаршрутаToolStripMenuItem.Text = "Параметры маршрута";
             // 
-            // удалитьПерекрестокToolStripMenuItem
+            // отобразитьДинамичскиToolStripMenuItem
             // 
-            this.удалитьПерекрестокToolStripMenuItem.Name = "удалитьПерекрестокToolStripMenuItem";
-            this.удалитьПерекрестокToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
-            this.удалитьПерекрестокToolStripMenuItem.Text = "Удалить перекресток";
-            this.удалитьПерекрестокToolStripMenuItem.Click += new System.EventHandler(this.удалитьПерекрестокToolStripMenuItem_Click);
+            this.отобразитьДинамичскиToolStripMenuItem.Name = "отобразитьДинамичскиToolStripMenuItem";
+            this.отобразитьДинамичскиToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+            this.отобразитьДинамичскиToolStripMenuItem.Text = "Отобразить динамически";
+            // 
+            // отобразитьСтатическиToolStripMenuItem
+            // 
+            this.отобразитьСтатическиToolStripMenuItem.Name = "отобразитьСтатическиToolStripMenuItem";
+            this.отобразитьСтатическиToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+            this.отобразитьСтатическиToolStripMenuItem.Text = "Отобразить статически";
+            this.отобразитьСтатическиToolStripMenuItem.Click += new System.EventHandler(this.отобразитьСтатическиToolStripMenuItem_Click);
             // 
             // Main
             // 
@@ -757,5 +783,8 @@
         private System.Windows.Forms.Label labelEditor;
         private System.Windows.Forms.ToolStripMenuItem удалитьПерегонToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem удалитьПерекрестокToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem параметрыМаршрутаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem отобразитьДинамичскиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem отобразитьСтатическиToolStripMenuItem;
     }
 }

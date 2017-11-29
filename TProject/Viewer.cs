@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TProject.Graph;
+using TProject.Way;
 
 namespace TProject
 {
@@ -28,7 +29,7 @@ namespace TProject
 
         Brush blackFontBrush = new SolidBrush(Color.Black);
 
-       
+
 
         public int VertexLocationX { get; set; }
         public int VertexLocationY { get; set; }
@@ -126,7 +127,7 @@ namespace TProject
                 new EditEdge(selectedEdge).Show();
         }
 
-#region Масштабирование
+        #region Масштабирование
 
         /// <summary>
         /// Происходит при прокрутке колесика мыши
@@ -180,9 +181,9 @@ namespace TProject
             dX = Width / 2;
             dY = Height / 2;
         }
-#endregion
+        #endregion
 
-#region Методы работы с контроллером (инициализация pictureBox для карты и тд.)
+        #region Методы работы с контроллером (инициализация pictureBox для карты и тд.)
 
         /// <summary>
         /// Создает объект контроллера отображения
@@ -236,9 +237,9 @@ namespace TProject
             }
         }
 
-#endregion
+        #endregion
 
-#region Создание ребра
+        #region Создание ребра
 
         ///
         /// <summary>
@@ -254,7 +255,7 @@ namespace TProject
 
         public void DeleteEdge(int x, int y)
         {
-            if(Map.edges.GetSelected(x, y))
+            if (Map.edges.GetSelected(x, y))
             {
                 Map.edges.Delete(selectedEdge);
                 selectedEdge = null;
@@ -263,7 +264,7 @@ namespace TProject
 
         public void DelteVertex(int x, int y)
         {
-            if(Map.vertexes.GetSelected(x, y))
+            if (Map.vertexes.GetSelected(x, y))
             {
                 Map.edges.DeleteAllConnection(selectedVertex);
                 Map.vertexes.Delete(selectedVertex);
@@ -293,13 +294,13 @@ namespace TProject
                 selectedEdge.SetEnd(selectedVertex);
                 Map.edges.Add(selectedEdge);
             }
-                selectedVertex = null;
-                selectedEdge = null;
+            selectedVertex = null;
+            selectedEdge = null;
         }
 
-#endregion
+        #endregion
 
-#region Отрисовка элементов, содержащихся на карте
+        #region Отрисовка элементов, содержащихся на карте
         /// <summary>
         /// Происходит при перерисовке pictureBox, содержащего карту
         /// </summary>
@@ -347,7 +348,7 @@ namespace TProject
                         (selectedEdge.GetHead().Y.UnScaling() + (selectedEdge.GetEnd().Y.UnScaling() - selectedEdge.GetHead().Y.UnScaling()) / 2 - 10));
             }
         }
-        
+
         /// <summary>
         /// Отрисовывает все перекрестки, содержащиеся на карте
         /// </summary>
@@ -355,15 +356,20 @@ namespace TProject
         private void DrawVertexes(Graphics graph)
         {
             foreach (var item in Map.vertexes.List)
-            //    if (selectedVertex != item)
-                    graph.FillEllipse(PensCase.Point, item.X.UnScaling(), item.Y.UnScaling(), Width, Height);
+                //    if (selectedVertex != item)
+                graph.FillEllipse(PensCase.Point, item.X.UnScaling(), item.Y.UnScaling(), Width, Height);
 
             if (selectedVertex != null)
                 graph.FillEllipse(PensCase.SelectedVertex, selectedVertex.X.UnScaling(), selectedVertex.Y.UnScaling(), Width, Height);
         }
+
+        public void DrawRoute()
+        {
+
+        }
         #endregion
 
-#region Работа с выделением объектов
+        #region Работа с выделением объектов
 
         /// <summary>
         /// Помечает указанную вершину как выбранную
@@ -435,8 +441,28 @@ namespace TProject
             }
             return false;
         }
+
+        #endregion
+        public void SelectStartVertex(int x, int y)
+        {
+            if (Map.vertexes.GetSelected(x, y))
+            {
+                Route.Start = selectedVertex;
+            }
+        }
+        public void SelectEndVertex(int x, int y)
+        {
+            if (Map.vertexes.GetSelected(x, y))
+            {
+                Route.End = selectedVertex;
+            }
+        }
     }
-    #endregion
+
+
+
+
+
 
     public static class ReScaling
     {
