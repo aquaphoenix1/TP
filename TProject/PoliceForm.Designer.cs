@@ -28,70 +28,73 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.tb_Coefficient = new System.Windows.Forms.TextBox();
-            this.tb_TypePolice = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.buttonOK = new System.Windows.Forms.Button();
+            this.textBoxCoefficient = new System.Windows.Forms.TextBox();
+            this.textBoxTypePolice = new System.Windows.Forms.TextBox();
+            this.labelCoefficient = new System.Windows.Forms.Label();
+            this.labelTypePolice = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // button1
+            // buttonOK
             // 
-            this.button1.Location = new System.Drawing.Point(195, 170);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Добавить";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.buttonOK.Location = new System.Drawing.Point(201, 62);
+            this.buttonOK.Name = "buttonOK";
+            this.buttonOK.Size = new System.Drawing.Size(75, 23);
+            this.buttonOK.TabIndex = 9;
+            this.buttonOK.Text = "Применить";
+            this.buttonOK.UseVisualStyleBackColor = true;
+            this.buttonOK.Click += new System.EventHandler(this.buttonAccept_Click);
             // 
-            // tb_Coefficient
+            // textBoxCoefficient
             // 
-            this.tb_Coefficient.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tb_Coefficient.Location = new System.Drawing.Point(152, 122);
-            this.tb_Coefficient.Name = "tb_Coefficient";
-            this.tb_Coefficient.Size = new System.Drawing.Size(122, 22);
-            this.tb_Coefficient.TabIndex = 8;
+            this.textBoxCoefficient.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxCoefficient.Location = new System.Drawing.Point(154, 34);
+            this.textBoxCoefficient.Name = "textBoxCoefficient";
+            this.textBoxCoefficient.Size = new System.Drawing.Size(122, 22);
+            this.textBoxCoefficient.TabIndex = 8;
             // 
-            // tb_TypePolice
+            // textBoxTypePolice
             // 
-            this.tb_TypePolice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tb_TypePolice.Location = new System.Drawing.Point(152, 70);
-            this.tb_TypePolice.Name = "tb_TypePolice";
-            this.tb_TypePolice.Size = new System.Drawing.Size(122, 22);
-            this.tb_TypePolice.TabIndex = 7;
+            this.textBoxTypePolice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxTypePolice.Location = new System.Drawing.Point(154, 6);
+            this.textBoxTypePolice.Name = "textBoxTypePolice";
+            this.textBoxTypePolice.Size = new System.Drawing.Size(122, 22);
+            this.textBoxTypePolice.TabIndex = 7;
             // 
-            // label2
+            // labelCoefficient
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(10, 128);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(101, 16);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Коэффициент";
+            this.labelCoefficient.AutoSize = true;
+            this.labelCoefficient.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelCoefficient.Location = new System.Drawing.Point(12, 34);
+            this.labelCoefficient.Name = "labelCoefficient";
+            this.labelCoefficient.Size = new System.Drawing.Size(101, 16);
+            this.labelCoefficient.TabIndex = 6;
+            this.labelCoefficient.Text = "Коэффициент";
             // 
-            // label1
+            // labelTypePolice
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(10, 76);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(128, 16);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Тип полицейского";
+            this.labelTypePolice.AutoSize = true;
+            this.labelTypePolice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelTypePolice.Location = new System.Drawing.Point(12, 9);
+            this.labelTypePolice.Name = "labelTypePolice";
+            this.labelTypePolice.Size = new System.Drawing.Size(128, 16);
+            this.labelTypePolice.TabIndex = 5;
+            this.labelTypePolice.Text = "Тип полицейского";
             // 
             // PoliceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(281, 198);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.tb_Coefficient);
-            this.Controls.Add(this.tb_TypePolice);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(281, 91);
+            this.Controls.Add(this.buttonOK);
+            this.Controls.Add(this.textBoxCoefficient);
+            this.Controls.Add(this.textBoxTypePolice);
+            this.Controls.Add(this.labelCoefficient);
+            this.Controls.Add(this.labelTypePolice);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "PoliceForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PoliceForm";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -100,10 +103,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox tb_Coefficient;
-        private System.Windows.Forms.TextBox tb_TypePolice;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button buttonOK;
+        private System.Windows.Forms.TextBox textBoxCoefficient;
+        private System.Windows.Forms.TextBox textBoxTypePolice;
+        private System.Windows.Forms.Label labelCoefficient;
+        private System.Windows.Forms.Label labelTypePolice;
     }
 }

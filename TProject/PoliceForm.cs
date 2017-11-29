@@ -1,21 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TProject.Way;
 
 namespace TProject
 {
-    //Работа с бд форма для добавления и изменения.Даниил
     public partial class PoliceForm : Form
     {
-        private bool addOrEdit; //Добавление или изменение
-        private Police p;
+        private bool addOrEdit;
+        private Police police;
 
         private PoliceForm()
         {
@@ -24,54 +17,84 @@ namespace TProject
 
         public PoliceForm(bool addOrEdit) : this()
         {
-            button1.Text = (addOrEdit) ? "Добавить" : "Изменить";
             this.addOrEdit = addOrEdit;
         }
 
-        public PoliceForm(int id, string tPolice, double coeff) : this(false)
+        public PoliceForm(long id, string tPolice, double coeff) : this(false)
         {
-            p = new Police(id, tPolice, coeff);
-            tb_TypePolice.Text = tPolice;
-            tb_Coefficient.Text = coeff.ToString();
+            police = Police.CreatePolice(id, tPolice, coeff);
+            textBoxTypePolice.Text = tPolice;
+            textBoxCoefficient.Text = coeff.ToString();
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void buttonAccept_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tb_TypePolice.Text))
-                MessageBox.Show("Поле тип полицейского не задан !");
+            textBoxTypePolice.BackColor = Color.White;
+            textBoxCoefficient.BackColor = Color.White;
+            string type = textBoxTypePolice.Text;
+
+            if (string.IsNullOrWhiteSpace(type) || string.IsNullOrEmpty(type))
+            {
+                textBoxTypePolice.BackColor = Color.Red;
+                MessageBox.Show("Поле тип полицейского не задан!");
+            }
             else
             {
                 double d;
-                if (double.TryParse(tb_Coefficient.Text, out d))
+                if (double.TryParse(textBoxCoefficient.Text, out d))
                 {
-                    if (p == null) p = new Police(tb_TypePolice.Text, d);
+                    if (police == null)
+                    {
+                        police = new Police(type, d);
+                    }
                     else
                     {
-                        p.TypeName = tb_TypePolice.Text;
-                        p.Coeff = d;
+                        police.TypeName = textBoxTypePolice.Text;
+                        police.Coeff = d;
                     }
-                    if (addOrEdit) Add();
-                    else Edit();
-
+                    
+                    if (addOrEdit)
+                    {
+                        Add();
+                    }
+                    else
+                    {
+                        Edit();
+                    }
                 }
-                else MessageBox.Show("Не корректно задан коэффициент !");
+                else
+                {
+                    MessageBox.Show("Не корректно задан коэффициент!");
+                    textBoxCoefficient.BackColor = Color.Red;
+                }
             }
         }
 
 
         private void Add()
         {
-            if (new PoliceDAO().Insert(p))
+            if (new PoliceDAO().Insert(police))
             {
+                Main.IsChanged = true;
                 this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Ошибка создания");
+                Police.CurrentMaxID--;
             }
         }
 
         private void Edit()
         {
-            if (new PoliceDAO().Update(p))
+            if (new PoliceDAO().Update(police))
             {
+                Main.IsChanged = true;
                 this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Ошибка обновления");
             }
         }
 

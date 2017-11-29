@@ -28,70 +28,70 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.tbValueSign = new System.Windows.Forms.TextBox();
-            this.tbTypeSign = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.buttonAccept = new System.Windows.Forms.Button();
+            this.textBoxValueSign = new System.Windows.Forms.TextBox();
+            this.textBoxTypeSign = new System.Windows.Forms.TextBox();
+            this.labelValue = new System.Windows.Forms.Label();
+            this.labelType = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // button1
+            // buttonAccept
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(132, 88);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(86, 29);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Добавить";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonAccept.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonAccept.Location = new System.Drawing.Point(133, 61);
+            this.buttonAccept.Name = "buttonAccept";
+            this.buttonAccept.Size = new System.Drawing.Size(86, 29);
+            this.buttonAccept.TabIndex = 9;
+            this.buttonAccept.Text = "Принять";
+            this.buttonAccept.UseVisualStyleBackColor = true;
+            this.buttonAccept.Click += new System.EventHandler(this.buttonAccept_Click);
             // 
-            // tbValueSign
+            // textBoxValueSign
             // 
-            this.tbValueSign.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbValueSign.Location = new System.Drawing.Point(115, 47);
-            this.tbValueSign.Name = "tbValueSign";
-            this.tbValueSign.Size = new System.Drawing.Size(100, 22);
-            this.tbValueSign.TabIndex = 8;
+            this.textBoxValueSign.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxValueSign.Location = new System.Drawing.Point(115, 33);
+            this.textBoxValueSign.Name = "textBoxValueSign";
+            this.textBoxValueSign.Size = new System.Drawing.Size(100, 22);
+            this.textBoxValueSign.TabIndex = 8;
             // 
-            // tbTypeSign
+            // textBoxTypeSign
             // 
-            this.tbTypeSign.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbTypeSign.Location = new System.Drawing.Point(115, 9);
-            this.tbTypeSign.Name = "tbTypeSign";
-            this.tbTypeSign.Size = new System.Drawing.Size(100, 22);
-            this.tbTypeSign.TabIndex = 7;
+            this.textBoxTypeSign.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxTypeSign.Location = new System.Drawing.Point(115, 9);
+            this.textBoxTypeSign.Name = "textBoxTypeSign";
+            this.textBoxTypeSign.Size = new System.Drawing.Size(100, 22);
+            this.textBoxTypeSign.TabIndex = 7;
             // 
-            // label2
+            // labelValue
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(12, 47);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 16);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Величина";
+            this.labelValue.AutoSize = true;
+            this.labelValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelValue.Location = new System.Drawing.Point(12, 36);
+            this.labelValue.Name = "labelValue";
+            this.labelValue.Size = new System.Drawing.Size(73, 16);
+            this.labelValue.TabIndex = 6;
+            this.labelValue.Text = "Величина";
             // 
-            // label1
+            // labelType
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(36, 16);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Тип ";
+            this.labelType.AutoSize = true;
+            this.labelType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelType.Location = new System.Drawing.Point(12, 9);
+            this.labelType.Name = "labelType";
+            this.labelType.Size = new System.Drawing.Size(36, 16);
+            this.labelType.TabIndex = 5;
+            this.labelType.Text = "Тип ";
             // 
             // SignForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(231, 131);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.tbValueSign);
-            this.Controls.Add(this.tbTypeSign);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(231, 96);
+            this.Controls.Add(this.buttonAccept);
+            this.Controls.Add(this.textBoxValueSign);
+            this.Controls.Add(this.textBoxTypeSign);
+            this.Controls.Add(this.labelValue);
+            this.Controls.Add(this.labelType);
             this.Name = "SignForm";
             this.Text = "SignForm";
             this.ResumeLayout(false);
@@ -101,10 +101,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox tbValueSign;
-        private System.Windows.Forms.TextBox tbTypeSign;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button buttonAccept;
+        private System.Windows.Forms.TextBox textBoxValueSign;
+        private System.Windows.Forms.TextBox textBoxTypeSign;
+        private System.Windows.Forms.Label labelValue;
+        private System.Windows.Forms.Label labelType;
     }
 }

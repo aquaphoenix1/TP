@@ -28,71 +28,74 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.tb_Price = new System.Windows.Forms.TextBox();
-            this.tb_NameFuel = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.buttonAccept = new System.Windows.Forms.Button();
+            this.textBoxPrice = new System.Windows.Forms.TextBox();
+            this.textBoxNameFuel = new System.Windows.Forms.TextBox();
+            this.labelPrice = new System.Windows.Forms.Label();
+            this.labelNameFuel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // button1
+            // buttonAccept
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(186, 105);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(83, 23);
-            this.button1.TabIndex = 19;
-            this.button1.Text = "Добавить";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonAccept.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonAccept.Location = new System.Drawing.Point(189, 62);
+            this.buttonAccept.Name = "buttonAccept";
+            this.buttonAccept.Size = new System.Drawing.Size(83, 23);
+            this.buttonAccept.TabIndex = 19;
+            this.buttonAccept.Text = "Принять";
+            this.buttonAccept.UseVisualStyleBackColor = true;
+            this.buttonAccept.Click += new System.EventHandler(this.buttonAccept_Click);
             // 
-            // tb_Price
+            // textBoxPrice
             // 
-            this.tb_Price.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tb_Price.Location = new System.Drawing.Point(172, 54);
-            this.tb_Price.Name = "tb_Price";
-            this.tb_Price.Size = new System.Drawing.Size(100, 22);
-            this.tb_Price.TabIndex = 18;
+            this.textBoxPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxPrice.Location = new System.Drawing.Point(150, 34);
+            this.textBoxPrice.Name = "textBoxPrice";
+            this.textBoxPrice.Size = new System.Drawing.Size(122, 22);
+            this.textBoxPrice.TabIndex = 18;
             // 
-            // tb_NameFuel
+            // textBoxNameFuel
             // 
-            this.tb_NameFuel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tb_NameFuel.Location = new System.Drawing.Point(172, 6);
-            this.tb_NameFuel.Name = "tb_NameFuel";
-            this.tb_NameFuel.Size = new System.Drawing.Size(100, 22);
-            this.tb_NameFuel.TabIndex = 17;
+            this.textBoxNameFuel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxNameFuel.Location = new System.Drawing.Point(150, 6);
+            this.textBoxNameFuel.Name = "textBoxNameFuel";
+            this.textBoxNameFuel.Size = new System.Drawing.Size(122, 22);
+            this.textBoxNameFuel.TabIndex = 17;
             // 
-            // label2
+            // labelPrice
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(12, 57);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 16);
-            this.label2.TabIndex = 16;
-            this.label2.Text = "Цена";
+            this.labelPrice.AutoSize = true;
+            this.labelPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelPrice.Location = new System.Drawing.Point(12, 34);
+            this.labelPrice.Name = "labelPrice";
+            this.labelPrice.Size = new System.Drawing.Size(41, 16);
+            this.labelPrice.TabIndex = 16;
+            this.labelPrice.Text = "Цена";
             // 
-            // label1
+            // labelNameFuel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(132, 16);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "Название топлива";
+            this.labelNameFuel.AutoSize = true;
+            this.labelNameFuel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelNameFuel.Location = new System.Drawing.Point(12, 9);
+            this.labelNameFuel.Name = "labelNameFuel";
+            this.labelNameFuel.Size = new System.Drawing.Size(132, 16);
+            this.labelNameFuel.TabIndex = 15;
+            this.labelNameFuel.Text = "Название топлива";
             // 
             // FuelForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(279, 139);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.tb_Price);
-            this.Controls.Add(this.tb_NameFuel);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(279, 90);
+            this.Controls.Add(this.buttonAccept);
+            this.Controls.Add(this.textBoxPrice);
+            this.Controls.Add(this.textBoxNameFuel);
+            this.Controls.Add(this.labelPrice);
+            this.Controls.Add(this.labelNameFuel);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FuelForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FuelForm";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -101,10 +104,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox tb_Price;
-        private System.Windows.Forms.TextBox tb_NameFuel;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button buttonAccept;
+        private System.Windows.Forms.TextBox textBoxPrice;
+        private System.Windows.Forms.TextBox textBoxNameFuel;
+        private System.Windows.Forms.Label labelPrice;
+        private System.Windows.Forms.Label labelNameFuel;
     }
 }

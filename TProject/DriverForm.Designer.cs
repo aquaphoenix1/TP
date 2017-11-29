@@ -28,23 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonAccept = new System.Windows.Forms.Button();
             this.tbTypeDriver = new System.Windows.Forms.TextBox();
             this.cbIDAuto = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // button1
+            // buttonAccept
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(210, 141);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Добавить";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonAccept.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonAccept.Location = new System.Drawing.Point(210, 90);
+            this.buttonAccept.Name = "buttonAccept";
+            this.buttonAccept.Size = new System.Drawing.Size(100, 23);
+            this.buttonAccept.TabIndex = 9;
+            this.buttonAccept.Text = "Принять";
+            this.buttonAccept.UseVisualStyleBackColor = true;
+            this.buttonAccept.Click += new System.EventHandler(this.button1_Click);
             // 
             // tbTypeDriver
             // 
@@ -56,6 +56,7 @@
             // 
             // cbIDAuto
             // 
+            this.cbIDAuto.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cbIDAuto.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbIDAuto.FormattingEnabled = true;
             this.cbIDAuto.Location = new System.Drawing.Point(189, 60);
@@ -87,13 +88,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(318, 170);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(318, 121);
+            this.Controls.Add(this.buttonAccept);
             this.Controls.Add(this.tbTypeDriver);
             this.Controls.Add(this.cbIDAuto);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "DriverForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DriverForm";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -102,7 +106,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonAccept;
         private System.Windows.Forms.TextBox tbTypeDriver;
         private System.Windows.Forms.ComboBox cbIDAuto;
         private System.Windows.Forms.Label label2;

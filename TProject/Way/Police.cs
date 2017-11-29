@@ -15,11 +15,26 @@ namespace TProject.Way
             this.Coeff = coefficient;
         }
         //Используется в "Работе с БД" для изменения - так как нужно найти соот-щую запись.Даниил 
-        public Police(int id, string typeName, double coefficient)
+        /*public Police(long id, string typeName, double coefficient)
         {
             this.ID = id;
             this.TypeName = typeName;
             this.Coeff = coefficient;
+        }*/
+
+        public static Police CreatePolice(long id, string typeName, double coefficient)
+        {
+            Police police = new Police
+            {
+                ID = id,
+                TypeName = typeName,
+                Coeff = coefficient
+            };
+
+            return police;
         }
+
+        private Police()
+        { }
     }
 }
