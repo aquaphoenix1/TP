@@ -19,6 +19,7 @@ namespace TProject
             vertexes = new Vertexes();
             edges = new Edges();
         }
+        
         public static void SetWay(List<long> list)
         {
             Way = new List<Vertex>();

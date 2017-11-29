@@ -75,8 +75,14 @@ namespace TProject.Way
 
         public double FindMinLengthWay(Vertexes vertColl, Edges edgColl, out List<long> way)
         {
-            long fromVertex = Start.ID;
-            long toVertex = End.ID;
+            long fromVertex = 0, toVertex = 0;
+            for (int i = 0; i < Map.vertexes.GetCountElements(); i++)
+            {
+                if (Map.vertexes.GetElement(i).ID == Start.ID)
+                    fromVertex = i;
+                if (Map.vertexes.GetElement(i).ID == End.ID)
+                    toVertex = i;
+            }
             double[,] matrix = GetMatrixWay(out int[,] parents, out long[] IDs, vertColl, edgColl);
             int size = (int)Math.Sqrt(matrix.Length);
 

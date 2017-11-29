@@ -21,6 +21,7 @@ namespace TProject.Coll
         /// </summary>
         public event Viewer.ReDraw RePaint;
 
+
         public T GetElement(int index)
         {
             return List.ElementAt(index);
