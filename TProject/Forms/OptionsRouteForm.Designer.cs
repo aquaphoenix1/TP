@@ -1,6 +1,6 @@
 ﻿namespace TProject
 {
-    partial class optionsRouteForm
+    partial class OptionsRouteForm
     {
         /// <summary>
         /// Required designer variable.

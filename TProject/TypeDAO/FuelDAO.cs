@@ -2,27 +2,25 @@
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TProject.Driver;
 
 namespace TProject.TypeDAO
 {
-    class FuelDAO : DAO 
+    class FuelDAO : DAO
     {
-        //Добаваление в бд и в лист ListTypePolicemen
-        public bool Insert(Type obj) 
+        public bool Insert(Type obj)
         {
             try
             {
-                //[ID] Integer primary key, [Name] char(30) not null, [Cost]
                 Fuel f = (Fuel)obj;
                 new SQLiteCommand(string.Format("Insert into Fuel values ({0} , \'{1}\', {2})", f.ID, f.TypeName, f.Price), DAO.GetConnection()).ExecuteNonQuery();
 
-                List<object> list = new List<object>();
-                list.Add(f.ID);
-                list.Add(f.TypeName);
-                list.Add(f.Price);
+                List<object> list = new List<object>
+                {
+                    f.ID,
+                    f.TypeName,
+                    f.Price
+                };
                 Fuel.ListFuel.Add(list);
 
                 return true;
@@ -32,7 +30,7 @@ namespace TProject.TypeDAO
                 return false;
             }
         }
-        //Удаление из бд и из листа ListTypePolicemen
+
         public bool Delete(long ID)
         {
             try
@@ -48,7 +46,7 @@ namespace TProject.TypeDAO
                 return false;
             }
         }
-        //Изменение в бд и в листе ListTypePolicemen
+
         public bool Update(Type obj)
         {
             try

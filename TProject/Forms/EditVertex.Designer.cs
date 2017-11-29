@@ -50,7 +50,7 @@
             this.okEditCrossroadButton.TabIndex = 5;
             this.okEditCrossroadButton.Text = "Ок";
             this.okEditCrossroadButton.UseVisualStyleBackColor = true;
-            this.okEditCrossroadButton.Click += new System.EventHandler(this.okEditCrossroadButton_Click);
+            this.okEditCrossroadButton.Click += new System.EventHandler(this.OkEditCrossroadButton_Click);
             // 
             // cancelEditCrossroadButton
             // 
@@ -62,7 +62,7 @@
             this.cancelEditCrossroadButton.TabIndex = 4;
             this.cancelEditCrossroadButton.Text = "Отмена";
             this.cancelEditCrossroadButton.UseVisualStyleBackColor = true;
-            this.cancelEditCrossroadButton.Click += new System.EventHandler(this.cancelEditCrossroadButton_Click);
+            this.cancelEditCrossroadButton.Click += new System.EventHandler(this.CancelEditCrossroadButton_Click);
             // 
             // crossroadGroupBox
             // 
@@ -134,7 +134,7 @@
             this.trafficlightCheckBox.TabIndex = 0;
             this.trafficlightCheckBox.Text = "Наличие светофора";
             this.trafficlightCheckBox.UseVisualStyleBackColor = true;
-            this.trafficlightCheckBox.CheckedChanged += new System.EventHandler(this.trafficlightCheckBox_CheckedChanged);
+            this.trafficlightCheckBox.CheckedChanged += new System.EventHandler(this.TrafficlightCheckBox_CheckedChanged);
             // 
             // EditVertex
             // 

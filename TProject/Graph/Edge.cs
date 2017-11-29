@@ -34,11 +34,11 @@ namespace TProject.Graph
             EndVertex = c;
         }
 
-
         public void SetHead(Vertex A)
         {
             HeadVertex = A;
         }
+
         public void SetEnd(Vertex B)
         {
             EndVertex = B;

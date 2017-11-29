@@ -12,8 +12,6 @@ namespace TProject
 {
     public partial class Main : Form
     {
-
-
         /// <summary>
         /// Показывает, перемещается ли в данный момент карта
         /// </summary>
@@ -847,7 +845,6 @@ namespace TProject
                         }
                 }
             }
-
         }
 
         private void УдалитьПерегонToolStripMenuItem_Click(object sender, EventArgs e)

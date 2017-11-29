@@ -4,9 +4,6 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TProject.Graph;
 using TProject.Way;
@@ -28,8 +25,6 @@ namespace TProject
         public int MapLocationY { get; set; }
 
         Brush blackFontBrush = new SolidBrush(Color.Black);
-
-
 
         public int VertexLocationX { get; set; }
         public int VertexLocationY { get; set; }
@@ -68,7 +63,6 @@ namespace TProject
         /// Текущий масштаб
         /// </summary>
         public double ZoomCurValue { private set; get; }
-
         public bool IsPolice_Visible { get; set; } = true;
         public bool IsTrafficLight_Visible { get; set; } = true;
         public bool IsSign_Visible { get; set; } = true;
@@ -119,12 +113,17 @@ namespace TProject
         public void EditVertexOptions()
         {
             if (selectedVertex != null)
+            {
                 new EditVertex(selectedVertex).Show();
+            }
         }
+
         public void EditEdgeOptions()
         {
             if (selectedEdge != null)
+            {
                 new EditEdge(selectedEdge).Show();
+            }
         }
 
         #region Масштабирование
@@ -163,7 +162,7 @@ namespace TProject
         /// Создание кэша отмасштабированных карт
         /// (для повышения быстродействия масштабирования)
         /// </summary>
-        private void toList()
+        private void ToList()
         {
             for (double i = 0.6; i < 1.5; i = i + 0.2)
             {
@@ -230,7 +229,7 @@ namespace TProject
 
 
                 cache = new SortedList<double, Image>();
-                toList();
+                ToList();
 
                 view.Enabled = true;
                 view.Visible = true;
@@ -312,8 +311,10 @@ namespace TProject
             graph.SmoothingMode = SmoothingMode.HighQuality;
             DrawEdges(graph);
             DrawVertexes(graph);
-            if(Map.Way !=  null)
+            if (Map.Way != null)
+            {
                 DrawRoute(graph);
+            }
         }
 
         /// <summary>
@@ -344,10 +345,12 @@ namespace TProject
                 graph.DrawLine(PensCase.GetPenForEdge(true, false, Width.UnScaling()), selectedEdge.GetHead().X.UnScaling() + dX, selectedEdge.GetHead().Y.UnScaling() + dY,
                     selectedEdge.GetEnd().X.UnScaling() + dX, selectedEdge.GetEnd().Y.UnScaling() + dY);
                 if (IsStreetLength_Visible)
+                {
                     graph.DrawString(Math.Round(selectedEdge.GetLength(ScaleCoefficient), 2).ToString(), new Font(mainFormFont.FontFamily, 10f, FontStyle.Italic | FontStyle.Bold,
                         GraphicsUnit.Point, mainFormFont.GdiCharSet), blackFontBrush,
                         (selectedEdge.GetHead().X.UnScaling() + (selectedEdge.GetEnd().X.UnScaling() - selectedEdge.GetHead().X.UnScaling()) / 2 - 25),
                         (selectedEdge.GetHead().Y.UnScaling() + (selectedEdge.GetEnd().Y.UnScaling() - selectedEdge.GetHead().Y.UnScaling()) / 2 - 10));
+                }
             }
         }
 
@@ -358,18 +361,24 @@ namespace TProject
         private void DrawVertexes(Graphics graph)
         {
             foreach (var item in Map.vertexes.List)
+            {
                 //    if (selectedVertex != item)
                 graph.FillEllipse(PensCase.Point, item.X.UnScaling(), item.Y.UnScaling(), Width, Height);
+            }
 
             if (selectedVertex != null)
+            {
                 graph.FillEllipse(PensCase.SelectedVertex, selectedVertex.X.UnScaling(), selectedVertex.Y.UnScaling(), Width, Height);
+            }
         }
 
         private void DrawRoute(Graphics graph)
         {
-            Pen pen = new Pen(Color.Green, Width.UnScaling() + 4);
-            pen.StartCap = LineCap.Round;
-            pen.EndCap = LineCap.ArrowAnchor;
+            Pen pen = new Pen(Color.Green, Width.UnScaling() + 4)
+            {
+                StartCap = LineCap.Round,
+                EndCap = LineCap.ArrowAnchor
+            };
 
             for (int i = 0; i < Map.Way.Count - 1; i++)
             {
@@ -385,9 +394,14 @@ namespace TProject
             Route route = new Route();
             route.FindMinLengthWay(Map.vertexes, Map.edges, out way);
             if (way != null)
+            {
                 Map.SetWay(way);
+            }
             else
+            {
                 MessageBox.Show("Невозможно построить маршрут");
+            }
+
             ViewPort.Invalidate();
         }
         #endregion
@@ -452,9 +466,13 @@ namespace TProject
             if (x.Scaling() - Width <= Math.Max(x1, x2) && x.Scaling() + Width >= Math.Min(x1, x2) && y.Scaling() - Height <= Math.Max(y1, y2) && y.Scaling() + Height >= Math.Min(y1, y2))
             {
                 if (x2 == x1)
+                {
                     return x.Scaling() >= x1 - Width && x.Scaling() <= x1 + Width;
+                }
                 else if (y2 == y1)
+                {
                     return y.Scaling() >= y1 - Width && y.Scaling() <= y1 + Width;
+                }
                 else
                 {
                     double k = (double)(y2 - y1) / (double)(x2 - x1);
@@ -475,12 +493,6 @@ namespace TProject
             Map.vertexes.GetSelected(x, y, out Route.End);
         }
     }
-
-
-
-
-
-
 
     public static class ReScaling
     {

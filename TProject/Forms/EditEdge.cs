@@ -15,13 +15,13 @@ namespace TProject
             Edge = _edge;
         }
 
-        private void checkBoxWay_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxWay_CheckedChanged(object sender, EventArgs e)
         {
             Edge.IsBilateral = signTwoWayCheckBox.Checked;
             Viewer.ViewPort.Invalidate();
         }
 
-        private void buttonMirror_Click(object sender, EventArgs e)
+        private void ButtonMirror_Click(object sender, EventArgs e)
         {
             Edge.Revers();
             Viewer.ViewPort.Invalidate();
@@ -39,7 +39,7 @@ namespace TProject
             policemanCheckBox.Checked = Edge.Policemen != null;
         }
 
-        private void okEditEgdeButton_Click(object sender, EventArgs e)
+        private void OkEditEgdeButton_Click(object sender, EventArgs e)
         {
             Edge.Coat = (Coating)coatingComboBox.SelectedItem;
             Edge.IsBilateral = signTwoWayCheckBox.Checked;
@@ -49,17 +49,17 @@ namespace TProject
             Close();
         }
 
-        private void cancelEditEgdeButton_Click(object sender, EventArgs e)
+        private void CancelEditEgdeButton_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void policemanCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void PolicemanCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             policemanGroupBox.Enabled = ((CheckBox)sender).Checked;
         }
 
-        private void signMaxSpeedCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void SignMaxSpeedCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             signMaxSpeedComboBox.Enabled = ((CheckBox)sender).Checked;
         }

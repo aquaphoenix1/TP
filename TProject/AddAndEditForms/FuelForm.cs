@@ -15,7 +15,7 @@ namespace TProject
         {
             InitializeComponent();
         }
-        
+
         public FuelForm(bool addOrEdit) : this()
         {
             this.addOrEdit = addOrEdit;

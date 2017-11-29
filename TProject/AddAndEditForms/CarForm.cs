@@ -9,7 +9,7 @@ namespace TProject
 {
     public partial class CarForm : Form
     {
-        private bool addOrEdit; //Добавление или изменение
+        private bool addOrEdit;
         private Car car;
 
         private CarForm()

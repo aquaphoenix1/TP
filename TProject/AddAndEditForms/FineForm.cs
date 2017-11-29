@@ -15,7 +15,7 @@ namespace TProject
         {
             InitializeComponent();
         }
-        
+
         public FineForm(bool addOrEdit) : this()
         {
             this.addOrEdit = addOrEdit;
@@ -77,7 +77,7 @@ namespace TProject
             if (new FineDAO().Insert(fine))
             {
                 Main.IsChanged = true;
-                
+
                 Close();
             }
             else

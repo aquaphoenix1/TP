@@ -7,7 +7,7 @@
 
         public Entity()
         {
-            this.ID = ++CurrentMaxID;
+            this.ID = CurrentMaxID++;
         }
     }
 }

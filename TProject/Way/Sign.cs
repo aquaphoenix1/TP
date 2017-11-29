@@ -9,8 +9,7 @@ namespace TProject.Way
         public static List<List<object>> ListSigns { get; set; }
         public double Count { get; set; }
 
-        //Используется в "Работе с БД" для добавления.Даниил
-        public Sign(string text,double count) : base(text)
+        public Sign(string text, double count) : base(text)
         {
             this.ID = ++CurrentMaxID;
             this.Count = count;

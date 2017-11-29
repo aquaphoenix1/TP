@@ -10,7 +10,6 @@ namespace TProject
 
         private static SQLiteConnection connection;
 
-
         protected static SQLiteConnection GetConnection()
         {
             if (connection == null)
@@ -57,7 +56,7 @@ namespace TProject
                 new SQLiteCommand("Create table Policemen ([ID] integer primary key, [TypePolice] char(20) not null, [Koefficient] real not null)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Auto ([ID] Integer primary key, [Model] char(30), [IDFuel] Integer References Fuel ([ID]), [Сonsumption] real not null)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Driver ([ID] Integer primary key, [TypeDriver] char(20) not null, [IDAuto] Integer References Auto ([ID]))", GetConnection()).ExecuteNonQuery();
-                new SQLiteCommand("Create table Fuel ([ID] Integer primary key, [Name] char(30) not null, [Cost] real not null)", GetConnection()).ExecuteNonQuery();        
+                new SQLiteCommand("Create table Fuel ([ID] Integer primary key, [Name] char(30) not null, [Cost] real not null)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Fine ([ID] Integer primary key, [NameFine] char(20), [CostFine] real not null)", GetConnection()).ExecuteNonQuery();
                 #endregion SQLCommands
             }

@@ -55,21 +55,6 @@ namespace TProject.Way
             }
             list.Add(to);
 
-            /*while (true) 
-            {
-                list.Add(vert);
-
-                int last = vert;
-                vert = arrayOfParents[from, vert];
-
-                if (vert == last)
-                    break;
-            }
-
-            if (list[0] != from)
-                list.Insert(0, from);
-            list.Add(to);
-            */
             return list;
         }
 
@@ -79,9 +64,14 @@ namespace TProject.Way
             for (int i = 0; i < Map.vertexes.GetCountElements(); i++)
             {
                 if (Map.vertexes.GetElement(i).ID == Start.ID)
+                {
                     fromVertex = i;
+                }
+
                 if (Map.vertexes.GetElement(i).ID == End.ID)
+                {
                     toVertex = i;
+                }
             }
             double[,] matrix = GetMatrixWay(out int[,] parents, out long[] IDs, vertColl, edgColl);
             int size = (int)Math.Sqrt(matrix.Length);

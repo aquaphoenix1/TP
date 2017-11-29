@@ -8,7 +8,6 @@ namespace TProject
 {
     class PoliceDAO : DAO, TypeDAO.ITypeDAO
     {
-        //Добаваление в бд и в лист.Даниил
         public bool Insert(Type obj)
         {
             try
@@ -16,10 +15,12 @@ namespace TProject
                 Police p = (Police)obj;
                 new SQLiteCommand(string.Format("Insert into Policemen values ({0} , \'{1}\', {2})", p.ID, p.TypeName, p.Coeff), DAO.GetConnection()).ExecuteNonQuery();
 
-                List<object> list = new List<object>();
-                list.Add(p.ID);
-                list.Add(p.TypeName);
-                list.Add(p.Coeff);
+                List<object> list = new List<object>
+                {
+                    p.ID,
+                    p.TypeName,
+                    p.Coeff
+                };
                 Police.ListTypePolicemen.Add(list);
 
                 return true;
@@ -29,7 +30,7 @@ namespace TProject
                 return false;
             }
         }
-        //Удаление из бд и из листа.Даниил
+
         public bool Delete(long ID)
         {
             try
@@ -45,7 +46,7 @@ namespace TProject
                 return false;
             }
         }
-        //Изменение в бд и в листе.Даниил
+
         public bool Update(Type obj)
         {
             try

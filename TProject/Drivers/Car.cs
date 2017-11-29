@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace TProject.Driver
 {
@@ -9,7 +8,7 @@ namespace TProject.Driver
         public static List<List<object>> ListAuto { get; set; }
         public Fuel CarFuel { get; set; }
         public double FuelConsumption { get; set; }
-        
+
         public Car(string model, Fuel fuel, double consumption) : base(model)
         {
             this.ID = ++CurrentMaxID;

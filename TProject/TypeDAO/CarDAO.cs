@@ -6,14 +6,12 @@ using TProject.Driver;
 
 namespace TProject.TypeDAO
 {
-    class CarDAO : DAO 
+    class CarDAO : DAO
     {
-        //Добаваление в бд.Даниил
         public bool Insert(Type obj)
         {
             try
             {
-            
                 Car.ListAuto.FirstOrDefault();
                 Car c = (Car)obj;
                 new SQLiteCommand(string.Format("Insert into Auto values ({0},\'{1}\',{2},{3})", c.ID, c.TypeName, c.CarFuel.ID, c.FuelConsumption), DAO.GetConnection()).ExecuteNonQuery();
@@ -34,7 +32,7 @@ namespace TProject.TypeDAO
                 return false;
             }
         }
-        //Удаление из бд и из листа.Даниил
+
         public bool Delete(long ID)
         {
             try
@@ -50,7 +48,7 @@ namespace TProject.TypeDAO
                 return false;
             }
         }
-        //Изменение в бд и в листе.Даниил
+
         public bool Update(Type obj)
         {
             try

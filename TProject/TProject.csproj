@@ -70,37 +70,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CarForm.cs">
+    <Compile Include="AddAndEditForms\CarForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CarForm.Designer.cs">
+    <Compile Include="AddAndEditForms\CarForm.Designer.cs">
       <DependentUpon>CarForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CoatingForm.cs">
+    <Compile Include="AddAndEditForms\CoatingForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CoatingForm.Designer.cs">
+    <Compile Include="AddAndEditForms\CoatingForm.Designer.cs">
       <DependentUpon>CoatingForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Coll\AbstractCollection.cs" />
     <Compile Include="Coll\Edges.cs" />
     <Compile Include="Coll\Vertexes.cs" />
-    <Compile Include="DriverForm.cs">
+    <Compile Include="AddAndEditForms\DriverForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DriverForm.Designer.cs">
+    <Compile Include="AddAndEditForms\DriverForm.Designer.cs">
       <DependentUpon>DriverForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="FineForm.cs">
+    <Compile Include="AddAndEditForms\FineForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FineForm.Designer.cs">
+    <Compile Include="AddAndEditForms\FineForm.Designer.cs">
       <DependentUpon>FineForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormStreet.cs">
+    <Compile Include="AddAndEditForms\FormStreet.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormStreet.Designer.cs">
+    <Compile Include="AddAndEditForms\FormStreet.Designer.cs">
       <DependentUpon>FormStreet.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\DataBaseForm.cs">
@@ -134,10 +134,10 @@
     <Compile Include="Forms\SystemInfoForm.Designer.cs">
       <DependentUpon>SystemInfoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="FuelForm.cs">
+    <Compile Include="AddAndEditForms\FuelForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FuelForm.Designer.cs">
+    <Compile Include="AddAndEditForms\FuelForm.Designer.cs">
       <DependentUpon>FuelForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Main.cs">
@@ -153,16 +153,16 @@
     <Compile Include="Forms\OptionsRouteForm.Designer.cs">
       <DependentUpon>OptionsRouteForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PoliceForm.cs">
+    <Compile Include="AddAndEditForms\PoliceForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PoliceForm.Designer.cs">
+    <Compile Include="AddAndEditForms\PoliceForm.Designer.cs">
       <DependentUpon>PoliceForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SignForm.cs">
+    <Compile Include="AddAndEditForms\SignForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SignForm.Designer.cs">
+    <Compile Include="AddAndEditForms\SignForm.Designer.cs">
       <DependentUpon>SignForm.cs</DependentUpon>
     </Compile>
     <Compile Include="TypeDAO\CarDAO.cs" />
@@ -221,19 +221,19 @@
     </Compile>
     <Compile Include="Way\Route.cs" />
     <Compile Include="Way\Coating.cs" />
-    <EmbeddedResource Include="CarForm.resx">
+    <EmbeddedResource Include="AddAndEditForms\CarForm.resx">
       <DependentUpon>CarForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CoatingForm.resx">
+    <EmbeddedResource Include="AddAndEditForms\CoatingForm.resx">
       <DependentUpon>CoatingForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DriverForm.resx">
+    <EmbeddedResource Include="AddAndEditForms\DriverForm.resx">
       <DependentUpon>DriverForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FineForm.resx">
+    <EmbeddedResource Include="AddAndEditForms\FineForm.resx">
       <DependentUpon>FineForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormStreet.resx">
+    <EmbeddedResource Include="AddAndEditForms\FormStreet.resx">
       <DependentUpon>FormStreet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DataBaseForm.resx">
@@ -257,7 +257,7 @@
     <EmbeddedResource Include="Forms\SystemInfoForm.resx">
       <DependentUpon>SystemInfoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FuelForm.resx">
+    <EmbeddedResource Include="AddAndEditForms\FuelForm.resx">
       <DependentUpon>FuelForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
@@ -266,7 +266,7 @@
     <EmbeddedResource Include="Forms\OptionsRouteForm.resx">
       <DependentUpon>OptionsRouteForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PoliceForm.resx">
+    <EmbeddedResource Include="AddAndEditForms\PoliceForm.resx">
       <DependentUpon>PoliceForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -274,7 +274,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="SignForm.resx">
+    <EmbeddedResource Include="AddAndEditForms\SignForm.resx">
       <DependentUpon>SignForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VertexInfoControl.resx">

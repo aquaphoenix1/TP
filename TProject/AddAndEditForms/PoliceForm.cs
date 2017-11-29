@@ -97,7 +97,5 @@ namespace TProject
                 MessageBox.Show("Ошибка обновления");
             }
         }
-
-       
     }
 }

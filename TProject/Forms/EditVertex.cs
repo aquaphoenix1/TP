@@ -37,23 +37,28 @@ namespace TProject
             }
         }
 
-        private void trafficlightCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void TrafficlightCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             panelContainer.Enabled = ((CheckBox)sender).Checked;
         }
 
 
-        private void okEditCrossroadButton_Click(object sender, EventArgs e)
+        private void OkEditCrossroadButton_Click(object sender, EventArgs e)
         {
             if (trafficlightCheckBox.Checked)
+            {
                 Vertex.TrafficLight = null;
+            }
             else
+            {
                 Vertex.TrafficLight = new TrafficLight(int.Parse(timeGreenLightComboBox.SelectedItem.ToString()),
                     int.Parse(timeRedLightComboBox.SelectedItem.ToString()));
+            }
+
             Close();
         }
 
-        private void cancelEditCrossroadButton_Click(object sender, EventArgs e)
+        private void CancelEditCrossroadButton_Click(object sender, EventArgs e)
         {
             Vertex.TrafficLight = SaveTF;
             Close();

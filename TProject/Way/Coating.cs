@@ -8,12 +8,14 @@ namespace TProject.Way
         public static long CurrentMaxID { get; set; }
         public static List<List<object>> ListSurface { get; set; }
         public double Coeff { get; set; }
- 
+
         public Coating(string typeName, double coefficient) : base(typeName)
         {
             var coating = Coating.ListSurface.Select(i => i[0]).Max();
-            if(coating == null) { CurrentMaxID = 0; }
-            else { CurrentMaxID = int.Parse(coating.ToString()); }
+            if (coating == null)
+            { CurrentMaxID = 0; }
+            else
+            { CurrentMaxID = int.Parse(coating.ToString()); }
             this.Coeff = coefficient;
             this.ID = ++CurrentMaxID;
         }
