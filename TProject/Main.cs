@@ -104,11 +104,8 @@ namespace TProject
                 {
                     case "Дорожные покрытия":
                         {
-                            //dataGridViewDataBase.Columns.Add("ID", "ID покрытия");
                             dataGridViewDataBase.Columns.Add("name", "Название покрытия");
                             dataGridViewDataBase.Columns.Add("koefficient", "Коэффициент торможения");
-
-                            //Coating.ListSurface.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
 
                             FillGrid(Coating.ListSurface);
 
@@ -116,52 +113,48 @@ namespace TProject
                         }
                     case "Типы полицейских":
                         {
-                            //dataGridViewDataBase.Columns.Add("id", "ID полицейского");
                             dataGridViewDataBase.Columns.Add("type", "Тип полицейского");
                             dataGridViewDataBase.Columns.Add("koefficient", "Коэффициент жадности полицейского");
-
-                            Police.ListTypePolicemen.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
-
+                            
+                            FillGrid(Police.ListTypePolicemen);
                             break;
                         }
                     case "Топливо":
                         {
-                            //dataGridViewDataBase.Columns.Add("id", "ID топлива");
                             dataGridViewDataBase.Columns.Add("nameFuel", "Название топлива");
                             dataGridViewDataBase.Columns.Add("cost", "Цена");
-
-                            Fuel.ListFuel.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
-
+                            
+                            FillGrid(Fuel.ListFuel);
                             break;
                         }
                     case "Автомобили":
                         {
                             dataGridViewDataBase.Columns.Add("id", "Номер автомобиля");
                             dataGridViewDataBase.Columns.Add("model", "Модель");
-                            dataGridViewDataBase.Columns.Add("IDfuel", "ID топлива");
+                            dataGridViewDataBase.Columns.Add("fuel", "Топливо");
                             dataGridViewDataBase.Columns.Add("consumption", "Потребление");
 
-                            Car.ListAuto.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            Car.ListAuto.ForEach(val => {
+                                object[] array = val.ToArray();
+                                array[2] = Fuel.ListFuel.Select(fuel => fuel).Where(fuel => long.Parse(fuel[0].ToString()) == long.Parse(val[2].ToString())).ToArray()[0][1];
+                                dataGridViewDataBase.Rows.Add(array);
+                            });
 
                             break;
                         }
                     case "Штрафы":
                         {
-                            //dataGridViewDataBase.Columns.Add("ID", "ID штрафа");
                             dataGridViewDataBase.Columns.Add("name", "Название штрафа");
                             dataGridViewDataBase.Columns.Add("cost", "Цена");
-
-                            Fine.ListFine.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
-
+                            
+                            FillGrid(Fine.ListFine);
                             break;
                         }
                     case "Водители":
                         {
-                            //dataGridViewDataBase.Columns.Add("ID", "ID водителя");
                             dataGridViewDataBase.Columns.Add("name", "Тип водителя");
                             dataGridViewDataBase.Columns.Add("IDauto", "ID автомобиля");
-
-                            //Driver.Driver.ListDriver.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            dataGridViewDataBase.Columns.Add("model", "Модель автомобиля");
 
                             ToArr del = listToArray => {
                                 object[] arr = listToArray.ToArray(), result = new object[arr.Length - 1];
@@ -174,29 +167,28 @@ namespace TProject
                             };
 
                             Driver.Driver.ListDriver.ForEach(val => {
-                                val.Add(((Car.ListAuto.Select(car => car).Where(car => long.Parse(car[0].ToString()) == long.Parse(val[2].ToString()))).ToArray()[0][1]));
-                                dataGridViewDataBase.Rows.Add(del(val));
+                                object[] array = val.ToArray();
+                                array[0] = array[1];
+                                array[1] = array[2];
+                                array[2] = Car.ListAuto.Select(car => car).Where(car => long.Parse(car[0].ToString()) == long.Parse(val[2].ToString())).ToArray()[0][1];
+                                dataGridViewDataBase.Rows.Add(array);
                             });
 
                             break;
                         }
                     case "Дорожные знаки":
                         {
-                            //dataGridViewDataBase.Columns.Add("ID", "ID знака");
                             dataGridViewDataBase.Columns.Add("type", "Тип знака");
                             dataGridViewDataBase.Columns.Add("value", "Значение");
-
-                            Sign.ListSigns.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
-
+                            
+                            FillGrid(Sign.ListSigns);
                             break;
                         }
                     case "Улицы":
                         {
-                            //dataGridViewDataBase.Columns.Add("ID", "ID знака");
                             dataGridViewDataBase.Columns.Add("name", "Название улицы");
-
-                            Edge.StreetList.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
-
+                            
+                            FillGrid(Edge.StreetList);
                             break;
                         }
                 }
@@ -211,68 +203,56 @@ namespace TProject
                 comboBoxSelectTable.SelectedItem = null;
             }
         }
-        //Работа с бд кнопка добавить.Даниил
+
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             if (comboBoxSelectTable.SelectedItem != null)
             {
                 switch (comboBoxSelectTable.SelectedItem.ToString())
                 {
-                    //Правильно работает.Даниил
                     case "Типы полицейских":
                         {
-                            PoliceForm f = new PoliceForm(true);
-                            f.ShowDialog();
+                            new PoliceForm(true).ShowDialog();
                             dataGridViewDataBase.Rows.Clear();
-                            Police.ListTypePolicemen.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            FillGrid(Police.ListTypePolicemen);
                             break;
                         }
-                    //Правильно работает.Даниил
                     case "Дорожные покрытия":
                         {
-                            CoatingForm cf = new CoatingForm(true);
-                            cf.ShowDialog();
+                            new CoatingForm(true).ShowDialog();
                             dataGridViewDataBase.Rows.Clear();
-                            Coating.ListSurface.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            FillGrid(Coating.ListSurface);
                             break;
                         }
-                    //Правильно работает.Даниил
                     case "Штрафы":
                         {
-                            FineForm fform = new FineForm(true);
-                            fform.ShowDialog();
+                            new FineForm(true).ShowDialog();
                             dataGridViewDataBase.Rows.Clear();
-                            Fine.ListFine.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            FillGrid(Fine.ListFine);
                             break;
                         }
-                    //Правильно работает.Даниил
                     case "Топливо":
                         {
-                            FuelForm ff = new FuelForm(true);
-                            ff.ShowDialog();
+                            new FuelForm(true).ShowDialog();
                             dataGridViewDataBase.Rows.Clear();
-                            Fuel.ListFuel.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            FillGrid(Fuel.ListFuel);
                             break;
                         }
-                    //Правильно работает.Даниил
                     case "Дорожные знаки":
                         {
-                            SignForm f = new SignForm(true);
-                            f.ShowDialog();
+                            new SignForm(true).ShowDialog();
                             dataGridViewDataBase.Rows.Clear();
-                            Sign.ListSigns.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            FillGrid(Sign.ListSigns);
                             break;
                         }
-                    //Правильно работает.Даниил
-                    case "Автомобили": //отмет
+                    case "Автомобили":///////////
                         {
-                            CarForm cf = new CarForm(true);
-                            cf.ShowDialog();
+                            new CarForm(true).ShowDialog();
                             dataGridViewDataBase.Rows.Clear();
                             Car.ListAuto.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
                             break;
                         }
-                    case "Водители":
+                    case "Водители"://///////////
                         {
                             DriverForm df = new DriverForm(true);
                             df.ShowDialog();
@@ -280,7 +260,7 @@ namespace TProject
                             Driver.Driver.ListDriver.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
                             break;
                         }
-                    case "Улицы":
+                    case "Улицы"://///
                         {
                             string[] arr = new string[2];
                             arr[0] = (++Edge.curMaxIdStreet).ToString();

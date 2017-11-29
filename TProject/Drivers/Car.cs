@@ -32,6 +32,5 @@ namespace TProject.Driver
             this.CarFuel = fuel;
             this.FuelConsumption = consumption;
         }
-
     }
 }
