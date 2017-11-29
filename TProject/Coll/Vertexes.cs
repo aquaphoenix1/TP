@@ -16,5 +16,12 @@ namespace TProject.Coll
             Viewer.ViewPort.UnSelectAll();
             return false;
         }
+        public Vertex GetForId(long id)
+        {
+            for (int i = 0; i < List.Count; i++)
+                if (List.ElementAt(i).ID == id)
+                    return List.ElementAt(i);
+            return null;
+        }
     }
 }

@@ -312,6 +312,8 @@ namespace TProject
             graph.SmoothingMode = SmoothingMode.HighQuality;
             DrawEdges(graph);
             DrawVertexes(graph);
+            if(Map.Way !=  null)
+                DrawRoute(graph);
         }
 
         /// <summary>
@@ -363,9 +365,26 @@ namespace TProject
                 graph.FillEllipse(PensCase.SelectedVertex, selectedVertex.X.UnScaling(), selectedVertex.Y.UnScaling(), Width, Height);
         }
 
-        public void DrawRoute()
+        private void DrawRoute(Graphics graph)
         {
+            Pen pen = new Pen(Color.Green, Width.UnScaling() + 4);
+            pen.StartCap = LineCap.Round;
+            pen.EndCap = LineCap.ArrowAnchor;
 
+            for (int i = 0; i < Map.Way.Count - 1; i++)
+            {
+                graph.DrawLine(pen,
+                  Map.Way.ElementAt(i).X, Map.Way.ElementAt(i).Y,
+                  Map.Way.ElementAt(i + 1).X, Map.Way.ElementAt(i + 1).Y);
+            }
+        }
+
+        public void MakeStaticRoute()
+        {
+            List<long> way = new List<long>();
+            Route route = new Route();
+            route.FindMinLengthWay(Map.vertexes, Map.edges, out way);
+            Map.SetWay(way);
         }
         #endregion
 

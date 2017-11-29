@@ -42,36 +42,37 @@ namespace TProject
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tbTypeDriver.Text))
-                MessageBox.Show("Поле тип водителя не задан !");
-            else
-            {
-                double d;
-                if (double.TryParse(cbIDAuto.Text, out d))
-                {
-                    //нашел машину для водителя
-                    var findcar = Car.ListAuto.FirstOrDefault(l => l.ElementAt(0).ToString() == cbIDAuto.SelectedItem.ToString());
+            //if (string.IsNullOrWhiteSpace(tbTypeDriver.Text))
+            //    MessageBox.Show("Поле тип водителя не задан !");
+            //else
+            //{
+            //    double d;
+            //    if (double.TryParse(cbIDAuto.Text, out d))
+            //    {
+            //        //нашел машину для водителя
+            //        var findcar = Car.ListAuto.FirstOrDefault(l => l.ElementAt(0).ToString() == cbIDAuto.SelectedItem.ToString());
 
 
-                    var findfuel = Fuel.ListFuel.FirstOrDefault(l => l.ElementAt(0).ToString() == findcar[2].ToString());
+            //        var findfuel = Fuel.ListFuel.FirstOrDefault(l => l.ElementAt(0).ToString() == findcar[2].ToString());
 
-                    Fuel ffuel = new Fuel(int.Parse(findfuel[0].ToString()), findfuel[1].ToString(), double.Parse(findfuel[2].ToString()));
+            //        //    Fuel ffuel = new Fuel(int.Parse(findfuel[0].ToString()), findfuel[1].ToString(), double.Parse(findfuel[2].ToString()));
 
-                    Car fcar = new Car(int.Parse(findcar[0].ToString()), findcar[1].ToString(), ffuel, double.Parse(findcar[3].ToString()));
+            //        //   Car fcar = new Car(int.Parse(findcar[0].ToString()), findcar[1].ToString(), ffuel, double.Parse(findcar[3].ToString()));
 
-                    if (tbTypeDriver.Text == "Нет") { typed = false; } else { typed = true; }
-                    if (driver == null) driver = new Driver.Driver(typed, fcar);
-                    else
-                    {
-                        driver.IsViolateTL = typed;
-                        driver.Car = fcar;
-                    }
-                    if (addOrEdit) Add();
-                    else Edit();
+            //        if (tbTypeDriver.Text == "Нет") { typed = false; } else { typed = true; }
+            //    }
+            //    //     if (driver == null) driver = new Driver.Driver(typed, fcar);
+            //    else
+            //    {
+            //        driver.IsViolateTL = typed;
+            //        //       driver.Car = fcar;
+            //    }
+            //        if (addOrEdit) Add();
+            //        else Edit();
 
-                }
-                else MessageBox.Show("Не корректно задан id машины !");
-            }
+            //    }
+            //    else MessageBox.Show("Не корректно задан id машины !");
+            //}
         }
 
         private void Add()

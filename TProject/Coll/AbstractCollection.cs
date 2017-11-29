@@ -21,7 +21,7 @@ namespace TProject.Coll
         /// </summary>
         public event Viewer.ReDraw RePaint;
 
-        public T GetVertex(int index)
+        public T GetElement(int index)
         {
             return List.ElementAt(index);
         }

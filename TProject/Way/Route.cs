@@ -41,9 +41,9 @@ namespace TProject.Way
             }
             return array;
         }
-        private List<int> GetWay(int from, int to, int[,] arrayOfParents)
+        private List<long> GetWay(long from, long to, int[,] arrayOfParents)
         {
-            List<int> list = new List<int>();
+            List<long> list = new List<long>();
 
             int vert = arrayOfParents[from, to];
 
@@ -73,8 +73,10 @@ namespace TProject.Way
             return list;
         }
 
-        public double FindMinLengthWay(int fromVertex, int toVertex, Vertexes vertColl, Edges edgColl, out List<long> way)
+        public double FindMinLengthWay(Vertexes vertColl, Edges edgColl, out List<long> way)
         {
+            long fromVertex = Start.ID;
+            long toVertex = End.ID;
             int[,] parents;
             long[] IDs;
             double[,] matrix = GetMatrixWay(out parents, out IDs, vertColl, edgColl);
@@ -102,7 +104,7 @@ namespace TProject.Way
             }
             else
             {
-                List<int> wayList = GetWay(fromVertex, toVertex, parents);
+                List<long> wayList = GetWay(fromVertex, toVertex, parents);
 
                 way = new List<long>(wayList.Count);
 
@@ -114,8 +116,6 @@ namespace TProject.Way
                 return matrix[fromVertex, toVertex];
             }
         }
-
-
 
         private Edge GetEdge(Vertex one, Vertex two, Edges edges)
         {

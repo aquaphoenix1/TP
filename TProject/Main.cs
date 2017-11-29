@@ -785,9 +785,9 @@ namespace TProject
 
 
 
-                            Fuel fuel = new Fuel(int.Parse(findfuel[0].ToString()), findfuel[1].ToString(), double.Parse(findfuel[2].ToString()));
-                            CarForm f = new CarForm(id, model, fuel, consumption);
-                            f.ShowDialog();
+                         //   Fuel fuel = new Fuel(int.Parse(findfuel[1].ToString(), double.Parse(findfuel[2].ToString()));
+                           // CarForm f = new CarForm(id, model, fuel, consumption);
+                           // f.ShowDialog();
                             dataGridViewDataBase.Rows.Clear();
                             Car.ListAuto.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
                             break;
@@ -805,15 +805,15 @@ namespace TProject
                             var fcar = Car.ListAuto.FirstOrDefault(l => l.ElementAt(0).ToString() == idauto.ToString());
                             var ffuel = Fuel.ListFuel.FirstOrDefault(l => l.ElementAt(0).ToString() == fcar[2].ToString());
 
-                            Fuel fuel = new Fuel(int.Parse(ffuel[0].ToString()), ffuel[1].ToString(), double.Parse(ffuel[2].ToString()));
+                          //  Fuel fuel = new Fuel(int.Parse(ffuel[0].ToString()), ffuel[1].ToString(), double.Parse(ffuel[2].ToString()));
 
-                            Car car = new Car(int.Parse(fcar[0].ToString()), fcar[1].ToString(), fuel, double.Parse(fcar[3].ToString()));
+                     //       Car car = new Car(int.Parse(fcar[0].ToString()), fcar[1].ToString(), fuel, double.Parse(fcar[3].ToString()));
 
                             if (Name == "Нет") { typedriver = false; } else { typedriver = true; }
 
 
-                            DriverForm f = new DriverForm(id, typedriver, car);
-                            f.ShowDialog();
+                       //     DriverForm f = new DriverForm(id, typedriver, car);
+                         //   f.ShowDialog();
                             dataGridViewDataBase.Rows.Clear();
                             Driver.Driver.ListDriver.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
                             break;
@@ -835,7 +835,7 @@ namespace TProject
 
         private void отобразитьСтатическиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Viewer.ViewPort.DrawRoute();
+            Viewer.ViewPort.MakeStaticRoute();
         }
     }
 }

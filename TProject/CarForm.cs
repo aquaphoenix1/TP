@@ -54,7 +54,7 @@ namespace TProject
 
                     if (findfuel != null)
                     {
-                        fuel = new Fuel(int.Parse(findfuel[0].ToString()), findfuel[1].ToString(), double.Parse(findfuel[2].ToString()));
+                  //     fuel = new Fuel(int.Parse(findfuel[0].ToString()), findfuel[1].ToString(), double.Parse(findfuel[2].ToString()));
                     }
                     if (c == null) c = new Car(tbModel.Text, fuel, double.Parse(tbconsumption.Text));
                     else
