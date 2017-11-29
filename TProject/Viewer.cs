@@ -384,7 +384,11 @@ namespace TProject
             List<long> way = new List<long>();
             Route route = new Route();
             route.FindMinLengthWay(Map.vertexes, Map.edges, out way);
-            Map.SetWay(way);
+            if (way != null)
+                Map.SetWay(way);
+            else
+                MessageBox.Show("Невозможно построить маршрут");
+            ViewPort.Invalidate();
         }
         #endregion
 
