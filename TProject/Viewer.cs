@@ -464,17 +464,15 @@ namespace TProject
         #endregion
         public void SelectStartVertex(int x, int y)
         {
-            if (Map.vertexes.GetSelected(x, y))
-            {
-                Route.Start = selectedVertex;
-            }
+            Vertex v;
+            Map.vertexes.GetSelected(x, y, out v);
+            Route.Start = v;
         }
         public void SelectEndVertex(int x, int y)
         {
-            if (Map.vertexes.GetSelected(x, y))
-            {
-                Route.End = selectedVertex;
-            }
+            Vertex v;
+            Map.vertexes.GetSelected(x, y, out v);
+            Route.End = v;
         }
     }
 

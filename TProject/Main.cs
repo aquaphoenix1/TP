@@ -860,7 +860,7 @@ namespace TProject
             Viewer.ViewPort.DelteVertex(lastClickCoordX, lastClickCoordY);
         }
 
-        private void отобразитьСтатическиToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ToolStripMenuItem_MakeStaticRoute_Click(object sender, EventArgs e)
         {
             Viewer.ViewPort.MakeStaticRoute();
         }

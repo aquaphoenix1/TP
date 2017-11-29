@@ -19,6 +19,21 @@ namespace TProject.Coll
             Viewer.ViewPort.UnSelectAll();
             return false;
         }
+        public bool GetSelected(int x, int y, out Vertex selected)
+        {
+            selected = null;
+            for (int i = 0; i < List.Count; i++)
+            {
+                if (Viewer.IsPointInRectangle(List.ElementAt(i).X, List.ElementAt(i).Y, x, y))
+                {
+                    selected = List.ElementAt(i);
+                    return true;
+                }
+            }
+
+            Viewer.ViewPort.UnSelectAll();
+            return false;
+        }
         public Vertex GetForId(long id)
         {
             for (int i = 0; i < List.Count; i++)
