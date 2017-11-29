@@ -29,7 +29,7 @@ namespace TProject
             textBoxPrice.Text = price.ToString();
         }
 
-        private void buttonAccept_Click(object sender, EventArgs e)
+        private void ButtonAccept_Click(object sender, EventArgs e)
         {
             textBoxNameFuel.BackColor = Color.White;
             textBoxPrice.BackColor = Color.White;
@@ -90,6 +90,7 @@ namespace TProject
             if (new FuelDAO().Update(fuel))
             {
                 Main.IsChanged = true;
+
                 Close();
             }
             else

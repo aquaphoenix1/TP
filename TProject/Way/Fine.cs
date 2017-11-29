@@ -23,11 +23,12 @@ namespace TProject.Way
 
         public static Fine CreateFine(long id, string name, double count)
         {
-            Fine fine = new Fine();
-
-            fine.ID = id;
-            fine.TypeName = name;
-            fine.Count = count;
+            Fine fine = new Fine
+            {
+                ID = id,
+                TypeName = name,
+                Count = count
+            };
 
             return fine;
         }

@@ -27,7 +27,7 @@ namespace TProject
             textBoxCoefficient.Text = coeff.ToString();
         }
 
-        private void buttonAccept_Click(object sender, EventArgs e)
+        private void ButtonAccept_Click(object sender, EventArgs e)
         {
             textBoxTypePolice.BackColor = Color.White;
             textBoxCoefficient.BackColor = Color.White;
@@ -40,8 +40,7 @@ namespace TProject
             }
             else
             {
-                double d;
-                if (double.TryParse(textBoxCoefficient.Text, out d))
+                if (double.TryParse(textBoxCoefficient.Text, out double d))
                 {
                     if (police == null)
                     {
@@ -52,7 +51,7 @@ namespace TProject
                         police.TypeName = textBoxTypePolice.Text;
                         police.Coeff = d;
                     }
-                    
+
                     if (addOrEdit)
                     {
                         Add();
@@ -76,6 +75,7 @@ namespace TProject
             if (new PoliceDAO().Insert(police))
             {
                 Main.IsChanged = true;
+
                 this.Close();
             }
             else

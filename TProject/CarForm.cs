@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TProject.Driver;
 using TProject.TypeDAO;
@@ -15,76 +10,108 @@ namespace TProject
     public partial class CarForm : Form
     {
         private bool addOrEdit; //Добавление или изменение
-        private Car c;
-        private Fuel fuel;
+        private Car car;
 
         private CarForm()
         {
             InitializeComponent();
         }
 
-        //изменение кнопки
         public CarForm(bool addOrEdit) : this()
         {
-            Fuel.ListFuel.ForEach(var => cbIDFuel.Items.Add(var[0]));
-            button1.Text = (addOrEdit) ? "Добавить" : "Изменить";
+            Fuel.ListFuel.ForEach(var => comboBoxIDFuel.Items.Add(var[0]));
             this.addOrEdit = addOrEdit;
         }
-        //Конструктор для изменения
-        public CarForm(int id, string Model, Fuel fuel, double consumption) : this(false)
+
+        public CarForm(long id, string model, Fuel fuel, double consumption) : this(false)
         {
-            c = new Car(id, Model, fuel, consumption);
-            tbModel.Text = Model;
-            int index = cbIDFuel.FindString(fuel.ID.ToString());
-            cbIDFuel.SelectedIndex = index;
-            tbconsumption.Text = consumption.ToString();
+            car = Car.CreateCar(id, model, fuel, consumption);
+            textBoxModel.Text = model;
+            comboBoxIDFuel.SelectedIndex = comboBoxIDFuel.FindString(fuel.ID.ToString());
+            textBoxConsumption.Text = consumption.ToString();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ButtonAccept_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tbModel.Text) || string.IsNullOrWhiteSpace(tbconsumption.Text) || cbIDFuel.SelectedItem.ToString() == "")
-                MessageBox.Show("Поля не заданы  !");
+            string model = textBoxModel.Text;
+            string consumption = textBoxConsumption.Text;
 
+            textBoxModel.BackColor = Color.White;
+            textBoxConsumption.BackColor = Color.White;
+
+            if (string.IsNullOrWhiteSpace(model) || string.IsNullOrEmpty(model))
+            {
+                MessageBox.Show("Не корректное значение модели!");
+                textBoxModel.BackColor = Color.Red;
+            }
             else
             {
-                double consumption;
-                if (double.TryParse(tbconsumption.Text, out consumption))
+                if (double.TryParse(consumption, out double d))
                 {
-                    var findfuel = Fuel.ListFuel.FirstOrDefault(l => l.ElementAt(0).ToString() == cbIDFuel.SelectedItem.ToString());
-
-                    if (findfuel != null)
+                    if (long.TryParse(comboBoxIDFuel.Text, out long idFuel))
                     {
-                        fuel = new Fuel(int.Parse(findfuel[0].ToString()), findfuel[1].ToString(), double.Parse(findfuel[2].ToString()));
+                        var findfuel = Fuel.ListFuel.First(l => l.ElementAt(0).ToString() == comboBoxIDFuel.SelectedItem.ToString());
+
+                        Fuel fuel = Fuel.CreateFuel(long.Parse(findfuel[0].ToString()), findfuel[1].ToString(), double.Parse(findfuel[2].ToString()));
+
+                        if (car == null)
+                        {
+                            car = new Car(textBoxModel.Text, fuel, double.Parse(textBoxConsumption.Text));
+                        }
+                        else
+                        {
+                            car.TypeName = textBoxModel.Text;
+                            car.CarFuel = fuel;
+                            car.FuelConsumption = double.Parse(textBoxConsumption.Text);
+                        }
+
+                        if (addOrEdit)
+                        {
+                            Add();
+                        }
+                        else
+                        {
+                            Edit();
+                        }
                     }
-                    if (c == null) c = new Car(tbModel.Text, fuel, double.Parse(tbconsumption.Text));
                     else
                     {
-                        // var findfuel1 = Fuel.ListFuel.FirstOrDefault(l => l.ElementAt(0).ToString() == cbIDFuel.SelectedItem.ToString());
-                        //Fuel fuel1 = new Fuel(int.Parse(findfuel[0].ToString()), findfuel[1].ToString(), double.Parse(findfuel[2].ToString()));
-                        c.Model = tbModel.Text;
-                        c.CarFuel = fuel;
-                        c.FuelConsumption = double.Parse(tbconsumption.Text);
+                        MessageBox.Show("Не выбрано топливо!");
                     }
-                    if (addOrEdit) Add();
-                    else Edit();
-
                 }
-                else MessageBox.Show("Не корректно задана цена !");
+                else
+                {
+                    MessageBox.Show("Не корректно задано потребление!");
+                    textBoxConsumption.BackColor = Color.Red;
+                }
             }
         }
         private void Add()
         {
-            if (new CarDAO().Insert(c))
+            if (new CarDAO().Insert(car))
             {
+                Main.IsChanged = true;
+
                 Close();
+            }
+            else
+            {
+                MessageBox.Show("Ошибка добавления");
+                Car.CurrentMaxID--;
             }
         }
 
         private void Edit()
         {
-            if (new CarDAO().Update(c))
+            if (new CarDAO().Update(car))
             {
+                Main.IsChanged = true;
+
                 Close();
+            }
+            else
+            {
+                MessageBox.Show("Ошибка изменения");
             }
         }
 

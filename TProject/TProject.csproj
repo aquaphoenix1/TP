@@ -97,6 +97,12 @@
     <Compile Include="FineForm.Designer.cs">
       <DependentUpon>FineForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormStreet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStreet.Designer.cs">
+      <DependentUpon>FormStreet.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DataBaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -226,6 +232,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FineForm.resx">
       <DependentUpon>FineForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStreet.resx">
+      <DependentUpon>FormStreet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DataBaseForm.resx">
       <DependentUpon>DataBaseForm.cs</DependentUpon>

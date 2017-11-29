@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TProject.Driver;
 using TProject.TypeDAO;
@@ -14,10 +8,8 @@ namespace TProject
 {
     public partial class DriverForm : Form
     {
-        private bool addOrEdit; //Добавление или изменение
+        private bool addOrEdit;
         private Driver.Driver driver;
-        private string type;
-        private bool typed;
 
         private DriverForm()
         {
@@ -26,51 +18,51 @@ namespace TProject
 
         public DriverForm(bool addOrEdit) : this()
         {
-            Car.ListAuto.ForEach(var => cbIDAuto.Items.Add(var[0]));
-            buttonAccept.Text = (addOrEdit) ? "Добавить" : "Изменить";
+            Car.ListAuto.ForEach(var => comboBoxIDAuto.Items.Add(var[0]));
             this.addOrEdit = addOrEdit;
         }
 
-        public DriverForm(int id, bool typeDriver, Car car) : this(false)
+        public DriverForm(long id, string typeDriver, Car car) : this(false)
         {
-            if (typeDriver == false) { type = "Нет"; } else { type = "Да"; }
-            driver = new Driver.Driver(id, typeDriver, car);
-            int index = cbIDAuto.FindString(car.ID.ToString());
-            cbIDAuto.SelectedIndex = index;
-            tbTypeDriver.Text = type;
+            driver = Driver.Driver.CreateDriver(id, typeDriver.Equals("Нарушитель"), car);
+            checkBoxIsIntruder.Checked = typeDriver.Equals("Нарушитель");
+            comboBoxIDAuto.SelectedIndex = comboBoxIDAuto.FindString(car.ID.ToString());
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ButtonAccept_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tbTypeDriver.Text))
-                MessageBox.Show("Поле тип водителя не задан !");
+            if (long.TryParse(comboBoxIDAuto.Text, out long d))
+            {
+                var findcar = Car.ListAuto.FirstOrDefault(l => l.ElementAt(0).ToString() == comboBoxIDAuto.SelectedItem.ToString());
+
+                var findfuel = Fuel.ListFuel.FirstOrDefault(l => l.ElementAt(0).ToString() == findcar[2].ToString());
+
+                Fuel fuel = Fuel.CreateFuel(long.Parse(findfuel[0].ToString()), findfuel[1].ToString(), double.Parse(findfuel[2].ToString()));
+
+                Car fcar = Car.CreateCar(long.Parse(findcar[0].ToString()), findcar[1].ToString(), fuel, double.Parse(findcar[3].ToString()));
+
+                if (driver == null)
+                {
+                    driver = new Driver.Driver(checkBoxIsIntruder.Checked, fcar);
+                }
+                else
+                {
+                    driver.IsViolateTL = checkBoxIsIntruder.Checked;
+                    driver.Car = fcar;
+                }
+
+                if (addOrEdit)
+                {
+                    Add();
+                }
+                else
+                {
+                    Edit();
+                }
+            }
             else
             {
-                double d;
-                if (double.TryParse(cbIDAuto.Text, out d))
-                {
-                    //нашел машину для водителя
-                    var findcar = Car.ListAuto.FirstOrDefault(l => l.ElementAt(0).ToString() == cbIDAuto.SelectedItem.ToString());
-
-
-                    var findfuel = Fuel.ListFuel.FirstOrDefault(l => l.ElementAt(0).ToString() == findcar[2].ToString());
-
-                    Fuel ffuel = new Fuel(int.Parse(findfuel[0].ToString()), findfuel[1].ToString(), double.Parse(findfuel[2].ToString()));
-
-                    Car fcar = new Car(int.Parse(findcar[0].ToString()), findcar[1].ToString(), ffuel, double.Parse(findcar[3].ToString()));
-
-                    if (tbTypeDriver.Text == "Нет") { typed = false; } else { typed = true; }
-                    if (driver == null) driver = new Driver.Driver(typed, fcar);
-                    else
-                    {
-                        driver.IsViolateTL = typed;
-                        driver.Car = fcar;
-                    }
-                    if (addOrEdit) Add();
-                    else Edit();
-
-                }
-                else MessageBox.Show("Не корректно задан id машины !");
+                MessageBox.Show("Не корректно задан id машины!");
             }
         }
 
@@ -78,7 +70,14 @@ namespace TProject
         {
             if (new DriverDAO().Insert(driver))
             {
+                Main.IsChanged = true;
+
                 this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Ошибка добавления");
+                Driver.Driver.CurrentMaxID--;
             }
         }
 
@@ -86,7 +85,12 @@ namespace TProject
         {
             if (new DriverDAO().Update(driver))
             {
+                Main.IsChanged = true;
                 this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Ошибка изменения");
             }
         }
     }

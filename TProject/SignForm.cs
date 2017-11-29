@@ -31,7 +31,7 @@ namespace TProject
 
 
         //нажата кнопка добавить новое покрытие
-        private void buttonAccept_Click(object sender, EventArgs e)
+        private void ButtonAccept_Click(object sender, EventArgs e)
         {
             textBoxTypeSign.BackColor = Color.White;
             textBoxValueSign.BackColor = Color.White;
@@ -81,6 +81,7 @@ namespace TProject
             if (new SignDAO().Insert(sign))
             {
                 Main.IsChanged = true;
+
                 Close();
             }
             else

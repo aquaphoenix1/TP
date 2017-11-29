@@ -75,9 +75,7 @@ namespace TProject.Way
 
         public double FindMinLengthWay(int fromVertex, int toVertex, Vertexes vertColl, Edges edgColl, out List<long> way)
         {
-            int[,] parents;
-            long[] IDs;
-            double[,] matrix = GetMatrixWay(out parents, out IDs, vertColl, edgColl);
+            double[,] matrix = GetMatrixWay(out int[,] parents, out long[] IDs, vertColl, edgColl);
             int size = (int)Math.Sqrt(matrix.Length);
 
             for (int k = 0; k < size; ++k)
@@ -123,7 +121,7 @@ namespace TProject.Way
             {
                 if (!list[i].IsBilateral)
                 {
-                    if (list[i].GetHead() == one && (second = list[i].GetEnd()) == two && list[i].isConnected(second))
+                    if (list[i].GetHead() == one && (second = list[i].GetEnd()) == two && list[i].IsConnected(second))
                     {
                         return list[i];
                     }

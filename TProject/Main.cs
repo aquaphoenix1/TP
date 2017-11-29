@@ -72,7 +72,7 @@ namespace TProject
             Edge.StreetList = DAO.GetAll("Street");
         }
 
-        private void clearDataGrid()
+        private void ClearDataGrid()
         {
             dataGridViewDataBase.Rows.Clear();
             dataGridViewDataBase.Columns.Clear();
@@ -80,26 +80,14 @@ namespace TProject
 
         private void FillGrid(List<List<object>> listWithData)
         {
-            /*ToArr del = listToArray => {
-                object[] arr = listToArray.ToArray(), result = new object[arr.Length - 1];
-                for (int i = 1; i < arr.Length; i++)
-                {
-                    result[i - 1] = arr[i];
-                }
-
-                return result;
-            };*/
-
             listWithData.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
         }
 
-        //delegate object[] ToArr(List<object> list);
-
-        private void comboBoxSelectTable_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBoxSelectTable_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControlMain.SelectedIndex == 1)
             {
-                clearDataGrid();
+                ClearDataGrid();
                 switch (comboBoxSelectTable.SelectedItem.ToString())
                 {
                     case "Дорожные покрытия":
@@ -117,7 +105,7 @@ namespace TProject
                             dataGridViewDataBase.Columns.Add("id", "ID");
                             dataGridViewDataBase.Columns.Add("type", "Тип полицейского");
                             dataGridViewDataBase.Columns.Add("koefficient", "Коэффициент жадности полицейского");
-                            
+
                             FillGrid(Police.ListTypePolicemen);
                             break;
                         }
@@ -126,7 +114,7 @@ namespace TProject
                             dataGridViewDataBase.Columns.Add("id", "ID");
                             dataGridViewDataBase.Columns.Add("nameFuel", "Название топлива");
                             dataGridViewDataBase.Columns.Add("cost", "Цена");
-                            
+
                             FillGrid(Fuel.ListFuel);
                             break;
                         }
@@ -137,9 +125,10 @@ namespace TProject
                             dataGridViewDataBase.Columns.Add("fuel", "Топливо");
                             dataGridViewDataBase.Columns.Add("consumption", "Потребление");
 
-                            Car.ListAuto.ForEach(val => {
+                            Car.ListAuto.ForEach(val =>
+                            {
                                 object[] array = val.ToArray();
-                                array[2] = Fuel.ListFuel.Select(fuel => fuel).Where(fuel => long.Parse(fuel[0].ToString()) == long.Parse(val[2].ToString())).ToArray()[0][1];
+                                array[2] = Fuel.ListFuel.First(fuel => fuel[0].ToString().Equals(val[2].ToString())).ToArray()[1];
                                 dataGridViewDataBase.Rows.Add(array);
                             });
 
@@ -150,7 +139,7 @@ namespace TProject
                             dataGridViewDataBase.Columns.Add("id", "ID");
                             dataGridViewDataBase.Columns.Add("name", "Название штрафа");
                             dataGridViewDataBase.Columns.Add("cost", "Цена");
-                            
+
                             FillGrid(Fine.ListFine);
                             break;
                         }
@@ -161,9 +150,12 @@ namespace TProject
                             dataGridViewDataBase.Columns.Add("IDauto", "ID автомобиля");
                             dataGridViewDataBase.Columns.Add("model", "Модель автомобиля");
 
-                            Driver.Driver.ListDriver.ForEach(val => {
-                                System.Collections.ArrayList list = new System.Collections.ArrayList(val.ToArray());
-                                list.Add(Car.ListAuto.Select(car => car).Where(car => long.Parse(car[0].ToString()) == long.Parse(val[2].ToString())).ToArray()[0][1]);
+                            Driver.Driver.ListDriver.ForEach(val =>
+                            {
+                                System.Collections.ArrayList list = new System.Collections.ArrayList(val.ToArray())
+                                {
+                                    Car.ListAuto.First(car => car[0].ToString().Equals(val[2].ToString())).ToArray()[1]
+                                };
                                 dataGridViewDataBase.Rows.Add(list.ToArray());
                             });
 
@@ -174,7 +166,7 @@ namespace TProject
                             dataGridViewDataBase.Columns.Add("id", "ID");
                             dataGridViewDataBase.Columns.Add("type", "Тип знака");
                             dataGridViewDataBase.Columns.Add("value", "Значение");
-                            
+
                             FillGrid(Sign.ListSigns);
                             break;
                         }
@@ -182,7 +174,7 @@ namespace TProject
                         {
                             dataGridViewDataBase.Columns.Add("id", "ID");
                             dataGridViewDataBase.Columns.Add("name", "Название улицы");
-                            
+
                             FillGrid(Edge.StreetList);
                             break;
                         }
@@ -190,18 +182,18 @@ namespace TProject
             }
         }
 
-        private void tabControlMain_SelectedIndexChanged(object sender, EventArgs e)
+        private void TabControlMain_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControlMain.SelectedIndex == 0)
             {
-                clearDataGrid();
+                ClearDataGrid();
                 comboBoxSelectTable.SelectedItem = null;
             }
         }
 
         public static bool IsChanged { private get; set; }
 
-        private void buttonAdd_Click(object sender, EventArgs e)
+        private void ButtonAdd_Click(object sender, EventArgs e)
         {
             if (comboBoxSelectTable.SelectedItem != null)
             {
@@ -262,48 +254,51 @@ namespace TProject
                             }
                             break;
                         }
-                    case "Автомобили":///////////
+                    case "Автомобили":
                         {
                             IsChanged = false;
                             new CarForm(true).ShowDialog();
                             if (IsChanged)
                             {
                                 dataGridViewDataBase.Rows.Clear();
-                                Car.ListAuto.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+
+                                Car.ListAuto.ForEach(val =>
+                                {
+                                    object[] array = val.ToArray();
+                                    array[2] = Fuel.ListFuel.First(fuel => fuel[0].ToString().Equals(val[2].ToString())).ToArray()[1];
+                                    dataGridViewDataBase.Rows.Add(array);
+                                });
                             }
                             break;
                         }
-                    case "Водители"://///////////
+                    case "Водители":
                         {
                             IsChanged = false;
                             new DriverForm(true).ShowDialog();
                             if (IsChanged)
                             {
                                 dataGridViewDataBase.Rows.Clear();
-                                Driver.Driver.ListDriver.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+
+                                Driver.Driver.ListDriver.ForEach(val =>
+                                {
+                                    System.Collections.ArrayList list = new System.Collections.ArrayList(val.ToArray())
+                                {
+                                    Car.ListAuto.First(car => car[0].ToString().Equals(val[2].ToString())).ToArray()[1]
+                                };
+                                    dataGridViewDataBase.Rows.Add(list.ToArray());
+                                });
                             }
                             break;
                         }
-                    case "Улицы"://///
+                    case "Улицы":
                         {
                             IsChanged = false;
-                            string[] arr = new string[2];
-                            //arr[0] = (++Edge.curMaxIdStreet).ToString();
-                            arr[1] = "Московское шоссе";
+                            new FormStreet(true).ShowDialog();
+                            if (IsChanged)
+                            {
+                                dataGridViewDataBase.Rows.Clear();
 
-                            object x = arr;
-                            String s = "Московское шоссе";
-                            if (new StreetDAO().Insert(x))
-                            {
-                                List<object> list = new List<object>();
-                                //list.Add(++Edge.curMaxIdStreet);
-                                list.Add(s);
-                                Edge.StreetList.Add(list);
-                                dataGridViewDataBase.Rows.Add(list.ToArray());
-                            }
-                            else
-                            {
-                                //Edge.curMaxIdStreet--;
+                                FillGrid(Edge.StreetList);
                             }
                             break;
                         }
@@ -311,13 +306,13 @@ namespace TProject
             }
         }
 
-        private void buttonDelete_Click(object sender, EventArgs e)
+        private void ButtonDelete_Click(object sender, EventArgs e)
         {
             if (comboBoxSelectTable.SelectedItem != null)
             {
                 switch (comboBoxSelectTable.SelectedItem.ToString())
                 {
-                    case "Типы полицейских": 
+                    case "Типы полицейских":
                         {
                             if (new PoliceDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
                             {
@@ -413,6 +408,7 @@ namespace TProject
         private void PictureBoxMap_MouseDown(object sender, MouseEventArgs e)
         {
             if (!isVertexMoved && !isMapMoved)
+            {
                 switch (e.Button)
                 {
                     case MouseButtons.Right:
@@ -450,7 +446,9 @@ namespace TProject
                                 Viewer.ViewPort.UnSelectVertex();
                             }
                             else
+                            {
                                 Viewer.ViewPort.UnSelectEdge();
+                            }
                         }
                         break;
                     case MouseButtons.Middle:
@@ -461,6 +459,8 @@ namespace TProject
                         }
                         break;
                 }
+            }
+
             if (isCreatedEdge)
             {
                 isCreatedEdge = false;
@@ -498,7 +498,9 @@ namespace TProject
                 case MouseButtons.Left:
                     {
                         if (isVertexMoved)
+                        {
                             isVertexMoved = false;
+                        }
                     }
                     break;
             }
@@ -514,7 +516,10 @@ namespace TProject
             Map.edges.RePaint += Viewer.ViewPort.Invalidate;
 
             if (openSubMapFileDialog.ShowDialog() == DialogResult.OK)
+            {
                 Viewer.ViewPort.OpenPicture(openSubMapFileDialog.FileName);
+            }
+
             Viewer.ViewPort.Invalidate();
         }
 
@@ -553,9 +558,14 @@ namespace TProject
         private void PanelSlide_Click(object sender, EventArgs e)
         {
             if ((slide = !slide))
+            {
                 panelSlideContainer.Size = new Size(205, panelSlideContainer.Size.Width);
+            }
             else
+            {
                 panelSlideContainer.Size = new Size(23, panelSlideContainer.Size.Width);
+            }
+
             panelSlide.SendToBack();
         }
 
@@ -563,7 +573,7 @@ namespace TProject
         {
             button_Ok_Сalibration.Enabled = true;
             button_Calibration.Enabled = false;
-            callibrationEdge = new Edge(new Vertex(20.UnScaling(), 50.UnScaling()),new Vertex(60.UnScaling(), 50.UnScaling()));
+            callibrationEdge = new Edge(new Vertex(20.UnScaling(), 50.UnScaling()), new Vertex(60.UnScaling(), 50.UnScaling()));
             Viewer.ViewPort.Invalidate();
 
             Viewer.ViewPort.View.MouseDown -= PictureBoxMap_MouseDown;
@@ -577,7 +587,7 @@ namespace TProject
             Viewer.ViewPort.View.Paint += View_Paint;
         }
 
-        private void button_Ok_Сalibration_Click(object sender, EventArgs e)
+        private void Button_Ok_Сalibration_Click(object sender, EventArgs e)
         {
             Viewer.ViewPort.ScaleCoefficient = 100 / (callibrationEdge.GetLength(1));
 
@@ -600,12 +610,15 @@ namespace TProject
         }
 
 
-#region Калибровка
+        #region Калибровка
         private void View_Paint(object sender, PaintEventArgs e)
         {
             int dX = Viewer.Width;
             if (selectedLabel != null)
+            {
                 e.Graphics.FillEllipse(PensCase.SelectedVertex, selectedLabel.X.UnScaling(), selectedLabel.Y.UnScaling(), dX, dX);
+            }
+
             e.Graphics.FillEllipse(PensCase.Point, callibrationEdge.GetHead().X.UnScaling(), callibrationEdge.GetHead().Y.UnScaling(), dX, dX);
 
             e.Graphics.FillEllipse(PensCase.Point, callibrationEdge.GetEnd().X.UnScaling(), callibrationEdge.GetEnd().Y.UnScaling(), dX, dX);
@@ -634,8 +647,9 @@ namespace TProject
                 {
                     isVertexMoved = true;
                     selectedLabel = callibrationEdge.GetEnd();
-                } else if (Viewer.IsPointOnEdge(e.X, e.Y, callibrationEdge.GetHead().X, callibrationEdge.GetHead().Y,
-                    callibrationEdge.GetEnd().X, callibrationEdge.GetEnd().Y + Viewer.Height))
+                }
+                else if (Viewer.IsPointOnEdge(e.X, e.Y, callibrationEdge.GetHead().X, callibrationEdge.GetHead().Y,
+                  callibrationEdge.GetEnd().X, callibrationEdge.GetEnd().Y + Viewer.Height))
                 {
                     isCreatedEdge = true;
                 }
@@ -672,150 +686,163 @@ namespace TProject
         }
         #endregion
 
-#region Управление слоями
-        private void checkBox__TrafficLight_CheckedChanged(object sender, EventArgs e)
+        #region Управление слоями
+        private void CheckBox__TrafficLight_CheckedChanged(object sender, EventArgs e)
         {
             Viewer.ViewPort.IsTrafficLight_Visible = ((CheckBox)sender).Checked;
             Viewer.ViewPort.Invalidate();
         }
 
-        private void checkBox_Police_CheckedChanged(object sender, EventArgs e)
+        private void CheckBox_Police_CheckedChanged(object sender, EventArgs e)
         {
             Viewer.ViewPort.IsPolice_Visible = ((CheckBox)sender).Checked;
             Viewer.ViewPort.Invalidate();
         }
 
-        private void checkBox_Sign_CheckedChanged(object sender, EventArgs e)
+        private void CheckBox_Sign_CheckedChanged(object sender, EventArgs e)
         {
             Viewer.ViewPort.IsSign_Visible = ((CheckBox)sender).Checked;
             Viewer.ViewPort.Invalidate();
         }
 
-        private void checkBox_StreetLength_CheckedChanged(object sender, EventArgs e)
+        private void CheckBox_StreetLength_CheckedChanged(object sender, EventArgs e)
         {
             Viewer.ViewPort.IsStreetLength_Visible = ((CheckBox)sender).Checked;
             Viewer.ViewPort.Invalidate();
         }
 
-        private void checkBox_StreetName_CheckedChanged(object sender, EventArgs e)
+        private void CheckBox_StreetName_CheckedChanged(object sender, EventArgs e)
         {
             Viewer.ViewPort.IsStreetName_Visible = ((CheckBox)sender).Checked;
             Viewer.ViewPort.Invalidate();
         }
         #endregion
 
-
-        //Работа с бд.Нажата кнопка изменить.Даниил
-        private void buttonEdit_Click(object sender, EventArgs e)
+        private void ButtonEdit_Click(object sender, EventArgs e)
         {
             if (comboBoxSelectTable.SelectedItem != null && dataGridViewDataBase.SelectedRows.Count > 0)
             {
                 switch (comboBoxSelectTable.SelectedItem.ToString())
                 {
-                    //Работает правильно.Даниил
                     case "Типы полицейских":
                         {
-                            int id = int.Parse(dataGridViewDataBase.SelectedRows[0].Cells["id"].Value.ToString());
+                            long id = long.Parse(dataGridViewDataBase.SelectedRows[0].Cells["id"].Value.ToString());
+                            List<object> police = Police.ListTypePolicemen.First(policeman => policeman[0].ToString().Equals(id.ToString()));
+
                             string typePolice = dataGridViewDataBase.SelectedRows[0].Cells["type"].Value.ToString();
                             double coef = double.Parse(dataGridViewDataBase.SelectedRows[0].Cells["koefficient"].Value.ToString());
-                            PoliceForm f = new PoliceForm(id, typePolice, coef);
-                            f.ShowDialog();
-                            dataGridViewDataBase.Rows.Clear();
-                            Police.ListTypePolicemen.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            new PoliceForm(id, police[1].ToString(), double.Parse(police[2].ToString())).ShowDialog();
+
+                            if (IsChanged)
+                            {
+                                dataGridViewDataBase.Rows.Clear();
+                                FillGrid(Police.ListTypePolicemen);
+                            }
+
                             break;
                         }
-                    //Работает правильно.Даниил
                     case "Дорожные покрытия":
                         {
-                            int id = int.Parse(dataGridViewDataBase.SelectedRows[0].Cells["ID"].Value.ToString());
-                            string typeCoating = dataGridViewDataBase.SelectedRows[0].Cells["name"].Value.ToString();
-                            double coef = double.Parse(dataGridViewDataBase.SelectedRows[0].Cells["koefficient"].Value.ToString());
-                            CoatingForm f = new CoatingForm(id, typeCoating, coef);
-                            f.ShowDialog();
-                            dataGridViewDataBase.Rows.Clear();
-                            Coating.ListSurface.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            long id = long.Parse(dataGridViewDataBase.SelectedRows[0].Cells["ID"].Value.ToString());
+                            List<object> coat = Coating.ListSurface.First(coating => coating[0].ToString().Equals(id.ToString()));
+                            new CoatingForm(id, coat[1].ToString(), double.Parse(coat[2].ToString())).ShowDialog();
+
+                            if (IsChanged)
+                            {
+                                dataGridViewDataBase.Rows.Clear();
+                                FillGrid(Coating.ListSurface);
+                            }
+
                             break;
                         }
-                    //Работает правально.Даниил
                     case "Штрафы":
                         {
-                            int id = int.Parse(dataGridViewDataBase.SelectedRows[0].Cells["ID"].Value.ToString());
-                            string NameFine = dataGridViewDataBase.SelectedRows[0].Cells["name"].Value.ToString();
-                            double cost = double.Parse(dataGridViewDataBase.SelectedRows[0].Cells["cost"].Value.ToString());
-                            FineForm f = new FineForm(id, NameFine, cost);
-                            f.ShowDialog();
-                            dataGridViewDataBase.Rows.Clear();
-                            Fine.ListFine.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            long id = long.Parse(dataGridViewDataBase.SelectedRows[0].Cells["ID"].Value.ToString());
+                            List<object> fine = Fine.ListFine.First(fin => fin[0].ToString().Equals(id.ToString()));
+                            new FineForm(id, fine[1].ToString(), double.Parse(fine[2].ToString())).ShowDialog();
+
+                            if (IsChanged)
+                            {
+                                dataGridViewDataBase.Rows.Clear();
+                                FillGrid(Fine.ListFine);
+                            }
+
                             break;
                         }
-                    //Работает правально.Даниил
                     case "Топливо":
                         {
-                            int id = int.Parse(dataGridViewDataBase.SelectedRows[0].Cells["id"].Value.ToString());
-                            string NameFuel = dataGridViewDataBase.SelectedRows[0].Cells["nameFuel"].Value.ToString();
-                            double price = double.Parse(dataGridViewDataBase.SelectedRows[0].Cells["cost"].Value.ToString());
-                            FuelForm f = new FuelForm(id, NameFuel, price);
-                            f.ShowDialog();
-                            dataGridViewDataBase.Rows.Clear();
-                            Fuel.ListFuel.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            long id = long.Parse(dataGridViewDataBase.SelectedRows[0].Cells["id"].Value.ToString());
+                            List<object> fuel = Fuel.ListFuel.First(fl => fl[0].ToString().Equals(id.ToString()));
+                            new FuelForm(id, fuel[1].ToString(), double.Parse(fuel[2].ToString())).ShowDialog();
+
+                            if (IsChanged)
+                            {
+                                dataGridViewDataBase.Rows.Clear();
+                                FillGrid(Fuel.ListFuel);
+                            }
+
                             break;
                         }
-                    //Работает правально.Даниил
                     case "Дорожные знаки":
                         {
-                            int id = int.Parse(dataGridViewDataBase.SelectedRows[0].Cells["ID"].Value.ToString());
-                            string TypeSign = dataGridViewDataBase.SelectedRows[0].Cells["type"].Value.ToString();
-                            double value = double.Parse(dataGridViewDataBase.SelectedRows[0].Cells["value"].Value.ToString());
-                            SignForm f = new SignForm(id, TypeSign, value);
-                            f.ShowDialog();
-                            dataGridViewDataBase.Rows.Clear();
-                            Sign.ListSigns.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            long id = long.Parse(dataGridViewDataBase.SelectedRows[0].Cells["ID"].Value.ToString());
+                            List<object> sign = Sign.ListSigns.First(sg => sg[0].ToString().Equals(id.ToString()));
+                            new SignForm(id, sign[1].ToString(), int.Parse(sign[2].ToString())).ShowDialog();
+
+                            if (IsChanged)
+                            {
+                                dataGridViewDataBase.Rows.Clear();
+                                FillGrid(Sign.ListSigns);
+                            }
+
                             break;
                         }
-                    //Работает правально.Даниил
                     case "Автомобили":
                         {
-                            int id = int.Parse(dataGridViewDataBase.SelectedRows[0].Cells["id"].Value.ToString());
-                            string model = dataGridViewDataBase.SelectedRows[0].Cells["model"].Value.ToString();
-                            //Здесь почему то записывает такое же значение как и в id
-                            int idCarFuel = int.Parse(dataGridViewDataBase.SelectedRows[0].Cells["IDfuel"].Value.ToString());
-                            double consumption = double.Parse(dataGridViewDataBase.SelectedRows[0].Cells["consumption"].Value.ToString());
-                            //Поиск топлива
-                            var findfuel = Fuel.ListFuel.FirstOrDefault(l => l.ElementAt(0).ToString() == idCarFuel.ToString());
+                            long id = long.Parse(dataGridViewDataBase.SelectedRows[0].Cells["id"].Value.ToString());
+                            List<object> auto = Car.ListAuto.First(car => car[0].ToString().Equals(id.ToString()));
+                            List<object> fl = Fuel.ListFuel.First(f => f[0].ToString().Equals(auto[2].ToString()));
+                            Fuel currentFuel = Fuel.CreateFuel(long.Parse(fl[0].ToString()), fl[1].ToString(), double.Parse(fl[2].ToString()));
 
+                            new CarForm(id, auto[1].ToString(), currentFuel, double.Parse(auto[3].ToString())).ShowDialog();
 
+                            if (IsChanged)
+                            {
+                                dataGridViewDataBase.Rows.Clear();
 
-                            Fuel fuel = new Fuel(int.Parse(findfuel[0].ToString()), findfuel[1].ToString(), double.Parse(findfuel[2].ToString()));
-                            CarForm f = new CarForm(id, model, fuel, consumption);
-                            f.ShowDialog();
-                            dataGridViewDataBase.Rows.Clear();
-                            Car.ListAuto.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                                Car.ListAuto.ForEach(val =>
+                                {
+                                    object[] array = val.ToArray();
+                                    array[2] = Fuel.ListFuel.First(fuel => fuel[0].ToString().Equals(val[2].ToString())).ToArray()[1];
+                                    dataGridViewDataBase.Rows.Add(array);
+                                });
+                            }
                             break;
                         }
-                    //Работает правильно.Даниил
                     case "Водители":
                         {
-                            bool typedriver;
+                            long id = long.Parse(dataGridViewDataBase.SelectedRows[0].Cells["id"].Value.ToString());
+                            List<object> driver = Driver.Driver.ListDriver.First(dv => dv[0].ToString().Equals(id.ToString()));
+                            List<object> auto = Car.ListAuto.First(cr => cr[0].ToString().Equals(driver[2].ToString()));
+                            List<object> fl = Fuel.ListFuel.First(f => f[0].ToString().Equals(auto[2].ToString()));
+                            Fuel currentFuel = Fuel.CreateFuel(long.Parse(fl[0].ToString()), fl[1].ToString(), double.Parse(fl[2].ToString()));
+                            Car car = Car.CreateCar(long.Parse(auto[0].ToString()), auto[1].ToString(), currentFuel, double.Parse(auto[2].ToString()));
+                            new DriverForm(id, driver[1].ToString(), car).ShowDialog();
 
-                            int id = int.Parse(dataGridViewDataBase.SelectedRows[0].Cells["ID"].Value.ToString());
-                            string Name = dataGridViewDataBase.SelectedRows[0].Cells["name"].Value.ToString();
-                            if (Name == "Нет") { typedriver = false; } else { typedriver = true; }
-                            double idauto = double.Parse(dataGridViewDataBase.SelectedRows[0].Cells["IDauto"].Value.ToString());
+                            if (IsChanged)
+                            {
+                                dataGridViewDataBase.Rows.Clear();
 
-                            var fcar = Car.ListAuto.FirstOrDefault(l => l.ElementAt(0).ToString() == idauto.ToString());
-                            var ffuel = Fuel.ListFuel.FirstOrDefault(l => l.ElementAt(0).ToString() == fcar[2].ToString());
+                                Driver.Driver.ListDriver.ForEach(val =>
+                                {
+                                    System.Collections.ArrayList list = new System.Collections.ArrayList(val.ToArray())
+                                {
+                                    Car.ListAuto.First(cr => cr[0].ToString().Equals(val[2].ToString())).ToArray()[1]
+                                };
+                                    dataGridViewDataBase.Rows.Add(list.ToArray());
+                                });
+                            }
 
-                            Fuel fuel = new Fuel(int.Parse(ffuel[0].ToString()), ffuel[1].ToString(), double.Parse(ffuel[2].ToString()));
-
-                            Car car = new Car(int.Parse(fcar[0].ToString()), fcar[1].ToString(), fuel, double.Parse(fcar[3].ToString()));
-
-                            if (Name == "Нет") { typedriver = false; } else { typedriver = true; }
-
-
-                            DriverForm f = new DriverForm(id, typedriver, car);
-                            f.ShowDialog();
-                            dataGridViewDataBase.Rows.Clear();
-                            Driver.Driver.ListDriver.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
                             break;
                         }
                 }
@@ -823,12 +850,12 @@ namespace TProject
 
         }
 
-        private void удалитьПерегонToolStripMenuItem_Click(object sender, EventArgs e)
+        private void УдалитьПерегонToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Viewer.ViewPort.DeleteEdge(lastClickCoordX, lastClickCoordY);
         }
 
-        private void удалитьПерекрестокToolStripMenuItem_Click(object sender, EventArgs e)
+        private void УдалитьПерекрестокToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Viewer.ViewPort.DelteVertex(lastClickCoordX, lastClickCoordY);
         }
