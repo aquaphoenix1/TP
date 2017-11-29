@@ -7,8 +7,8 @@ namespace TProject.Way
 {
     public class Route
     {
-        public Vertex Start { get; set; }
-        public Vertex End { get; set; }
+        public static Vertex Start { get; set; }
+        public static Vertex End { get; set; }
 
         public double[,] GetMatrixWay(out int[,] parents, out long[] arrayOfID, Vertexes vertexes, Edges edges)
         {
@@ -41,9 +41,9 @@ namespace TProject.Way
             }
             return array;
         }
-        public List<int> GetWay(int from, int to, int[,] arrayOfParents)
+        public List<long> GetWay(long from, long to, int[,] arrayOfParents)
         {
-            List<int> list = new List<int>();
+            List<long> list = new List<long>();
 
             int vert = arrayOfParents[from, to];
 
@@ -73,8 +73,10 @@ namespace TProject.Way
             return list;
         }
 
-        public double FindMinLengthWay(int fromVertex, int toVertex, Vertexes vertColl, Edges edgColl, out List<long> way)
+        public double FindMinLengthWay(Vertexes vertColl, Edges edgColl, out List<long> way)
         {
+            long fromVertex = Start.ID;
+            long toVertex = End.ID;
             double[,] matrix = GetMatrixWay(out int[,] parents, out long[] IDs, vertColl, edgColl);
             int size = (int)Math.Sqrt(matrix.Length);
 
@@ -100,7 +102,7 @@ namespace TProject.Way
             }
             else
             {
-                List<int> wayList = GetWay(fromVertex, toVertex, parents);
+                List<long> wayList = GetWay(fromVertex, toVertex, parents);
 
                 way = new List<long>(wayList.Count);
 
