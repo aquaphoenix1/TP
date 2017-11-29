@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TProject.TypeDAO;
 using TProject.Way;
@@ -14,68 +8,95 @@ namespace TProject
 {
     public partial class CoatingForm : Form
     {
-        private bool addOrEdit; //Добавление или изменение.Даниил
-        private Coating c;
+        private bool addOrEdit;
+        private Coating coating;
 
         private CoatingForm()
         {
             InitializeComponent();
         }
-
-        //изменение кнопки.Даниил
+        
         public CoatingForm(bool addOrEdit) : this()
         {
-            button1.Text = (addOrEdit) ? "Добавить" : "Изменить";
             this.addOrEdit = addOrEdit;
         }
-        //Конструктор.Даниил
-        public CoatingForm(int id, string tCoating, double coeff) : this(false)
+
+        public CoatingForm(long id, string tCoating, double coeff) : this(false)
         {
-            c = new Coating(id, tCoating, coeff);
-            tb_TypeCoating.Text = tCoating;
-            tb_Coefficient.Text = coeff.ToString();
+            coating = Coating.CreateCoating(id, tCoating, coeff);
+
+            textBoxTypeCoating.Text = tCoating;
+            textBoxCoefficient.Text = coeff.ToString();
         }
-
-
-        //нажата кнопка добавить новое покрытие.Даниил
-        private void button1_Click(object sender, EventArgs e)
+        
+        private void buttonAccept_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tb_TypeCoating.Text))
-                MessageBox.Show("Тип покрытия не задано !");
+            textBoxCoefficient.BackColor = Color.White;
+            textBoxTypeCoating.BackColor = Color.White;
+
+            string type = textBoxTypeCoating.Text;
+
+            if (string.IsNullOrWhiteSpace(type) || string.IsNullOrEmpty(type))
+            {
+                MessageBox.Show("Тип покрытия не задан!");
+                textBoxTypeCoating.BackColor = Color.Red;
+            }
             else
             {
-                double d;
-                if (double.TryParse(tb_Coefficient.Text, out d))
+                if (double.TryParse(textBoxCoefficient.Text, out double d))
                 {
-                    if (c == null) c = new Coating(tb_TypeCoating.Text, d);
+                    if (coating == null)
+                    {
+                        coating = new Coating(type, d);
+                    }
                     else
                     {
-                        c.TypeName = tb_TypeCoating.Text;
-                        c.Coeff = d;
+                        coating.TypeName = textBoxTypeCoating.Text;
+                        coating.Coeff = d;
                     }
-                    if (addOrEdit) Add();
-                    else Edit();
 
+                    if (addOrEdit)
+                    {
+                        Add();
+                    }
+                    else
+                    {
+                        Edit();
+                    }
                 }
-                else MessageBox.Show("Не корректно задан коэффициент !");
+                else
+                {
+                    MessageBox.Show("Не корректно задан коэффициент!");
+                    textBoxCoefficient.BackColor = Color.Red;
+                }
             }
 
         }
 
-
         private void Add()
         {
-            if (new CoatingDAO().Insert(c))
+            if (new CoatingDAO().Insert(coating))
             {
+                Main.IsChanged = true;
                 Close();
+            }
+            else
+            {
+                MessageBox.Show("ОШибка добавления");
+                Coating.CurrentMaxID--;
             }
         }
 
         private void Edit()
         {
-            if (new CoatingDAO().Update(c))
+            if (new CoatingDAO().Update(coating))
             {
+                Main.IsChanged = true;
                 Close();
+            }
+            else
+            {
+                MessageBox.Show("Ошибка изменения");
             }
         }
     }

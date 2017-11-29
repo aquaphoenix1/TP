@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TProject.TypeDAO;
 using TProject.Way;
@@ -14,65 +8,94 @@ namespace TProject
 {
     public partial class FineForm : Form
     {
-        private bool addOrEdit; //Добавление или изменение
-        private Fine f;
+        private bool addOrEdit;
+        private Fine fine;
 
         private FineForm()
         {
             InitializeComponent();
         }
-
-        //изменение кнопки
+        
         public FineForm(bool addOrEdit) : this()
         {
-            button1.Text = (addOrEdit) ? "Добавить" : "Изменить";
             this.addOrEdit = addOrEdit;
         }
-        //Конструктор
-        public FineForm(int id, string nFine, double cost) : this(false)
+
+        public FineForm(long id, string nFine, double cost) : this(false)
         {
-            f = new Fine(id, nFine, cost);
-            tbNameFine.Text = nFine;
-            tbSummaFine.Text = cost.ToString();
+            fine = Fine.CreateFine(id, nFine, cost);
+
+            textBoxNameFine.Text = nFine;
+            textBoxValueFine.Text = cost.ToString();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonAccept_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tbNameFine.Text))
-                MessageBox.Show("Название штрафа не задано !");
+            textBoxNameFine.BackColor = Color.White;
+            textBoxValueFine.BackColor = Color.White;
+
+            string name = textBoxNameFine.Text;
+
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrEmpty(name))
+            {
+                MessageBox.Show("Название штрафа не задано!");
+                textBoxNameFine.BackColor = Color.Red;
+            }
             else
             {
-                double d;
-                if (double.TryParse(tbSummaFine.Text, out d))
+                if (double.TryParse(textBoxValueFine.Text, out double d) || d > 0)
                 {
-                    if (f == null) f = new Fine(tbNameFine.Text, d);
-
+                    if (fine == null)
+                    {
+                        fine = new Fine(name, d);
+                    }
                     else
                     {
-                        long index = f.ID;
-                        f.TypeName = tbNameFine.Text;
-                        f.Count = d;
+                        fine.TypeName = textBoxNameFine.Text;
+                        fine.Count = d;
                     }
-                    if (addOrEdit) Add();
-                    else Edit();
 
+                    if (addOrEdit)
+                    {
+                        Add();
+                    }
+                    else
+                    {
+                        Edit();
+                    }
                 }
-                else MessageBox.Show("Не корректно задан коэффициент !");
+                else
+                {
+                    MessageBox.Show("Не корректно задан коэффициент!");
+                    textBoxValueFine.BackColor = Color.Red;
+                }
             }
         }
+
         private void Add()
         {
-            if (new FineDAO().Insert(f))
+            if (new FineDAO().Insert(fine))
             {
+                Main.IsChanged = true;
                 Close();
+            }
+            else
+            {
+                MessageBox.Show("Ошибка добавления");
+                Fine.CurrentMaxID--;
             }
         }
 
         private void Edit()
         {
-            if (new FineDAO().Update(f))
+            if (new FineDAO().Update(fine))
             {
+                Main.IsChanged = true;
                 Close();
+            }
+            else
+            {
+                MessageBox.Show("ОШибка изменения");
             }
         }
     }

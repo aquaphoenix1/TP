@@ -6,7 +6,7 @@ namespace TProject.Way
     //Fine [ID] Integer , [NameFine] char(20), [CostFine] real 
     public class Fine : Type
     {
-        public static long CurrentMaxID { private get; set; }
+        public static long CurrentMaxID { get; set; }
         public static List<List<object>> ListFine { get; set; }
         public double Count { get; set; }
 
@@ -18,12 +18,18 @@ namespace TProject.Way
             this.ID = ++CurrentMaxID;
             this.Count = count;
         }
-        //Используется в "Работе с БД" для изменения - так как нужно найти соот-щую запись.Даниил
-        public Fine(int id, string name, double count) 
+
+        private Fine() { }
+
+        public static Fine CreateFine(long id, string name, double count)
         {
-            this.ID = id;
-            this.TypeName = name;
-            this.Count = count;
+            Fine fine = new Fine();
+
+            fine.ID = id;
+            fine.TypeName = name;
+            fine.Count = count;
+
+            return fine;
         }
     }
 }

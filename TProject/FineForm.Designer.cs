@@ -28,49 +28,49 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.tbSummaFine = new System.Windows.Forms.TextBox();
-            this.tbNameFine = new System.Windows.Forms.TextBox();
+            this.buttonAccept = new System.Windows.Forms.Button();
+            this.labelValue = new System.Windows.Forms.Label();
+            this.textBoxValueFine = new System.Windows.Forms.TextBox();
+            this.textBoxNameFine = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelName = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // button1
+            // buttonAccept
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(174, 125);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Добавить";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonAccept.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonAccept.Location = new System.Drawing.Point(173, 67);
+            this.buttonAccept.Name = "buttonAccept";
+            this.buttonAccept.Size = new System.Drawing.Size(75, 23);
+            this.buttonAccept.TabIndex = 11;
+            this.buttonAccept.Text = "Принять";
+            this.buttonAccept.UseVisualStyleBackColor = true;
+            this.buttonAccept.Click += new System.EventHandler(this.buttonAccept_Click);
             // 
-            // label3
+            // labelValue
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(12, 77);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(105, 16);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Сумма штрафа";
+            this.labelValue.AutoSize = true;
+            this.labelValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelValue.Location = new System.Drawing.Point(12, 37);
+            this.labelValue.Name = "labelValue";
+            this.labelValue.Size = new System.Drawing.Size(105, 16);
+            this.labelValue.TabIndex = 10;
+            this.labelValue.Text = "Сумма штрафа";
             // 
-            // tbSummaFine
+            // textBoxValueFine
             // 
-            this.tbSummaFine.Location = new System.Drawing.Point(124, 76);
-            this.tbSummaFine.Name = "tbSummaFine";
-            this.tbSummaFine.Size = new System.Drawing.Size(125, 20);
-            this.tbSummaFine.TabIndex = 9;
+            this.textBoxValueFine.Location = new System.Drawing.Point(123, 37);
+            this.textBoxValueFine.Name = "textBoxValueFine";
+            this.textBoxValueFine.Size = new System.Drawing.Size(125, 20);
+            this.textBoxValueFine.TabIndex = 9;
             // 
-            // tbNameFine
+            // textBoxNameFine
             // 
-            this.tbNameFine.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbNameFine.Location = new System.Drawing.Point(124, 9);
-            this.tbNameFine.Name = "tbNameFine";
-            this.tbNameFine.Size = new System.Drawing.Size(125, 22);
-            this.tbNameFine.TabIndex = 8;
+            this.textBoxNameFine.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxNameFine.Location = new System.Drawing.Point(124, 9);
+            this.textBoxNameFine.Name = "textBoxNameFine";
+            this.textBoxNameFine.Size = new System.Drawing.Size(125, 22);
+            this.textBoxNameFine.TabIndex = 8;
             // 
             // label2
             // 
@@ -80,28 +80,31 @@
             this.label2.Size = new System.Drawing.Size(0, 13);
             this.label2.TabIndex = 7;
             // 
-            // label1
+            // labelName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 16);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Название";
+            this.labelName.AutoSize = true;
+            this.labelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelName.Location = new System.Drawing.Point(12, 9);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(74, 16);
+            this.labelName.TabIndex = 6;
+            this.labelName.Text = "Название";
             // 
             // FineForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(264, 167);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.tbSummaFine);
-            this.Controls.Add(this.tbNameFine);
+            this.ClientSize = new System.Drawing.Size(264, 96);
+            this.Controls.Add(this.buttonAccept);
+            this.Controls.Add(this.labelValue);
+            this.Controls.Add(this.textBoxValueFine);
+            this.Controls.Add(this.textBoxNameFine);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelName);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FineForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FineForm";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -110,11 +113,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox tbSummaFine;
-        private System.Windows.Forms.TextBox tbNameFine;
+        private System.Windows.Forms.Button buttonAccept;
+        private System.Windows.Forms.Label labelValue;
+        private System.Windows.Forms.TextBox textBoxValueFine;
+        private System.Windows.Forms.TextBox textBoxNameFine;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelName;
     }
 }

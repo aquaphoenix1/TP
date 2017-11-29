@@ -27,7 +27,7 @@ namespace TProject
         public DriverForm(bool addOrEdit) : this()
         {
             Car.ListAuto.ForEach(var => cbIDAuto.Items.Add(var[0]));
-            button1.Text = (addOrEdit) ? "Добавить" : "Изменить";
+            buttonAccept.Text = (addOrEdit) ? "Добавить" : "Изменить";
             this.addOrEdit = addOrEdit;
         }
 

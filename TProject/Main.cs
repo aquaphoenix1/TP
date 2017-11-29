@@ -54,13 +54,13 @@ namespace TProject
         private void Initialize()
         {
             Police.CurrentMaxID = DAO.GetMaxID("Policemen");
-            Coating.curMaxId = DAO.GetMaxID("Surface");
-            Fine.curMaxId = DAO.GetMaxID("Fine");
-            Car.curMaxId = DAO.GetMaxID("Auto");
-            Fuel.curMaxId = DAO.GetMaxID("Fuel");
-            Driver.Driver.curMaxId = DAO.GetMaxID("Driver");
-            Sign.curMaxId = DAO.GetMaxID("Sign");
-            Edge.curMaxIdStreet = DAO.GetMaxID("Street");
+            Coating.CurrentMaxID = DAO.GetMaxID("Surface");
+            Fine.CurrentMaxID = DAO.GetMaxID("Fine");
+            Car.CurrentMaxID = DAO.GetMaxID("Auto");
+            Fuel.CurrentMaxID = DAO.GetMaxID("Fuel");
+            Driver.Driver.CurrentMaxID = DAO.GetMaxID("Driver");
+            Sign.CurrentMaxID = DAO.GetMaxID("Sign");
+            Edge.CurrentMaxID = DAO.GetMaxID("Street");
 
             Coating.ListSurface = DAO.GetAll("Surface");
             Fine.ListFine = DAO.GetAll("Fine");
@@ -80,7 +80,7 @@ namespace TProject
 
         private void FillGrid(List<List<object>> listWithData)
         {
-            ToArr del = listToArray => {
+            /*ToArr del = listToArray => {
                 object[] arr = listToArray.ToArray(), result = new object[arr.Length - 1];
                 for (int i = 1; i < arr.Length; i++)
                 {
@@ -88,12 +88,12 @@ namespace TProject
                 }
 
                 return result;
-            };
+            };*/
 
-            listWithData.ForEach(val => dataGridViewDataBase.Rows.Add(del(val)));
+            listWithData.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
         }
 
-        delegate object[] ToArr(List<object> list);
+        //delegate object[] ToArr(List<object> list);
 
         private void comboBoxSelectTable_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -104,6 +104,7 @@ namespace TProject
                 {
                     case "Дорожные покрытия":
                         {
+                            dataGridViewDataBase.Columns.Add("id", "ID");
                             dataGridViewDataBase.Columns.Add("name", "Название покрытия");
                             dataGridViewDataBase.Columns.Add("koefficient", "Коэффициент торможения");
 
@@ -113,6 +114,7 @@ namespace TProject
                         }
                     case "Типы полицейских":
                         {
+                            dataGridViewDataBase.Columns.Add("id", "ID");
                             dataGridViewDataBase.Columns.Add("type", "Тип полицейского");
                             dataGridViewDataBase.Columns.Add("koefficient", "Коэффициент жадности полицейского");
                             
@@ -121,6 +123,7 @@ namespace TProject
                         }
                     case "Топливо":
                         {
+                            dataGridViewDataBase.Columns.Add("id", "ID");
                             dataGridViewDataBase.Columns.Add("nameFuel", "Название топлива");
                             dataGridViewDataBase.Columns.Add("cost", "Цена");
                             
@@ -129,7 +132,7 @@ namespace TProject
                         }
                     case "Автомобили":
                         {
-                            dataGridViewDataBase.Columns.Add("id", "Номер автомобиля");
+                            dataGridViewDataBase.Columns.Add("id", "ID");
                             dataGridViewDataBase.Columns.Add("model", "Модель");
                             dataGridViewDataBase.Columns.Add("fuel", "Топливо");
                             dataGridViewDataBase.Columns.Add("consumption", "Потребление");
@@ -144,6 +147,7 @@ namespace TProject
                         }
                     case "Штрафы":
                         {
+                            dataGridViewDataBase.Columns.Add("id", "ID");
                             dataGridViewDataBase.Columns.Add("name", "Название штрафа");
                             dataGridViewDataBase.Columns.Add("cost", "Цена");
                             
@@ -152,32 +156,22 @@ namespace TProject
                         }
                     case "Водители":
                         {
+                            dataGridViewDataBase.Columns.Add("id", "ID");
                             dataGridViewDataBase.Columns.Add("name", "Тип водителя");
                             dataGridViewDataBase.Columns.Add("IDauto", "ID автомобиля");
                             dataGridViewDataBase.Columns.Add("model", "Модель автомобиля");
 
-                            ToArr del = listToArray => {
-                                object[] arr = listToArray.ToArray(), result = new object[arr.Length - 1];
-                                for (int i = 1; i < arr.Length; i++)
-                                {
-                                    result[i - 1] = arr[i];
-                                }
-
-                                return result;
-                            };
-
                             Driver.Driver.ListDriver.ForEach(val => {
-                                object[] array = val.ToArray();
-                                array[0] = array[1];
-                                array[1] = array[2];
-                                array[2] = Car.ListAuto.Select(car => car).Where(car => long.Parse(car[0].ToString()) == long.Parse(val[2].ToString())).ToArray()[0][1];
-                                dataGridViewDataBase.Rows.Add(array);
+                                System.Collections.ArrayList list = new System.Collections.ArrayList(val.ToArray());
+                                list.Add(Car.ListAuto.Select(car => car).Where(car => long.Parse(car[0].ToString()) == long.Parse(val[2].ToString())).ToArray()[0][1]);
+                                dataGridViewDataBase.Rows.Add(list.ToArray());
                             });
 
                             break;
                         }
                     case "Дорожные знаки":
                         {
+                            dataGridViewDataBase.Columns.Add("id", "ID");
                             dataGridViewDataBase.Columns.Add("type", "Тип знака");
                             dataGridViewDataBase.Columns.Add("value", "Значение");
                             
@@ -186,6 +180,7 @@ namespace TProject
                         }
                     case "Улицы":
                         {
+                            dataGridViewDataBase.Columns.Add("id", "ID");
                             dataGridViewDataBase.Columns.Add("name", "Название улицы");
                             
                             FillGrid(Edge.StreetList);
@@ -204,6 +199,8 @@ namespace TProject
             }
         }
 
+        public static bool IsChanged { private get; set; }
+
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             if (comboBoxSelectTable.SelectedItem != null)
@@ -212,58 +209,86 @@ namespace TProject
                 {
                     case "Типы полицейских":
                         {
+                            IsChanged = false;
                             new PoliceForm(true).ShowDialog();
-                            dataGridViewDataBase.Rows.Clear();
-                            FillGrid(Police.ListTypePolicemen);
+                            if (IsChanged)
+                            {
+                                dataGridViewDataBase.Rows.Clear();
+                                FillGrid(Police.ListTypePolicemen);
+                            }
                             break;
                         }
                     case "Дорожные покрытия":
                         {
+                            IsChanged = false;
                             new CoatingForm(true).ShowDialog();
-                            dataGridViewDataBase.Rows.Clear();
-                            FillGrid(Coating.ListSurface);
+                            if (IsChanged)
+                            {
+                                dataGridViewDataBase.Rows.Clear();
+                                FillGrid(Coating.ListSurface);
+                            }
                             break;
                         }
                     case "Штрафы":
                         {
+                            IsChanged = false;
                             new FineForm(true).ShowDialog();
-                            dataGridViewDataBase.Rows.Clear();
-                            FillGrid(Fine.ListFine);
+                            if (IsChanged)
+                            {
+                                dataGridViewDataBase.Rows.Clear();
+                                FillGrid(Fine.ListFine);
+                            }
                             break;
                         }
                     case "Топливо":
                         {
+                            IsChanged = false;
                             new FuelForm(true).ShowDialog();
-                            dataGridViewDataBase.Rows.Clear();
-                            FillGrid(Fuel.ListFuel);
+                            if (IsChanged)
+                            {
+                                dataGridViewDataBase.Rows.Clear();
+                                FillGrid(Fuel.ListFuel);
+                            }
                             break;
                         }
                     case "Дорожные знаки":
                         {
+                            IsChanged = false;
                             new SignForm(true).ShowDialog();
-                            dataGridViewDataBase.Rows.Clear();
-                            FillGrid(Sign.ListSigns);
+                            if (IsChanged)
+                            {
+                                dataGridViewDataBase.Rows.Clear();
+                                FillGrid(Sign.ListSigns);
+                            }
                             break;
                         }
                     case "Автомобили":///////////
                         {
+                            IsChanged = false;
                             new CarForm(true).ShowDialog();
-                            dataGridViewDataBase.Rows.Clear();
-                            Car.ListAuto.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            if (IsChanged)
+                            {
+                                dataGridViewDataBase.Rows.Clear();
+                                Car.ListAuto.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            }
                             break;
                         }
                     case "Водители"://///////////
                         {
-                            DriverForm df = new DriverForm(true);
-                            df.ShowDialog();
-                            dataGridViewDataBase.Rows.Clear();
-                            Driver.Driver.ListDriver.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            IsChanged = false;
+                            new DriverForm(true).ShowDialog();
+                            if (IsChanged)
+                            {
+                                dataGridViewDataBase.Rows.Clear();
+                                Driver.Driver.ListDriver.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
+                            }
                             break;
                         }
                     case "Улицы"://///
                         {
+                            IsChanged = false;
                             string[] arr = new string[2];
-                            arr[0] = (++Edge.curMaxIdStreet).ToString();
+                            //arr[0] = (++Edge.curMaxIdStreet).ToString();
                             arr[1] = "Московское шоссе";
 
                             object x = arr;
@@ -271,28 +296,27 @@ namespace TProject
                             if (new StreetDAO().Insert(x))
                             {
                                 List<object> list = new List<object>();
-                                list.Add(++Edge.curMaxIdStreet);
+                                //list.Add(++Edge.curMaxIdStreet);
                                 list.Add(s);
                                 Edge.StreetList.Add(list);
                                 dataGridViewDataBase.Rows.Add(list.ToArray());
                             }
                             else
                             {
-                                Edge.curMaxIdStreet--;
+                                //Edge.curMaxIdStreet--;
                             }
                             break;
                         }
                 }
             }
         }
-        //Нажата кнопка удалить.Даниил
+
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             if (comboBoxSelectTable.SelectedItem != null)
             {
                 switch (comboBoxSelectTable.SelectedItem.ToString())
                 {
-                    //Работает правильно.Даниил
                     case "Типы полицейских": 
                         {
                             if (new PoliceDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
@@ -305,7 +329,6 @@ namespace TProject
                             }
                             break;
                         }
-                    //Работает правильно.Даниил
                     case "Дорожные покрытия":
                         {
                             if (new CoatingDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
@@ -318,7 +341,6 @@ namespace TProject
                             }
                             break;
                         }
-                    //Работает правильно.Даниил
                     case "Штрафы":
                         {
                             if (new FineDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
@@ -331,7 +353,6 @@ namespace TProject
                             }
                             break;
                         }
-                    //Работает правильно.Даниил
                     case "Топливо":
                         {
                             if (new FuelDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
@@ -344,7 +365,6 @@ namespace TProject
                             }
                             break;
                         }
-                    //Работает правильно.Даниил
                     case "Дорожные знаки":
                         {
                             if (new SignDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
@@ -357,7 +377,6 @@ namespace TProject
                             }
                             break;
                         }
-                    //Работает правильно.Даниил
                     case "Автомобили":
                         {
                             if (new CarDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
@@ -370,7 +389,6 @@ namespace TProject
                             }
                             break;
                         }
-                    //Работает правильно.Даниил
                     case "Водители":
                         {
                             if (new DriverDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
