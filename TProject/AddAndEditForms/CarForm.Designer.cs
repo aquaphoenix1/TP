@@ -42,6 +42,7 @@
             // 
             // comboBoxIDFuel
             // 
+            this.comboBoxIDFuel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxIDFuel.FormattingEnabled = true;
             this.comboBoxIDFuel.Location = new System.Drawing.Point(130, 34);
             this.comboBoxIDFuel.Name = "comboBoxIDFuel";

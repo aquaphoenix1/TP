@@ -64,12 +64,12 @@ namespace TProject
                     if (d < 5)
                     {
                         MessageBox.Show(string.Format("Минимальное количество потребление топлива - {0}!", 5));
-                        textBoxSpeed.BackColor = Color.Red;
+                        textBoxConsumption.BackColor = Color.Red;
                     }
                     else if (d > 25)
                     {
                         MessageBox.Show(string.Format("Максимальное количество потребление топлива - {0}!", 25));
-                        textBoxSpeed.BackColor = Color.Red;
+                        textBoxConsumption.BackColor = Color.Red;
                     }
                     else if (long.TryParse(comboBoxIDFuel.Text, out long idFuel))
                     {
