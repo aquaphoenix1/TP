@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using TProject.Coll;
 using TProject.Graph;
 
@@ -19,16 +15,17 @@ namespace TProject
             vertexes = new Vertexes();
             edges = new Edges();
         }
-        
+
         public static void SetWay(List<long> list)
         {
             Way = new List<Vertex>();
             Vertex vert = null;
-
-            foreach(var o in list)
+            foreach (var o in list)
             {
                 if ((vert = vertexes.GetForId(o)) != null)
+                {
                     Way.Add(vert);
+                }
             }
         }
     }

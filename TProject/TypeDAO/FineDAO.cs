@@ -2,27 +2,25 @@
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TProject.Way;
 
 namespace TProject.TypeDAO
 {
     class FineDAO : DAO
     {
-        //Добаваление в бд и в лист ListTypePolicemen
         public bool Insert(Type obj)
         {
             try
             {
-
                 Fine f = (Fine)obj;
                 new SQLiteCommand(string.Format("Insert into Fine values ({0} , \'{1}\', {2})", f.ID, f.TypeName, f.Count), DAO.GetConnection()).ExecuteNonQuery();
 
-                List<object> list = new List<object>();
-                list.Add(f.ID);
-                list.Add(f.TypeName);
-                list.Add(f.Count);
+                List<object> list = new List<object>
+                {
+                    f.ID,
+                    f.TypeName,
+                    f.Count
+                };
                 Fine.ListFine.Add(list);
 
                 return true;
@@ -32,7 +30,7 @@ namespace TProject.TypeDAO
                 return false;
             }
         }
-        //Удаление из бд и из листа ListTypePolicemen
+
         public bool Delete(long ID)
         {
             try
@@ -48,7 +46,7 @@ namespace TProject.TypeDAO
                 return false;
             }
         }
-        //Изменение в бд и в листе ListTypePolicemen
+
         public bool Update(Type obj)
         {
             try

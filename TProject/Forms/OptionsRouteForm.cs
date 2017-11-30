@@ -1,20 +1,75 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows.Forms;
 
 namespace TProject
 {
-    public partial class optionsRouteForm : Form
+    public partial class OptionsRouteForm : Form
     {
-        public optionsRouteForm()
+        public Main.Criterial Criterial { private set; get; }
+        public Driver.Driver Drive { private set; get; }
+
+        public OptionsRouteForm()
         {
             InitializeComponent();
+
+            TProject.Driver.Driver.ListDriver.ForEach((System.Collections.Generic.List<object> drive) => driverComboBox.Items.Add(drive[0]));
+        }
+
+        private void OkRouteButton_Click(object sender, System.EventArgs e)
+        {
+            if(driverComboBox.SelectedItem.ToString() == "")
+            {
+                MessageBox.Show("Выберите водителя!");
+            }
+            else if (critSearchComboBox.SelectedItem.ToString() == "")
+            {
+                MessageBox.Show("Выберите критерий поиска!");
+            }
+            else
+            {
+                System.Collections.Generic.List<object> driver = Driver.Driver.ListDriver.First(dv => dv[0].ToString().Equals(driverComboBox.SelectedItem.ToString()));
+
+
+                switch (critSearchComboBox.SelectedItem)
+                {
+                    case "Время":
+                        {
+                            Criterial = Main.Criterial.Time;
+                            
+                            break;
+                        }
+                    case "Длина":
+                        {
+                            Criterial = Main.Criterial.Length;
+                            Drive = null;
+                            break;
+                        }
+                    case "Стоимость":
+                        {
+                            Criterial = Main.Criterial.Price;
+
+                            System.Collections.Generic.List<object> cars = Driver.Car.ListAuto.First(car => car[0].ToString().Equals(driver[2].ToString()));
+                            System.Collections.Generic.List<object> fuels = Driver.Fuel.ListFuel.First(fuel => fuel[0].ToString().Equals(cars[2].ToString()));
+
+                            Driver.Fuel curFuel = Driver.Fuel.CreateFuel(long.Parse(fuels[0].ToString()), fuels[1].ToString(), double.Parse(fuels[2].ToString()));
+                            Driver.Car curCar = Driver.Car.CreateCar(long.Parse(cars[0].ToString()), cars[1].ToString(), curFuel, double.Parse(cars[3].ToString()), double.Parse(cars[4].ToString()));
+                            Drive = Driver.Driver.CreateDriver(long.Parse(driver[0].ToString()), bool.Parse(driver[1].ToString()), curCar);
+
+                            break;
+                        }
+                }
+
+                this.DialogResult = DialogResult.OK;
+
+                Hide();
+            }
+        }
+
+        private void CancelRouteButton_Click(object sender, System.EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+
+            Close();
         }
     }
 }

@@ -12,8 +12,6 @@ namespace TProject
 {
     public partial class Main : Form
     {
-
-
         /// <summary>
         /// Показывает, перемещается ли в данный момент карта
         /// </summary>
@@ -124,6 +122,7 @@ namespace TProject
                             dataGridViewDataBase.Columns.Add("model", "Модель");
                             dataGridViewDataBase.Columns.Add("fuel", "Топливо");
                             dataGridViewDataBase.Columns.Add("consumption", "Потребление");
+                            dataGridViewDataBase.Columns.Add("speed", "Скорость");
 
                             Car.ListAuto.ForEach(val =>
                             {
@@ -146,7 +145,7 @@ namespace TProject
                     case "Водители":
                         {
                             dataGridViewDataBase.Columns.Add("id", "ID");
-                            dataGridViewDataBase.Columns.Add("name", "Тип водителя");
+                            dataGridViewDataBase.Columns.Add("name", "Нарушитель?");
                             dataGridViewDataBase.Columns.Add("IDauto", "ID автомобиля");
                             dataGridViewDataBase.Columns.Add("model", "Модель автомобиля");
 
@@ -199,14 +198,32 @@ namespace TProject
             {
                 switch (comboBoxSelectTable.SelectedItem.ToString())
                 {
-                    case "Дорожные покрытия":
+                    case "Типы полицейских":
                         {
-                            IsChanged = false;
-                            new CoatingForm(true).ShowDialog();
+                            /*IsChanged = false;
+                            new PoliceForm(true).ShowDialog();
                             if (IsChanged)
                             {
                                 dataGridViewDataBase.Rows.Clear();
-                                FillGrid(Coating.ListSurface);
+                                FillGrid(Police.ListTypePolicemen);
+                            }*/
+                            break;
+                        }
+                    case "Дорожные покрытия":
+                        {
+                            if (Coating.ListSurface.Count == 10)
+                            {
+                                MessageBox.Show(string.Format("Максимальное количество дорожных покрытий - {0}", 10));
+                            }
+                            else
+                            {
+                                IsChanged = false;
+                                new CoatingForm(true).ShowDialog();
+                                if (IsChanged)
+                                {
+                                    dataGridViewDataBase.Rows.Clear();
+                                    FillGrid(Coating.ListSurface);
+                                }
                             }
                             break;
                         }
@@ -223,12 +240,19 @@ namespace TProject
                         }
                     case "Топливо":
                         {
-                            IsChanged = false;
-                            new FuelForm(true).ShowDialog();
-                            if (IsChanged)
+                            if (Fuel.ListFuel.Count == 7)
                             {
-                                dataGridViewDataBase.Rows.Clear();
-                                FillGrid(Fuel.ListFuel);
+                                MessageBox.Show(string.Format("Максимальное количество видов топлива - {0}", 7));
+                            }
+                            else
+                            {
+                                IsChanged = false;
+                                new FuelForm(true).ShowDialog();
+                                if (IsChanged)
+                                {
+                                    dataGridViewDataBase.Rows.Clear();
+                                    FillGrid(Fuel.ListFuel);
+                                }
                             }
                             break;
                         }
@@ -245,49 +269,70 @@ namespace TProject
                         }
                     case "Автомобили":
                         {
-                            IsChanged = false;
-                            new CarForm(true).ShowDialog();
-                            if (IsChanged)
+                            if (Car.ListAuto.Count == 10)
                             {
-                                dataGridViewDataBase.Rows.Clear();
-
-                                Car.ListAuto.ForEach(val =>
+                                MessageBox.Show(string.Format("Максимальное количество автомобилей - {0}", 10));
+                            }
+                            else
+                            {
+                                IsChanged = false;
+                                new CarForm(true).ShowDialog();
+                                if (IsChanged)
                                 {
-                                    object[] array = val.ToArray();
-                                    array[2] = Fuel.ListFuel.First(fuel => fuel[0].ToString().Equals(val[2].ToString())).ToArray()[1];
-                                    dataGridViewDataBase.Rows.Add(array);
-                                });
+                                    dataGridViewDataBase.Rows.Clear();
+
+                                    Car.ListAuto.ForEach(val =>
+                                    {
+                                        object[] array = val.ToArray();
+                                        array[2] = Fuel.ListFuel.First(fuel => fuel[0].ToString().Equals(val[2].ToString())).ToArray()[1];
+                                        dataGridViewDataBase.Rows.Add(array);
+                                    });
+                                }
                             }
                             break;
                         }
                     case "Водители":
                         {
-                            IsChanged = false;
-                            new DriverForm(true).ShowDialog();
-                            if (IsChanged)
+                            if (Driver.Driver.ListDriver.Count == 10)
                             {
-                                dataGridViewDataBase.Rows.Clear();
+                                MessageBox.Show(string.Format("Максимальное количество водителей - {0}", 10));
+                            }
+                            else
+                            {
+                                IsChanged = false;
+                                new DriverForm(true).ShowDialog();
+                                if (IsChanged)
+                                {
+                                    dataGridViewDataBase.Rows.Clear();
 
-                                Driver.Driver.ListDriver.ForEach(val =>
-                                {
-                                    System.Collections.ArrayList list = new System.Collections.ArrayList(val.ToArray())
-                                {
+                                    Driver.Driver.ListDriver.ForEach(val =>
+                                    {
+                                        System.Collections.ArrayList list = new System.Collections.ArrayList(val.ToArray())
+                                    {
                                     Car.ListAuto.First(car => car[0].ToString().Equals(val[2].ToString())).ToArray()[1]
-                                };
-                                    dataGridViewDataBase.Rows.Add(list.ToArray());
-                                });
+                                    };
+                                        dataGridViewDataBase.Rows.Add(list.ToArray());
+                                    });
+                                }
                             }
                             break;
                         }
                     case "Улицы":
                         {
-                            IsChanged = false;
-                            new FormStreet(true).ShowDialog();
-                            if (IsChanged)
+                            if (Edge.StreetList.Count == 100)
                             {
-                                dataGridViewDataBase.Rows.Clear();
+                                MessageBox.Show(string.Format("Максимальное количество наименований улиц - {0}", 100));
+                            }
+                            else
+                            {
+                                IsChanged = false;
+                                new FormStreet(true).ShowDialog();
+                                if (IsChanged)
+                                {
+                                    dataGridViewDataBase.Rows.Clear();
 
-                                FillGrid(Edge.StreetList);
+                                    FillGrid(Edge.StreetList);
+                                }
                             }
                             break;
                         }
@@ -301,15 +346,34 @@ namespace TProject
             {
                 switch (comboBoxSelectTable.SelectedItem.ToString())
                 {
-                    case "Дорожные покрытия":
+                    case "Типы полицейских":
                         {
-                            if (new CoatingDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
+                            /*if (new PoliceDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
                             {
                                 dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
                             }
                             else
                             {
                                 MessageBox.Show("Невозможно удалить");
+                            }*/
+                            break;
+                        }
+                    case "Дорожные покрытия":
+                        {
+                            if (Coating.ListSurface.Count == 1)
+                            {
+                                MessageBox.Show(string.Format("Минимальное количество дорожных покрытий - {0}", 1));
+                            }
+                            else
+                            {
+                                if (new CoatingDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
+                                {
+                                    dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Невозможно удалить");
+                                }
                             }
                             break;
                         }
@@ -327,13 +391,20 @@ namespace TProject
                         }
                     case "Топливо":
                         {
-                            if (new FuelDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
+                            if (Fuel.ListFuel.Count == 1)
                             {
-                                dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
+                                MessageBox.Show(string.Format("Минимальное количество видов топлива - {0}", 1));
                             }
                             else
                             {
-                                MessageBox.Show("Невозможно удалить");
+                                if (new FuelDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
+                                {
+                                    dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Невозможно удалить");
+                                }
                             }
                             break;
                         }
@@ -351,25 +422,58 @@ namespace TProject
                         }
                     case "Автомобили":
                         {
-                            if (new CarDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
+                            if (Car.ListAuto.Count == 1)
                             {
-                                dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
+                                MessageBox.Show(string.Format("Минимальное количество автомобилей - {0}", 1));
                             }
                             else
                             {
-                                MessageBox.Show("Невозможно удалить");
+                                if (new CarDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
+                                {
+                                    dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Невозможно удалить");
+                                }
                             }
                             break;
                         }
                     case "Водители":
                         {
-                            if (new DriverDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
+                            if (Driver.Driver.ListDriver.Count == 1)
                             {
-                                dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
+                                MessageBox.Show(string.Format("Минимальное количество водителей - {0}", 1));
                             }
                             else
                             {
-                                MessageBox.Show("Невозможно удалить");
+                                if (new DriverDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
+                                {
+                                    dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Невозможно удалить");
+                                }
+                            }
+                            break;
+                        }
+                    case "Улицы":
+                        {
+                            if (Edge.StreetList.Count == 5)
+                            {
+                                MessageBox.Show(string.Format("Минимальное количество наименований улиц - {0}", 5));
+                            }
+                            else
+                            {
+                                if (new StreetDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
+                                {
+                                    dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Невозможно удалить");
+                                }
                             }
                             break;
                         }
@@ -702,6 +806,23 @@ namespace TProject
             {
                 switch (comboBoxSelectTable.SelectedItem.ToString())
                 {
+                    case "Типы полицейских":
+                        {
+                            /*long id = long.Parse(dataGridViewDataBase.SelectedRows[0].Cells["id"].Value.ToString());
+                            List<object> police = Police.ListTypePolicemen.First(policeman => policeman[0].ToString().Equals(id.ToString()));
+
+                            string typePolice = dataGridViewDataBase.SelectedRows[0].Cells["type"].Value.ToString();
+                            double coef = double.Parse(dataGridViewDataBase.SelectedRows[0].Cells["koefficient"].Value.ToString());
+                            new PoliceForm(id, police[1].ToString()).ShowDialog();
+
+                            if (IsChanged)
+                            {
+                                dataGridViewDataBase.Rows.Clear();
+                                FillGrid(Police.ListTypePolicemen);
+                            }*/
+
+                            break;
+                        }
                     case "Дорожные покрытия":
                         {
                             long id = long.Parse(dataGridViewDataBase.SelectedRows[0].Cells["ID"].Value.ToString());
@@ -765,7 +886,7 @@ namespace TProject
                             List<object> fl = Fuel.ListFuel.First(f => f[0].ToString().Equals(auto[2].ToString()));
                             Fuel currentFuel = Fuel.CreateFuel(long.Parse(fl[0].ToString()), fl[1].ToString(), double.Parse(fl[2].ToString()));
 
-                            new CarForm(id, auto[1].ToString(), currentFuel, double.Parse(auto[3].ToString())).ShowDialog();
+                            new CarForm(id, auto[1].ToString(), currentFuel, double.Parse(auto[3].ToString()), double.Parse(auto[4].ToString())).ShowDialog();
 
                             if (IsChanged)
                             {
@@ -787,7 +908,7 @@ namespace TProject
                             List<object> auto = Car.ListAuto.First(cr => cr[0].ToString().Equals(driver[2].ToString()));
                             List<object> fl = Fuel.ListFuel.First(f => f[0].ToString().Equals(auto[2].ToString()));
                             Fuel currentFuel = Fuel.CreateFuel(long.Parse(fl[0].ToString()), fl[1].ToString(), double.Parse(fl[2].ToString()));
-                            Car car = Car.CreateCar(long.Parse(auto[0].ToString()), auto[1].ToString(), currentFuel, double.Parse(auto[2].ToString()));
+                            Car car = Car.CreateCar(long.Parse(auto[0].ToString()), auto[1].ToString(), currentFuel, double.Parse(auto[3].ToString()), double.Parse(auto[4].ToString()));
                             new DriverForm(id, driver[1].ToString(), car).ShowDialog();
 
                             if (IsChanged)
@@ -808,7 +929,6 @@ namespace TProject
                         }
                 }
             }
-
         }
 
         private void УдалитьПерегонToolStripMenuItem_Click(object sender, EventArgs e)
@@ -824,6 +944,24 @@ namespace TProject
         private void ToolStripMenuItem_MakeStaticRoute_Click(object sender, EventArgs e)
         {
             Viewer.ViewPort.MakeStaticRoute();
+        }
+
+        public enum Criterial { Time, Length, Price }
+
+        private void ПараметрыМаршрутаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OptionsRouteForm optionsRouteForm = new OptionsRouteForm();
+
+            optionsRouteForm.ShowDialog();
+
+            if (optionsRouteForm.DialogResult == DialogResult.OK)
+            {
+                Criterial criterial = optionsRouteForm.Criterial;
+                Driver.Driver driver = optionsRouteForm.Drive;
+                optionsRouteForm.Close();
+
+                new Route().FindMinLengthWay(Map.vertexes, Map.edges, criterial, driver);
+            }
         }
     }
 }

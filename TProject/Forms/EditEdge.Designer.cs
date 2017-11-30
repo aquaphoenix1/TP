@@ -82,7 +82,7 @@
             this.signMaxSpeedCheckBox.Size = new System.Drawing.Size(15, 14);
             this.signMaxSpeedCheckBox.TabIndex = 9;
             this.signMaxSpeedCheckBox.UseVisualStyleBackColor = true;
-            this.signMaxSpeedCheckBox.CheckedChanged += new System.EventHandler(this.signMaxSpeedCheckBox_CheckedChanged);
+            this.signMaxSpeedCheckBox.CheckedChanged += new System.EventHandler(this.SignMaxSpeedCheckBox_CheckedChanged);
             // 
             // signTwoWayCheckBox
             // 
@@ -181,7 +181,7 @@
             this.okEditEgdeButton.TabIndex = 12;
             this.okEditEgdeButton.Text = "Ок";
             this.okEditEgdeButton.UseVisualStyleBackColor = true;
-            this.okEditEgdeButton.Click += new System.EventHandler(this.okEditEgdeButton_Click);
+            this.okEditEgdeButton.Click += new System.EventHandler(this.OkEditEgdeButton_Click);
             // 
             // cancelEditEgdeButton
             // 
@@ -193,7 +193,7 @@
             this.cancelEditEgdeButton.TabIndex = 10;
             this.cancelEditEgdeButton.Text = "Отмена";
             this.cancelEditEgdeButton.UseVisualStyleBackColor = true;
-            this.cancelEditEgdeButton.Click += new System.EventHandler(this.cancelEditEgdeButton_Click);
+            this.cancelEditEgdeButton.Click += new System.EventHandler(this.CancelEditEgdeButton_Click);
             // 
             // policemanGroupBox
             // 
@@ -215,7 +215,7 @@
             this.policemanCheckBox.TabIndex = 4;
             this.policemanCheckBox.Text = "Наличие полицейского";
             this.policemanCheckBox.UseVisualStyleBackColor = true;
-            this.policemanCheckBox.CheckedChanged += new System.EventHandler(this.policemanCheckBox_CheckedChanged);
+            this.policemanCheckBox.CheckedChanged += new System.EventHandler(this.PolicemanCheckBox_CheckedChanged);
             // 
             // policemanLabel
             // 

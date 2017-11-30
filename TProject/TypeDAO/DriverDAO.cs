@@ -2,27 +2,24 @@
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TProject.TypeDAO
 {
     class DriverDAO : DAO
     {
-        string typeDriver;
-        //Добаваление в бд 
         public bool Insert(Entity obj)
         {
             try
             {
                 Driver.Driver d = (Driver.Driver)obj;
-                if (d.IsViolateTL == false) { typeDriver = "Нет"; } else { typeDriver = "Да"; }
-                new SQLiteCommand(string.Format("Insert into Driver values ({0},\'{1}\',{2})", d.ID, typeDriver, d.Car.ID), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("Insert into Driver values ({0},\'{1}\',{2})", d.ID, d.IsViolateTL.ToString(), d.Car.ID), DAO.GetConnection()).ExecuteNonQuery();
 
-                List<object> list = new List<object>();
-                list.Add(d.ID);
-                list.Add(d.IsViolateTL);
-                list.Add(d.Car.ID);
+                List<object> list = new List<object>
+                {
+                    d.ID,
+                    d.IsViolateTL,
+                    d.Car.ID
+                };
                 Driver.Driver.ListDriver.Add(list);
 
                 return true;
@@ -32,7 +29,7 @@ namespace TProject.TypeDAO
                 return false;
             }
         }
-        //Удаление из бд и из листа ListTypePolicemen
+
         public bool Delete(long ID)
         {
             try
@@ -48,14 +45,13 @@ namespace TProject.TypeDAO
                 return false;
             }
         }
-        //Изменение в бд и в листе ListTypePolicemen
+
         public bool Update(Entity obj)
         {
             try
             {
                 Driver.Driver d = (Driver.Driver)obj;
-                if (d.IsViolateTL == false) { typeDriver = "Нет"; } else { typeDriver = "Да"; }
-                new SQLiteCommand(string.Format("UPDATE Driver SET [TypeDriver] = '{0}', [IDAuto] = {1}  where [ID]= {2}", typeDriver, int.Parse(d.Car.ID.ToString()), d.ID), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("UPDATE Driver SET [TypeDriver] = '{0}', [IDAuto] = {1}  where [ID]= {2}", d.IsViolateTL.ToString(), int.Parse(d.Car.ID.ToString()), d.ID), DAO.GetConnection()).ExecuteNonQuery();
 
                 var updatedDriver = Driver.Driver.ListDriver.FirstOrDefault(l => l.ElementAt(0).ToString() == d.ID.ToString());
                 if (updatedDriver != null)

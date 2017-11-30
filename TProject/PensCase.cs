@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using TProject.Graph;
 
 namespace TProject
@@ -15,10 +10,9 @@ namespace TProject
         public static Pen SelectedEdgeBilater { get; set; }
         public static Pen SelectedEdgeAtoB { get; set; }
         public static Pen CustomAtoB { get; set; }
-        public static Pen CustomBilat{ get; set; }
+        public static Pen CustomBilat { get; set; }
 
         public static Pen GeneralEdge { get; set; }
-
 
         public static Pen Createble { get; set; }
 
@@ -49,9 +43,12 @@ namespace TProject
             CustomAtoB = new Pen(custom, Vertex.Radius_2);
             CustomBilat = new Pen(custom, Vertex.Radius_2);
 
-            SelectedEdgeAtoB = new Pen(generealEdgeColor, GeneralEdge.Width);
-            SelectedEdgeAtoB.Color = SelectedEdge;
-            SelectedEdgeBilater = new Pen(generealEdgeColor, GeneralEdge.Width); ;
+            SelectedEdgeAtoB = new Pen(generealEdgeColor, GeneralEdge.Width)
+            {
+                Color = SelectedEdge
+            };
+            SelectedEdgeBilater = new Pen(generealEdgeColor, GeneralEdge.Width);
+            ;
             SelectedEdgeBilater.Color = SelectedEdge;
 
             Point = new SolidBrush(generalVert);
@@ -68,6 +65,7 @@ namespace TProject
 
             GeneralEdgeAtoB.StartCap = CustomAtoB.StartCap = SelectedEdgeAtoB.StartCap = System.Drawing.Drawing2D.LineCap.Round;
         }
+
         public static Pen GetCustomPen(bool isBiLat, int w)
         {
             if (isBiLat)
@@ -79,6 +77,7 @@ namespace TProject
             CustomAtoB.Width = w;
             return CustomAtoB;
         }
+
         public static Pen GetPenForEdge(bool isSelected, bool isBiLat, int w)
         {
             if (isSelected)

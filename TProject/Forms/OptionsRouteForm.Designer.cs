@@ -1,6 +1,6 @@
 ﻿namespace TProject
 {
-    partial class optionsRouteForm
+    partial class OptionsRouteForm
     {
         /// <summary>
         /// Required designer variable.
@@ -50,6 +50,7 @@
             this.cancelRouteButton.TabIndex = 11;
             this.cancelRouteButton.Text = "Отмена";
             this.cancelRouteButton.UseVisualStyleBackColor = true;
+            this.cancelRouteButton.Click += new System.EventHandler(this.CancelRouteButton_Click);
             // 
             // routeGroupBox
             // 
@@ -118,8 +119,6 @@
             // 
             this.driverComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.driverComboBox.FormattingEnabled = true;
-            this.driverComboBox.Items.AddRange(new object[] {
-            "Нарушитель"});
             this.driverComboBox.Location = new System.Drawing.Point(151, 13);
             this.driverComboBox.Name = "driverComboBox";
             this.driverComboBox.Size = new System.Drawing.Size(131, 21);
@@ -130,7 +129,9 @@
             this.critSearchComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.critSearchComboBox.FormattingEnabled = true;
             this.critSearchComboBox.Items.AddRange(new object[] {
-            "Время"});
+            "Время",
+            "Стоимость",
+            "Длина"});
             this.critSearchComboBox.Location = new System.Drawing.Point(151, 105);
             this.critSearchComboBox.Name = "critSearchComboBox";
             this.critSearchComboBox.Size = new System.Drawing.Size(131, 21);
@@ -155,8 +156,9 @@
             this.okRouteButton.TabIndex = 12;
             this.okRouteButton.Text = "Ок";
             this.okRouteButton.UseVisualStyleBackColor = true;
+            this.okRouteButton.Click += new System.EventHandler(this.OkRouteButton_Click);
             // 
-            // optionsRouteForm
+            // OptionsRouteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -165,7 +167,7 @@
             this.Controls.Add(this.routeGroupBox);
             this.Controls.Add(this.okRouteButton);
             this.MaximumSize = new System.Drawing.Size(327, 225);
-            this.Name = "optionsRouteForm";
+            this.Name = "OptionsRouteForm";
             this.Text = "Параметры маршрута";
             this.routeGroupBox.ResumeLayout(false);
             this.routeGroupBox.PerformLayout();

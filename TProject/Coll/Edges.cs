@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using TProject.Graph;
 
 namespace TProject.Coll
@@ -24,6 +20,7 @@ namespace TProject.Coll
             Viewer.ViewPort.UnSelectAll();
             return false;
         }
+
         public void DeleteAllConnection(Vertex vertex)
         {
             List.RemoveAll(o => o.GetHead().Equals(vertex) || o.GetEnd().Equals(vertex));

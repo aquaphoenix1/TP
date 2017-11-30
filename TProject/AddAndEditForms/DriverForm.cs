@@ -39,7 +39,7 @@ namespace TProject
 
                 Fuel fuel = Fuel.CreateFuel(long.Parse(findfuel[0].ToString()), findfuel[1].ToString(), double.Parse(findfuel[2].ToString()));
 
-                Car fcar = Car.CreateCar(long.Parse(findcar[0].ToString()), findcar[1].ToString(), fuel, double.Parse(findcar[3].ToString()));
+                Car fcar = Car.CreateCar(long.Parse(findcar[0].ToString()), findcar[1].ToString(), fuel, double.Parse(findcar[3].ToString()), double.Parse(findcar[4].ToString()));
 
                 if (driver == null)
                 {

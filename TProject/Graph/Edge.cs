@@ -34,14 +34,69 @@ namespace TProject.Graph
             EndVertex = c;
         }
 
-
         public void SetHead(Vertex A)
         {
             HeadVertex = A;
         }
+
         public void SetEnd(Vertex B)
         {
             EndVertex = B;
+        }
+
+        internal double GetCriterialValue(Main.Criterial criterial, Driver.Driver driver)
+        {
+            switch (criterial)
+            {
+                case Main.Criterial.Length:
+                    {
+                        return GetLength(Viewer.ViewPort.ScaleCoefficient);
+                    }
+                case Main.Criterial.Price:
+                    {
+                        return GetPrice(GetLength(Viewer.ViewPort.ScaleCoefficient), driver);
+                    }
+                case Main.Criterial.Time:
+                    {
+                        return GetLength(Viewer.ViewPort.ScaleCoefficient);
+                    }
+            }
+
+            return 0;
+        }
+        
+        private double GetPrice(double length, Driver.Driver driver)
+        {
+            double price = 0.0;
+
+            price += driver.Car.FuelConsumption * length * driver.Car.CarFuel.Price;
+
+            if(driver.IsViolateTL && this.Policemen != null && Signs != null)
+            {
+                double different = driver.Car.Speed - Signs.Count;
+
+                if (different > 19)
+                {
+                    if(different < 40)
+                    {
+                        price += this.Policemen.Coeff * 500;
+                    }
+                    else if (different < 60)
+                    {
+                        price += this.Policemen.Coeff * 1000;
+                    }
+                    else if (different < 80)
+                    {
+                        price += this.Policemen.Coeff * 2000;
+                    }
+                    else
+                    {
+                        price += this.Policemen.Coeff * 5000;
+                    }
+                }
+            }
+
+            return price;
         }
 
         private void SetVertex(Vertex A, Vertex B)

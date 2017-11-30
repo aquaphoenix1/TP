@@ -31,7 +31,7 @@ namespace TProject
             string name = textBoxNameStreet.Text;
             textBoxNameStreet.BackColor = Color.White;
 
-            if((string.IsNullOrWhiteSpace(name)) || (string.IsNullOrEmpty(name)))
+            if ((string.IsNullOrWhiteSpace(name)) || (string.IsNullOrEmpty(name)))
             {
                 MessageBox.Show("Не корректное название улицы!");
                 textBoxNameStreet.BackColor = Color.Red;

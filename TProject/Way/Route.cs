@@ -7,10 +7,13 @@ namespace TProject.Way
 {
     public class Route
     {
+        public static List<long> Way { private set; get; }
+        public double Value { private set; get; }
+
         public static Vertex Start;
         public static Vertex End;
 
-        public double[,] GetMatrixWay(out int[,] parents, out long[] arrayOfID, Vertexes vertexes, Edges edges)
+        private double[,] GetMatrixWay(out int[,] parents, out long[] arrayOfID, Vertexes vertexes, Edges edges, Main.Criterial criterial, Driver.Driver driver)
         {
             int count = vertexes.GetCountElements();
 
@@ -33,7 +36,8 @@ namespace TProject.Way
                     else
                     {
                         Edge edge = GetEdge(vertexList[i], vertexList[j], edges);
-                        array[i, j] = (edge != null) ? edge.GetLength(Viewer.ViewPort.ScaleCoefficient) : Double.MaxValue;//edge.GetCriterialValue() : Double.MaxValue;// edge.GetLength() : Double.MaxValue;
+                        array[i, j] = (edge != null) ? edge.GetCriterialValue(criterial, driver) : Double.MaxValue;
+                        //edge.GetLength(Viewer.ViewPort.ScaleCoefficient) : Double.MaxValue;//edge.GetCriterialValue() : Double.MaxValue;// edge.GetLength() : Double.MaxValue;
                     }
                     parents[i, j] = i;
                 }
@@ -41,7 +45,7 @@ namespace TProject.Way
             }
             return array;
         }
-        public List<long> GetWay(long from, long to, int[,] arrayOfParents)
+        private List<long> GetWay(long from, long to, int[,] arrayOfParents)
         {
             List<long> list = new List<long>();
 
@@ -55,35 +59,25 @@ namespace TProject.Way
             }
             list.Add(to);
 
-            /*while (true) 
-            {
-                list.Add(vert);
-
-                int last = vert;
-                vert = arrayOfParents[from, vert];
-
-                if (vert == last)
-                    break;
-            }
-
-            if (list[0] != from)
-                list.Insert(0, from);
-            list.Add(to);
-            */
             return list;
         }
 
-        public double FindMinLengthWay(Vertexes vertColl, Edges edgColl, out List<long> way)
+        public void FindMinLengthWay(Vertexes vertColl, Edges edgColl, Main.Criterial criterial, Driver.Driver driver)
         {
             long fromVertex = 0, toVertex = 0;
             for (int i = 0; i < Map.vertexes.GetCountElements(); i++)
             {
                 if (Map.vertexes.GetElement(i).ID == Start.ID)
+                {
                     fromVertex = i;
+                }
+
                 if (Map.vertexes.GetElement(i).ID == End.ID)
+                {
                     toVertex = i;
+                }
             }
-            double[,] matrix = GetMatrixWay(out int[,] parents, out long[] IDs, vertColl, edgColl);
+            double[,] matrix = GetMatrixWay(out int[,] parents, out long[] IDs, vertColl, edgColl, criterial, driver);
             int size = (int)Math.Sqrt(matrix.Length);
 
             for (int k = 0; k < size; ++k)
@@ -103,25 +97,24 @@ namespace TProject.Way
 
             if (matrix[fromVertex, toVertex] == Double.MaxValue)
             {
-                way = null;
-                return -1;
+                Way = null;
             }
             else
             {
                 List<long> wayList = GetWay(fromVertex, toVertex, parents);
 
-                way = new List<long>(wayList.Count);
+                Way = new List<long>(wayList.Count);
 
                 for (int i = 0; i < wayList.Count; i++)
                 {
-                    way.Add(IDs[wayList[i]]);
+                    Way.Add(IDs[wayList[i]]);
                 }
-
-                return matrix[fromVertex, toVertex];
+                
+                Value = matrix[fromVertex, toVertex];
             }
         }
 
-        public Edge GetEdge(Vertex one, Vertex two, Edges edges)
+        private Edge GetEdge(Vertex one, Vertex two, Edges edges)
         {
             List<Edge> list = edges.List;
             Vertex first = null, second = null;
@@ -146,7 +139,5 @@ namespace TProject.Way
             }
             return null;
         }
-
-
     }
 }

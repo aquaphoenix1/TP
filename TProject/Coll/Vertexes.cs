@@ -19,6 +19,7 @@ namespace TProject.Coll
             Viewer.ViewPort.UnSelectAll();
             return false;
         }
+
         public bool GetSelected(int x, int y, out Vertex selected)
         {
             selected = null;
@@ -32,11 +33,17 @@ namespace TProject.Coll
             }
             return false;
         }
+
         public Vertex GetForId(long id)
         {
             for (int i = 0; i < List.Count; i++)
+            {
                 if (List.ElementAt(i).ID == id)
+                {
                     return List.ElementAt(i);
+                }
+            }
+
             return null;
         }
     }

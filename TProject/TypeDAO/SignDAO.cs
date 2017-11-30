@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TProject.Way;
 
 namespace TProject.TypeDAO
 {
     class SignDAO : DAO
     {
-
         public bool Insert(Type obj)
         {
             try
@@ -18,10 +15,12 @@ namespace TProject.TypeDAO
                 Sign s = (Sign)obj;
                 new SQLiteCommand(string.Format("Insert into Sign values ({0} , \'{1}\', {2})", s.ID, s.TypeName, s.Count), DAO.GetConnection()).ExecuteNonQuery();
 
-                List<object> list = new List<object>();
-                list.Add(s.ID);
-                list.Add(s.TypeName);
-                list.Add(s.Count);
+                List<object> list = new List<object>
+                {
+                    s.ID,
+                    s.TypeName,
+                    s.Count
+                };
                 Sign.ListSigns.Add(list);
 
                 return true;

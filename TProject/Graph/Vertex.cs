@@ -27,11 +27,13 @@ namespace TProject.Graph
         private Rectangle pointOnMap;
 
 
-        public int X {
+        public int X
+        {
             get { return pointOnMap.X; }
             set { pointOnMap.X = value; }
         }
-        public int Y {
+        public int Y
+        {
             get { return pointOnMap.Y; }
             set { pointOnMap.Y = value; }
         }
@@ -41,7 +43,7 @@ namespace TProject.Graph
             Radius = 20;
             Radius_2 = Radius / 2;
         }
-        public Vertex(int x, int y):base()
+        public Vertex(int x, int y) : base()
         {
             pointOnMap = new Rectangle(x, y, Radius, Radius);
             TrafficLight = null;

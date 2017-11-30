@@ -6,53 +6,53 @@ using TProject.Way;
 
 namespace TProject
 {
-    public partial class CoatingForm : Form
+    public partial class SignForm : Form
     {
         private bool addOrEdit;
-        private Coating coating;
+        private Sign sign;
 
-        private CoatingForm()
+        private SignForm()
         {
             InitializeComponent();
         }
-        
-        public CoatingForm(bool addOrEdit) : this()
+
+        public SignForm(bool addOrEdit) : this()
         {
             this.addOrEdit = addOrEdit;
         }
 
-        public CoatingForm(long id, string tCoating, double coeff) : this(false)
+        public SignForm(long id, string tSign, double value) : this(false)
         {
-            coating = Coating.CreateCoating(id, tCoating, coeff);
+            sign = Sign.CreateSign(id, tSign, value);
 
-            textBoxTypeCoating.Text = tCoating;
-            textBoxCoefficient.Text = coeff.ToString();
+            textBoxTypeSign.Text = tSign;
+            textBoxValueSign.Text = value.ToString();
         }
-        
+
         private void ButtonAccept_Click(object sender, EventArgs e)
         {
-            textBoxCoefficient.BackColor = Color.White;
-            textBoxTypeCoating.BackColor = Color.White;
+            textBoxTypeSign.BackColor = Color.White;
+            textBoxValueSign.BackColor = Color.White;
 
-            string type = textBoxTypeCoating.Text;
+            string type = textBoxTypeSign.Text;
 
             if (string.IsNullOrWhiteSpace(type) || string.IsNullOrEmpty(type))
             {
-                MessageBox.Show("Тип покрытия не задан!");
-                textBoxTypeCoating.BackColor = Color.Red;
+                textBoxTypeSign.BackColor = Color.Red;
+                MessageBox.Show("Тип дорожного знака не задан!");
             }
             else
             {
-                if (double.TryParse(textBoxCoefficient.Text, out double d))
+                if (double.TryParse(textBoxValueSign.Text, out double d))
                 {
-                    if (coating == null)
+                    if (sign == null)
                     {
-                        coating = new Coating(type, d);
+                        sign = new Sign(type, d);
                     }
                     else
                     {
-                        coating.TypeName = textBoxTypeCoating.Text;
-                        coating.Coeff = d;
+                        sign.TypeName = type;
+                        sign.Count = d;
                     }
 
                     if (addOrEdit)
@@ -66,16 +66,17 @@ namespace TProject
                 }
                 else
                 {
-                    MessageBox.Show("Не корректно задан коэффициент!");
-                    textBoxCoefficient.BackColor = Color.Red;
+                    MessageBox.Show("Не корректно задано значение!");
+                    textBoxValueSign.BackColor = Color.Red;
                 }
             }
 
         }
 
+
         private void Add()
         {
-            if (new CoatingDAO().Insert(coating))
+            if (new SignDAO().Insert(sign))
             {
                 Main.IsChanged = true;
 
@@ -84,13 +85,13 @@ namespace TProject
             else
             {
                 MessageBox.Show("Ошибка добавления");
-                Coating.CurrentMaxID--;
+                Sign.CurrentMaxID--;
             }
         }
 
         private void Edit()
         {
-            if (new CoatingDAO().Update(coating))
+            if (new SignDAO().Update(sign))
             {
                 Main.IsChanged = true;
                 Close();
