@@ -390,12 +390,12 @@ namespace TProject
 
         public void MakeStaticRoute()
         {
-            List<long> way = new List<long>();
+            /*List<long> way = new List<long>();
             Route route = new Route();
-            route.FindMinLengthWay(Map.vertexes, Map.edges, out way);
-            if (way != null)
+            route.FindMinLengthWay(Map.vertexes, Map.edges, out way);*/
+            if (Route.Way != null)
             {
-                Map.SetWay(way);
+                Map.SetWay(Route.Way);
             }
             else
             {

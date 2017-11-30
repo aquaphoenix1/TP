@@ -36,6 +36,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.labelIDFuel = new System.Windows.Forms.Label();
             this.labelModel = new System.Windows.Forms.Label();
+            this.textBoxSpeed = new System.Windows.Forms.TextBox();
+            this.labelSpeed = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // comboBoxIDFuel
@@ -49,7 +51,7 @@
             // buttonAccept
             // 
             this.buttonAccept.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonAccept.Location = new System.Drawing.Point(183, 94);
+            this.buttonAccept.Location = new System.Drawing.Point(183, 122);
             this.buttonAccept.Name = "buttonAccept";
             this.buttonAccept.Size = new System.Drawing.Size(86, 23);
             this.buttonAccept.TabIndex = 15;
@@ -110,11 +112,31 @@
             this.labelModel.TabIndex = 9;
             this.labelModel.Text = "Модель";
             // 
+            // textBoxSpeed
+            // 
+            this.textBoxSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxSpeed.Location = new System.Drawing.Point(128, 94);
+            this.textBoxSpeed.Name = "textBoxSpeed";
+            this.textBoxSpeed.Size = new System.Drawing.Size(139, 22);
+            this.textBoxSpeed.TabIndex = 18;
+            // 
+            // labelSpeed
+            // 
+            this.labelSpeed.AutoSize = true;
+            this.labelSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelSpeed.Location = new System.Drawing.Point(10, 97);
+            this.labelSpeed.Name = "labelSpeed";
+            this.labelSpeed.Size = new System.Drawing.Size(69, 16);
+            this.labelSpeed.TabIndex = 17;
+            this.labelSpeed.Text = "Скорость";
+            // 
             // CarForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(280, 123);
+            this.ClientSize = new System.Drawing.Size(276, 152);
+            this.Controls.Add(this.textBoxSpeed);
+            this.Controls.Add(this.labelSpeed);
             this.Controls.Add(this.comboBoxIDFuel);
             this.Controls.Add(this.buttonAccept);
             this.Controls.Add(this.labelConsumption);
@@ -143,5 +165,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label labelIDFuel;
         private System.Windows.Forms.Label labelModel;
+        private System.Windows.Forms.TextBox textBoxSpeed;
+        private System.Windows.Forms.Label labelSpeed;
     }
 }

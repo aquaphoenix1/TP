@@ -7,17 +7,12 @@ namespace TProject.TypeDAO
 {
     class DriverDAO : DAO
     {
-        string typeDriver;
         public bool Insert(Entity obj)
         {
             try
             {
                 Driver.Driver d = (Driver.Driver)obj;
-                if (d.IsViolateTL == false)
-                { typeDriver = "Нет"; }
-                else
-                { typeDriver = "Да"; }
-                new SQLiteCommand(string.Format("Insert into Driver values ({0},\'{1}\',{2})", d.ID, typeDriver, d.Car.ID), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("Insert into Driver values ({0},\'{1}\',{2})", d.ID, d.IsViolateTL.ToString(), d.Car.ID), DAO.GetConnection()).ExecuteNonQuery();
 
                 List<object> list = new List<object>
                 {
@@ -56,11 +51,7 @@ namespace TProject.TypeDAO
             try
             {
                 Driver.Driver d = (Driver.Driver)obj;
-                if (d.IsViolateTL == false)
-                { typeDriver = "Нет"; }
-                else
-                { typeDriver = "Да"; }
-                new SQLiteCommand(string.Format("UPDATE Driver SET [TypeDriver] = '{0}', [IDAuto] = {1}  where [ID]= {2}", typeDriver, int.Parse(d.Car.ID.ToString()), d.ID), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("UPDATE Driver SET [TypeDriver] = '{0}', [IDAuto] = {1}  where [ID]= {2}", d.IsViolateTL.ToString(), int.Parse(d.Car.ID.ToString()), d.ID), DAO.GetConnection()).ExecuteNonQuery();
 
                 var updatedDriver = Driver.Driver.ListDriver.FirstOrDefault(l => l.ElementAt(0).ToString() == d.ID.ToString());
                 if (updatedDriver != null)

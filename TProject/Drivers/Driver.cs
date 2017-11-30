@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace TProject.Driver
 {
-    class Driver : Entity
+    public class Driver : Entity
     {
         public static long CurrentMaxID { get; set; }
         public static List<List<object>> ListDriver { get; set; }

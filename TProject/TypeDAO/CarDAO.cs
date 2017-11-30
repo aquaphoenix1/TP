@@ -14,14 +14,15 @@ namespace TProject.TypeDAO
             {
                 Car.ListAuto.FirstOrDefault();
                 Car c = (Car)obj;
-                new SQLiteCommand(string.Format("Insert into Auto values ({0},\'{1}\',{2},{3})", c.ID, c.TypeName, c.CarFuel.ID, c.FuelConsumption), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("Insert into Auto values ({0},\'{1}\',{2},{3},{4})", c.ID, c.TypeName, c.CarFuel.ID, c.FuelConsumption, c.Speed), DAO.GetConnection()).ExecuteNonQuery();
 
                 List<object> list = new List<object>
                 {
                     c.ID,
                     c.TypeName,
                     c.CarFuel.ID,
-                    c.FuelConsumption
+                    c.FuelConsumption,
+                    c.Speed
                 };
                 Car.ListAuto.Add(list);
 
@@ -54,7 +55,7 @@ namespace TProject.TypeDAO
             try
             {
                 Car c = (Car)obj;
-                new SQLiteCommand(string.Format("UPDATE Auto SET [Model] = '{0}', [IDFuel] = {1}, [Сonsumption] = {2} where ID = {3}", c.TypeName, c.CarFuel.ID, c.FuelConsumption, c.ID), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("UPDATE Auto SET [Model] = '{0}', [IDFuel] = {1}, [Сonsumption] = {2}, [Speed] = {4} where ID = {3}", c.TypeName, c.CarFuel.ID, c.FuelConsumption, c.ID, c.Speed), DAO.GetConnection()).ExecuteNonQuery();
 
                 var updatedCar = Car.ListAuto.FirstOrDefault(l => l.ElementAt(0).ToString() == c.ID.ToString());
                 if (updatedCar != null)
@@ -62,6 +63,7 @@ namespace TProject.TypeDAO
                     updatedCar[1] = c.TypeName;
                     updatedCar[2] = c.CarFuel.ID;
                     updatedCar[3] = c.FuelConsumption;
+                    updatedCar[4] = c.Speed;
                 }
 
                 return true;

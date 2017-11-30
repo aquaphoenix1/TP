@@ -153,12 +153,6 @@
     <Compile Include="Forms\OptionsRouteForm.Designer.cs">
       <DependentUpon>OptionsRouteForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddAndEditForms\PoliceForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddAndEditForms\PoliceForm.Designer.cs">
-      <DependentUpon>PoliceForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="AddAndEditForms\SignForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -172,7 +166,6 @@
     <Compile Include="TypeDAO\FineDAO.cs" />
     <Compile Include="TypeDAO\FuelDAO.cs" />
     <Compile Include="TypeDAO\ITypeDAO.cs" />
-    <Compile Include="TypeDAO\PoliceDAO.cs" />
     <Compile Include="Drivers\Car.cs" />
     <Compile Include="Drivers\Fuel.cs" />
     <Compile Include="Graph\Edge.cs" />
@@ -265,9 +258,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\OptionsRouteForm.resx">
       <DependentUpon>OptionsRouteForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AddAndEditForms\PoliceForm.resx">
-      <DependentUpon>PoliceForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

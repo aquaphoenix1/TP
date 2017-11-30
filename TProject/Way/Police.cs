@@ -9,22 +9,57 @@ namespace TProject.Way
         public double Coeff { get; set; }
 
 
-        public Police(string typeName, double coefficient) : base(typeName)
+        public Police(string typeName) : base(typeName)
         {
             this.ID = ++CurrentMaxID;
-            this.Coeff = coefficient;
+            switch (typeName)
+            {
+                case "Добрый":
+                    {
+                        this.Coeff = 1.0;
+                        break;
+                    }
+                case "Жадный":
+                    {
+                        this.Coeff = 1.5;
+                        break;
+                    }
+                case "Супер-ажный":
+                    {
+                        this.Coeff = 2.5;
+                        break;
+                    }
+            }
         }
 
         private Police() { }
 
-        public static Police CreatePolice(long id, string typeName, double coefficient)
+        public static Police CreatePolice(long id, string typeName)
         {
             Police police = new Police
             {
                 ID = id,
-                TypeName = typeName,
-                Coeff = coefficient
+                TypeName = typeName
             };
+
+            switch (typeName)
+            {
+                case "Добрый":
+                    {
+                        police.Coeff = 1.0;
+                        break;
+                    }
+                case "Жадный":
+                    {
+                        police.Coeff = 1.5;
+                        break;
+                    }
+                case "Супер-ажный":
+                    {
+                        police.Coeff = 2.5;
+                        break;
+                    }
+            }
 
             return police;
         }
