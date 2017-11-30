@@ -24,6 +24,7 @@ namespace TProject
         {
             Way = new List<Vertex>();
             Vertex vert = null;
+
             foreach(var o in list)
             {
                 if ((vert = vertexes.GetForId(o)) != null)

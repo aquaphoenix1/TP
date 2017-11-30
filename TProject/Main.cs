@@ -199,17 +199,6 @@ namespace TProject
             {
                 switch (comboBoxSelectTable.SelectedItem.ToString())
                 {
-                    case "Типы полицейских":
-                        {
-                            IsChanged = false;
-                            new PoliceForm(true).ShowDialog();
-                            if (IsChanged)
-                            {
-                                dataGridViewDataBase.Rows.Clear();
-                                FillGrid(Police.ListTypePolicemen);
-                            }
-                            break;
-                        }
                     case "Дорожные покрытия":
                         {
                             IsChanged = false;
@@ -312,18 +301,6 @@ namespace TProject
             {
                 switch (comboBoxSelectTable.SelectedItem.ToString())
                 {
-                    case "Типы полицейских":
-                        {
-                            if (new PoliceDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
-                            {
-                                dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
-                            }
-                            else
-                            {
-                                MessageBox.Show("Невозможно удалить");
-                            }
-                            break;
-                        }
                     case "Дорожные покрытия":
                         {
                             if (new CoatingDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
@@ -518,6 +495,7 @@ namespace TProject
             if (openSubMapFileDialog.ShowDialog() == DialogResult.OK)
             {
                 Viewer.ViewPort.OpenPicture(openSubMapFileDialog.FileName);
+
             }
 
             Viewer.ViewPort.Invalidate();
@@ -724,23 +702,6 @@ namespace TProject
             {
                 switch (comboBoxSelectTable.SelectedItem.ToString())
                 {
-                    case "Типы полицейских":
-                        {
-                            long id = long.Parse(dataGridViewDataBase.SelectedRows[0].Cells["id"].Value.ToString());
-                            List<object> police = Police.ListTypePolicemen.First(policeman => policeman[0].ToString().Equals(id.ToString()));
-
-                            string typePolice = dataGridViewDataBase.SelectedRows[0].Cells["type"].Value.ToString();
-                            double coef = double.Parse(dataGridViewDataBase.SelectedRows[0].Cells["koefficient"].Value.ToString());
-                            new PoliceForm(id, police[1].ToString(), double.Parse(police[2].ToString())).ShowDialog();
-
-                            if (IsChanged)
-                            {
-                                dataGridViewDataBase.Rows.Clear();
-                                FillGrid(Police.ListTypePolicemen);
-                            }
-
-                            break;
-                        }
                     case "Дорожные покрытия":
                         {
                             long id = long.Parse(dataGridViewDataBase.SelectedRows[0].Cells["ID"].Value.ToString());

@@ -312,8 +312,40 @@ namespace TProject
             graph.SmoothingMode = SmoothingMode.HighQuality;
             DrawEdges(graph);
             DrawVertexes(graph);
+
+            if (Route.End != null)
+            {
+                DrawEndPoint(graph);
+            }
+            if (Route.Start != null)
+            {
+                DrawStartPoint( graph);
+            }
+
             if(Map.Way !=  null)
                 DrawRoute(graph);
+        }
+
+        private void DrawStartPoint(Graphics graph)
+        {
+            Pen pen = new Pen(Color.LightGreen);
+            DrawPointFlag(graph, pen, Route.Start.X, Route.Start.Y);
+        }
+
+        private void DrawPointFlag(Graphics graph, Pen pen, int x, int y)
+        {
+            pen.Width = 8;
+            graph.DrawPolygon(pen, new Point[]{
+                new Point((x  + Width  / 2).UnScaling(), (y).UnScaling()),
+                new Point((x - Width).UnScaling(), (y - (Width)).UnScaling()),
+                new Point((x - Width).UnScaling(), (y - (Width * 2)).UnScaling()),
+                new Point((x  + Width  / 2).UnScaling(), (y - (Width * 2)).UnScaling())
+            });
+        }
+        private void DrawEndPoint(Graphics graph)
+        {
+            Pen pen = new Pen(Color.Green);
+            DrawPointFlag(graph, pen, Route.End.X, Route.End.Y);
         }
 
         /// <summary>
