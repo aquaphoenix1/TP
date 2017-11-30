@@ -318,212 +318,212 @@ namespace TProject
             }
             if (Route.Start != null)
             {
-                DrawStartPoint( graph);
+                DrawStartPoint(graph);
             }
 
-            if(Map.Way !=  null)
+            if (Map.Way != null)
                 DrawRoute(graph);
-            }
         }
 
-        private void DrawStartPoint(Graphics graph)
-        {
-            Pen pen = new Pen(Color.LightGreen);
-            DrawPointFlag(graph, pen, Route.Start.X, Route.Start.Y);
-        }
 
-        private void DrawPointFlag(Graphics graph, Pen pen, int x, int y)
-        {
-            pen.Width = 8;
-            graph.DrawPolygon(pen, new Point[]{
+    private void DrawStartPoint(Graphics graph)
+    {
+        Pen pen = new Pen(Color.LightGreen);
+        DrawPointFlag(graph, pen, Route.Start.X, Route.Start.Y);
+    }
+
+    private void DrawPointFlag(Graphics graph, Pen pen, int x, int y)
+    {
+        pen.Width = 8;
+        graph.DrawPolygon(pen, new Point[]{
                 new Point((x  + Width  / 2).UnScaling(), (y).UnScaling()),
                 new Point((x - Width).UnScaling(), (y - (Width)).UnScaling()),
                 new Point((x - Width).UnScaling(), (y - (Width * 2)).UnScaling()),
                 new Point((x  + Width  / 2).UnScaling(), (y - (Width * 2)).UnScaling())
             });
-        }
-        private void DrawEndPoint(Graphics graph)
-        {
-            Pen pen = new Pen(Color.Green);
-            DrawPointFlag(graph, pen, Route.End.X, Route.End.Y);
-        }
+    }
+    private void DrawEndPoint(Graphics graph)
+    {
+        Pen pen = new Pen(Color.Green);
+        DrawPointFlag(graph, pen, Route.End.X, Route.End.Y);
+    }
 
-        /// <summary>
-        /// отрисовывает все перегоны, содержащиеся на карте
-        /// </summary>
-        /// <param name="graph"></param>
-        private void DrawEdges(Graphics graph)
+    /// <summary>
+    /// отрисовывает все перегоны, содержащиеся на карте
+    /// </summary>
+    /// <param name="graph"></param>
+    private void DrawEdges(Graphics graph)
+    {
+        foreach (var item in Map.edges.List)
         {
-            foreach (var item in Map.edges.List)
+            if (!item.Equals(selectedEdge))
             {
-                if (!item.Equals(selectedEdge))
-                {
-                    graph.DrawLine(PensCase.GetCustomPen(false, Width.UnScaling() + 3), item.GetHead().X.UnScaling() + dX, item.GetHead().Y.UnScaling() + dY,
-                        item.GetEnd().X.UnScaling() + dX, item.GetEnd().Y.UnScaling() + dY);
-                    graph.DrawLine(PensCase.GetPenForEdge(false, false, Width.UnScaling()), item.GetHead().X.UnScaling() + dX, item.GetHead().Y.UnScaling() + dY,
-                        item.GetEnd().X.UnScaling() + dX, item.GetEnd().Y.UnScaling() + dY);
-                    if (IsStreetLength_Visible)
-                    {
-                        graph.DrawString(Math.Round(item.GetLength(ScaleCoefficient), 2).ToString(), new Font(mainFormFont.FontFamily, 10f, FontStyle.Italic | FontStyle.Bold,
-                            GraphicsUnit.Point, mainFormFont.GdiCharSet), blackFontBrush,
-                            (item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 - 25),
-                            (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 10));
-                    }
-                }
-            }
-            if (selectedEdge != null)
-            {
-                graph.DrawLine(PensCase.GetPenForEdge(true, false, Width.UnScaling()), selectedEdge.GetHead().X.UnScaling() + dX, selectedEdge.GetHead().Y.UnScaling() + dY,
-                    selectedEdge.GetEnd().X.UnScaling() + dX, selectedEdge.GetEnd().Y.UnScaling() + dY);
+                graph.DrawLine(PensCase.GetCustomPen(false, Width.UnScaling() + 3), item.GetHead().X.UnScaling() + dX, item.GetHead().Y.UnScaling() + dY,
+                    item.GetEnd().X.UnScaling() + dX, item.GetEnd().Y.UnScaling() + dY);
+                graph.DrawLine(PensCase.GetPenForEdge(false, false, Width.UnScaling()), item.GetHead().X.UnScaling() + dX, item.GetHead().Y.UnScaling() + dY,
+                    item.GetEnd().X.UnScaling() + dX, item.GetEnd().Y.UnScaling() + dY);
                 if (IsStreetLength_Visible)
                 {
-                    graph.DrawString(Math.Round(selectedEdge.GetLength(ScaleCoefficient), 2).ToString(), new Font(mainFormFont.FontFamily, 10f, FontStyle.Italic | FontStyle.Bold,
+                    graph.DrawString(Math.Round(item.GetLength(ScaleCoefficient), 2).ToString(), new Font(mainFormFont.FontFamily, 10f, FontStyle.Italic | FontStyle.Bold,
                         GraphicsUnit.Point, mainFormFont.GdiCharSet), blackFontBrush,
-                        (selectedEdge.GetHead().X.UnScaling() + (selectedEdge.GetEnd().X.UnScaling() - selectedEdge.GetHead().X.UnScaling()) / 2 - 25),
-                        (selectedEdge.GetHead().Y.UnScaling() + (selectedEdge.GetEnd().Y.UnScaling() - selectedEdge.GetHead().Y.UnScaling()) / 2 - 10));
+                        (item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 - 25),
+                        (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 10));
                 }
             }
         }
-
-        /// <summary>
-        /// Отрисовывает все перекрестки, содержащиеся на карте
-        /// </summary>
-        /// <param name="graph"></param>
-        private void DrawVertexes(Graphics graph)
+        if (selectedEdge != null)
         {
-            foreach (var item in Map.vertexes.List)
+            graph.DrawLine(PensCase.GetPenForEdge(true, false, Width.UnScaling()), selectedEdge.GetHead().X.UnScaling() + dX, selectedEdge.GetHead().Y.UnScaling() + dY,
+                selectedEdge.GetEnd().X.UnScaling() + dX, selectedEdge.GetEnd().Y.UnScaling() + dY);
+            if (IsStreetLength_Visible)
             {
-                //    if (selectedVertex != item)
-                graph.FillEllipse(PensCase.Point, item.X.UnScaling(), item.Y.UnScaling(), Width, Height);
-            }
-
-            if (selectedVertex != null)
-            {
-                graph.FillEllipse(PensCase.SelectedVertex, selectedVertex.X.UnScaling(), selectedVertex.Y.UnScaling(), Width, Height);
+                graph.DrawString(Math.Round(selectedEdge.GetLength(ScaleCoefficient), 2).ToString(), new Font(mainFormFont.FontFamily, 10f, FontStyle.Italic | FontStyle.Bold,
+                    GraphicsUnit.Point, mainFormFont.GdiCharSet), blackFontBrush,
+                    (selectedEdge.GetHead().X.UnScaling() + (selectedEdge.GetEnd().X.UnScaling() - selectedEdge.GetHead().X.UnScaling()) / 2 - 25),
+                    (selectedEdge.GetHead().Y.UnScaling() + (selectedEdge.GetEnd().Y.UnScaling() - selectedEdge.GetHead().Y.UnScaling()) / 2 - 10));
             }
         }
+    }
 
-        private void DrawRoute(Graphics graph)
+    /// <summary>
+    /// Отрисовывает все перекрестки, содержащиеся на карте
+    /// </summary>
+    /// <param name="graph"></param>
+    private void DrawVertexes(Graphics graph)
+    {
+        foreach (var item in Map.vertexes.List)
         {
-            Pen pen = new Pen(Color.Green, Width.UnScaling() + 4)
-            {
-                StartCap = LineCap.Round,
-                EndCap = LineCap.ArrowAnchor
-            };
-
-            for (int i = 0; i < Map.Way.Count - 1; i++)
-            {
-                graph.DrawLine(pen,
-                  Map.Way.ElementAt(i).X, Map.Way.ElementAt(i).Y,
-                  Map.Way.ElementAt(i + 1).X, Map.Way.ElementAt(i + 1).Y);
-            }
+            //    if (selectedVertex != item)
+            graph.FillEllipse(PensCase.Point, item.X.UnScaling(), item.Y.UnScaling(), Width, Height);
         }
 
-        public void MakeStaticRoute()
+        if (selectedVertex != null)
         {
-            /*List<long> way = new List<long>();
-            Route route = new Route();
-            route.FindMinLengthWay(Map.vertexes, Map.edges, out way);*/
-            if (Route.Way != null)
+            graph.FillEllipse(PensCase.SelectedVertex, selectedVertex.X.UnScaling(), selectedVertex.Y.UnScaling(), Width, Height);
+        }
+    }
+
+    private void DrawRoute(Graphics graph)
+    {
+        Pen pen = new Pen(Color.Green, Width.UnScaling() + 4)
+        {
+            StartCap = LineCap.Round,
+            EndCap = LineCap.ArrowAnchor
+        };
+
+        for (int i = 0; i < Map.Way.Count - 1; i++)
+        {
+            graph.DrawLine(pen,
+              Map.Way.ElementAt(i).X, Map.Way.ElementAt(i).Y,
+              Map.Way.ElementAt(i + 1).X, Map.Way.ElementAt(i + 1).Y);
+        }
+    }
+
+    public void MakeStaticRoute()
+    {
+        /*List<long> way = new List<long>();
+        Route route = new Route();
+        route.FindMinLengthWay(Map.vertexes, Map.edges, out way);*/
+        if (Route.Way != null)
+        {
+            Map.SetWay(Route.Way);
+        }
+        else
+        {
+            MessageBox.Show("Невозможно построить маршрут");
+        }
+
+        ViewPort.Invalidate();
+    }
+    #endregion
+
+    #region Работа с выделением объектов
+
+    /// <summary>
+    /// Помечает указанную вершину как выбранную
+    /// </summary>
+    /// <param name="vertex"></param>
+    public void SelectVertex(Vertex vertex)
+    {
+        selectedVertex = vertex;
+    }
+    public void SelectEdge(Edge edge)
+    {
+        selectedEdge = edge;
+    }
+
+    /// <summary>
+    /// Сбрасывает выделенные ребра и вершины
+    /// </summary>
+    public void UnSelectAll()
+    {
+        selectedVertex = null;
+        selectedEdge = null;
+    }
+    public void UnSelectVertex()
+    {
+        selectedVertex = null;
+    }
+    public void UnSelectEdge()
+    {
+        selectedEdge = null;
+    }
+
+    /// <summary>
+    /// Вызывается при перетаскивании перекрестков на карте
+    /// с помощью указателя мыши
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    public void MoveVertex(int x, int y)
+    {
+        selectedVertex.X = (x - dX).Scaling();
+        selectedVertex.Y = (y - dY).Scaling();
+    }
+    /// <summary>
+    /// Определяет, есть ли вершина в заданной точке
+    /// </summary>
+    /// <param name="x1">Координата точки на карте</param>
+    /// <param name="y1">Координата точки на карте</param>
+    /// <param name="x2">Координата вершины</param>
+    /// <param name="y2">Координата вершины</param>
+    /// <returns></returns>
+    public static bool IsPointInRectangle(int x1, int y1, int x2, int y2)
+    {
+        return x1.UnScaling() + Width >= x2 && y1.UnScaling() + Height >= y2 && x2 >= x1.UnScaling() && y2 >= y1.UnScaling();
+    }
+    public static bool IsPointOnEdge(int x, int y, int x1, int y1, int x2, int y2)
+    {
+        if (x.Scaling() - Width <= Math.Max(x1, x2) && x.Scaling() + Width >= Math.Min(x1, x2) && y.Scaling() - Height <= Math.Max(y1, y2) && y.Scaling() + Height >= Math.Min(y1, y2))
+        {
+            if (x2 == x1)
             {
-                Map.SetWay(Route.Way);
+                return x.Scaling() >= x1 - Width && x.Scaling() <= x1 + Width;
+            }
+            else if (y2 == y1)
+            {
+                return y.Scaling() >= y1 - Width && y.Scaling() <= y1 + Width;
             }
             else
             {
-                MessageBox.Show("Невозможно построить маршрут");
+                double k = (double)(y2 - y1) / (double)(x2 - x1);
+                double pointY = k * x.Scaling() + y1 - k * x1;
+                return pointY - Width <= y.Scaling() && pointY + Width >= y.Scaling();
             }
-
-            ViewPort.Invalidate();
         }
-        #endregion
-
-        #region Работа с выделением объектов
-
-        /// <summary>
-        /// Помечает указанную вершину как выбранную
-        /// </summary>
-        /// <param name="vertex"></param>
-        public void SelectVertex(Vertex vertex)
-        {
-            selectedVertex = vertex;
-        }
-        public void SelectEdge(Edge edge)
-        {
-            selectedEdge = edge;
-        }
-
-        /// <summary>
-        /// Сбрасывает выделенные ребра и вершины
-        /// </summary>
-        public void UnSelectAll()
-        {
-            selectedVertex = null;
-            selectedEdge = null;
-        }
-        public void UnSelectVertex()
-        {
-            selectedVertex = null;
-        }
-        public void UnSelectEdge()
-        {
-            selectedEdge = null;
-        }
-
-        /// <summary>
-        /// Вызывается при перетаскивании перекрестков на карте
-        /// с помощью указателя мыши
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void MoveVertex(int x, int y)
-        {
-            selectedVertex.X = (x - dX).Scaling();
-            selectedVertex.Y = (y - dY).Scaling();
-        }
-        /// <summary>
-        /// Определяет, есть ли вершина в заданной точке
-        /// </summary>
-        /// <param name="x1">Координата точки на карте</param>
-        /// <param name="y1">Координата точки на карте</param>
-        /// <param name="x2">Координата вершины</param>
-        /// <param name="y2">Координата вершины</param>
-        /// <returns></returns>
-        public static bool IsPointInRectangle(int x1, int y1, int x2, int y2)
-        {
-            return x1.UnScaling() + Width >= x2 && y1.UnScaling() + Height >= y2 && x2 >= x1.UnScaling() && y2 >= y1.UnScaling();
-        }
-        public static bool IsPointOnEdge(int x, int y, int x1, int y1, int x2, int y2)
-        {
-            if (x.Scaling() - Width <= Math.Max(x1, x2) && x.Scaling() + Width >= Math.Min(x1, x2) && y.Scaling() - Height <= Math.Max(y1, y2) && y.Scaling() + Height >= Math.Min(y1, y2))
-            {
-                if (x2 == x1)
-                {
-                    return x.Scaling() >= x1 - Width && x.Scaling() <= x1 + Width;
-                }
-                else if (y2 == y1)
-                {
-                    return y.Scaling() >= y1 - Width && y.Scaling() <= y1 + Width;
-                }
-                else
-                {
-                    double k = (double)(y2 - y1) / (double)(x2 - x1);
-                    double pointY = k * x.Scaling() + y1 - k * x1;
-                    return pointY - Width <= y.Scaling() && pointY + Width >= y.Scaling();
-                }
-            }
-            return false;
-        }
-
-        #endregion
-        public void SelectStartVertex(int x, int y)
-        {
-            Map.vertexes.GetSelected(x, y, out Route.Start);
-        }
-        public void SelectEndVertex(int x, int y)
-        {
-            Map.vertexes.GetSelected(x, y, out Route.End);
-        }
+        return false;
     }
+
+    #endregion
+    public void SelectStartVertex(int x, int y)
+    {
+        Map.vertexes.GetSelected(x, y, out Route.Start);
+    }
+    public void SelectEndVertex(int x, int y)
+    {
+        Map.vertexes.GetSelected(x, y, out Route.End);
+    }
+}
 
     public static class ReScaling
     {

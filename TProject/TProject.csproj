@@ -82,6 +82,12 @@
     <Compile Include="AddAndEditForms\CoatingForm.Designer.cs">
       <DependentUpon>CoatingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddAndEditForms\SignForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddAndEditForms\SignForm.Designer.cs">
+      <DependentUpon>SignForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Coll\AbstractCollection.cs" />
     <Compile Include="Coll\Edges.cs" />
     <Compile Include="Coll\Vertexes.cs" />
@@ -152,12 +158,6 @@
     </Compile>
     <Compile Include="Forms\OptionsRouteForm.Designer.cs">
       <DependentUpon>OptionsRouteForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SignForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SignForm.Designer.cs">
-      <DependentUpon>SignForm.cs</DependentUpon>
     </Compile>
     <Compile Include="TypeDAO\CarDAO.cs" />
     <Compile Include="TypeDAO\CoatingDAO.cs" />
