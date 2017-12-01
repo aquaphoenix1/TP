@@ -26,13 +26,13 @@ namespace TProject
             sign = Sign.CreateSign(id, tSign, value);
 
             textBoxTypeSign.Text = tSign;
-            textBoxValueSign.Text = value.ToString();
+            textBoxValueSign.Value =(decimal)value;
         }
 
         private void ButtonAccept_Click(object sender, EventArgs e)
         {
             textBoxTypeSign.BackColor = Color.White;
-            textBoxValueSign.BackColor = Color.White;
+           // textBoxValueSign.BackColor = Color.White;
 
             string type = textBoxTypeSign.Text;
 
@@ -64,11 +64,11 @@ namespace TProject
                         Edit();
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Не корректно задано значение!");
-                    textBoxValueSign.BackColor = Color.Red;
-                }
+                //else
+                //{
+                //    MessageBox.Show("Не корректно задано значение!");
+                //    textBoxValueSign.BackColor = Color.Red;
+                //}
             }
 
         }

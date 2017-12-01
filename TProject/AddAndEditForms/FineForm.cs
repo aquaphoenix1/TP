@@ -43,7 +43,7 @@ namespace TProject
             }
             else
             {
-                if (double.TryParse(textBoxValueFine.Text, out double d) || d > 0)
+                if (double.TryParse(textBoxValueFine.Value.ToString(), out double d) || d > 0)
                 {
                     if (fine == null)
                     {
@@ -64,11 +64,11 @@ namespace TProject
                         Edit();
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Не корректно задан коэффициент!");
-                    textBoxValueFine.BackColor = Color.Red;
-                }
+                //else
+                //{
+                //    MessageBox.Show("Не корректно задан коэффициент!");
+                //    textBoxValueFine.BackColor = Color.Red;
+                //}
             }
         }
 

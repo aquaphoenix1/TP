@@ -73,6 +73,7 @@
             this.ClientSize = new System.Drawing.Size(284, 180);
             this.Controls.Add(this.firstChoiceGroupBox);
             this.Name = "FirstForm";
+            this.ShowIcon = false;
             this.Text = "Выберети действие";
             this.firstChoiceGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);

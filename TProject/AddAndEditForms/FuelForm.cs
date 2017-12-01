@@ -26,13 +26,14 @@ namespace TProject
             fuel = Fuel.CreateFuel(id, nFuel, price);
 
             textBoxNameFuel.Text = nFuel;
-            textBoxPrice.Text = price.ToString();
+            
+            textBoxPrice.Value = (decimal)price;
         }
 
         private void ButtonAccept_Click(object sender, EventArgs e)
         {
             textBoxNameFuel.BackColor = Color.White;
-            textBoxPrice.BackColor = Color.White;
+           // textBoxPrice.BackColor = Color.White;
 
             string name = textBoxNameFuel.Text;
 
@@ -43,7 +44,7 @@ namespace TProject
             }
             else
             {
-                if (double.TryParse(textBoxPrice.Text, out double d) || d > 0)
+                if (double.TryParse(textBoxPrice.Value.ToString(), out double d) || d > 0)
                 {
                     if (fuel == null)
                     {
@@ -64,11 +65,11 @@ namespace TProject
                         Edit();
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Не корректно задана цена!");
-                    textBoxPrice.BackColor = Color.Red;
-                }
+                //else
+                //{
+                //    MessageBox.Show("Не корректно задана цена!");
+                //    textBoxPrice.BackColor = Color.Red;
+                //}
             }
         }
         private void Add()

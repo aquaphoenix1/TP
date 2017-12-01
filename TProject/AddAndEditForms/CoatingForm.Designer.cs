@@ -29,74 +29,92 @@
         private void InitializeComponent()
         {
             this.buttonAccept = new System.Windows.Forms.Button();
-            this.textBoxCoefficient = new System.Windows.Forms.TextBox();
             this.textBoxTypeCoating = new System.Windows.Forms.TextBox();
             this.labelCoefficient = new System.Windows.Forms.Label();
             this.labelType = new System.Windows.Forms.Label();
+            this.textBoxCoefficient = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxCoefficient)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonAccept
             // 
-            this.buttonAccept.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonAccept.Location = new System.Drawing.Point(239, 65);
+            this.buttonAccept.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.buttonAccept.Location = new System.Drawing.Point(225, 75);
             this.buttonAccept.Name = "buttonAccept";
-            this.buttonAccept.Size = new System.Drawing.Size(87, 23);
+            this.buttonAccept.Size = new System.Drawing.Size(101, 27);
             this.buttonAccept.TabIndex = 14;
             this.buttonAccept.Text = "Принять";
             this.buttonAccept.UseVisualStyleBackColor = true;
             this.buttonAccept.Click += new System.EventHandler(this.ButtonAccept_Click);
             // 
-            // textBoxCoefficient
-            // 
-            this.textBoxCoefficient.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxCoefficient.Location = new System.Drawing.Point(196, 37);
-            this.textBoxCoefficient.Name = "textBoxCoefficient";
-            this.textBoxCoefficient.Size = new System.Drawing.Size(130, 22);
-            this.textBoxCoefficient.TabIndex = 13;
-            // 
             // textBoxTypeCoating
             // 
-            this.textBoxTypeCoating.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxTypeCoating.Location = new System.Drawing.Point(196, 9);
+            this.textBoxTypeCoating.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.textBoxTypeCoating.Location = new System.Drawing.Point(175, 10);
             this.textBoxTypeCoating.Name = "textBoxTypeCoating";
-            this.textBoxTypeCoating.Size = new System.Drawing.Size(130, 22);
+            this.textBoxTypeCoating.Size = new System.Drawing.Size(151, 23);
             this.textBoxTypeCoating.TabIndex = 12;
             // 
             // labelCoefficient
             // 
             this.labelCoefficient.AutoSize = true;
-            this.labelCoefficient.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelCoefficient.Location = new System.Drawing.Point(12, 40);
+            this.labelCoefficient.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.labelCoefficient.Location = new System.Drawing.Point(14, 44);
             this.labelCoefficient.Name = "labelCoefficient";
-            this.labelCoefficient.Size = new System.Drawing.Size(181, 16);
+            this.labelCoefficient.Size = new System.Drawing.Size(157, 15);
             this.labelCoefficient.TabIndex = 11;
-            this.labelCoefficient.Text = "Коэффициент скольжения";
+            this.labelCoefficient.Text = "Коэффициент скольжения:";
             // 
             // labelType
             // 
             this.labelType.AutoSize = true;
-            this.labelType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelType.Location = new System.Drawing.Point(12, 9);
+            this.labelType.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.labelType.Location = new System.Drawing.Point(14, 13);
             this.labelType.Name = "labelType";
-            this.labelType.Size = new System.Drawing.Size(98, 16);
+            this.labelType.Size = new System.Drawing.Size(88, 15);
             this.labelType.TabIndex = 10;
-            this.labelType.Text = "Тип покрытия";
+            this.labelType.Text = "Тип покрытия:";
+            // 
+            // textBoxCoefficient
+            // 
+            this.textBoxCoefficient.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.textBoxCoefficient.Location = new System.Drawing.Point(175, 42);
+            this.textBoxCoefficient.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.textBoxCoefficient.Name = "textBoxCoefficient";
+            this.textBoxCoefficient.Size = new System.Drawing.Size(152, 23);
+            this.textBoxCoefficient.TabIndex = 15;
+            this.textBoxCoefficient.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // CoatingForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(338, 93);
-            this.Controls.Add(this.buttonAccept);
+            this.ClientSize = new System.Drawing.Size(337, 107);
             this.Controls.Add(this.textBoxCoefficient);
+            this.Controls.Add(this.buttonAccept);
             this.Controls.Add(this.textBoxTypeCoating);
             this.Controls.Add(this.labelCoefficient);
             this.Controls.Add(this.labelType);
+            this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CoatingForm";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CoatingForm";
+            this.Text = "Параметры покрытия";
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxCoefficient)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -105,9 +123,9 @@
         #endregion
 
         private System.Windows.Forms.Button buttonAccept;
-        private System.Windows.Forms.TextBox textBoxCoefficient;
         private System.Windows.Forms.TextBox textBoxTypeCoating;
         private System.Windows.Forms.Label labelCoefficient;
         private System.Windows.Forms.Label labelType;
+        private System.Windows.Forms.NumericUpDown textBoxCoefficient;
     }
 }

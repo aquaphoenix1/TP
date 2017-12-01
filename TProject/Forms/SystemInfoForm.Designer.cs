@@ -61,6 +61,7 @@
             this.Controls.Add(this.systenInfoRichTextBox);
             this.Controls.Add(this.systenInfoButton);
             this.Name = "SystemInfoForm";
+            this.ShowIcon = false;
             this.Text = "Сведения о системе";
             this.ResumeLayout(false);
 

@@ -151,6 +151,7 @@
             this.MaximumSize = new System.Drawing.Size(327, 211);
             this.MinimizeBox = false;
             this.Name = "EditVertex";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Параметры перекрестка";
             this.TopMost = true;

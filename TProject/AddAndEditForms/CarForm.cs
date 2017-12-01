@@ -35,12 +35,12 @@ namespace TProject
         private void ButtonAccept_Click(object sender, EventArgs e)
         {
             string model = textBoxModel.Text;
-            string consumption = textBoxConsumption.Text;
-            string speed = textBoxSpeed.Text;
+            string consumption = textBoxConsumption.Value.ToString();
+            string speed = textBoxSpeed.Value.ToString();
 
             textBoxModel.BackColor = Color.White;
-            textBoxConsumption.BackColor = Color.White;
-            textBoxSpeed.BackColor = Color.White;
+            //textBoxConsumption.BackColor = Color.White;
+            //textBoxSpeed.BackColor = Color.White;
 
             if (string.IsNullOrWhiteSpace(model) || string.IsNullOrEmpty(model))
             {
@@ -49,29 +49,31 @@ namespace TProject
             }
             else if (double.TryParse(speed, out double spd))
             {
-                if (spd < 5)
+                //if (spd < 5)
+                //{
+                //    MessageBox.Show(string.Format("Минимальное значение скорости - {0}!", 5));
+                //    textBoxSpeed.BackColor = Color.Red;
+                //}
+                //else if (spd > 250)
+                //{
+                //    MessageBox.Show(string.Format("Максимальное значение скорости - {0}!", 250));
+                //    textBoxSpeed.BackColor = Color.Red;
+                //}
+                //else
+                if (double.TryParse(consumption, out double d))
                 {
-                    MessageBox.Show(string.Format("Минимальное значение скорости - {0}!", 5));
-                    textBoxSpeed.BackColor = Color.Red;
-                }
-                else if (spd > 250)
-                {
-                    MessageBox.Show(string.Format("Максимальное значение скорости - {0}!", 250));
-                    textBoxSpeed.BackColor = Color.Red;
-                }
-                else if (double.TryParse(consumption, out double d))
-                {
-                    if (d < 5)
-                    {
-                        MessageBox.Show(string.Format("Минимальное количество потребление топлива - {0}!", 5));
-                        textBoxConsumption.BackColor = Color.Red;
-                    }
-                    else if (d > 25)
-                    {
-                        MessageBox.Show(string.Format("Максимальное количество потребление топлива - {0}!", 25));
-                        textBoxConsumption.BackColor = Color.Red;
-                    }
-                    else if (long.TryParse(comboBoxIDFuel.Text, out long idFuel))
+                    //if (d < 5)
+                    //{
+                    //    MessageBox.Show(string.Format("Минимальное количество потребление топлива - {0}!", 5));
+                    //    textBoxConsumption.BackColor = Color.Red;
+                    //}
+                    //else if (d > 25)
+                    //{
+                    //    MessageBox.Show(string.Format("Максимальное количество потребление топлива - {0}!", 25));
+                    //    textBoxConsumption.BackColor = Color.Red;
+                    //}
+                    //else
+                    if (long.TryParse(comboBoxIDFuel.Text, out long idFuel))
                     {
                         var findfuel = Fuel.ListFuel.First(l => l.ElementAt(0).ToString() == comboBoxIDFuel.SelectedItem.ToString());
 
@@ -85,7 +87,7 @@ namespace TProject
                         {
                             car.TypeName = textBoxModel.Text;
                             car.CarFuel = fuel;
-                            car.FuelConsumption = double.Parse(textBoxConsumption.Text);
+                            car.FuelConsumption = double.Parse(textBoxConsumption.Value.ToString());
                         }
 
                         if (addOrEdit)
@@ -102,17 +104,17 @@ namespace TProject
                         MessageBox.Show("Не выбрано топливо!");
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Не корректно задано потребление!");
-                    textBoxConsumption.BackColor = Color.Red;
-                }
+                //else
+                //{
+                //    MessageBox.Show("Не корректно задано потребление!");
+                //    textBoxConsumption.BackColor = Color.Red;
+                //}
             }
-            else
-            {
-                MessageBox.Show("Не корректно задана скорость!");
-                textBoxSpeed.BackColor = Color.Red;
-            }
+            //else
+            //{
+            //    MessageBox.Show("Не корректно задана скорость!");
+            //    textBoxSpeed.BackColor = Color.Red;
+            //}
         }
 
         private void Add()
@@ -142,6 +144,11 @@ namespace TProject
             {
                 MessageBox.Show("Ошибка изменения");
             }
+        }
+
+        private void textBoxModel_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

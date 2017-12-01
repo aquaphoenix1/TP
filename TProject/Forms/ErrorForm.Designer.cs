@@ -74,6 +74,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.eroorGroupBox);
             this.Name = "ErrorForm";
+            this.ShowIcon = false;
             this.Text = "Ошибка";
             this.eroorGroupBox.ResumeLayout(false);
             this.eroorGroupBox.PerformLayout();

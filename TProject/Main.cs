@@ -484,6 +484,8 @@ namespace TProject
         private void Main_SizeChanged(object sender, EventArgs e)
         {
             label_Layers.Location = new Point(-17, panelSlideContainer.Height / 2 - 40);
+            if (Viewer.ViewPort == null || Viewer.ViewPort.View == null)
+                pictureBoxMap.Size = this.Size;
         }
 
         private void PictureBoxMap_MouseDown(object sender, MouseEventArgs e)
@@ -599,6 +601,12 @@ namespace TProject
             if (openSubMapFileDialog.ShowDialog() == DialogResult.OK)
             {
                 Viewer.ViewPort.OpenPicture(openSubMapFileDialog.FileName);
+
+                Viewer.ViewPort.View.MouseDown += PictureBoxMap_MouseDown;
+                Viewer.ViewPort.View.MouseMove += PictureBoxMap_MouseMove;
+                Viewer.ViewPort.View.MouseUp += PictureBoxMap_MouseUp;
+
+                Viewer.ViewPort.View.ContextMenuStrip = contextMenuVertex;
 
             }
 
@@ -716,49 +724,11 @@ namespace TProject
         }
         private void Сalibration_MouseDown(object sender, MouseEventArgs e)
         {
-            int X = e.X;
-            int Y = e.Y;
-            if (!isVertexMoved && e.Button == MouseButtons.Left)
-            {
-                if (Viewer.IsPointInRectangle(callibrationEdge.GetHead().X, callibrationEdge.GetHead().Y, e.X, e.Y))
-                {
-                    selectedLabel = callibrationEdge.GetHead();
-                    isVertexMoved = true;
-                }
-                else if (Viewer.IsPointInRectangle(callibrationEdge.GetEnd().X, callibrationEdge.GetEnd().Y, e.X, e.Y))
-                {
-                    isVertexMoved = true;
-                    selectedLabel = callibrationEdge.GetEnd();
-                }
-                else if (Viewer.IsPointOnEdge(e.X, e.Y, callibrationEdge.GetHead().X, callibrationEdge.GetHead().Y,
-                  callibrationEdge.GetEnd().X, callibrationEdge.GetEnd().Y + Viewer.Height))
-                {
-                    isCreatedEdge = true;
-                }
-            }
-            else
-            {
-                lastClickCoordX = e.X;
-                lastClickCoordY = e.Y;
-            }
+
         }
         private void Сalibration_MouseMove(object sender, MouseEventArgs e)
         {
-            if (isVertexMoved)
-            {
-                selectedLabel.X = e.X.Scaling();
-                callibrationEdge.GetHead().Y = callibrationEdge.GetEnd().Y = e.Y.Scaling();
-                Viewer.ViewPort.Invalidate();
-                textBox_CurrentCoefficient.Text = (100 / (callibrationEdge.GetLength(1))).ToString();
-            }
-            else if (isCreatedEdge)
-            {
-                int dx = Math.Abs(callibrationEdge.GetHead().X - callibrationEdge.GetEnd().X);
-                callibrationEdge.GetHead().X = (e.X.Scaling() - dx / 2);
-                callibrationEdge.GetEnd().X = (e.X.Scaling() + dx / 2);
-                callibrationEdge.GetHead().Y = callibrationEdge.GetEnd().Y = e.Y.Scaling();
-                Viewer.ViewPort.Invalidate();
-            }
+
         }
         private void Сalibration_MouseUp(object sender, MouseEventArgs e)
         {
@@ -961,6 +931,20 @@ namespace TProject
                 optionsRouteForm.Close();
 
                 new Route().FindMinLengthWay(Map.vertexes, Map.edges, criterial, driver);
+            }
+        }
+
+        private void ToolStripMenuItem_Route_Click(object sender, EventArgs e)
+        {
+            if(Route.Start == null || Route.End == null)
+            {
+                ToolStripMenuItem_StaticView.Enabled = false;
+                ToolStripMenuItem_RouteParameters.Enabled = false;
+            }
+            else
+            {
+                ToolStripMenuItem_StaticView.Enabled = true;
+                ToolStripMenuItem_RouteParameters.Enabled = true;
             }
         }
     }

@@ -61,6 +61,7 @@
             this.Controls.Add(this.cancelModifyTableButton);
             this.Controls.Add(this.okModifyTableButton);
             this.Name = "ModifyTableForm";
+            this.ShowIcon = false;
             this.Text = "Добавление записи";
             this.ResumeLayout(false);
 

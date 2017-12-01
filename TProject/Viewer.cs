@@ -345,7 +345,7 @@ namespace TProject
     private void DrawEndPoint(Graphics graph)
     {
         Pen pen = new Pen(Color.Green);
-        DrawPointFlag(graph, pen, Route.End.X, Route.End.Y);
+        DrawPointFlag(graph, pen, Route.End.X - Width / 2, Route.End.Y - Width / 2);
     }
 
     /// <summary>
@@ -405,7 +405,7 @@ namespace TProject
 
     private void DrawRoute(Graphics graph)
     {
-        Pen pen = new Pen(Color.Green, Width.UnScaling() + 4)
+        Pen pen = new Pen(Color.Green, Width.UnScaling() - 2)
         {
             StartCap = LineCap.Round,
             EndCap = LineCap.ArrowAnchor
@@ -414,8 +414,8 @@ namespace TProject
         for (int i = 0; i < Map.Way.Count - 1; i++)
         {
             graph.DrawLine(pen,
-              Map.Way.ElementAt(i).X, Map.Way.ElementAt(i).Y,
-              Map.Way.ElementAt(i + 1).X, Map.Way.ElementAt(i + 1).Y);
+              (Map.Way.ElementAt(i).X).UnScaling() + Width / 2, (Map.Way.ElementAt(i).Y).UnScaling() + Width / 2,
+              (Map.Way.ElementAt(i + 1).X).UnScaling() + Width / 2, (Map.Way.ElementAt(i + 1).Y).UnScaling() + Width / 2);
         }
     }
 

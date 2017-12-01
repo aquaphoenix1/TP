@@ -168,6 +168,7 @@
             this.Controls.Add(this.okRouteButton);
             this.MaximumSize = new System.Drawing.Size(327, 225);
             this.Name = "OptionsRouteForm";
+            this.ShowIcon = false;
             this.Text = "Параметры маршрута";
             this.routeGroupBox.ResumeLayout(false);
             this.routeGroupBox.PerformLayout();

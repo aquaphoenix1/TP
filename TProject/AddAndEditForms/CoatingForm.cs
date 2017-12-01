@@ -26,12 +26,12 @@ namespace TProject
             coating = Coating.CreateCoating(id, tCoating, coeff);
 
             textBoxTypeCoating.Text = tCoating;
-            textBoxCoefficient.Text = coeff.ToString();
+            textBoxCoefficient.Value = (decimal)coeff;
         }
 
         private void ButtonAccept_Click(object sender, EventArgs e)
         {
-            textBoxCoefficient.BackColor = Color.White;
+          //  textBoxCoefficient.BackColor = Color.White;
             textBoxTypeCoating.BackColor = Color.White;
 
             string type = textBoxTypeCoating.Text;
@@ -64,11 +64,11 @@ namespace TProject
                         Edit();
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Не корректно задан коэффициент!");
-                    textBoxCoefficient.BackColor = Color.Red;
-                }
+                //else
+                //{
+                //    MessageBox.Show("Не корректно задан коэффициент!");
+                //    textBoxCoefficient.BackColor = Color.Red;
+                //}
             }
 
         }

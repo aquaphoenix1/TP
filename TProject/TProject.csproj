@@ -88,6 +88,7 @@
     <Compile Include="AddAndEditForms\SignForm.Designer.cs">
       <DependentUpon>SignForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddAndEditForms\Validator.cs" />
     <Compile Include="Coll\AbstractCollection.cs" />
     <Compile Include="Coll\Edges.cs" />
     <Compile Include="Coll\Vertexes.cs" />

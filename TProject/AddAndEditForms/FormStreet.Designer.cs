@@ -35,25 +35,26 @@
             // 
             // textBoxNameStreet
             // 
-            this.textBoxNameStreet.Location = new System.Drawing.Point(109, 6);
+            this.textBoxNameStreet.Location = new System.Drawing.Point(139, 7);
             this.textBoxNameStreet.Name = "textBoxNameStreet";
-            this.textBoxNameStreet.Size = new System.Drawing.Size(163, 20);
+            this.textBoxNameStreet.Size = new System.Drawing.Size(189, 23);
             this.textBoxNameStreet.TabIndex = 0;
             // 
             // labelNameStreet
             // 
             this.labelNameStreet.AutoSize = true;
-            this.labelNameStreet.Location = new System.Drawing.Point(12, 9);
+            this.labelNameStreet.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.labelNameStreet.Location = new System.Drawing.Point(14, 10);
             this.labelNameStreet.Name = "labelNameStreet";
-            this.labelNameStreet.Size = new System.Drawing.Size(91, 13);
+            this.labelNameStreet.Size = new System.Drawing.Size(101, 15);
             this.labelNameStreet.TabIndex = 1;
-            this.labelNameStreet.Text = "Название улицы";
+            this.labelNameStreet.Text = "Название улицы:";
             // 
             // buttonAccept
             // 
-            this.buttonAccept.Location = new System.Drawing.Point(197, 32);
+            this.buttonAccept.Location = new System.Drawing.Point(241, 37);
             this.buttonAccept.Name = "buttonAccept";
-            this.buttonAccept.Size = new System.Drawing.Size(75, 23);
+            this.buttonAccept.Size = new System.Drawing.Size(87, 27);
             this.buttonAccept.TabIndex = 2;
             this.buttonAccept.Text = "Принять";
             this.buttonAccept.UseVisualStyleBackColor = true;
@@ -61,17 +62,19 @@
             // 
             // FormStreet
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 64);
+            this.ClientSize = new System.Drawing.Size(341, 74);
             this.Controls.Add(this.buttonAccept);
             this.Controls.Add(this.labelNameStreet);
             this.Controls.Add(this.textBoxNameStreet);
+            this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormStreet";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormStreet";
+            this.Text = "Параметры улицы";
             this.ResumeLayout(false);
             this.PerformLayout();
 

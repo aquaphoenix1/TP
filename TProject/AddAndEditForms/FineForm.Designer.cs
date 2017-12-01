@@ -1,4 +1,6 @@
-﻿namespace TProject
+﻿using TProject.AddAndEditForms;
+
+namespace TProject
 {
     partial class FineForm
     {
@@ -30,18 +32,18 @@
         {
             this.buttonAccept = new System.Windows.Forms.Button();
             this.labelValue = new System.Windows.Forms.Label();
-            this.textBoxValueFine = new System.Windows.Forms.TextBox();
             this.textBoxNameFine = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.labelName = new System.Windows.Forms.Label();
+            this.textBoxValueFine = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxValueFine)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonAccept
             // 
             this.buttonAccept.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonAccept.Location = new System.Drawing.Point(173, 67);
+            this.buttonAccept.Location = new System.Drawing.Point(202, 73);
             this.buttonAccept.Name = "buttonAccept";
-            this.buttonAccept.Size = new System.Drawing.Size(75, 23);
+            this.buttonAccept.Size = new System.Drawing.Size(89, 27);
             this.buttonAccept.TabIndex = 11;
             this.buttonAccept.Text = "Принять";
             this.buttonAccept.UseVisualStyleBackColor = true;
@@ -50,62 +52,72 @@
             // labelValue
             // 
             this.labelValue.AutoSize = true;
-            this.labelValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelValue.Location = new System.Drawing.Point(12, 37);
+            this.labelValue.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.labelValue.Location = new System.Drawing.Point(14, 39);
             this.labelValue.Name = "labelValue";
-            this.labelValue.Size = new System.Drawing.Size(105, 16);
+            this.labelValue.Size = new System.Drawing.Size(95, 15);
             this.labelValue.TabIndex = 10;
-            this.labelValue.Text = "Сумма штрафа";
-            // 
-            // textBoxValueFine
-            // 
-            this.textBoxValueFine.Location = new System.Drawing.Point(123, 37);
-            this.textBoxValueFine.Name = "textBoxValueFine";
-            this.textBoxValueFine.Size = new System.Drawing.Size(125, 20);
-            this.textBoxValueFine.TabIndex = 9;
+            this.labelValue.Text = "Сумма штрафа:";
             // 
             // textBoxNameFine
             // 
-            this.textBoxNameFine.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxNameFine.Location = new System.Drawing.Point(124, 9);
+            this.textBoxNameFine.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.textBoxNameFine.Location = new System.Drawing.Point(145, 10);
             this.textBoxNameFine.Name = "textBoxNameFine";
-            this.textBoxNameFine.Size = new System.Drawing.Size(125, 22);
+            this.textBoxNameFine.Size = new System.Drawing.Size(145, 23);
             this.textBoxNameFine.TabIndex = 8;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 77);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(0, 13);
-            this.label2.TabIndex = 7;
             // 
             // labelName
             // 
             this.labelName.AutoSize = true;
-            this.labelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelName.Location = new System.Drawing.Point(12, 9);
+            this.labelName.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.labelName.Location = new System.Drawing.Point(14, 10);
             this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(74, 16);
+            this.labelName.Size = new System.Drawing.Size(62, 15);
             this.labelName.TabIndex = 6;
-            this.labelName.Text = "Название";
+            this.labelName.Text = "Название:";
+            // 
+            // textBoxValueFine
+            // 
+            this.textBoxValueFine.DecimalPlaces = 1;
+            this.textBoxValueFine.Location = new System.Drawing.Point(143, 39);
+            this.textBoxValueFine.Maximum = new decimal(new int[] {
+            40000,
+            0,
+            0,
+            0});
+            this.textBoxValueFine.Minimum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.textBoxValueFine.Name = "textBoxValueFine";
+            this.textBoxValueFine.Size = new System.Drawing.Size(147, 23);
+            this.textBoxValueFine.TabIndex = 12;
+            this.textBoxValueFine.Value = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
             // 
             // FineForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(264, 96);
+            this.ClientSize = new System.Drawing.Size(298, 111);
+            this.Controls.Add(this.textBoxValueFine);
             this.Controls.Add(this.buttonAccept);
             this.Controls.Add(this.labelValue);
-            this.Controls.Add(this.textBoxValueFine);
             this.Controls.Add(this.textBoxNameFine);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.labelName);
+            this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FineForm";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FineForm";
+            this.Text = "Параметры штрафа";
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxValueFine)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -115,9 +127,8 @@
 
         private System.Windows.Forms.Button buttonAccept;
         private System.Windows.Forms.Label labelValue;
-        private System.Windows.Forms.TextBox textBoxValueFine;
         private System.Windows.Forms.TextBox textBoxNameFine;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label labelName;
+        private System.Windows.Forms.NumericUpDown textBoxValueFine;
     }
 }

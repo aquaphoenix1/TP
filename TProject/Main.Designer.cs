@@ -80,9 +80,9 @@
             this.сменитьПодложкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.базаДанныхToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.маршрутToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.отобразитьСтатическиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.параметрыМаршрутаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_Route = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_StaticView = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_RouteParameters = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuEdge = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьПерегонToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -108,16 +108,12 @@
             // pictureBoxMap
             // 
             this.pictureBoxMap.BackColor = System.Drawing.Color.Silver;
-            this.pictureBoxMap.ContextMenuStrip = this.contextMenuVertex;
             this.pictureBoxMap.Location = new System.Drawing.Point(-10, -30);
             this.pictureBoxMap.Name = "pictureBoxMap";
             this.pictureBoxMap.Size = new System.Drawing.Size(752, 392);
             this.pictureBoxMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxMap.TabIndex = 0;
             this.pictureBoxMap.TabStop = false;
-            this.pictureBoxMap.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureBoxMap_MouseDown);
-            this.pictureBoxMap.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBoxMap_MouseMove);
-            this.pictureBoxMap.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PictureBoxMap_MouseUp);
             // 
             // contextMenuVertex
             // 
@@ -564,7 +560,7 @@
             this.toolStripMenuItem1,
             this.базаДанныхToolStripMenuItem,
             this.справкаToolStripMenuItem,
-            this.маршрутToolStripMenuItem});
+            this.ToolStripMenuItem_Route});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
             this.menuStrip2.Size = new System.Drawing.Size(775, 24);
@@ -622,26 +618,27 @@
             // 
             // маршрутToolStripMenuItem
             // 
-            this.маршрутToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.отобразитьСтатическиToolStripMenuItem,
-            this.параметрыМаршрутаToolStripMenuItem});
-            this.маршрутToolStripMenuItem.Name = "маршрутToolStripMenuItem";
-            this.маршрутToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
-            this.маршрутToolStripMenuItem.Text = "Маршрут";
+            this.ToolStripMenuItem_Route.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItem_StaticView,
+            this.ToolStripMenuItem_RouteParameters});
+            this.ToolStripMenuItem_Route.Name = "маршрутToolStripMenuItem";
+            this.ToolStripMenuItem_Route.Size = new System.Drawing.Size(72, 20);
+            this.ToolStripMenuItem_Route.Text = "Маршрут";
+            this.ToolStripMenuItem_Route.Click += new System.EventHandler(this.ToolStripMenuItem_Route_Click);
             // 
             // отобразитьСтатическиToolStripMenuItem
             // 
-            this.отобразитьСтатическиToolStripMenuItem.Name = "отобразитьСтатическиToolStripMenuItem";
-            this.отобразитьСтатическиToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.отобразитьСтатическиToolStripMenuItem.Text = "Отобразить статически";
-            this.отобразитьСтатическиToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItem_MakeStaticRoute_Click);
+            this.ToolStripMenuItem_StaticView.Name = "отобразитьСтатическиToolStripMenuItem";
+            this.ToolStripMenuItem_StaticView.Size = new System.Drawing.Size(202, 22);
+            this.ToolStripMenuItem_StaticView.Text = "Отобразить статически";
+            this.ToolStripMenuItem_StaticView.Click += new System.EventHandler(this.ToolStripMenuItem_MakeStaticRoute_Click);
             // 
             // параметрыМаршрутаToolStripMenuItem
             // 
-            this.параметрыМаршрутаToolStripMenuItem.Name = "параметрыМаршрутаToolStripMenuItem";
-            this.параметрыМаршрутаToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.параметрыМаршрутаToolStripMenuItem.Text = "Параметры маршрута";
-            this.параметрыМаршрутаToolStripMenuItem.Click += new System.EventHandler(this.ПараметрыМаршрутаToolStripMenuItem_Click);
+            this.ToolStripMenuItem_RouteParameters.Name = "параметрыМаршрутаToolStripMenuItem";
+            this.ToolStripMenuItem_RouteParameters.Size = new System.Drawing.Size(202, 22);
+            this.ToolStripMenuItem_RouteParameters.Text = "Параметры маршрута";
+            this.ToolStripMenuItem_RouteParameters.Click += new System.EventHandler(this.ПараметрыМаршрутаToolStripMenuItem_Click);
             // 
             // contextMenuEdge
             // 
@@ -758,7 +755,7 @@
         private System.Windows.Forms.ToolStripMenuItem сменитьПодложкуToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem базаДанныхToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem маршрутToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Route;
         private VerticalLabel label_Layers;
         private System.Windows.Forms.ContextMenuStrip contextMenuEdge;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
@@ -776,7 +773,7 @@
         private System.Windows.Forms.Label labelEditor;
         private System.Windows.Forms.ToolStripMenuItem удалитьПерегонToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem удалитьПерекрестокToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem отобразитьСтатическиToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem параметрыМаршрутаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_StaticView;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_RouteParameters;
     }
 }

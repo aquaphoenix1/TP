@@ -196,6 +196,7 @@
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.databaseGroupBox);
             this.Name = "dataBaseForm";
+            this.ShowIcon = false;
             this.Text = "Работа с базой данных";
             this.changeTableGroupBox.ResumeLayout(false);
             this.changeTableGroupBox.PerformLayout();

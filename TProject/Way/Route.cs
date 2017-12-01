@@ -47,16 +47,20 @@ namespace TProject.Way
         }
         private List<long> GetWay(long from, long to, int[,] arrayOfParents)
         {
+
             List<long> list = new List<long>();
 
             int vert = arrayOfParents[from, to];
 
-            list.Add(from);
             while (vert != from)
             {
                 list.Add(vert);
                 vert = arrayOfParents[from, vert];
             }
+
+            list.Add(from);
+            list.Reverse();
+
             list.Add(to);
 
             return list;

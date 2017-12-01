@@ -28,6 +28,7 @@ namespace TProject.Coll
                 if (Viewer.IsPointInRectangle(List.ElementAt(i).X, List.ElementAt(i).Y, x, y))
                 {
                     selected = List.ElementAt(i);
+                    Viewer.ViewPort.Invalidate();
                     return true;
                 }
             }
