@@ -3,7 +3,7 @@
     public interface ITypeDAO
     {
         bool Insert(Type obj);
-        bool Delete(long ID);
+        bool Delete(string ID);
         bool Update(Type obj);
     }
 }

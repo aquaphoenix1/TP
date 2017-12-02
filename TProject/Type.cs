@@ -1,9 +1,9 @@
 ﻿namespace TProject
 {
-    public class Type : Entity
+    public class Type
     {
         public string TypeName { get; set; }
-        public Type() : base() { }
+        public Type() { }
         public Type(string typeName)
         {
             TypeName = typeName;

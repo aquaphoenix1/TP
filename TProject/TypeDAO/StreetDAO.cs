@@ -9,14 +9,12 @@ namespace TProject.TypeDAO
         {
             try
             {
-                string[] array = (string[])obj;
-                long id = long.Parse(array[0]);
-                new SQLiteCommand(string.Format("Insert into Street values ({0} , \'{1}\')", id, array[1]), DAO.GetConnection()).ExecuteNonQuery();
+                string str = obj.ToString();
+                new SQLiteCommand(string.Format("Insert into Street values ('{0}')", str), DAO.GetConnection()).ExecuteNonQuery();
 
                 System.Collections.Generic.List<object> list = new System.Collections.Generic.List<object>
                 {
-                    id,
-                    array[1]
+                    str
                 };
 
                 Graph.Edge.StreetList.Add(list);
@@ -29,11 +27,11 @@ namespace TProject.TypeDAO
             }
         }
 
-        public bool Delete(long ID)
+        public bool Delete(string name)
         {
             try
             {
-                new SQLiteCommand(string.Format("DELETE from Policemen where ID = {0}", ID), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("DELETE from Street where Name = '{0}'", name), DAO.GetConnection()).ExecuteNonQuery();
 
                 return true;
             }

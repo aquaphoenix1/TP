@@ -21,11 +21,12 @@ namespace TProject
             this.addOrEdit = addOrEdit;
         }
 
-        public FineForm(long id, string nFine, double cost) : this(false)
+        public FineForm(string nFine, double cost) : this(false)
         {
-            fine = Fine.CreateFine(id, nFine, cost);
+            fine = Fine.CreateFine(nFine, cost);
 
             textBoxNameFine.Text = nFine;
+            textBoxNameFine.Enabled = false;
             textBoxValueFine.Text = cost.ToString();
         }
 
@@ -82,7 +83,6 @@ namespace TProject
             else
             {
                 MessageBox.Show("Ошибка добавления");
-                Fine.CurrentMaxID--;
             }
         }
 

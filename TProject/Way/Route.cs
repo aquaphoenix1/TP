@@ -8,18 +8,18 @@ namespace TProject.Way
     public class Route
     {
         public static List<long> Way { private set; get; }
-        public double Value { private set; get; }
+        public static double Value { private set; get; }
 
         public static Vertex Start;
         public static Vertex End;
 
-        private double[,] GetMatrixWay(out int[,] parents, out long[] arrayOfID, Vertexes vertexes, Edges edges, Main.Criterial criterial, Driver.Driver driver)
+        private double[,] GetMatrixWay(out long[,] parents, out long[] arrayOfID, Vertexes vertexes, Edges edges, Main.Criterial criterial, Driver.Driver driver)
         {
             int count = vertexes.GetCountElements();
 
             double[,] array = new double[count, count];
 
-            parents = new int[count, count];
+            parents = new long[count, count];
 
             arrayOfID = new long[count];
 
@@ -37,30 +37,39 @@ namespace TProject.Way
                     {
                         Edge edge = GetEdge(vertexList[i], vertexList[j], edges);
                         array[i, j] = (edge != null) ? edge.GetCriterialValue(criterial, driver) : Double.MaxValue;
-                        //edge.GetLength(Viewer.ViewPort.ScaleCoefficient) : Double.MaxValue;//edge.GetCriterialValue() : Double.MaxValue;// edge.GetLength() : Double.MaxValue;
+
+                        if (edge != null)
+                        {
+                            for (int p = 0; p < Map.vertexes.GetCountElements(); p++)
+                            {
+                                if (Map.vertexes.GetElement(p).ID == Start.ID)
+                                {
+                                    parents[i, j] = p;
+                                    break;
+                                }
+                            }
+                        }
+                        else parents[i, j] = long.MaxValue;
                     }
-                    parents[i, j] = i;
                 }
                 arrayOfID[i] = vertexList[i].ID;
             }
             return array;
         }
-        private List<long> GetWay(long from, long to, int[,] arrayOfParents)
+        private List<long> GetWay(long from, long to, long[,] arrayOfParents)
         {
 
             List<long> list = new List<long>();
 
-            int vert = arrayOfParents[from, to];
+            long vert = arrayOfParents[from, to];
+
+            list.Add(from);
 
             while (vert != from)
             {
                 list.Add(vert);
-                vert = arrayOfParents[from, vert];
+                vert = arrayOfParents[vert, to];
             }
-
-            list.Add(from);
-            list.Reverse();
-
             list.Add(to);
 
             return list;
@@ -81,7 +90,7 @@ namespace TProject.Way
                     toVertex = i;
                 }
             }
-            double[,] matrix = GetMatrixWay(out int[,] parents, out long[] IDs, vertColl, edgColl, criterial, driver);
+            double[,] matrix = GetMatrixWay(out long[,] parents, out long[] IDs, vertColl, edgColl, criterial, driver);
             int size = (int)Math.Sqrt(matrix.Length);
 
             for (int k = 0; k < size; ++k)

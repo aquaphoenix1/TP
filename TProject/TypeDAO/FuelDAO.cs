@@ -13,11 +13,10 @@ namespace TProject.TypeDAO
             try
             {
                 Fuel f = (Fuel)obj;
-                new SQLiteCommand(string.Format("Insert into Fuel values ({0} , \'{1}\', {2})", f.ID, f.TypeName, f.Price), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("Insert into Fuel values ('{0}', {1})", f.TypeName, f.Price), DAO.GetConnection()).ExecuteNonQuery();
 
                 List<object> list = new List<object>
                 {
-                    f.ID,
                     f.TypeName,
                     f.Price
                 };
@@ -31,13 +30,13 @@ namespace TProject.TypeDAO
             }
         }
 
-        public bool Delete(long ID)
+        public bool Delete(string name)
         {
             try
             {
-                new SQLiteCommand(string.Format("DELETE from Fuel where ID = {0}", ID), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("DELETE from Fuel where Name = {0}", name), DAO.GetConnection()).ExecuteNonQuery();
 
-                var obj = Fuel.ListFuel.RemoveAll(l => l.ElementAt(0).ToString() == ID.ToString());
+                var obj = Fuel.ListFuel.RemoveAll(l => l.ElementAt(0).ToString().Equals(name));
 
                 return true;
             }
@@ -52,13 +51,12 @@ namespace TProject.TypeDAO
             try
             {
                 Fuel f = (Fuel)obj;
-                new SQLiteCommand(string.Format("UPDATE Fuel SET [Name] = '{0}', [Cost] = {1} where ID = {2}", f.TypeName, f.Price, f.ID), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("UPDATE Fuel SET [Cost] = {0} where Name = '{1}'", f.Price, f.TypeName), DAO.GetConnection()).ExecuteNonQuery();
 
-                var updatedFuel = Fuel.ListFuel.FirstOrDefault(l => l.ElementAt(0).ToString() == f.ID.ToString());
+                var updatedFuel = Fuel.ListFuel.FirstOrDefault(l => l.ElementAt(0).ToString().Equals(f.TypeName));
                 if (updatedFuel != null)
                 {
-                    updatedFuel[1] = f.TypeName;
-                    updatedFuel[2] = f.Price;
+                    updatedFuel[1] = f.Price;
                 }
 
                 return true;

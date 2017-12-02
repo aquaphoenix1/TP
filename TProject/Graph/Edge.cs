@@ -7,7 +7,6 @@ namespace TProject.Graph
     public class Edge : Entity
     {
         public static List<List<object>> StreetList { get; set; }
-        public static long CurrentMaxID { get; set; }
 
         private int Length;
 

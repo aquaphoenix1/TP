@@ -427,6 +427,7 @@ namespace TProject
         if (Route.Way != null)
         {
             Map.SetWay(Route.Way);
+            MessageBox.Show(Route.Value.ToString());
         }
         else
         {

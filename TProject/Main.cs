@@ -51,15 +51,6 @@ namespace TProject
 
         private void Initialize()
         {
-            Police.CurrentMaxID = DAO.GetMaxID("Policemen");
-            Coating.CurrentMaxID = DAO.GetMaxID("Surface");
-            Fine.CurrentMaxID = DAO.GetMaxID("Fine");
-            Car.CurrentMaxID = DAO.GetMaxID("Auto");
-            Fuel.CurrentMaxID = DAO.GetMaxID("Fuel");
-            Driver.Driver.CurrentMaxID = DAO.GetMaxID("Driver");
-            Sign.CurrentMaxID = DAO.GetMaxID("Sign");
-            Edge.CurrentMaxID = DAO.GetMaxID("Street");
-
             Coating.ListSurface = DAO.GetAll("Surface");
             Fine.ListFine = DAO.GetAll("Fine");
             Car.ListAuto = DAO.GetAll("Auto");
@@ -90,7 +81,6 @@ namespace TProject
                 {
                     case "Дорожные покрытия":
                         {
-                            dataGridViewDataBase.Columns.Add("id", "ID");
                             dataGridViewDataBase.Columns.Add("name", "Название покрытия");
                             dataGridViewDataBase.Columns.Add("koefficient", "Коэффициент торможения");
 
@@ -100,7 +90,6 @@ namespace TProject
                         }
                     case "Типы полицейских":
                         {
-                            dataGridViewDataBase.Columns.Add("id", "ID");
                             dataGridViewDataBase.Columns.Add("type", "Тип полицейского");
                             dataGridViewDataBase.Columns.Add("koefficient", "Коэффициент жадности полицейского");
 
@@ -109,8 +98,7 @@ namespace TProject
                         }
                     case "Топливо":
                         {
-                            dataGridViewDataBase.Columns.Add("id", "ID");
-                            dataGridViewDataBase.Columns.Add("nameFuel", "Название топлива");
+                            dataGridViewDataBase.Columns.Add("name", "Название топлива");
                             dataGridViewDataBase.Columns.Add("cost", "Цена");
 
                             FillGrid(Fuel.ListFuel);
@@ -118,7 +106,6 @@ namespace TProject
                         }
                     case "Автомобили":
                         {
-                            dataGridViewDataBase.Columns.Add("id", "ID");
                             dataGridViewDataBase.Columns.Add("model", "Модель");
                             dataGridViewDataBase.Columns.Add("fuel", "Топливо");
                             dataGridViewDataBase.Columns.Add("consumption", "Потребление");
@@ -135,7 +122,6 @@ namespace TProject
                         }
                     case "Штрафы":
                         {
-                            dataGridViewDataBase.Columns.Add("id", "ID");
                             dataGridViewDataBase.Columns.Add("name", "Название штрафа");
                             dataGridViewDataBase.Columns.Add("cost", "Цена");
 
@@ -144,7 +130,6 @@ namespace TProject
                         }
                     case "Водители":
                         {
-                            dataGridViewDataBase.Columns.Add("id", "ID");
                             dataGridViewDataBase.Columns.Add("name", "Нарушитель?");
                             dataGridViewDataBase.Columns.Add("IDauto", "ID автомобиля");
                             dataGridViewDataBase.Columns.Add("model", "Модель автомобиля");
@@ -162,7 +147,6 @@ namespace TProject
                         }
                     case "Дорожные знаки":
                         {
-                            dataGridViewDataBase.Columns.Add("id", "ID");
                             dataGridViewDataBase.Columns.Add("type", "Тип знака");
                             dataGridViewDataBase.Columns.Add("value", "Значение");
 
@@ -171,7 +155,6 @@ namespace TProject
                         }
                     case "Улицы":
                         {
-                            dataGridViewDataBase.Columns.Add("id", "ID");
                             dataGridViewDataBase.Columns.Add("name", "Название улицы");
 
                             FillGrid(Edge.StreetList);
@@ -200,13 +183,6 @@ namespace TProject
                 {
                     case "Типы полицейских":
                         {
-                            /*IsChanged = false;
-                            new PoliceForm(true).ShowDialog();
-                            if (IsChanged)
-                            {
-                                dataGridViewDataBase.Rows.Clear();
-                                FillGrid(Police.ListTypePolicemen);
-                            }*/
                             break;
                         }
                     case "Дорожные покрытия":
@@ -348,14 +324,7 @@ namespace TProject
                 {
                     case "Типы полицейских":
                         {
-                            /*if (new PoliceDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
-                            {
-                                dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
-                            }
-                            else
-                            {
-                                MessageBox.Show("Невозможно удалить");
-                            }*/
+
                             break;
                         }
                     case "Дорожные покрытия":
@@ -366,7 +335,7 @@ namespace TProject
                             }
                             else
                             {
-                                if (new CoatingDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
+                                if (new CoatingDAO().Delete(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString()))
                                 {
                                     dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
                                 }
@@ -379,7 +348,7 @@ namespace TProject
                         }
                     case "Штрафы":
                         {
-                            if (new FineDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
+                            if (new FineDAO().Delete(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString()))
                             {
                                 dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
                             }
@@ -397,7 +366,7 @@ namespace TProject
                             }
                             else
                             {
-                                if (new FuelDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
+                                if (new FuelDAO().Delete(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString()))
                                 {
                                     dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
                                 }
@@ -410,7 +379,7 @@ namespace TProject
                         }
                     case "Дорожные знаки":
                         {
-                            if (new SignDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
+                            if (new SignDAO().Delete(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString()))
                             {
                                 dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
                             }
@@ -428,7 +397,7 @@ namespace TProject
                             }
                             else
                             {
-                                if (new CarDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
+                                if (new CarDAO().Delete(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString()))
                                 {
                                     dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
                                 }
@@ -447,7 +416,7 @@ namespace TProject
                             }
                             else
                             {
-                                if (new DriverDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
+                                if (new DriverDAO().Delete(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString()))
                                 {
                                     dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
                                 }
@@ -466,7 +435,7 @@ namespace TProject
                             }
                             else
                             {
-                                if (new StreetDAO().Delete(long.Parse(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString())))
+                                if (new StreetDAO().Delete(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString()))
                                 {
                                     dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
                                 }
@@ -795,9 +764,9 @@ namespace TProject
                         }
                     case "Дорожные покрытия":
                         {
-                            long id = long.Parse(dataGridViewDataBase.SelectedRows[0].Cells["ID"].Value.ToString());
-                            List<object> coat = Coating.ListSurface.First(coating => coating[0].ToString().Equals(id.ToString()));
-                            new CoatingForm(id, coat[1].ToString(), double.Parse(coat[2].ToString())).ShowDialog();
+                            string name = dataGridViewDataBase.SelectedRows[0].Cells["name"].Value.ToString();
+                            List<object> coat = Coating.ListSurface.First(coating => coating[0].ToString().Equals(name));
+                            new CoatingForm(coat[0].ToString(), double.Parse(coat[1].ToString())).ShowDialog();
 
                             if (IsChanged)
                             {
@@ -809,9 +778,9 @@ namespace TProject
                         }
                     case "Штрафы":
                         {
-                            long id = long.Parse(dataGridViewDataBase.SelectedRows[0].Cells["ID"].Value.ToString());
-                            List<object> fine = Fine.ListFine.First(fin => fin[0].ToString().Equals(id.ToString()));
-                            new FineForm(id, fine[1].ToString(), double.Parse(fine[2].ToString())).ShowDialog();
+                            string name = dataGridViewDataBase.SelectedRows[0].Cells["name"].Value.ToString();
+                            List<object> fine = Fine.ListFine.First(fin => fin[0].ToString().Equals(name));
+                            new FineForm(fine[0].ToString(), double.Parse(fine[1].ToString())).ShowDialog();
 
                             if (IsChanged)
                             {
@@ -823,9 +792,9 @@ namespace TProject
                         }
                     case "Топливо":
                         {
-                            long id = long.Parse(dataGridViewDataBase.SelectedRows[0].Cells["id"].Value.ToString());
-                            List<object> fuel = Fuel.ListFuel.First(fl => fl[0].ToString().Equals(id.ToString()));
-                            new FuelForm(id, fuel[1].ToString(), double.Parse(fuel[2].ToString())).ShowDialog();
+                            string name = dataGridViewDataBase.SelectedRows[0].Cells["name"].Value.ToString();
+                            List<object> fuel = Fuel.ListFuel.First(fl => fl[0].ToString().Equals(name));
+                            new FuelForm(fuel[0].ToString(), double.Parse(fuel[1].ToString())).ShowDialog();
 
                             if (IsChanged)
                             {
@@ -837,9 +806,9 @@ namespace TProject
                         }
                     case "Дорожные знаки":
                         {
-                            long id = long.Parse(dataGridViewDataBase.SelectedRows[0].Cells["ID"].Value.ToString());
-                            List<object> sign = Sign.ListSigns.First(sg => sg[0].ToString().Equals(id.ToString()));
-                            new SignForm(id, sign[1].ToString(), int.Parse(sign[2].ToString())).ShowDialog();
+                            string name = dataGridViewDataBase.SelectedRows[0].Cells["type"].Value.ToString();
+                            List<object> sign = Sign.ListSigns.First(sg => sg[0].ToString().Equals(name));
+                            new SignForm(sign[0].ToString(), int.Parse(sign[1].ToString())).ShowDialog();
 
                             if (IsChanged)
                             {
@@ -851,12 +820,12 @@ namespace TProject
                         }
                     case "Автомобили":
                         {
-                            long id = long.Parse(dataGridViewDataBase.SelectedRows[0].Cells["id"].Value.ToString());
-                            List<object> auto = Car.ListAuto.First(car => car[0].ToString().Equals(id.ToString()));
-                            List<object> fl = Fuel.ListFuel.First(f => f[0].ToString().Equals(auto[2].ToString()));
-                            Fuel currentFuel = Fuel.CreateFuel(long.Parse(fl[0].ToString()), fl[1].ToString(), double.Parse(fl[2].ToString()));
+                            string name = dataGridViewDataBase.SelectedRows[0].Cells["model"].Value.ToString();
+                            List<object> auto = Car.ListAuto.First(car => car[0].ToString().Equals(name));
+                            List<object> fl = Fuel.ListFuel.First(f => f[0].ToString().Equals(auto[1].ToString()));
+                            Fuel currentFuel = Fuel.CreateFuel(fl[0].ToString(), double.Parse(fl[1].ToString()));
 
-                            new CarForm(id, auto[1].ToString(), currentFuel, double.Parse(auto[3].ToString()), double.Parse(auto[4].ToString())).ShowDialog();
+                            new CarForm(auto[1].ToString(), currentFuel, double.Parse(auto[3].ToString()), double.Parse(auto[4].ToString())).ShowDialog();
 
                             if (IsChanged)
                             {
@@ -873,13 +842,13 @@ namespace TProject
                         }
                     case "Водители":
                         {
-                            long id = long.Parse(dataGridViewDataBase.SelectedRows[0].Cells["id"].Value.ToString());
-                            List<object> driver = Driver.Driver.ListDriver.First(dv => dv[0].ToString().Equals(id.ToString()));
-                            List<object> auto = Car.ListAuto.First(cr => cr[0].ToString().Equals(driver[2].ToString()));
-                            List<object> fl = Fuel.ListFuel.First(f => f[0].ToString().Equals(auto[2].ToString()));
-                            Fuel currentFuel = Fuel.CreateFuel(long.Parse(fl[0].ToString()), fl[1].ToString(), double.Parse(fl[2].ToString()));
-                            Car car = Car.CreateCar(long.Parse(auto[0].ToString()), auto[1].ToString(), currentFuel, double.Parse(auto[3].ToString()), double.Parse(auto[4].ToString()));
-                            new DriverForm(id, driver[1].ToString(), car).ShowDialog();
+                            string name = dataGridViewDataBase.SelectedRows[0].Cells["name"].Value.ToString();
+                            List<object> driver = Driver.Driver.ListDriver.First(dv => dv[0].ToString().Equals(name));
+                            List<object> auto = Car.ListAuto.First(cr => cr[0].ToString().Equals(driver[1].ToString()));
+                            List<object> fl = Fuel.ListFuel.First(f => f[0].ToString().Equals(auto[1].ToString()));
+                            Fuel currentFuel = Fuel.CreateFuel(fl[0].ToString(), double.Parse(fl[1].ToString()));
+                            Car car = Car.CreateCar(auto[0].ToString(), currentFuel, double.Parse(auto[2].ToString()), double.Parse(auto[3].ToString()));
+                            //new DriverForm(driver[0].ToString(), car).ShowDialog();
 
                             if (IsChanged)
                             {

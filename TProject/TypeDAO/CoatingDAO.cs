@@ -13,11 +13,10 @@ namespace TProject.TypeDAO
             try
             {
                 Coating c = (Coating)obj;
-                new SQLiteCommand(string.Format("Insert into Surface values ({0} , \'{1}\', {2})", c.ID, c.TypeName, c.Coeff), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("Insert into Surface values ('{0}', {1})", c.TypeName, c.Coeff), DAO.GetConnection()).ExecuteNonQuery();
 
                 List<object> list = new List<object>
                 {
-                    c.ID,
                     c.TypeName,
                     c.Coeff
                 };
@@ -31,13 +30,13 @@ namespace TProject.TypeDAO
             }
         }
 
-        public bool Delete(long ID)
+        public bool Delete(string nameSurface)
         {
             try
             {
-                new SQLiteCommand(string.Format("DELETE from Surface where ID = {0}", ID), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("DELETE from Surface where NameSurface = '{0}'", nameSurface), DAO.GetConnection()).ExecuteNonQuery();
 
-                var obj = Coating.ListSurface.RemoveAll(l => l.ElementAt(0).ToString() == ID.ToString());
+                var obj = Coating.ListSurface.RemoveAll(l => l.ElementAt(0).ToString().Equals(nameSurface));
 
                 return true;
             }
@@ -52,13 +51,12 @@ namespace TProject.TypeDAO
             try
             {
                 Coating c = (Coating)obj;
-                new SQLiteCommand(string.Format("UPDATE Surface SET [NameSurface] = '{0}', [KoefSurface] = {1} where ID = {2}", c.TypeName, c.Coeff, c.ID), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("UPDATE Surface SET [KoefSurface] = {0} where NameSurface = '{1}'", c.Coeff, c.TypeName), DAO.GetConnection()).ExecuteNonQuery();
 
-                var updatedCoating = Coating.ListSurface.FirstOrDefault(l => l.ElementAt(0).ToString() == c.ID.ToString());
+                var updatedCoating = Coating.ListSurface.FirstOrDefault(l => l.ElementAt(0).ToString().Equals(c.TypeName));
                 if (updatedCoating != null)
                 {
-                    updatedCoating[1] = c.TypeName;
-                    updatedCoating[2] = c.Coeff;
+                    updatedCoating[1] = c.Coeff;
                 }
 
                 return true;

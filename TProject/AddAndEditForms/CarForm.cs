@@ -23,11 +23,12 @@ namespace TProject
             this.addOrEdit = addOrEdit;
         }
 
-        public CarForm(long id, string model, Fuel fuel, double consumption, double speed) : this(false)
+        public CarForm(string model, Fuel fuel, double consumption, double speed) : this(false)
         {
-            car = Car.CreateCar(id, model, fuel, consumption, speed);
+            car = Car.CreateCar(model, fuel, consumption, speed);
             textBoxModel.Text = model;
-            comboBoxIDFuel.SelectedIndex = comboBoxIDFuel.FindString(fuel.ID.ToString());
+
+            comboBoxIDFuel.SelectedIndex = comboBoxIDFuel.FindString(fuel.TypeName);
             textBoxConsumption.Text = consumption.ToString();
             textBoxSpeed.Text = speed.ToString();
         }
@@ -53,7 +54,7 @@ namespace TProject
                     {
                         var findfuel = Fuel.ListFuel.First(l => l.ElementAt(0).ToString() == comboBoxIDFuel.SelectedItem.ToString());
 
-                        Fuel fuel = Fuel.CreateFuel(long.Parse(findfuel[0].ToString()), findfuel[1].ToString(), double.Parse(findfuel[2].ToString()));
+                        Fuel fuel = Fuel.CreateFuel(findfuel[0].ToString(), double.Parse(findfuel[1].ToString()));
 
                         if (car == null)
                         {
@@ -100,7 +101,6 @@ namespace TProject
             else
             {
                 MessageBox.Show("Ошибка добавления");
-                Car.CurrentMaxID--;
             }
         }
 

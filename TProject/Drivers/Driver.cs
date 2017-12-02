@@ -1,29 +1,28 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace TProject.Driver
 {
-    public class Driver : Entity
+    public class Driver : Type
     {
-        public static long CurrentMaxID { get; set; }
         public static List<List<object>> ListDriver { get; set; }
         public Car Car { get; set; }
         public bool IsViolateTL { get; set; }
+        public string FIO { get; set; }
 
-        public Driver(bool isViolateTL, Car car)
+        public Driver(string FIO, bool isViolateTL, Car car)
         {
-            this.ID = ++CurrentMaxID;
+            this.FIO = FIO;
             IsViolateTL = isViolateTL;
             Car = car;
         }
 
         private Driver() { }
 
-        public static Driver CreateDriver(long id, bool isViolateTL, Car car)
+        public static Driver CreateDriver(string FIO, bool isViolateTL, Car car)
         {
             return new Driver
             {
-                ID = id,
+                FIO = FIO,
                 Car = car,
                 IsViolateTL = isViolateTL
             };

@@ -13,11 +13,10 @@ namespace TProject.TypeDAO
             try
             {
                 Sign s = (Sign)obj;
-                new SQLiteCommand(string.Format("Insert into Sign values ({0} , \'{1}\', {2})", s.ID, s.TypeName, s.Count), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("Insert into Sign values ('{0}', {1})", s.TypeName, s.Count), DAO.GetConnection()).ExecuteNonQuery();
 
                 List<object> list = new List<object>
                 {
-                    s.ID,
                     s.TypeName,
                     s.Count
                 };
@@ -31,13 +30,13 @@ namespace TProject.TypeDAO
             }
         }
 
-        public bool Delete(long ID)
+        public bool Delete(string type)
         {
             try
             {
-                new SQLiteCommand(string.Format("DELETE from Sign where ID = {0}", ID), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("DELETE from Sign where Type = '{0}'", type), DAO.GetConnection()).ExecuteNonQuery();
 
-                var obj = Sign.ListSigns.RemoveAll(l => l.ElementAt(0).ToString() == ID.ToString());
+                var obj = Sign.ListSigns.RemoveAll(l => l.ElementAt(0).ToString().Equals(type));
 
                 return true;
             }
@@ -52,13 +51,12 @@ namespace TProject.TypeDAO
             try
             {
                 Sign s = (Sign)obj;
-                new SQLiteCommand(string.Format("UPDATE Sign SET [Type] = '{0}', [Value] = {1} where ID = {2}", s.TypeName, s.Count, s.ID), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("UPDATE Sign SET [Value] = {0} where Type = '{1}'", s.Count, s.TypeName), DAO.GetConnection()).ExecuteNonQuery();
 
-                var updatedSign = Sign.ListSigns.FirstOrDefault(l => l.ElementAt(0).ToString() == s.ID.ToString());
+                var updatedSign = Sign.ListSigns.FirstOrDefault(l => l.ElementAt(0).ToString().Equals(s.TypeName));
                 if (updatedSign != null)
                 {
-                    updatedSign[1] = s.TypeName;
-                    updatedSign[2] = s.Count;
+                    updatedSign[1] = s.Count;
                 }
 
                 return true;

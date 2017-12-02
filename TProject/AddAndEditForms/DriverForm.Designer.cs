@@ -32,12 +32,14 @@
             this.comboBoxIDAuto = new System.Windows.Forms.ComboBox();
             this.labelIDAuto = new System.Windows.Forms.Label();
             this.checkBoxIsIntruder = new System.Windows.Forms.CheckBox();
+            this.textBoxFIO = new System.Windows.Forms.TextBox();
+            this.labelFIO = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // buttonAccept
             // 
             this.buttonAccept.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.buttonAccept.Location = new System.Drawing.Point(151, 60);
+            this.buttonAccept.Location = new System.Drawing.Point(145, 87);
             this.buttonAccept.Name = "buttonAccept";
             this.buttonAccept.Size = new System.Drawing.Size(117, 27);
             this.buttonAccept.TabIndex = 9;
@@ -52,7 +54,7 @@
             this.comboBoxIDAuto.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.comboBoxIDAuto.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.comboBoxIDAuto.FormattingEnabled = true;
-            this.comboBoxIDAuto.Location = new System.Drawing.Point(128, 8);
+            this.comboBoxIDAuto.Location = new System.Drawing.Point(122, 35);
             this.comboBoxIDAuto.Name = "comboBoxIDAuto";
             this.comboBoxIDAuto.Size = new System.Drawing.Size(140, 23);
             this.comboBoxIDAuto.TabIndex = 7;
@@ -62,7 +64,7 @@
             // 
             this.labelIDAuto.AutoSize = true;
             this.labelIDAuto.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelIDAuto.Location = new System.Drawing.Point(12, 11);
+            this.labelIDAuto.Location = new System.Drawing.Point(6, 38);
             this.labelIDAuto.Name = "labelIDAuto";
             this.labelIDAuto.Size = new System.Drawing.Size(79, 15);
             this.labelIDAuto.TabIndex = 6;
@@ -71,18 +73,39 @@
             // checkBoxIsIntruder
             // 
             this.checkBoxIsIntruder.AutoSize = true;
-            this.checkBoxIsIntruder.Location = new System.Drawing.Point(15, 39);
+            this.checkBoxIsIntruder.Location = new System.Drawing.Point(9, 66);
             this.checkBoxIsIntruder.Name = "checkBoxIsIntruder";
             this.checkBoxIsIntruder.Size = new System.Drawing.Size(96, 19);
             this.checkBoxIsIntruder.TabIndex = 10;
             this.checkBoxIsIntruder.Text = "Нарушитель";
             this.checkBoxIsIntruder.UseVisualStyleBackColor = true;
             // 
+            // textBoxFIO
+            // 
+            this.textBoxFIO.Location = new System.Drawing.Point(122, 3);
+            this.textBoxFIO.Name = "textBoxFIO";
+            this.textBoxFIO.Size = new System.Drawing.Size(140, 23);
+            this.textBoxFIO.TabIndex = 11;
+            this.textBoxFIO.TextChanged += new System.EventHandler(this.TextBoxFIO_TextChanged);
+            this.textBoxFIO.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxFIO_KeyUp);
+            // 
+            // labelFIO
+            // 
+            this.labelFIO.AutoSize = true;
+            this.labelFIO.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.labelFIO.Location = new System.Drawing.Point(6, 9);
+            this.labelFIO.Name = "labelFIO";
+            this.labelFIO.Size = new System.Drawing.Size(37, 15);
+            this.labelFIO.TabIndex = 12;
+            this.labelFIO.Text = "ФИО:";
+            // 
             // DriverForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(274, 97);
+            this.ClientSize = new System.Drawing.Size(274, 126);
+            this.Controls.Add(this.labelFIO);
+            this.Controls.Add(this.textBoxFIO);
             this.Controls.Add(this.checkBoxIsIntruder);
             this.Controls.Add(this.buttonAccept);
             this.Controls.Add(this.comboBoxIDAuto);
@@ -105,5 +128,7 @@
         private System.Windows.Forms.ComboBox comboBoxIDAuto;
         private System.Windows.Forms.Label labelIDAuto;
         private System.Windows.Forms.CheckBox checkBoxIsIntruder;
+        private System.Windows.Forms.TextBox textBoxFIO;
+        private System.Windows.Forms.Label labelFIO;
     }
 }

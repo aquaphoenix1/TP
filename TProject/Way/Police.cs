@@ -4,14 +4,12 @@ namespace TProject.Way
 {
     public class Police : Type
     {
-        public static long CurrentMaxID { get; set; }
         public static List<List<object>> ListTypePolicemen { get; set; }
         public double Coeff { get; set; }
 
 
         public Police(string typeName) : base(typeName)
         {
-            this.ID = ++CurrentMaxID;
             switch (typeName)
             {
                 case "Добрый":
@@ -24,7 +22,7 @@ namespace TProject.Way
                         this.Coeff = 1.5;
                         break;
                     }
-                case "Супер-ажный":
+                case "Супер-жадный":
                     {
                         this.Coeff = 2.5;
                         break;
@@ -34,11 +32,10 @@ namespace TProject.Way
 
         private Police() { }
 
-        public static Police CreatePolice(long id, string typeName)
+        public static Police CreatePolice(string typeName)
         {
             Police police = new Police
             {
-                ID = id,
                 TypeName = typeName
             };
 
@@ -54,7 +51,7 @@ namespace TProject.Way
                         police.Coeff = 1.5;
                         break;
                     }
-                case "Супер-ажный":
+                case "Супер-жадный":
                     {
                         police.Coeff = 2.5;
                         break;

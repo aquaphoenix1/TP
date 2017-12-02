@@ -56,11 +56,9 @@ namespace TProject
 
         private void Add()
         {
-            string[] array = new string[2];
-            array[0] = (++Edge.CurrentMaxID).ToString();
-            array[1] = textBoxNameStreet.Text;
+            string str = textBoxNameStreet.Text;
 
-            object value = array;
+            object value = str;
 
             if (new TypeDAO.StreetDAO().Insert(value))
             {
@@ -70,7 +68,6 @@ namespace TProject
             }
             else
             {
-                Edge.CurrentMaxID--;
                 MessageBox.Show("Ошибка добавления");
             }
         }

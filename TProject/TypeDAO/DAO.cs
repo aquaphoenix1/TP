@@ -49,19 +49,19 @@ namespace TProject
                 // new SQLiteCommand("Create table Map ([IDMap] Integer primary key autoincrement, [File] Integer not null, [YVertex]Integer not null)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Vertex ([ID] Integer primary key, [XVertex] Integer not null,[YVertex]Integer not null)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table TrafficLight ([ID]Integer primary key, [GreenSeconds] Integer not null, [RedSeconds] Integer not null)", GetConnection()).ExecuteNonQuery();
-                new SQLiteCommand("Create table Sign ([ID] integer primary key, [Type] char(20) not null, [Value] Integer)", GetConnection()).ExecuteNonQuery();
-                new SQLiteCommand("Create table Surface ([ID] Integer primary key, [NameSurface] char(20) not null, [KoefSurface] real not null)", GetConnection()).ExecuteNonQuery();
-                new SQLiteCommand("Create table Street ([ID] Integer primary key, [Name] char(50) not null)", GetConnection()).ExecuteNonQuery();
-                new SQLiteCommand("Create table Edge ([ID] Integer primary key, [Direction] bool not null, [IDSign] integer References Sign ([ID]), [IDVertexFirst] Integer References Vertex ([ID]), [IDVertexSecond] Integer References Vertex ([ID]),  [IDName] char(50) References Street ([ID]), [IDSurface] char(20) References Surface ([ID]), [Length] real not null)", GetConnection()).ExecuteNonQuery();
-                new SQLiteCommand("Create table Policemen ([ID] integer primary key, [TypePolice] char(20) not null, [Koefficient] real not null)", GetConnection()).ExecuteNonQuery();
-                new SQLiteCommand("Create table Auto ([ID] Integer primary key, [Model] char(30), [IDFuel] Integer References Fuel ([ID]), [Сonsumption] real not null, [Speed] real not null)", GetConnection()).ExecuteNonQuery();
-                new SQLiteCommand("Create table Driver ([ID] Integer primary key, [TypeDriver] char(20) not null, [IDAuto] Integer References Auto ([ID]))", GetConnection()).ExecuteNonQuery();
-                new SQLiteCommand("Create table Fuel ([ID] Integer primary key, [Name] char(30) not null, [Cost] real not null)", GetConnection()).ExecuteNonQuery();
-                new SQLiteCommand("Create table Fine ([ID] Integer primary key, [NameFine] char(20), [CostFine] real not null)", GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand("Create table Sign ([Type] char(20) primary key, [Value] Integer)", GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand("Create table Surface ([NameSurface] char(20) primary key, [KoefSurface] real not null)", GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand("Create table Street ([Name] char(50) primary key)", GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand("Create table Edge ([ID] Integer primary key, [Direction] bool not null, [TypeSign] char(20) References Sign ([Type]), [IDVertexFirst] Integer References Vertex ([ID]), [IDVertexSecond] Integer References Vertex ([ID]),  [Name] char(50) References Street ([Name]), [Surface] char(20) References Surface ([NameSurface]), [Length] real not null)", GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand("Create table Policemen ([TypePolice] char(20) primary key, [Koefficient] real not null)", GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand("Create table Auto ([Model] char(30) primary key, [Fuel] char(30) References Fuel ([Name]), [Сonsumption] real not null, [Speed] real not null)", GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand("Create table Driver ([FIO] char(30) primary key, [TypeDriver] char(20) not null, [Model] char(30) References Auto ([Model]))", GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand("Create table Fuel ([Name] char(30) primary key, [Cost] real not null)", GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand("Create table Fine ([NameFine] char(20) primary key, [CostFine] real not null)", GetConnection()).ExecuteNonQuery();
 
-                new SQLiteCommand("Insert into Policemen values (0, 'Добрый', 1)", GetConnection()).ExecuteNonQuery();
-                new SQLiteCommand("Insert into Policemen values (1, 'Жадный', 1.5)", GetConnection()).ExecuteNonQuery();
-                new SQLiteCommand("Insert into Policemen values (2, 'Супер-жадный', 2.5)", GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand("Insert into Policemen values ('Добрый', 1)", GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand("Insert into Policemen values ('Жадный', 1.5)", GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand("Insert into Policemen values ('Супер-жадный', 2.5)", GetConnection()).ExecuteNonQuery();
                 #endregion SQLCommands
             }
             catch (SQLiteException) { throw new SQLiteException(String.Format("Невозможно подключиться к файлу базы данных {0}", path)); }

@@ -21,11 +21,13 @@ namespace TProject
             this.addOrEdit = addOrEdit;
         }
 
-        public SignForm(long id, string tSign, double value) : this(false)
+        public SignForm(string tSign, double value) : this(false)
         {
-            sign = Sign.CreateSign(id, tSign, value);
+            sign = Sign.CreateSign(tSign, value);
 
             textBoxTypeSign.Text = tSign;
+            textBoxTypeSign.Enabled = false;
+
             textBoxValueSign.Value =(decimal)value;
         }
 
@@ -83,7 +85,6 @@ namespace TProject
             else
             {
                 MessageBox.Show("Ошибка добавления");
-                Sign.CurrentMaxID--;
             }
         }
 

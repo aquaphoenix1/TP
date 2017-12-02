@@ -21,12 +21,13 @@ namespace TProject
             this.addOrEdit = addOrEdit;
         }
 
-        public FuelForm(long id, string nFuel, double price) : this(false)
+        public FuelForm(string nFuel, double price) : this(false)
         {
-            fuel = Fuel.CreateFuel(id, nFuel, price);
+            fuel = Fuel.CreateFuel(nFuel, price);
 
             textBoxNameFuel.Text = nFuel;
-            
+            textBoxNameFuel.Enabled = false;
+
             textBoxPrice.Value = (decimal)price;
         }
 
@@ -82,7 +83,6 @@ namespace TProject
             else
             {
                 MessageBox.Show("Ошибка добавления");
-                Fuel.CurrentMaxID--;
             }
         }
 
@@ -134,6 +134,11 @@ namespace TProject
             {
                 Accept();
             }
+        }
+
+        private void textBoxPrice_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using TProject.Driver;
@@ -22,28 +23,45 @@ namespace TProject
             this.addOrEdit = addOrEdit;
         }
 
-        public DriverForm(long id, string typeDriver, Car car) : this(false)
+        public DriverForm(string FIO, string typeDriver, Car car) : this(false)
         {
-            driver = Driver.Driver.CreateDriver(id, typeDriver.Equals("Нарушитель"), car);
+            driver = Driver.Driver.CreateDriver(FIO, typeDriver.Equals("Нарушитель"), car);
             checkBoxIsIntruder.Checked = typeDriver.Equals("Нарушитель");
-            comboBoxIDAuto.SelectedIndex = comboBoxIDAuto.FindString(car.ID.ToString());
+            comboBoxIDAuto.SelectedIndex = comboBoxIDAuto.FindString(car.TypeName);
+
+            textBoxFIO.Text = FIO;
+            textBoxFIO.Enabled = false;
         }
 
         private void Accept()
         {
-            if (long.TryParse(comboBoxIDAuto.Text, out long d))
+            textBoxFIO.BackColor = Color.White;
+
+            string name = textBoxFIO.Text;
+            string model = comboBoxIDAuto.SelectedText;
+
+            if (string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(name))
             {
-                var findcar = Car.ListAuto.FirstOrDefault(l => l.ElementAt(0).ToString() == comboBoxIDAuto.SelectedItem.ToString());
+                MessageBox.Show("Введите ФИО!");
+                textBoxFIO.BackColor = Color.Red;
+            }
+            else if (string.IsNullOrEmpty(model) || string.IsNullOrWhiteSpace(model))
+            {
+                MessageBox.Show("Выберите модель!");
+            }
+            else
+            {
+                var findcar = Car.ListAuto.FirstOrDefault(l => l.ElementAt(0).ToString().Equals(model));
 
-                var findfuel = Fuel.ListFuel.FirstOrDefault(l => l.ElementAt(0).ToString() == findcar[2].ToString());
+                var findfuel = Fuel.ListFuel.FirstOrDefault(l => l.ElementAt(0).Equals(findcar[2].ToString()));
 
-                Fuel fuel = Fuel.CreateFuel(long.Parse(findfuel[0].ToString()), findfuel[1].ToString(), double.Parse(findfuel[2].ToString()));
+                Fuel fuel = Fuel.CreateFuel(findfuel[0].ToString(), double.Parse(findfuel[2].ToString()));
 
-                Car fcar = Car.CreateCar(long.Parse(findcar[0].ToString()), findcar[1].ToString(), fuel, double.Parse(findcar[3].ToString()), double.Parse(findcar[4].ToString()));
+                Car fcar = Car.CreateCar(findcar[1].ToString(), fuel, double.Parse(findcar[3].ToString()), double.Parse(findcar[4].ToString()));
 
                 if (driver == null)
                 {
-                    driver = new Driver.Driver(checkBoxIsIntruder.Checked, fcar);
+                    driver = new Driver.Driver(name, checkBoxIsIntruder.Checked, fcar);
                 }
                 else
                 {
@@ -59,10 +77,6 @@ namespace TProject
                 {
                     Edit();
                 }
-            }
-            else
-            {
-                MessageBox.Show("Не корректно задан id машины!");
             }
         }
 
@@ -82,7 +96,6 @@ namespace TProject
             else
             {
                 MessageBox.Show("Ошибка добавления");
-                Driver.Driver.CurrentMaxID--;
             }
         }
 
@@ -101,7 +114,7 @@ namespace TProject
 
         private void ComboBoxIDAuto_KeyUp(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 Accept();
             }
@@ -109,7 +122,27 @@ namespace TProject
 
         private void ButtonAccept_KeyUp(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
+            {
+                Accept();
+            }
+        }
+
+        private void TextBoxFIO_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBoxFIO.Text) || string.IsNullOrWhiteSpace(textBoxFIO.Text))
+            {
+                textBoxFIO.BackColor = Color.Red;
+            }
+            else
+            {
+                textBoxFIO.BackColor = Color.White;
+            }
+        }
+
+        private void TextBoxFIO_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
             {
                 Accept();
             }

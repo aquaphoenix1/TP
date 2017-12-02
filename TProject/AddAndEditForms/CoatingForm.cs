@@ -21,11 +21,13 @@ namespace TProject
             this.addOrEdit = addOrEdit;
         }
 
-        public CoatingForm(long id, string tCoating, double coeff) : this(false)
+        public CoatingForm(string tCoating, double coeff) : this(false)
         {
-            coating = Coating.CreateCoating(id, tCoating, coeff);
+            coating = Coating.CreateCoating(tCoating, coeff);
 
             textBoxTypeCoating.Text = tCoating;
+            textBoxTypeCoating.Enabled = false;
+
             textBoxCoefficient.Value = (decimal)coeff;
         }
 
@@ -82,7 +84,6 @@ namespace TProject
             else
             {
                 MessageBox.Show("Ошибка добавления");
-                Coating.CurrentMaxID--;
             }
         }
 

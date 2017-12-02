@@ -13,11 +13,10 @@ namespace TProject.TypeDAO
             try
             {
                 Fine f = (Fine)obj;
-                new SQLiteCommand(string.Format("Insert into Fine values ({0} , \'{1}\', {2})", f.ID, f.TypeName, f.Count), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("Insert into Fine values ('{0}', {1})", f.TypeName, f.Count), DAO.GetConnection()).ExecuteNonQuery();
 
                 List<object> list = new List<object>
                 {
-                    f.ID,
                     f.TypeName,
                     f.Count
                 };
@@ -31,13 +30,13 @@ namespace TProject.TypeDAO
             }
         }
 
-        public bool Delete(long ID)
+        public bool Delete(string nameFine)
         {
             try
             {
-                new SQLiteCommand(string.Format("DELETE from Fine where ID = {0}", ID), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("DELETE from Fine where NameFine = '{0}'", nameFine), DAO.GetConnection()).ExecuteNonQuery();
 
-                var obj = Fine.ListFine.RemoveAll(l => l.ElementAt(0).ToString() == ID.ToString());
+                var obj = Fine.ListFine.RemoveAll(l => l.ElementAt(0).ToString().Equals(nameFine));
 
                 return true;
             }
@@ -52,13 +51,12 @@ namespace TProject.TypeDAO
             try
             {
                 Fine f = (Fine)obj;
-                new SQLiteCommand(string.Format("UPDATE Fine SET [NameFine] = '{0}', [CostFine] = {1} where ID = {2}", f.TypeName, f.Count, f.ID), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("UPDATE Fine SET [CostFine] = {0} where NameFine = '{1}'", f.Count, f.TypeName), DAO.GetConnection()).ExecuteNonQuery();
 
-                var updatedFine = Fine.ListFine.FirstOrDefault(l => l.ElementAt(0).ToString() == f.ID.ToString());
+                var updatedFine = Fine.ListFine.FirstOrDefault(l => l.ElementAt(0).ToString().Equals(f.TypeName));
                 if (updatedFine != null)
                 {
-                    updatedFine[1] = f.TypeName;
-                    updatedFine[2] = f.Count;
+                    updatedFine[1] = f.Count;
                 }
 
                 return true;

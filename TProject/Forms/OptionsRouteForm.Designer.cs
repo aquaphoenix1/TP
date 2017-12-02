@@ -30,21 +30,17 @@
         {
             this.cancelRouteButton = new System.Windows.Forms.Button();
             this.routeGroupBox = new System.Windows.Forms.GroupBox();
-            this.autoLabel = new System.Windows.Forms.Label();
-            this.autoComboBox = new System.Windows.Forms.ComboBox();
-            this.fuelLabel = new System.Windows.Forms.Label();
             this.driverLabel = new System.Windows.Forms.Label();
             this.critSearchLabel = new System.Windows.Forms.Label();
             this.driverComboBox = new System.Windows.Forms.ComboBox();
             this.critSearchComboBox = new System.Windows.Forms.ComboBox();
-            this.fuelComboBox = new System.Windows.Forms.ComboBox();
             this.okRouteButton = new System.Windows.Forms.Button();
             this.routeGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // cancelRouteButton
             // 
-            this.cancelRouteButton.Location = new System.Drawing.Point(225, 151);
+            this.cancelRouteButton.Location = new System.Drawing.Point(224, 87);
             this.cancelRouteButton.Name = "cancelRouteButton";
             this.cancelRouteButton.Size = new System.Drawing.Size(75, 25);
             this.cancelRouteButton.TabIndex = 11;
@@ -54,48 +50,15 @@
             // 
             // routeGroupBox
             // 
-            this.routeGroupBox.Controls.Add(this.autoLabel);
-            this.routeGroupBox.Controls.Add(this.autoComboBox);
-            this.routeGroupBox.Controls.Add(this.fuelLabel);
             this.routeGroupBox.Controls.Add(this.driverLabel);
             this.routeGroupBox.Controls.Add(this.critSearchLabel);
             this.routeGroupBox.Controls.Add(this.driverComboBox);
             this.routeGroupBox.Controls.Add(this.critSearchComboBox);
-            this.routeGroupBox.Controls.Add(this.fuelComboBox);
             this.routeGroupBox.Location = new System.Drawing.Point(12, 12);
             this.routeGroupBox.Name = "routeGroupBox";
-            this.routeGroupBox.Size = new System.Drawing.Size(288, 133);
+            this.routeGroupBox.Size = new System.Drawing.Size(288, 69);
             this.routeGroupBox.TabIndex = 13;
             this.routeGroupBox.TabStop = false;
-            // 
-            // autoLabel
-            // 
-            this.autoLabel.AutoSize = true;
-            this.autoLabel.Location = new System.Drawing.Point(6, 50);
-            this.autoLabel.Name = "autoLabel";
-            this.autoLabel.Size = new System.Drawing.Size(107, 13);
-            this.autoLabel.TabIndex = 1;
-            this.autoLabel.Text = "Выбор автомобиля:";
-            // 
-            // autoComboBox
-            // 
-            this.autoComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.autoComboBox.FormattingEnabled = true;
-            this.autoComboBox.Items.AddRange(new object[] {
-            "Mitsubishi Lancer"});
-            this.autoComboBox.Location = new System.Drawing.Point(151, 47);
-            this.autoComboBox.Name = "autoComboBox";
-            this.autoComboBox.Size = new System.Drawing.Size(131, 21);
-            this.autoComboBox.TabIndex = 6;
-            // 
-            // fuelLabel
-            // 
-            this.fuelLabel.AutoSize = true;
-            this.fuelLabel.Location = new System.Drawing.Point(6, 81);
-            this.fuelLabel.Name = "fuelLabel";
-            this.fuelLabel.Size = new System.Drawing.Size(87, 13);
-            this.fuelLabel.TabIndex = 2;
-            this.fuelLabel.Text = "Выбор топлива:";
             // 
             // driverLabel
             // 
@@ -109,7 +72,7 @@
             // critSearchLabel
             // 
             this.critSearchLabel.AutoSize = true;
-            this.critSearchLabel.Location = new System.Drawing.Point(6, 108);
+            this.critSearchLabel.Location = new System.Drawing.Point(6, 43);
             this.critSearchLabel.Name = "critSearchLabel";
             this.critSearchLabel.Size = new System.Drawing.Size(132, 13);
             this.critSearchLabel.TabIndex = 3;
@@ -132,25 +95,14 @@
             "Время",
             "Стоимость",
             "Длина"});
-            this.critSearchComboBox.Location = new System.Drawing.Point(151, 105);
+            this.critSearchComboBox.Location = new System.Drawing.Point(151, 40);
             this.critSearchComboBox.Name = "critSearchComboBox";
             this.critSearchComboBox.Size = new System.Drawing.Size(131, 21);
             this.critSearchComboBox.TabIndex = 7;
             // 
-            // fuelComboBox
-            // 
-            this.fuelComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.fuelComboBox.FormattingEnabled = true;
-            this.fuelComboBox.Items.AddRange(new object[] {
-            " Premium (АИ-98)"});
-            this.fuelComboBox.Location = new System.Drawing.Point(151, 78);
-            this.fuelComboBox.Name = "fuelComboBox";
-            this.fuelComboBox.Size = new System.Drawing.Size(131, 21);
-            this.fuelComboBox.TabIndex = 5;
-            // 
             // okRouteButton
             // 
-            this.okRouteButton.Location = new System.Drawing.Point(144, 151);
+            this.okRouteButton.Location = new System.Drawing.Point(146, 87);
             this.okRouteButton.Name = "okRouteButton";
             this.okRouteButton.Size = new System.Drawing.Size(75, 25);
             this.okRouteButton.TabIndex = 12;
@@ -162,13 +114,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(311, 186);
+            this.ClientSize = new System.Drawing.Size(311, 116);
+            this.ControlBox = false;
             this.Controls.Add(this.cancelRouteButton);
             this.Controls.Add(this.routeGroupBox);
             this.Controls.Add(this.okRouteButton);
             this.MaximumSize = new System.Drawing.Size(327, 225);
             this.Name = "OptionsRouteForm";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Параметры маршрута";
             this.routeGroupBox.ResumeLayout(false);
             this.routeGroupBox.PerformLayout();
@@ -180,14 +134,10 @@
 
         private System.Windows.Forms.Button cancelRouteButton;
         private System.Windows.Forms.GroupBox routeGroupBox;
-        private System.Windows.Forms.Label autoLabel;
-        private System.Windows.Forms.ComboBox autoComboBox;
-        private System.Windows.Forms.Label fuelLabel;
         private System.Windows.Forms.Label driverLabel;
         private System.Windows.Forms.Label critSearchLabel;
         private System.Windows.Forms.ComboBox driverComboBox;
         private System.Windows.Forms.ComboBox critSearchComboBox;
-        private System.Windows.Forms.ComboBox fuelComboBox;
         private System.Windows.Forms.Button okRouteButton;
     }
 }
