@@ -883,5 +883,10 @@ namespace TProject
                 ToolStripMenuItem_RouteParameters.Enabled = true;
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DAO.InsertMap(Map.vertexes, Map.edges);
+        }
     }
 }

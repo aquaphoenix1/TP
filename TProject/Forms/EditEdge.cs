@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using TProject.Graph;
 using TProject.Way;
@@ -13,6 +15,32 @@ namespace TProject
         {
             InitializeComponent();
             Edge = _edge;
+
+            Edge.StreetList.ForEach(var => nameStreetComboBox.Items.Add(var[0]));
+            Coating.ListSurface.ForEach(var => coatingComboBox.Items.Add(var[0]));
+            Police.ListTypePolicemen.ForEach(var => policemanComboBox.Items.Add(var[0]));
+            Sign.ListSigns.ForEach(var => signMaxSpeedComboBox.Items.Add(var[0]));
+
+            if(_edge.Policemen != null)
+            {
+                policemanCheckBox.Checked = true;
+                policemanComboBox.SelectedIndex = policemanComboBox.FindString(_edge.Policemen.TypeName);
+            }
+
+            signTwoWayCheckBox.Checked = _edge.SignTwoWay;
+
+            if (_edge.SignMaxSpeed != null)
+            {
+                signMaxSpeedCheckBox.Checked = true;
+                signMaxSpeedComboBox.SelectedIndex = signMaxSpeedComboBox.FindString(_edge.SignMaxSpeed.TypeName);
+            }
+
+            try
+            {
+                nameStreetComboBox.SelectedIndex = nameStreetComboBox.FindString(_edge.NameStreet);
+                coatingComboBox.SelectedIndex = coatingComboBox.FindString(_edge.Coat.TypeName);
+            }
+            catch { }
         }
 
         private void CheckBoxWay_CheckedChanged(object sender, EventArgs e)
@@ -21,31 +49,61 @@ namespace TProject
             Viewer.ViewPort.Invalidate();
         }
 
-        private void ButtonMirror_Click(object sender, EventArgs e)
-        {
-            Edge.Revers();
-            Viewer.ViewPort.Invalidate();
-        }
-        private void EditEdge_Load(object sender, EventArgs e)
-        {
-            Edge.StreetList.ForEach(var => nameStreetComboBox.Items.Add(var[1]));
-
-            nameStreetComboBox.SelectedItem = Edge.NameStreet;
-            coatingComboBox.SelectedItem = Edge.Coat;
-            policemanComboBox.SelectedItem = Edge.Policemen;
-
-            signTwoWayCheckBox.Checked = Edge.IsBilateral;
-            signMaxSpeedCheckBox.Checked = Edge.Signs != null;
-            policemanCheckBox.Checked = Edge.Policemen != null;
-        }
-
         private void OkEditEgdeButton_Click(object sender, EventArgs e)
         {
-            Edge.Coat = (Coating)coatingComboBox.SelectedItem;
-            Edge.IsBilateral = signTwoWayCheckBox.Checked;
-            Edge.NameStreet = nameStreetComboBox.SelectedItem.ToString();
-            Edge.Policemen = policemanCheckBox.Checked ? (Police)policemanComboBox.SelectedItem : null;
-            Edge.Signs = signMaxSpeedCheckBox.Checked ? (Sign)signMaxSpeedComboBox.SelectedItem : null;
+            if(nameStreetComboBox.SelectedItem == null)
+            {
+                MessageBox.Show("Выберите название улицы");
+            }
+            else if(coatingComboBox.SelectedItem == null)
+            {
+                MessageBox.Show("Выберите покрытие");
+            }
+            else
+            {
+                bool isPolice = policemanCheckBox.Checked;
+
+                if (isPolice)
+                {
+                    if (policemanComboBox.SelectedItem == null)
+                    {
+                        MessageBox.Show("Выберите полицейского");
+                        return;
+                    }
+                }
+
+                bool isSignMaxSpeed = signMaxSpeedCheckBox.Checked;
+
+                if (isSignMaxSpeed)
+                {
+                    if (signMaxSpeedComboBox.SelectedItem == null)
+                    {
+                        MessageBox.Show("Выберите знак");
+                        return;
+                    }
+                }
+
+                if (isPolice)
+                {
+                    Edge.Policemen = Police.CreatePolice(policemanComboBox.SelectedItem.ToString());
+                }
+
+                if (isSignMaxSpeed)
+                {
+                    List<object> sign = Sign.ListSigns.First(sg => sg[0].ToString().Equals(signMaxSpeedComboBox.SelectedItem.ToString()));
+                    Edge.SignMaxSpeed = Sign.CreateSign(sign[0].ToString(), double.Parse(sign[1].ToString()));
+                }
+
+                Edge.NameStreet = nameStreetComboBox.SelectedItem.ToString();
+
+                List<object> coat = Coating.ListSurface.First(coating => coating[0].ToString().Equals(coatingComboBox.SelectedItem.ToString()));
+                Edge.Coat = Coating.CreateCoating(coat[0].ToString(), double.Parse(coat[1].ToString()));
+
+                Edge.IsBilateral = signTwoWayCheckBox.Checked;
+
+                Edge.SignTwoWay = signTwoWayCheckBox.Checked;
+            }
+
             Close();
         }
 

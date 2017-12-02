@@ -88,6 +88,7 @@
             this.удалитьПерегонToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuMap = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMap)).BeginInit();
             this.contextMenuVertex.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -616,26 +617,26 @@
             this.справкаToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.справкаToolStripMenuItem.Text = "Справка";
             // 
-            // маршрутToolStripMenuItem
+            // ToolStripMenuItem_Route
             // 
             this.ToolStripMenuItem_Route.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolStripMenuItem_StaticView,
             this.ToolStripMenuItem_RouteParameters});
-            this.ToolStripMenuItem_Route.Name = "маршрутToolStripMenuItem";
+            this.ToolStripMenuItem_Route.Name = "ToolStripMenuItem_Route";
             this.ToolStripMenuItem_Route.Size = new System.Drawing.Size(72, 20);
             this.ToolStripMenuItem_Route.Text = "Маршрут";
             this.ToolStripMenuItem_Route.Click += new System.EventHandler(this.ToolStripMenuItem_Route_Click);
             // 
-            // отобразитьСтатическиToolStripMenuItem
+            // ToolStripMenuItem_StaticView
             // 
-            this.ToolStripMenuItem_StaticView.Name = "отобразитьСтатическиToolStripMenuItem";
+            this.ToolStripMenuItem_StaticView.Name = "ToolStripMenuItem_StaticView";
             this.ToolStripMenuItem_StaticView.Size = new System.Drawing.Size(202, 22);
             this.ToolStripMenuItem_StaticView.Text = "Отобразить статически";
             this.ToolStripMenuItem_StaticView.Click += new System.EventHandler(this.ToolStripMenuItem_MakeStaticRoute_Click);
             // 
-            // параметрыМаршрутаToolStripMenuItem
+            // ToolStripMenuItem_RouteParameters
             // 
-            this.ToolStripMenuItem_RouteParameters.Name = "параметрыМаршрутаToolStripMenuItem";
+            this.ToolStripMenuItem_RouteParameters.Name = "ToolStripMenuItem_RouteParameters";
             this.ToolStripMenuItem_RouteParameters.Size = new System.Drawing.Size(202, 22);
             this.ToolStripMenuItem_RouteParameters.Text = "Параметры маршрута";
             this.ToolStripMenuItem_RouteParameters.Click += new System.EventHandler(this.ПараметрыМаршрутаToolStripMenuItem_Click);
@@ -676,11 +677,22 @@
             this.toolStripMenuItem9.Text = "Добавить перекресток";
             this.toolStripMenuItem9.Click += new System.EventHandler(this.ToolStripMenu_AddVertex_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(466, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(775, 382);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.menuStrip2);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tabControlMain);
@@ -775,5 +787,6 @@
         private System.Windows.Forms.ToolStripMenuItem удалитьПерекрестокToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_StaticView;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_RouteParameters;
+        private System.Windows.Forms.Button button1;
     }
 }

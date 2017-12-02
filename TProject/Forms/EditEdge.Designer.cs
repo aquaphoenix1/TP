@@ -106,8 +106,6 @@
             // 
             this.signMaxSpeedComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.signMaxSpeedComboBox.FormattingEnabled = true;
-            this.signMaxSpeedComboBox.Items.AddRange(new object[] {
-            "60"});
             this.signMaxSpeedComboBox.Location = new System.Drawing.Point(279, 63);
             this.signMaxSpeedComboBox.Name = "signMaxSpeedComboBox";
             this.signMaxSpeedComboBox.Size = new System.Drawing.Size(66, 21);
@@ -156,8 +154,6 @@
             // 
             this.coatingComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.coatingComboBox.FormattingEnabled = true;
-            this.coatingComboBox.Items.AddRange(new object[] {
-            "Асфальт"});
             this.coatingComboBox.Location = new System.Drawing.Point(160, 47);
             this.coatingComboBox.Name = "coatingComboBox";
             this.coatingComboBox.Size = new System.Drawing.Size(185, 21);
@@ -230,9 +226,6 @@
             // 
             this.policemanComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.policemanComboBox.FormattingEnabled = true;
-            this.policemanComboBox.Items.AddRange(new object[] {
-            "Строгий",
-            "Добрый"});
             this.policemanComboBox.Location = new System.Drawing.Point(160, 24);
             this.policemanComboBox.Name = "policemanComboBox";
             this.policemanComboBox.Size = new System.Drawing.Size(185, 21);
@@ -260,7 +253,6 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Параметры перегона";
-            this.Load += new System.EventHandler(this.EditEdge_Load);
             this.signGroupBox.ResumeLayout(false);
             this.signGroupBox.PerformLayout();
             this.streetGroupBox.ResumeLayout(false);

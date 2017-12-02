@@ -122,7 +122,7 @@ namespace TProject
         {
             if (selectedEdge != null)
             {
-                new EditEdge(selectedEdge).Show();
+                new EditEdge(selectedEdge).ShowDialog();
             }
         }
 

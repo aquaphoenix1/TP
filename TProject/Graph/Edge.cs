@@ -15,7 +15,9 @@ namespace TProject.Graph
 
         public bool IsBilateral { get; set; }
 
-        public Sign Signs { get; set; }
+        public bool SignTwoWay { get; set; }
+        public Sign SignMaxSpeed { get; set; }
+
         public Police Policemen { get; set; }
         public string NameStreet { get; set; }
 
@@ -70,9 +72,9 @@ namespace TProject.Graph
 
             price += driver.Car.FuelConsumption * length * driver.Car.CarFuel.Price;
 
-            if(driver.IsViolateTL && this.Policemen != null && Signs != null)
+            if(driver.IsViolateTL && this.Policemen != null && SignMaxSpeed != null)
             {
-                double different = driver.Car.Speed - Signs.Count;
+                double different = driver.Car.Speed - SignMaxSpeed.Count;
 
                 if (different > 19)
                 {

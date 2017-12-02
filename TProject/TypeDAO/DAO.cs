@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using TProject.Coll;
 
 namespace TProject
 {
@@ -46,13 +47,12 @@ namespace TProject
                 }
 
                 #region SQLCommands
-                // new SQLiteCommand("Create table Map ([IDMap] Integer primary key autoincrement, [File] Integer not null, [YVertex]Integer not null)", GetConnection()).ExecuteNonQuery();
-                new SQLiteCommand("Create table Vertex ([ID] Integer primary key, [XVertex] Integer not null,[YVertex]Integer not null)", GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand("Create table Vertex ([ID] Integer primary key, [XVertex] Integer not null, [YVertex]Integer not null)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table TrafficLight ([ID]Integer primary key, [GreenSeconds] Integer not null, [RedSeconds] Integer not null)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Sign ([Type] char(20) primary key, [Value] Integer)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Surface ([NameSurface] char(20) primary key, [KoefSurface] real not null)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Street ([Name] char(50) primary key)", GetConnection()).ExecuteNonQuery();
-                new SQLiteCommand("Create table Edge ([ID] Integer primary key, [Direction] bool not null, [TypeSign] char(20) References Sign ([Type]), [IDVertexFirst] Integer References Vertex ([ID]), [IDVertexSecond] Integer References Vertex ([ID]),  [Name] char(50) References Street ([Name]), [Surface] char(20) References Surface ([NameSurface]), [Length] real not null)", GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand("Create table Edge ([ID] Integer primary key, [Direction] bool not null, [SignMaxSpeed] char(20) References Sign ([Type]), [SignTwoWay] bool, [IDVertexFirst] Integer References Vertex ([ID]), [IDVertexSecond] Integer References Vertex ([ID]),  [Name] char(50) References Street ([Name]), [Surface] char(20) References Surface ([NameSurface]), [Length] real not null)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Policemen ([TypePolice] char(20) primary key, [Koefficient] real not null)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Auto ([Model] char(30) primary key, [Fuel] char(30) References Fuel ([Name]), [Сonsumption] real not null, [Speed] real not null)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Driver ([FIO] char(30) primary key, [TypeDriver] char(20) not null, [Model] char(30) References Auto ([Model]))", GetConnection()).ExecuteNonQuery();
@@ -97,6 +97,49 @@ namespace TProject
             }
             catch { }
             return val;
+        }
+
+        internal static bool InsertMap(Vertexes vertexes, Edges edges)
+        {
+            try
+            {
+                new SQLiteCommand("DELETE FROM Vertex", GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand("DELETE FROM Edge", GetConnection()).ExecuteNonQuery();
+
+                for (int i = 0; i < vertexes.GetCountElements(); i++)
+                {
+                    var vert = vertexes.GetElement(i);
+                    new SQLiteCommand(string.Format("Insert into Vertex values ({0}, {1}, {2})", vert.ID, vert.X, vert.Y), GetConnection()).ExecuteNonQuery();
+                }
+
+                for (int i = 0; i < edges.GetCountElements(); i++)
+                {
+                    var edge = edges.GetElement(i);
+
+                    string idSign = (edge.SignMaxSpeed != null) ? edge.SignMaxSpeed.TypeName : "null";
+
+                    new SQLiteCommand(string.Format("Insert into Edge values ({0}, '{1}', '{2}', '{3}', {4}, {5}, '{6}', '{7}', {8})", edge.ID, edge.IsBilateral.ToString(), idSign, edge.SignTwoWay.ToString(), edge.GetHead().ID, edge.GetEnd().ID, edge.NameStreet, edge.Coat.TypeName, edge.GetLength(Viewer.ViewPort.ScaleCoefficient).ToString().Replace(',', '.')), GetConnection()).ExecuteNonQuery();
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        internal static bool LoadMap()
+        {
+            try
+            {
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /*public void ExecuteForMap(int[,] matrix, string name)
