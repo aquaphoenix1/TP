@@ -11,6 +11,8 @@ namespace TProject
         private bool addOrEdit;
         private Sign sign;
 
+        private string ID;
+
         private SignForm()
         {
             InitializeComponent();
@@ -26,7 +28,8 @@ namespace TProject
             sign = Sign.CreateSign(tSign, value);
 
             textBoxTypeSign.Text = tSign;
-            textBoxTypeSign.Enabled = false;
+
+            ID = tSign;
 
             textBoxValueSign.Value =(decimal)value;
         }
@@ -90,7 +93,7 @@ namespace TProject
 
         private void Edit()
         {
-            if (new SignDAO().Update(sign))
+            if (new SignDAO().Update(sign, ID))
             {
                 Main.IsChanged = true;
                 Close();

@@ -6,9 +6,9 @@ using TProject.Way;
 
 namespace TProject.TypeDAO
 {
-    class SignDAO : DAO
+    class SignDAO : DAO, ITypeDAO
     {
-        public bool Insert(Type obj)
+        public bool Insert(object obj)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace TProject.TypeDAO
             {
                 new SQLiteCommand(string.Format("DELETE from Sign where Type = '{0}'", type), DAO.GetConnection()).ExecuteNonQuery();
 
-                var obj = Sign.ListSigns.RemoveAll(l => l.ElementAt(0).ToString().Equals(type));
+                Sign.ListSigns.RemoveAll(l => l.ElementAt(0).ToString().Equals(type));
 
                 return true;
             }
@@ -46,16 +46,17 @@ namespace TProject.TypeDAO
             }
         }
 
-        public bool Update(Type obj)
+        public bool Update(object obj, string ID)
         {
             try
             {
                 Sign s = (Sign)obj;
-                new SQLiteCommand(string.Format("UPDATE Sign SET [Value] = {0} where Type = '{1}'", s.Count, s.TypeName), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("UPDATE Sign SET [Type] = '{0}', [Value] = {1} where Type = '{2}'", s.TypeName, s.Count, ID), DAO.GetConnection()).ExecuteNonQuery();
 
-                var updatedSign = Sign.ListSigns.FirstOrDefault(l => l.ElementAt(0).ToString().Equals(s.TypeName));
+                var updatedSign = Sign.ListSigns.FirstOrDefault(l => l.ElementAt(0).ToString().Equals(ID));
                 if (updatedSign != null)
                 {
+                    updatedSign[0] = s.TypeName;
                     updatedSign[1] = s.Count;
                 }
 

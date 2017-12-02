@@ -11,6 +11,8 @@ namespace TProject
         private bool addOrEdit;
         private Fuel fuel;
 
+        private string ID;
+
         private FuelForm()
         {
             InitializeComponent();
@@ -26,7 +28,8 @@ namespace TProject
             fuel = Fuel.CreateFuel(nFuel, price);
 
             textBoxNameFuel.Text = nFuel;
-            textBoxNameFuel.Enabled = false;
+
+            ID = nFuel;
 
             textBoxPrice.Value = (decimal)price;
         }
@@ -88,7 +91,7 @@ namespace TProject
 
         private void Edit()
         {
-            if (new FuelDAO().Update(fuel))
+            if (new FuelDAO().Update(fuel, ID))
             {
                 Main.IsChanged = true;
 
@@ -136,7 +139,7 @@ namespace TProject
             }
         }
 
-        private void textBoxPrice_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void TextBoxPrice_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             
         }

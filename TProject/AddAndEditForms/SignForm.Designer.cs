@@ -121,6 +121,7 @@
             this.MinimizeBox = false;
             this.Name = "SignForm";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Параметры здорожного знака";
             ((System.ComponentModel.ISupportInitialize)(this.textBoxValueSign)).EndInit();
             this.ResumeLayout(false);

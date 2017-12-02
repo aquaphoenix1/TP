@@ -5,9 +5,9 @@ using System.Linq;
 
 namespace TProject.TypeDAO
 {
-    class DriverDAO : DAO
+    class DriverDAO : DAO, ITypeDAO
     {
-        public bool Insert(Type obj)
+        public bool Insert(object obj)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace TProject.TypeDAO
             {
                 new SQLiteCommand(string.Format("DELETE from Driver where FIO = '{0}'", FIO), DAO.GetConnection()).ExecuteNonQuery();
 
-                var obj = Driver.Driver.ListDriver.RemoveAll(l => l.ElementAt(0).ToString().Equals(FIO));
+                Driver.Driver.ListDriver.RemoveAll(l => l.ElementAt(0).ToString().Equals(FIO));
 
                 return true;
             }
@@ -46,16 +46,17 @@ namespace TProject.TypeDAO
             }
         }
 
-        public bool Update(Type obj)
+        public bool Update(object obj, string ID)
         {
             try
             {
                 Driver.Driver d = (Driver.Driver)obj;
-                new SQLiteCommand(string.Format("UPDATE Driver SET [TypeDriver] = '{0}', [Model] = '{1}' where [FIO]= /'{2}/'", d.IsViolateTL.ToString(), d.Car.TypeName, d.FIO), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("UPDATE Driver SET [FIO] = '{0}, [TypeDriver] = '{1}', [Model] = '{2}' where FIO= '{3}'", d.FIO, d.IsViolateTL.ToString(), d.Car.TypeName, ID), DAO.GetConnection()).ExecuteNonQuery();
 
-                var updatedDriver = Driver.Driver.ListDriver.FirstOrDefault(l => l.ElementAt(0).ToString().Equals(d.FIO));
+                var updatedDriver = Driver.Driver.ListDriver.FirstOrDefault(l => l.ElementAt(0).ToString().Equals(ID));
                 if (updatedDriver != null)
                 {
+                    updatedDriver[0] = d.FIO;
                     updatedDriver[1] = d.IsViolateTL;
                     updatedDriver[2] = d.Car.TypeName;
                 }

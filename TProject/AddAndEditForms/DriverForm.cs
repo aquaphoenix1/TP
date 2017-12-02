@@ -12,6 +12,8 @@ namespace TProject
         private bool addOrEdit;
         private Driver.Driver driver;
 
+        private string ID;
+
         private DriverForm()
         {
             InitializeComponent();
@@ -30,7 +32,8 @@ namespace TProject
             comboBoxIDAuto.SelectedIndex = comboBoxIDAuto.FindString(car.TypeName);
 
             textBoxFIO.Text = FIO;
-            textBoxFIO.Enabled = false;
+
+            ID = FIO;
         }
 
         private void Accept()
@@ -38,26 +41,28 @@ namespace TProject
             textBoxFIO.BackColor = Color.White;
 
             string name = textBoxFIO.Text;
-            string model = comboBoxIDAuto.SelectedText;
+            string model = string.Empty;
 
             if (string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(name))
             {
                 MessageBox.Show("Введите ФИО!");
                 textBoxFIO.BackColor = Color.Red;
             }
-            else if (string.IsNullOrEmpty(model) || string.IsNullOrWhiteSpace(model))
+            else if (comboBoxIDAuto.SelectedItem == null)
             {
                 MessageBox.Show("Выберите модель!");
             }
             else
             {
+                model = comboBoxIDAuto.SelectedItem.ToString();
+
                 var findcar = Car.ListAuto.FirstOrDefault(l => l.ElementAt(0).ToString().Equals(model));
 
-                var findfuel = Fuel.ListFuel.FirstOrDefault(l => l.ElementAt(0).Equals(findcar[2].ToString()));
+                var findfuel = Fuel.ListFuel.FirstOrDefault(l => l.ElementAt(0).Equals(findcar[1].ToString()));
 
-                Fuel fuel = Fuel.CreateFuel(findfuel[0].ToString(), double.Parse(findfuel[2].ToString()));
+                Fuel fuel = Fuel.CreateFuel(findfuel[0].ToString(), double.Parse(findfuel[1].ToString()));
 
-                Car fcar = Car.CreateCar(findcar[1].ToString(), fuel, double.Parse(findcar[3].ToString()), double.Parse(findcar[4].ToString()));
+                Car fcar = Car.CreateCar(findcar[0].ToString(), fuel, double.Parse(findcar[2].ToString()), double.Parse(findcar[3].ToString()));
 
                 if (driver == null)
                 {
@@ -101,7 +106,7 @@ namespace TProject
 
         private void Edit()
         {
-            if (new DriverDAO().Update(driver))
+            if (new DriverDAO().Update(driver, ID))
             {
                 Main.IsChanged = true;
                 this.Close();

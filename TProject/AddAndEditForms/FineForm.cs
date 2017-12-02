@@ -10,6 +10,7 @@ namespace TProject
     {
         private bool addOrEdit;
         private Fine fine;
+        private string ID;
 
         private FineForm()
         {
@@ -26,8 +27,9 @@ namespace TProject
             fine = Fine.CreateFine(nFine, cost);
 
             textBoxNameFine.Text = nFine;
-            textBoxNameFine.Enabled = false;
             textBoxValueFine.Text = cost.ToString();
+
+            ID = nFine;
         }
 
         private void Accept()
@@ -43,7 +45,7 @@ namespace TProject
             }
             else
             {
-                if (double.TryParse(textBoxValueFine.Value.ToString(), out double d) || d > 0)
+                if (double.TryParse(textBoxValueFine.Value.ToString(), out double d))
                 {
                     if (fine == null)
                     {
@@ -51,7 +53,7 @@ namespace TProject
                     }
                     else
                     {
-                        fine.TypeName = textBoxNameFine.Text;
+                        fine.TypeName = name;
                         fine.Count = d;
                     }
 
@@ -88,7 +90,7 @@ namespace TProject
 
         private void Edit()
         {
-            if (new FineDAO().Update(fine))
+            if (new FineDAO().Update(fine, ID))
             {
                 Main.IsChanged = true;
                 Close();

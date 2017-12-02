@@ -82,7 +82,7 @@
             // 
             // textBoxFIO
             // 
-            this.textBoxFIO.Location = new System.Drawing.Point(122, 3);
+            this.textBoxFIO.Location = new System.Drawing.Point(122, 6);
             this.textBoxFIO.Name = "textBoxFIO";
             this.textBoxFIO.Size = new System.Drawing.Size(140, 23);
             this.textBoxFIO.TabIndex = 11;

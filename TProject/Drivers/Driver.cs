@@ -2,7 +2,7 @@
 
 namespace TProject.Driver
 {
-    public class Driver : Type
+    public class Driver
     {
         public static List<List<object>> ListDriver { get; set; }
         public Car Car { get; set; }

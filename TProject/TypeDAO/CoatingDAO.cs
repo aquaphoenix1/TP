@@ -6,9 +6,9 @@ using TProject.Way;
 
 namespace TProject.TypeDAO
 {
-    class CoatingDAO : DAO, TypeDAO.ITypeDAO
+    class CoatingDAO : DAO, ITypeDAO
     {
-        public bool Insert(Type obj)
+        public bool Insert(object obj)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace TProject.TypeDAO
             {
                 new SQLiteCommand(string.Format("DELETE from Surface where NameSurface = '{0}'", nameSurface), DAO.GetConnection()).ExecuteNonQuery();
 
-                var obj = Coating.ListSurface.RemoveAll(l => l.ElementAt(0).ToString().Equals(nameSurface));
+                Coating.ListSurface.RemoveAll(l => l.ElementAt(0).ToString().Equals(nameSurface));
 
                 return true;
             }
@@ -46,16 +46,17 @@ namespace TProject.TypeDAO
             }
         }
 
-        public bool Update(Type obj)
+        public bool Update(object obj, string ID)
         {
             try
             {
                 Coating c = (Coating)obj;
-                new SQLiteCommand(string.Format("UPDATE Surface SET [KoefSurface] = {0} where NameSurface = '{1}'", c.Coeff, c.TypeName), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("UPDATE Surface SET [NameSurface] = '{0}', [KoefSurface] = {1} where NameSurface = '{2}'", c.TypeName, c.Coeff, ID), DAO.GetConnection()).ExecuteNonQuery();
 
-                var updatedCoating = Coating.ListSurface.FirstOrDefault(l => l.ElementAt(0).ToString().Equals(c.TypeName));
+                var updatedCoating = Coating.ListSurface.FirstOrDefault(l => l.ElementAt(0).ToString().Equals(ID));
                 if (updatedCoating != null)
                 {
+                    updatedCoating[0] = c.TypeName;
                     updatedCoating[1] = c.Coeff;
                 }
 

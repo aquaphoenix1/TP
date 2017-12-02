@@ -6,9 +6,9 @@ using TProject.Driver;
 
 namespace TProject.TypeDAO
 {
-    class FuelDAO : DAO
+    class FuelDAO : DAO, ITypeDAO
     {
-        public bool Insert(Type obj)
+        public bool Insert(object obj)
         {
             try
             {
@@ -34,9 +34,9 @@ namespace TProject.TypeDAO
         {
             try
             {
-                new SQLiteCommand(string.Format("DELETE from Fuel where Name = {0}", name), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("DELETE from Fuel where Name = '{0}'", name), DAO.GetConnection()).ExecuteNonQuery();
 
-                var obj = Fuel.ListFuel.RemoveAll(l => l.ElementAt(0).ToString().Equals(name));
+                Fuel.ListFuel.RemoveAll(l => l.ElementAt(0).ToString().Equals(name));
 
                 return true;
             }
@@ -46,16 +46,17 @@ namespace TProject.TypeDAO
             }
         }
 
-        public bool Update(Type obj)
+        public bool Update(object obj, string ID)
         {
             try
             {
                 Fuel f = (Fuel)obj;
-                new SQLiteCommand(string.Format("UPDATE Fuel SET [Cost] = {0} where Name = '{1}'", f.Price, f.TypeName), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("UPDATE Fuel SET [Name] = '{0}', [Cost] = {1} where Name = '{2}'", f.TypeName, f.Price, ID), DAO.GetConnection()).ExecuteNonQuery();
 
-                var updatedFuel = Fuel.ListFuel.FirstOrDefault(l => l.ElementAt(0).ToString().Equals(f.TypeName));
+                var updatedFuel = Fuel.ListFuel.FirstOrDefault(l => l.ElementAt(0).ToString().Equals(ID));
                 if (updatedFuel != null)
                 {
+                    updatedFuel[0] = f.TypeName;
                     updatedFuel[1] = f.Price;
                 }
 

@@ -6,9 +6,9 @@ using TProject.Way;
 
 namespace TProject.TypeDAO
 {
-    class FineDAO : DAO
+    class FineDAO : DAO, ITypeDAO
     {
-        public bool Insert(Type obj)
+        public bool Insert(object obj)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace TProject.TypeDAO
             {
                 new SQLiteCommand(string.Format("DELETE from Fine where NameFine = '{0}'", nameFine), DAO.GetConnection()).ExecuteNonQuery();
 
-                var obj = Fine.ListFine.RemoveAll(l => l.ElementAt(0).ToString().Equals(nameFine));
+                Fine.ListFine.RemoveAll(l => l.ElementAt(0).ToString().Equals(nameFine));
 
                 return true;
             }
@@ -46,16 +46,17 @@ namespace TProject.TypeDAO
             }
         }
 
-        public bool Update(Type obj)
+        public bool Update(object obj, string ID)
         {
             try
             {
                 Fine f = (Fine)obj;
-                new SQLiteCommand(string.Format("UPDATE Fine SET [CostFine] = {0} where NameFine = '{1}'", f.Count, f.TypeName), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("UPDATE Fine SET [NameFine] = '{0}', [CostFine] = {1} where NameFine = '{2}'", f.TypeName, f.Count, ID), DAO.GetConnection()).ExecuteNonQuery();
 
-                var updatedFine = Fine.ListFine.FirstOrDefault(l => l.ElementAt(0).ToString().Equals(f.TypeName));
+                var updatedFine = Fine.ListFine.FirstOrDefault(l => l.ElementAt(0).ToString().Equals(ID));
                 if (updatedFine != null)
                 {
+                    updatedFine[0] = f.TypeName;
                     updatedFine[1] = f.Count;
                 }
 

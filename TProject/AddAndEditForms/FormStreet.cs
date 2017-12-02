@@ -8,7 +8,7 @@ namespace TProject
     public partial class FormStreet : Form
     {
         private bool addOrEdit;
-        private long ID;
+        private string ID;
 
         public FormStreet()
         {
@@ -20,10 +20,10 @@ namespace TProject
             this.addOrEdit = addOrEdit;
         }
 
-        public FormStreet(long id, string name) : this(false)
+        public FormStreet(string name) : this(false)
         {
             textBoxNameStreet.Text = name;
-            this.ID = id;
+            this.ID = name;
         }
 
         private void Accept()
@@ -74,7 +74,20 @@ namespace TProject
 
         private void Edit()
         {
-            Close();
+            string str = textBoxNameStreet.Text;
+
+            object value = str;
+
+            if (new TypeDAO.StreetDAO().Update(value, ID))
+            {
+                Main.IsChanged = true;
+
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Ошибка изменения");
+            }
         }
 
         private void TextBoxNameStreet_TextChanged(object sender, EventArgs e)

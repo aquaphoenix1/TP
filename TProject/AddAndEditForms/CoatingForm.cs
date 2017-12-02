@@ -10,6 +10,7 @@ namespace TProject
     {
         private bool addOrEdit;
         private Coating coating;
+        private string ID;
 
         private CoatingForm()
         {
@@ -26,7 +27,7 @@ namespace TProject
             coating = Coating.CreateCoating(tCoating, coeff);
 
             textBoxTypeCoating.Text = tCoating;
-            textBoxTypeCoating.Enabled = false;
+            ID = tCoating;
 
             textBoxCoefficient.Value = (decimal)coeff;
         }
@@ -89,7 +90,7 @@ namespace TProject
 
         private void Edit()
         {
-            if (new CoatingDAO().Update(coating))
+            if (new CoatingDAO().Update(coating, ID))
             {
                 Main.IsChanged = true;
                 Close();

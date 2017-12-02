@@ -12,6 +12,8 @@ namespace TProject
         private bool addOrEdit;
         private Car car;
 
+        private string ID;
+
         private CarForm()
         {
             InitializeComponent();
@@ -28,6 +30,8 @@ namespace TProject
             car = Car.CreateCar(model, fuel, consumption, speed);
             textBoxModel.Text = model;
 
+            ID = model;
+
             comboBoxIDFuel.SelectedIndex = comboBoxIDFuel.FindString(fuel.TypeName);
             textBoxConsumption.Text = consumption.ToString();
             textBoxSpeed.Text = speed.ToString();
@@ -38,6 +42,7 @@ namespace TProject
             string model = textBoxModel.Text;
             string consumption = textBoxConsumption.Value.ToString();
             string speed = textBoxSpeed.Value.ToString();
+            string f = string.Empty;
 
             textBoxModel.BackColor = Color.White;
 
@@ -46,128 +51,126 @@ namespace TProject
                 MessageBox.Show("Не корректное значение модели!");
                 textBoxModel.BackColor = Color.Red;
             }
-            else if (double.TryParse(speed, out double spd))
+            else if (comboBoxIDFuel.SelectedItem == null)
             {
-                if (double.TryParse(consumption, out double d))
+                MessageBox.Show("Не выбрано топливо!");
+            }
+            else
+            {
+                f = comboBoxIDFuel.SelectedItem.ToString();
+                double spd = double.Parse(speed);
+                double cons = double.Parse(consumption);
+
+                var findfuel = Fuel.ListFuel.First(l => l.ElementAt(0).ToString().Equals(f));
+
+                Fuel fuel = Fuel.CreateFuel(findfuel[0].ToString(), double.Parse(findfuel[1].ToString()));
+
+                if (car == null)
                 {
-                    if (long.TryParse(comboBoxIDFuel.Text, out long idFuel))
-                    {
-                        var findfuel = Fuel.ListFuel.First(l => l.ElementAt(0).ToString() == comboBoxIDFuel.SelectedItem.ToString());
+                    car = new Car(model, fuel, cons, spd);
+                }
+                else
+                {
+                    car.TypeName = model;
+                    car.CarFuel = fuel;
+                    car.FuelConsumption = cons;
+                    car.Speed = spd;
+                }
 
-                        Fuel fuel = Fuel.CreateFuel(findfuel[0].ToString(), double.Parse(findfuel[1].ToString()));
-
-                        if (car == null)
-                        {
-                            car = new Car(model, fuel, double.Parse(consumption), spd);
-                        }
-                        else
-                        {
-                            car.TypeName = textBoxModel.Text;
-                            car.CarFuel = fuel;
-                            car.FuelConsumption = double.Parse(consumption);
-                            car.Speed = spd;
-                        }
-
-                        if (addOrEdit)
-                        {
-                            Add();
-                        }
-                        else
-                        {
-                            Edit();
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Не выбрано топливо!");
-                    }
+                if (addOrEdit)
+                {
+                    Add();
+                }
+                else
+                {
+                    Edit();
                 }
             }
         }
 
-        private void ButtonAccept_Click(object sender, EventArgs e)
+    private void ButtonAccept_Click(object sender, EventArgs e)
+    {
+        Accept();
+    }
+
+    private void Add()
+    {
+        if (new CarDAO().Insert(car))
+        {
+            Main.IsChanged = true;
+
+            Close();
+        }
+        else
+        {
+            MessageBox.Show("Ошибка добавления");
+        }
+    }
+
+    private void Edit()
+    {
+        if (new CarDAO().Update(car, ID))
+        {
+            Main.IsChanged = true;
+
+            Close();
+        }
+        else
+        {
+            MessageBox.Show("Ошибка изменения");
+        }
+    }
+
+    private void TextBoxModel_TextChanged(object sender, EventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(textBoxModel.Text) || string.IsNullOrEmpty(textBoxModel.Text))
+        {
+            textBoxModel.BackColor = Color.Red;
+        }
+        else
+        {
+            textBoxModel.BackColor = Color.White;
+        }
+    }
+
+    private void TextBoxModel_KeyUp(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Enter)
         {
             Accept();
         }
+    }
 
-        private void Add()
+    private void ComboBoxIDFuel_KeyUp(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Enter)
         {
-            if (new CarDAO().Insert(car))
-            {
-                Main.IsChanged = true;
-
-                Close();
-            }
-            else
-            {
-                MessageBox.Show("Ошибка добавления");
-            }
-        }
-
-        private void Edit()
-        {
-            if (new CarDAO().Update(car))
-            {
-                Main.IsChanged = true;
-
-                Close();
-            }
-            else
-            {
-                MessageBox.Show("Ошибка изменения");
-            }
-        }
-
-        private void TextBoxModel_TextChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(textBoxModel.Text) || string.IsNullOrEmpty(textBoxModel.Text))
-            {
-                textBoxModel.BackColor = Color.Red;
-            }
-            else
-            {
-                textBoxModel.BackColor = Color.White;
-            }
-        }
-
-        private void TextBoxModel_KeyUp(object sender, KeyEventArgs e)
-        {
-            if(e.KeyCode == Keys.Enter)
-            {
-                Accept();
-            }
-        }
-
-        private void ComboBoxIDFuel_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                Accept();
-            }
-        }
-
-        private void TextBoxConsumption_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                Accept();
-            }
-        }
-
-        private void TextBoxSpeed_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                Accept();
-            }
-        }
-
-        private void ButtonAccept_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                Accept();
-            }
+            Accept();
         }
     }
+
+    private void TextBoxConsumption_KeyUp(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Enter)
+        {
+            Accept();
+        }
+    }
+
+    private void TextBoxSpeed_KeyUp(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Enter)
+        {
+            Accept();
+        }
+    }
+
+    private void ButtonAccept_KeyUp(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Enter)
+        {
+            Accept();
+        }
+    }
+}
 }

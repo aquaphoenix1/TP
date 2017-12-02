@@ -111,12 +111,7 @@ namespace TProject
                             dataGridViewDataBase.Columns.Add("consumption", "Потребление");
                             dataGridViewDataBase.Columns.Add("speed", "Скорость");
 
-                            Car.ListAuto.ForEach(val =>
-                            {
-                                object[] array = val.ToArray();
-                                array[2] = Fuel.ListFuel.First(fuel => fuel[0].ToString().Equals(val[2].ToString())).ToArray()[1];
-                                dataGridViewDataBase.Rows.Add(array);
-                            });
+                            FillGrid(Car.ListAuto);
 
                             break;
                         }
@@ -130,18 +125,11 @@ namespace TProject
                         }
                     case "Водители":
                         {
-                            dataGridViewDataBase.Columns.Add("name", "Нарушитель?");
-                            dataGridViewDataBase.Columns.Add("IDauto", "ID автомобиля");
-                            dataGridViewDataBase.Columns.Add("model", "Модель автомобиля");
+                            dataGridViewDataBase.Columns.Add("name", "ФИО");
+                            dataGridViewDataBase.Columns.Add("type", "Нарушитель?");
+                            dataGridViewDataBase.Columns.Add("model", "Автомобиль");
 
-                            Driver.Driver.ListDriver.ForEach(val =>
-                            {
-                                System.Collections.ArrayList list = new System.Collections.ArrayList(val.ToArray())
-                                {
-                                    Car.ListAuto.First(car => car[0].ToString().Equals(val[2].ToString())).ToArray()[1]
-                                };
-                                dataGridViewDataBase.Rows.Add(list.ToArray());
-                            });
+                            FillGrid(Driver.Driver.ListDriver);
 
                             break;
                         }
@@ -257,12 +245,7 @@ namespace TProject
                                 {
                                     dataGridViewDataBase.Rows.Clear();
 
-                                    Car.ListAuto.ForEach(val =>
-                                    {
-                                        object[] array = val.ToArray();
-                                        array[2] = Fuel.ListFuel.First(fuel => fuel[0].ToString().Equals(val[2].ToString())).ToArray()[1];
-                                        dataGridViewDataBase.Rows.Add(array);
-                                    });
+                                    FillGrid(Car.ListAuto);
                                 }
                             }
                             break;
@@ -281,14 +264,7 @@ namespace TProject
                                 {
                                     dataGridViewDataBase.Rows.Clear();
 
-                                    Driver.Driver.ListDriver.ForEach(val =>
-                                    {
-                                        System.Collections.ArrayList list = new System.Collections.ArrayList(val.ToArray())
-                                    {
-                                    Car.ListAuto.First(car => car[0].ToString().Equals(val[2].ToString())).ToArray()[1]
-                                    };
-                                        dataGridViewDataBase.Rows.Add(list.ToArray());
-                                    });
+                                    FillGrid(Driver.Driver.ListDriver);
                                 }
                             }
                             break;
@@ -454,7 +430,9 @@ namespace TProject
         {
             label_Layers.Location = new Point(-17, panelSlideContainer.Height / 2 - 40);
             if (Viewer.ViewPort == null || Viewer.ViewPort.View == null)
+            {
                 pictureBoxMap.Size = this.Size;
+            }
         }
 
         private void PictureBoxMap_MouseDown(object sender, MouseEventArgs e)
@@ -747,19 +725,6 @@ namespace TProject
                 {
                     case "Типы полицейских":
                         {
-                            /*long id = long.Parse(dataGridViewDataBase.SelectedRows[0].Cells["id"].Value.ToString());
-                            List<object> police = Police.ListTypePolicemen.First(policeman => policeman[0].ToString().Equals(id.ToString()));
-
-                            string typePolice = dataGridViewDataBase.SelectedRows[0].Cells["type"].Value.ToString();
-                            double coef = double.Parse(dataGridViewDataBase.SelectedRows[0].Cells["koefficient"].Value.ToString());
-                            new PoliceForm(id, police[1].ToString()).ShowDialog();
-
-                            if (IsChanged)
-                            {
-                                dataGridViewDataBase.Rows.Clear();
-                                FillGrid(Police.ListTypePolicemen);
-                            }*/
-
                             break;
                         }
                     case "Дорожные покрытия":
@@ -825,18 +790,13 @@ namespace TProject
                             List<object> fl = Fuel.ListFuel.First(f => f[0].ToString().Equals(auto[1].ToString()));
                             Fuel currentFuel = Fuel.CreateFuel(fl[0].ToString(), double.Parse(fl[1].ToString()));
 
-                            new CarForm(auto[1].ToString(), currentFuel, double.Parse(auto[3].ToString()), double.Parse(auto[4].ToString())).ShowDialog();
+                            new CarForm(auto[0].ToString(), currentFuel, double.Parse(auto[2].ToString()), double.Parse(auto[3].ToString())).ShowDialog();
 
                             if (IsChanged)
                             {
                                 dataGridViewDataBase.Rows.Clear();
 
-                                Car.ListAuto.ForEach(val =>
-                                {
-                                    object[] array = val.ToArray();
-                                    array[2] = Fuel.ListFuel.First(fuel => fuel[0].ToString().Equals(val[2].ToString())).ToArray()[1];
-                                    dataGridViewDataBase.Rows.Add(array);
-                                });
+                                FillGrid(Car.ListAuto);
                             }
                             break;
                         }
@@ -844,24 +804,17 @@ namespace TProject
                         {
                             string name = dataGridViewDataBase.SelectedRows[0].Cells["name"].Value.ToString();
                             List<object> driver = Driver.Driver.ListDriver.First(dv => dv[0].ToString().Equals(name));
-                            List<object> auto = Car.ListAuto.First(cr => cr[0].ToString().Equals(driver[1].ToString()));
+                            List<object> auto = Car.ListAuto.First(cr => cr[0].ToString().Equals(driver[2].ToString()));
                             List<object> fl = Fuel.ListFuel.First(f => f[0].ToString().Equals(auto[1].ToString()));
                             Fuel currentFuel = Fuel.CreateFuel(fl[0].ToString(), double.Parse(fl[1].ToString()));
                             Car car = Car.CreateCar(auto[0].ToString(), currentFuel, double.Parse(auto[2].ToString()), double.Parse(auto[3].ToString()));
-                            //new DriverForm(driver[0].ToString(), car).ShowDialog();
+                            new DriverForm(driver[0].ToString(), driver[1].ToString(), car).ShowDialog();
 
                             if (IsChanged)
                             {
                                 dataGridViewDataBase.Rows.Clear();
 
-                                Driver.Driver.ListDriver.ForEach(val =>
-                                {
-                                    System.Collections.ArrayList list = new System.Collections.ArrayList(val.ToArray())
-                                {
-                                    Car.ListAuto.First(cr => cr[0].ToString().Equals(val[2].ToString())).ToArray()[1]
-                                };
-                                    dataGridViewDataBase.Rows.Add(list.ToArray());
-                                });
+                                FillGrid(Driver.Driver.ListDriver);
                             }
 
                             break;
@@ -869,7 +822,15 @@ namespace TProject
 
                     case "Улицы":
                         {
-                            
+                            IsChanged = false;
+                            new FormStreet(dataGridViewDataBase.SelectedRows[0].Cells["name"].Value.ToString()).ShowDialog();
+
+                            if (IsChanged)
+                            {
+                                dataGridViewDataBase.Rows.Clear();
+
+                                FillGrid(Edge.StreetList);
+                            }
                             break;
                         }
                 }

@@ -17,11 +17,11 @@ namespace TProject
 
         private void OkRouteButton_Click(object sender, System.EventArgs e)
         {
-            if(driverComboBox.SelectedItem.ToString() == "")
+            if(driverComboBox.SelectedItem == null)
             {
                 MessageBox.Show("Выберите водителя!");
             }
-            else if (critSearchComboBox.SelectedItem.ToString() == "")
+            else if (critSearchComboBox.SelectedItem == null)
             {
                 MessageBox.Show("Выберите критерий поиска!");
             }
@@ -42,6 +42,7 @@ namespace TProject
                         {
                             Criterial = Main.Criterial.Length;
                             Drive = null;
+
                             break;
                         }
                     case "Стоимость":

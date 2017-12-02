@@ -2,8 +2,8 @@
 {
     public interface ITypeDAO
     {
-        bool Insert(Type obj);
+        bool Insert(object obj);
         bool Delete(string ID);
-        bool Update(Type obj);
+        bool Update(object obj, string ID);
     }
 }

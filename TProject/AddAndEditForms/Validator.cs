@@ -17,15 +17,18 @@ namespace TProject.AddAndEditForms
             bool zapyataya = true;
 
             foreach (char ch in tmp)
+            {
                 if (Char.IsDigit(ch) || (ch == ',' && zapyataya))
                 {
                     outS += ch;
                     if (ch == ',')
+                    {
                         zapyataya = false;
+                    }
                 }
+            }
 
-            decimal value;
-            decimal.TryParse(outS, out value);
+            decimal.TryParse(outS, out decimal value);
             nUD.Value = value;
         }
     }
