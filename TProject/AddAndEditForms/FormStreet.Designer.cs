@@ -39,6 +39,8 @@
             this.textBoxNameStreet.Name = "textBoxNameStreet";
             this.textBoxNameStreet.Size = new System.Drawing.Size(189, 23);
             this.textBoxNameStreet.TabIndex = 0;
+            this.textBoxNameStreet.TextChanged += new System.EventHandler(this.TextBoxNameStreet_TextChanged);
+            this.textBoxNameStreet.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxNameStreet_KeyUp);
             // 
             // labelNameStreet
             // 
@@ -59,6 +61,7 @@
             this.buttonAccept.Text = "Принять";
             this.buttonAccept.UseVisualStyleBackColor = true;
             this.buttonAccept.Click += new System.EventHandler(this.ButtonAccept_Click);
+            this.buttonAccept.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ButtonAccept_KeyUp);
             // 
             // FormStreet
             // 

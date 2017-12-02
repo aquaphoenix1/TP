@@ -29,7 +29,7 @@ namespace TProject
             comboBoxIDAuto.SelectedIndex = comboBoxIDAuto.FindString(car.ID.ToString());
         }
 
-        private void ButtonAccept_Click(object sender, EventArgs e)
+        private void Accept()
         {
             if (long.TryParse(comboBoxIDAuto.Text, out long d))
             {
@@ -66,6 +66,11 @@ namespace TProject
             }
         }
 
+        private void ButtonAccept_Click(object sender, EventArgs e)
+        {
+            Accept();
+        }
+
         private void Add()
         {
             if (new DriverDAO().Insert(driver))
@@ -91,6 +96,22 @@ namespace TProject
             else
             {
                 MessageBox.Show("Ошибка изменения");
+            }
+        }
+
+        private void ComboBoxIDAuto_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                Accept();
+            }
+        }
+
+        private void ButtonAccept_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                Accept();
             }
         }
     }

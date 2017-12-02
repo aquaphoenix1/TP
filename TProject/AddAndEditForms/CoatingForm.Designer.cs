@@ -46,6 +46,7 @@
             this.buttonAccept.Text = "Принять";
             this.buttonAccept.UseVisualStyleBackColor = true;
             this.buttonAccept.Click += new System.EventHandler(this.ButtonAccept_Click);
+            this.buttonAccept.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ButtonAccept_KeyUp);
             // 
             // textBoxTypeCoating
             // 
@@ -54,6 +55,8 @@
             this.textBoxTypeCoating.Name = "textBoxTypeCoating";
             this.textBoxTypeCoating.Size = new System.Drawing.Size(151, 23);
             this.textBoxTypeCoating.TabIndex = 12;
+            this.textBoxTypeCoating.TextChanged += new System.EventHandler(this.TextBoxTypeCoating_TextChanged);
+            this.textBoxTypeCoating.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxTypeCoating_KeyUp);
             // 
             // labelCoefficient
             // 
@@ -96,6 +99,7 @@
             0,
             0,
             0});
+            this.textBoxCoefficient.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxCoefficient_KeyUp);
             // 
             // CoatingForm
             // 

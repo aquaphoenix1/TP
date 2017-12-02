@@ -44,6 +44,7 @@
             this.buttonAccept.Text = "Принять";
             this.buttonAccept.UseVisualStyleBackColor = true;
             this.buttonAccept.Click += new System.EventHandler(this.ButtonAccept_Click);
+            this.buttonAccept.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ButtonAccept_KeyUp);
             // 
             // comboBoxIDAuto
             // 
@@ -55,6 +56,7 @@
             this.comboBoxIDAuto.Name = "comboBoxIDAuto";
             this.comboBoxIDAuto.Size = new System.Drawing.Size(140, 23);
             this.comboBoxIDAuto.TabIndex = 7;
+            this.comboBoxIDAuto.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ComboBoxIDAuto_KeyUp);
             // 
             // labelIDAuto
             // 

@@ -46,10 +46,11 @@
             // 
             this.comboBoxIDFuel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxIDFuel.FormattingEnabled = true;
-            this.comboBoxIDFuel.Location = new System.Drawing.Point(147, 36);
+            this.comboBoxIDFuel.Location = new System.Drawing.Point(147, 38);
             this.comboBoxIDFuel.Name = "comboBoxIDFuel";
             this.comboBoxIDFuel.Size = new System.Drawing.Size(161, 23);
             this.comboBoxIDFuel.TabIndex = 16;
+            this.comboBoxIDFuel.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ComboBoxIDFuel_KeyUp);
             // 
             // buttonAccept
             // 
@@ -61,6 +62,7 @@
             this.buttonAccept.Text = "Принять";
             this.buttonAccept.UseVisualStyleBackColor = true;
             this.buttonAccept.Click += new System.EventHandler(this.ButtonAccept_Click);
+            this.buttonAccept.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ButtonAccept_KeyUp);
             // 
             // labelConsumption
             // 
@@ -79,7 +81,8 @@
             this.textBoxModel.Name = "textBoxModel";
             this.textBoxModel.Size = new System.Drawing.Size(161, 23);
             this.textBoxModel.TabIndex = 12;
-            this.textBoxModel.TextChanged += new System.EventHandler(this.textBoxModel_TextChanged);
+            this.textBoxModel.TextChanged += new System.EventHandler(this.TextBoxModel_TextChanged);
+            this.textBoxModel.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxModel_KeyUp);
             // 
             // label3
             // 
@@ -145,6 +148,7 @@
             0,
             0,
             0});
+            this.textBoxSpeed.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxSpeed_KeyUp);
             // 
             // textBoxConsumption
             // 
@@ -172,6 +176,7 @@
             0,
             0,
             0});
+            this.textBoxConsumption.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxConsumption_KeyUp);
             // 
             // CarForm
             // 

@@ -29,10 +29,9 @@ namespace TProject
             textBoxValueSign.Value =(decimal)value;
         }
 
-        private void ButtonAccept_Click(object sender, EventArgs e)
+        private void Accept()
         {
             textBoxTypeSign.BackColor = Color.White;
-           // textBoxValueSign.BackColor = Color.White;
 
             string type = textBoxTypeSign.Text;
 
@@ -64,13 +63,12 @@ namespace TProject
                         Edit();
                     }
                 }
-                //else
-                //{
-                //    MessageBox.Show("Не корректно задано значение!");
-                //    textBoxValueSign.BackColor = Color.Red;
-                //}
             }
+        }
 
+        private void ButtonAccept_Click(object sender, EventArgs e)
+        {
+            Accept();
         }
 
 
@@ -99,6 +97,42 @@ namespace TProject
             else
             {
                 MessageBox.Show("Ошибка изменения");
+            }
+        }
+
+        private void TextBoxTypeSign_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBoxTypeSign.Text) || string.IsNullOrEmpty(textBoxTypeSign.Text))
+            {
+                textBoxTypeSign.BackColor = Color.Red;
+            }
+            else
+            {
+                textBoxTypeSign.BackColor = Color.White;
+            }
+        }
+
+        private void TextBoxTypeSign_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Accept();
+            }
+        }
+
+        private void TextBoxValueSign_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Accept();
+            }
+        }
+
+        private void ButtonAccept_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                Accept();
             }
         }
     }

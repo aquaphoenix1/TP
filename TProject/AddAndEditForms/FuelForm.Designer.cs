@@ -46,6 +46,7 @@
             this.buttonAccept.Text = "Принять";
             this.buttonAccept.UseVisualStyleBackColor = true;
             this.buttonAccept.Click += new System.EventHandler(this.ButtonAccept_Click);
+            this.buttonAccept.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ButtonAccept_KeyUp);
             // 
             // textBoxNameFuel
             // 
@@ -54,6 +55,8 @@
             this.textBoxNameFuel.Name = "textBoxNameFuel";
             this.textBoxNameFuel.Size = new System.Drawing.Size(142, 23);
             this.textBoxNameFuel.TabIndex = 17;
+            this.textBoxNameFuel.TextChanged += new System.EventHandler(this.TextBoxNameFuel_TextChanged);
+            this.textBoxNameFuel.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxNameFuel_KeyUp);
             // 
             // labelPrice
             // 
@@ -93,6 +96,7 @@
             0,
             0,
             0});
+            this.textBoxPrice.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxPrice_KeyUp);
             // 
             // FuelForm
             // 

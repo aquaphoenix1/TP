@@ -48,6 +48,7 @@ namespace TProject
             this.buttonAccept.Text = "Принять";
             this.buttonAccept.UseVisualStyleBackColor = true;
             this.buttonAccept.Click += new System.EventHandler(this.ButtonAccept_Click);
+            this.buttonAccept.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ButtonAccept_KeyUp);
             // 
             // labelValue
             // 
@@ -62,10 +63,12 @@ namespace TProject
             // textBoxNameFine
             // 
             this.textBoxNameFine.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.textBoxNameFine.Location = new System.Drawing.Point(145, 10);
+            this.textBoxNameFine.Location = new System.Drawing.Point(143, 10);
             this.textBoxNameFine.Name = "textBoxNameFine";
             this.textBoxNameFine.Size = new System.Drawing.Size(145, 23);
             this.textBoxNameFine.TabIndex = 8;
+            this.textBoxNameFine.TextChanged += new System.EventHandler(this.TextBoxNameFine_TextChanged);
+            this.textBoxNameFine.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxNameFine_KeyUp);
             // 
             // labelName
             // 
@@ -99,6 +102,7 @@ namespace TProject
             0,
             0,
             0});
+            this.textBoxValueFine.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxValueFine_KeyUp);
             // 
             // FineForm
             // 

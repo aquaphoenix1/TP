@@ -897,6 +897,12 @@ namespace TProject
 
                             break;
                         }
+
+                    case "Улицы":
+                        {
+                            
+                            break;
+                        }
                 }
             }
         }

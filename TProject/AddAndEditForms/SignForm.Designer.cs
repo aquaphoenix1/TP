@@ -46,6 +46,7 @@
             this.buttonAccept.Text = "Принять";
             this.buttonAccept.UseVisualStyleBackColor = true;
             this.buttonAccept.Click += new System.EventHandler(this.ButtonAccept_Click);
+            this.buttonAccept.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ButtonAccept_KeyUp);
             // 
             // textBoxTypeSign
             // 
@@ -54,6 +55,8 @@
             this.textBoxTypeSign.Name = "textBoxTypeSign";
             this.textBoxTypeSign.Size = new System.Drawing.Size(189, 23);
             this.textBoxTypeSign.TabIndex = 7;
+            this.textBoxTypeSign.TextChanged += new System.EventHandler(this.TextBoxTypeSign_TextChanged);
+            this.textBoxTypeSign.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxTypeSign_KeyUp);
             // 
             // labelValue
             // 
@@ -102,6 +105,7 @@
             0,
             0,
             0});
+            this.textBoxValueSign.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxValueSign_KeyUp);
             // 
             // SignForm
             // 

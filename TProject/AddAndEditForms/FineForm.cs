@@ -29,10 +29,9 @@ namespace TProject
             textBoxValueFine.Text = cost.ToString();
         }
 
-        private void ButtonAccept_Click(object sender, EventArgs e)
+        private void Accept()
         {
             textBoxNameFine.BackColor = Color.White;
-            textBoxValueFine.BackColor = Color.White;
 
             string name = textBoxNameFine.Text;
 
@@ -64,12 +63,12 @@ namespace TProject
                         Edit();
                     }
                 }
-                //else
-                //{
-                //    MessageBox.Show("Не корректно задан коэффициент!");
-                //    textBoxValueFine.BackColor = Color.Red;
-                //}
             }
+        }
+
+        private void ButtonAccept_Click(object sender, EventArgs e)
+        {
+            Accept();
         }
 
         private void Add()
@@ -96,7 +95,43 @@ namespace TProject
             }
             else
             {
-                MessageBox.Show("ОШибка изменения");
+                MessageBox.Show("Ошибка изменения");
+            }
+        }
+
+        private void TextBoxNameFine_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBoxNameFine.Text) || string.IsNullOrEmpty(textBoxNameFine.Text))
+            {
+                textBoxNameFine.BackColor = Color.Red;
+            }
+            else
+            {
+                textBoxNameFine.BackColor = Color.White;
+            }
+        }
+
+        private void TextBoxNameFine_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                Accept();
+            }
+        }
+
+        private void TextBoxValueFine_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Accept();
+            }
+        }
+
+        private void ButtonAccept_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Accept();
             }
         }
     }

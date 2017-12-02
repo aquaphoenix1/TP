@@ -30,10 +30,9 @@ namespace TProject
             textBoxPrice.Value = (decimal)price;
         }
 
-        private void ButtonAccept_Click(object sender, EventArgs e)
+        private void Accept()
         {
             textBoxNameFuel.BackColor = Color.White;
-           // textBoxPrice.BackColor = Color.White;
 
             string name = textBoxNameFuel.Text;
 
@@ -44,7 +43,7 @@ namespace TProject
             }
             else
             {
-                if (double.TryParse(textBoxPrice.Value.ToString(), out double d) || d > 0)
+                if (double.TryParse(textBoxPrice.Value.ToString(), out double d))
                 {
                     if (fuel == null)
                     {
@@ -65,13 +64,14 @@ namespace TProject
                         Edit();
                     }
                 }
-                //else
-                //{
-                //    MessageBox.Show("Не корректно задана цена!");
-                //    textBoxPrice.BackColor = Color.Red;
-                //}
             }
         }
+
+        private void ButtonAccept_Click(object sender, EventArgs e)
+        {
+            Accept();
+        }
+
         private void Add()
         {
             if (new FuelDAO().Insert(fuel))
@@ -97,6 +97,42 @@ namespace TProject
             else
             {
                 MessageBox.Show("Ошибка изменения");
+            }
+        }
+
+        private void TextBoxNameFuel_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBoxNameFuel.Text) || string.IsNullOrEmpty(textBoxNameFuel.Text))
+            {
+                textBoxNameFuel.BackColor = Color.Red;
+            }
+            else
+            {
+                textBoxNameFuel.BackColor = Color.White;
+            }
+        }
+
+        private void TextBoxNameFuel_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Accept();
+            }
+        }
+
+        private void TextBoxPrice_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                Accept();
+            }
+        }
+
+        private void ButtonAccept_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Accept();
             }
         }
     }

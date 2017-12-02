@@ -29,9 +29,8 @@ namespace TProject
             textBoxCoefficient.Value = (decimal)coeff;
         }
 
-        private void ButtonAccept_Click(object sender, EventArgs e)
+        private void Accept()
         {
-          //  textBoxCoefficient.BackColor = Color.White;
             textBoxTypeCoating.BackColor = Color.White;
 
             string type = textBoxTypeCoating.Text;
@@ -51,7 +50,7 @@ namespace TProject
                     }
                     else
                     {
-                        coating.TypeName = textBoxTypeCoating.Text;
+                        coating.TypeName = type;
                         coating.Coeff = d;
                     }
 
@@ -64,13 +63,12 @@ namespace TProject
                         Edit();
                     }
                 }
-                //else
-                //{
-                //    MessageBox.Show("Не корректно задан коэффициент!");
-                //    textBoxCoefficient.BackColor = Color.Red;
-                //}
             }
+        }
 
+        private void ButtonAccept_Click(object sender, EventArgs e)
+        {
+            Accept();
         }
 
         private void Add()
@@ -98,6 +96,42 @@ namespace TProject
             else
             {
                 MessageBox.Show("Ошибка изменения");
+            }
+        }
+
+        private void TextBoxTypeCoating_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBoxTypeCoating.Text) || string.IsNullOrEmpty(textBoxTypeCoating.Text))
+            {
+                textBoxTypeCoating.BackColor = Color.Red;
+            }
+            else
+            {
+                textBoxTypeCoating.BackColor = Color.White;
+            }
+        }
+
+        private void TextBoxTypeCoating_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                Accept();
+            }
+        }
+
+        private void TextBoxCoefficient_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Accept();
+            }
+        }
+
+        private void ButtonAccept_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Accept();
             }
         }
     }
