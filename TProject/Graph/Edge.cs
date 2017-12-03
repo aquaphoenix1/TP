@@ -8,8 +8,6 @@ namespace TProject.Graph
     {
         public static List<List<object>> StreetList { get; set; }
 
-        private int Length;
-
         private Vertex HeadVertex { get; set; }
         private Vertex EndVertex { get; set; }
 
@@ -123,32 +121,25 @@ namespace TProject.Graph
             EndVertex = v2;
         }
 
-        public Edge InitThisEdge(string nameStreet, int length, Coating coat, bool isBiLate)
-        {
-            Length = length;
-            NameStreet = nameStreet;
-            Coat = coat;
-            IsBilateral = isBiLate;
-
-            return this;
-        }
-
         public bool IsConnected(Vertex vertex)
         {
             return this.EndVertex == vertex;
         }
-
-        public static Edge CreateArc(string Direction, Vertex A, Vertex B, int length, string nameStreet, Coating coat)
+        
+        internal static Edge CreateEdge(long ID, Vertex head, Vertex end, Coating coat, string name, bool isBelaterial, bool signTwoWay, Sign signMaxSpeed, Police polieceman)
         {
-            Edge arc = new Edge
+            return new Edge
             {
-                Length = length,
-                HeadVertex = A,
-                EndVertex = B,
-                NameStreet = nameStreet,
-                Coat = coat
+                ID = ID,
+                HeadVertex = head,
+                EndVertex = end,
+                NameStreet = name,
+                Coat = coat,
+                IsBilateral = isBelaterial,
+                SignTwoWay = signTwoWay,
+                SignMaxSpeed = signMaxSpeed,
+                Policemen = polieceman
             };
-            return arc;
         }
     }
 }

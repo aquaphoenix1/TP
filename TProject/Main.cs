@@ -55,7 +55,7 @@ namespace TProject
             Fine.ListFine = DAO.GetAll("Fine");
             Car.ListAuto = DAO.GetAll("Auto");
             Fuel.ListFuel = DAO.GetAll("Fuel");
-            Police.ListTypePolicemen = DAO.GetAll("Policemen");
+            Police.ListTypePolicemen = DAO.GetAll("Policeman");
             Driver.Driver.ListDriver = DAO.GetAll("Driver");
             Sign.ListSigns = DAO.GetAll("Sign");
             Edge.StreetList = DAO.GetAll("Street");
@@ -886,7 +886,9 @@ namespace TProject
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DAO.InsertMap(Map.vertexes, Map.edges);
+            pictureBoxMap.Image = DAO.LoadMap("qwe", out Map.vertexes, out Map.edges) as Image;
+
+            //DAO.InsertMap(Map.vertexes, Map.edges, pictureBoxMap.Image, "qwe");
         }
     }
 }

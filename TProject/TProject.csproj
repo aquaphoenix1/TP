@@ -110,12 +110,6 @@
     <Compile Include="AddAndEditForms\FormStreet.Designer.cs">
       <DependentUpon>FormStreet.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\DataBaseForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\DataBaseForm.Designer.cs">
-      <DependentUpon>DataBaseForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\ErrorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -229,9 +223,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddAndEditForms\FormStreet.resx">
       <DependentUpon>FormStreet.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DataBaseForm.resx">
-      <DependentUpon>DataBaseForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditEdge.resx">
       <DependentUpon>EditEdge.cs</DependentUpon>

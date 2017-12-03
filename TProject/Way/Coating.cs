@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace TProject.Way
 {
@@ -21,6 +23,13 @@ namespace TProject.Way
                 Coeff = coefficient,
                 TypeName = typeName
             };
+        }
+
+        internal static Coating GetCoatingByName(string name)
+        {
+            List<object> coat = ListSurface.First(coating => coating[0].ToString().Equals(name));
+
+            return CreateCoating(coat[0].ToString(), double.Parse(coat[1].ToString()));
         }
     }
 }

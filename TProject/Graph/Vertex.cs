@@ -14,6 +14,18 @@ namespace TProject.Graph
 
         public bool IsRegular { get { return TrafficLight != null; } }
 
+        private Vertex() { }
+
+        internal static Vertex CreateVertex(long ID, int X, int Y)
+        {
+            return new Vertex
+            {
+                ID = ID,
+                X = X,
+                Y = Y
+            };
+        }
+
         public void SetRectXY(int x, int y)
         {
             pointOnMap.X = x;

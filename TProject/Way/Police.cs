@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace TProject.Way
 {
@@ -59,6 +61,13 @@ namespace TProject.Way
             }
 
             return police;
+        }
+
+        internal static Police GetPoliceByName(string name)
+        {
+            List<object> police = ListTypePolicemen.FirstOrDefault(pol => pol[0].ToString().Equals(name));
+
+            return (police != null) ? CreatePolice(police[0].ToString()) : null;
         }
     }
 }

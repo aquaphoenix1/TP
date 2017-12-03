@@ -49,7 +49,10 @@ namespace TProject.Way
                                 }
                             }
                         }
-                        else parents[i, j] = long.MaxValue;
+                        else
+                        {
+                            parents[i, j] = long.MaxValue;
+                        }
                     }
                 }
                 arrayOfID[i] = vertexList[i].ID;

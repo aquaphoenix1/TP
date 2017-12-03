@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace TProject.Way
@@ -22,6 +23,13 @@ namespace TProject.Way
                 Count = count,
                 TypeName = text
             };
+        }
+
+        internal static Sign GetSignByName(string name)
+        {
+            List<object> sign = ListSigns.FirstOrDefault(sgn => sgn[0].ToString().Equals(name));
+
+            return (sign != null) ? CreateSign(sign[0].ToString(), double.Parse(sign[1].ToString())) : null;
         }
     }
 }

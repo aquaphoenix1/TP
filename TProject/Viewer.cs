@@ -322,7 +322,9 @@ namespace TProject
             }
 
             if (Map.Way != null)
+            {
                 DrawRoute(graph);
+            }
         }
 
 
