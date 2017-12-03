@@ -40,8 +40,8 @@ namespace TProject
         private void Accept()
         {
             string model = textBoxModel.Text;
-            string consumption = textBoxConsumption.Value.ToString();
-            string speed = textBoxSpeed.Value.ToString();
+            string consumption = textBoxConsumption.Text;
+            string speed = textBoxSpeed.Text;
             string f = string.Empty;
 
             textBoxModel.BackColor = Color.White;
@@ -64,27 +64,37 @@ namespace TProject
                 var findfuel = Fuel.ListFuel.First(l => l.ElementAt(0).ToString().Equals(f));
 
                 Fuel fuel = Fuel.CreateFuel(findfuel[0].ToString(), double.Parse(findfuel[1].ToString()));
-
-                if (car == null)
+                if (spd > 250 || spd < 5)
                 {
-                    car = new Car(model, fuel, cons, spd);
+                    MessageBox.Show("Допустимый диапазон значений скорости от 5 до 250!");
+                }
+                else if (cons > 25 || cons < 5)
+                {
+                    MessageBox.Show("Допустимый диапазон значений топлива от 5 до 25!");
                 }
                 else
                 {
-                    car.TypeName = model;
-                    car.CarFuel = fuel;
-                    car.FuelConsumption = cons;
-                    car.Speed = spd;
-                }
+                    if (car == null)
+                    {
+                        car = new Car(model, fuel, cons, spd);
+                    }
+                    else
+                    {
+                        car.TypeName = model;
+                        car.CarFuel = fuel;
+                        car.FuelConsumption = cons;
+                        car.Speed = spd;
+                    }
 
-                if (addOrEdit)
-                {
-                    Add();
-                }
-                else
-                {
-                    Edit();
-                }
+                    if (addOrEdit)
+                    {
+                        Add();
+                    }
+                    else
+                    {
+                        Edit();
+                    }
+                }                                                         
             }
         }
 

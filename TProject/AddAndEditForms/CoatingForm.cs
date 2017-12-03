@@ -29,7 +29,7 @@ namespace TProject
             textBoxTypeCoating.Text = tCoating;
             ID = tCoating;
 
-            textBoxCoefficient.Value = (decimal)coeff;
+            textBoxCoefficient.Text = coeff.ToString();
         }
 
         private void Accept()
@@ -37,7 +37,7 @@ namespace TProject
             textBoxTypeCoating.BackColor = Color.White;
 
             string type = textBoxTypeCoating.Text;
-
+            double d;
             if (string.IsNullOrWhiteSpace(type) || string.IsNullOrEmpty(type))
             {
                 MessageBox.Show("Тип покрытия не задан!");
@@ -45,25 +45,32 @@ namespace TProject
             }
             else
             {
-                if (double.TryParse(textBoxCoefficient.Text, out double d))
+                if (double.TryParse(textBoxCoefficient.Text, out d))
                 {
-                    if (coating == null)
+                    if (d > 1 || d == 0)
                     {
-                        coating = new Coating(type, d);
+                        MessageBox.Show("Допустимый диапазон коэффициента: (0,1]!");
                     }
                     else
                     {
-                        coating.TypeName = type;
-                        coating.Coeff = d;
-                    }
+                        if (coating == null)
+                        {
+                            coating = new Coating(type, d);
+                        }
+                        else
+                        {
+                            coating.TypeName = type;
+                            coating.Coeff = d;
+                        }
 
-                    if (addOrEdit)
-                    {
-                        Add();
-                    }
-                    else
-                    {
-                        Edit();
+                        if (addOrEdit)
+                        {
+                            Add();
+                        }
+                        else
+                        {
+                            Edit();
+                        }
                     }
                 }
             }

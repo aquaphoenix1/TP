@@ -88,12 +88,12 @@
             0});
             this.textBoxValueSign.Location = new System.Drawing.Point(240, 32);
             this.textBoxValueSign.Maximum = new decimal(new int[] {
-            140,
+            150,
             0,
             0,
             0});
             this.textBoxValueSign.Minimum = new decimal(new int[] {
-            10,
+            1,
             0,
             0,
             0});

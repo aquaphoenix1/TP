@@ -32,8 +32,7 @@
             this.textBoxNameFuel = new System.Windows.Forms.TextBox();
             this.labelPrice = new System.Windows.Forms.Label();
             this.labelNameFuel = new System.Windows.Forms.Label();
-            this.textBoxPrice = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxPrice)).BeginInit();
+            this.textBoxPrice = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
             // buttonAccept
@@ -80,24 +79,11 @@
             // 
             // textBoxPrice
             // 
-            this.textBoxPrice.DecimalPlaces = 2;
-            this.textBoxPrice.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.textBoxPrice.Location = new System.Drawing.Point(175, 39);
-            this.textBoxPrice.Minimum = new decimal(new int[] {
-            15,
-            0,
-            0,
-            0});
+            this.textBoxPrice.Location = new System.Drawing.Point(175, 43);
+            this.textBoxPrice.Mask = "00.00";
             this.textBoxPrice.Name = "textBoxPrice";
             this.textBoxPrice.Size = new System.Drawing.Size(142, 23);
             this.textBoxPrice.TabIndex = 20;
-            this.textBoxPrice.Value = new decimal(new int[] {
-            35,
-            0,
-            0,
-            0});
-            this.textBoxPrice.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxPrice_KeyUp);
-            this.textBoxPrice.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxPrice_Validating);
             // 
             // FuelForm
             // 
@@ -116,7 +102,6 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Параметры топлива";
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxPrice)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -128,6 +113,6 @@
         private System.Windows.Forms.TextBox textBoxNameFuel;
         private System.Windows.Forms.Label labelPrice;
         private System.Windows.Forms.Label labelNameFuel;
-        private System.Windows.Forms.NumericUpDown textBoxPrice;
+        private System.Windows.Forms.MaskedTextBox textBoxPrice;
     }
 }

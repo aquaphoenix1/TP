@@ -37,6 +37,7 @@ namespace TProject
             textBoxNameFine.BackColor = Color.White;
 
             string name = textBoxNameFine.Text;
+            double d;
 
             if (string.IsNullOrWhiteSpace(name) || string.IsNullOrEmpty(name))
             {
@@ -44,26 +45,33 @@ namespace TProject
                 textBoxNameFine.BackColor = Color.Red;
             }
             else
-            {
-                if (double.TryParse(textBoxValueFine.Value.ToString(), out double d))
+            {                
+                if (double.TryParse(textBoxValueFine.Text, out d))
                 {
-                    if (fine == null)
+                    if (d < 100)
                     {
-                        fine = new Fine(name, d);
+                        MessageBox.Show("Минимальный размер штрафа равен 100!");
                     }
                     else
                     {
-                        fine.TypeName = name;
-                        fine.Count = d;
-                    }
+                        if (fine == null)
+                        {
+                            fine = new Fine(name, d);
+                        }
+                        else
+                        {
+                            fine.TypeName = name;
+                            fine.Count = d;
+                        }
 
-                    if (addOrEdit)
-                    {
-                        Add();
-                    }
-                    else
-                    {
-                        Edit();
+                        if (addOrEdit)
+                        {
+                            Add();
+                        }
+                        else
+                        {
+                            Edit();
+                        }
                     }
                 }
             }

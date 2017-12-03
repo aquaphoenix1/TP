@@ -31,13 +31,13 @@ namespace TProject
 
             ID = nFuel;
 
-            textBoxPrice.Value = (decimal)price;
+            textBoxPrice.Text = price.ToString();
         }
 
         private void Accept()
         {
             textBoxNameFuel.BackColor = Color.White;
-
+            double d;
             string name = textBoxNameFuel.Text;
 
             if (string.IsNullOrWhiteSpace(name) || string.IsNullOrEmpty(name))
@@ -47,25 +47,32 @@ namespace TProject
             }
             else
             {
-                if (double.TryParse(textBoxPrice.Value.ToString(), out double d))
+                if (double.TryParse(textBoxPrice.Text, out d))
                 {
-                    if (fuel == null)
+                    if (d <= 20)
                     {
-                        fuel = new Fuel(name, d);
+                        MessageBox.Show("Минимальная цена равна 20!");
                     }
                     else
                     {
-                        fuel.TypeName = name;
-                        fuel.Price = d;
-                    }
+                        if (fuel == null)
+                        {
+                            fuel = new Fuel(name, d);
+                        }
+                        else
+                        {
+                            fuel.TypeName = name;
+                            fuel.Price = d;
+                        }
 
-                    if (addOrEdit)
-                    {
-                        Add();
-                    }
-                    else
-                    {
-                        Edit();
+                        if (addOrEdit)
+                        {
+                            Add();
+                        }
+                        else
+                        {
+                            Edit();
+                        }
                     }
                 }
             }

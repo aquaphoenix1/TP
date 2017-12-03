@@ -36,10 +36,8 @@
             this.labelIDFuel = new System.Windows.Forms.Label();
             this.labelModel = new System.Windows.Forms.Label();
             this.labelSpeed = new System.Windows.Forms.Label();
-            this.textBoxSpeed = new System.Windows.Forms.NumericUpDown();
-            this.textBoxConsumption = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxSpeed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxConsumption)).BeginInit();
+            this.textBoxConsumption = new System.Windows.Forms.MaskedTextBox();
+            this.textBoxSpeed = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
             // comboBoxIDFuel
@@ -122,69 +120,29 @@
             this.labelSpeed.TabIndex = 17;
             this.labelSpeed.Text = "Скорость:";
             // 
-            // textBoxSpeed
-            // 
-            this.textBoxSpeed.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            65536});
-            this.textBoxSpeed.Location = new System.Drawing.Point(147, 110);
-            this.textBoxSpeed.Maximum = new decimal(new int[] {
-            250,
-            0,
-            0,
-            0});
-            this.textBoxSpeed.Minimum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.textBoxSpeed.Name = "textBoxSpeed";
-            this.textBoxSpeed.Size = new System.Drawing.Size(162, 23);
-            this.textBoxSpeed.TabIndex = 18;
-            this.textBoxSpeed.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.textBoxSpeed.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxSpeed_KeyUp);
-            // 
             // textBoxConsumption
             // 
-            this.textBoxConsumption.Increment = new decimal(new int[] {
-            2,
-            0,
-            0,
-            65536});
-            this.textBoxConsumption.Location = new System.Drawing.Point(147, 73);
-            this.textBoxConsumption.Maximum = new decimal(new int[] {
-            25,
-            0,
-            0,
-            0});
-            this.textBoxConsumption.Minimum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
+            this.textBoxConsumption.Location = new System.Drawing.Point(147, 75);
+            this.textBoxConsumption.Mask = "00.0";
             this.textBoxConsumption.Name = "textBoxConsumption";
-            this.textBoxConsumption.Size = new System.Drawing.Size(160, 23);
+            this.textBoxConsumption.Size = new System.Drawing.Size(161, 23);
             this.textBoxConsumption.TabIndex = 19;
-            this.textBoxConsumption.Value = new decimal(new int[] {
-            7,
-            0,
-            0,
-            0});
-            this.textBoxConsumption.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxConsumption_KeyUp);
+            // 
+            // textBoxSpeed
+            // 
+            this.textBoxSpeed.Location = new System.Drawing.Point(147, 106);
+            this.textBoxSpeed.Mask = "000";
+            this.textBoxSpeed.Name = "textBoxSpeed";
+            this.textBoxSpeed.Size = new System.Drawing.Size(161, 23);
+            this.textBoxSpeed.TabIndex = 20;
             // 
             // CarForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(322, 175);
-            this.Controls.Add(this.textBoxConsumption);
             this.Controls.Add(this.textBoxSpeed);
+            this.Controls.Add(this.textBoxConsumption);
             this.Controls.Add(this.labelSpeed);
             this.Controls.Add(this.comboBoxIDFuel);
             this.Controls.Add(this.buttonAccept);
@@ -200,8 +158,6 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Параметры автомобиля";
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxSpeed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxConsumption)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -217,7 +173,7 @@
         private System.Windows.Forms.Label labelIDFuel;
         private System.Windows.Forms.Label labelModel;
         private System.Windows.Forms.Label labelSpeed;
-        private System.Windows.Forms.NumericUpDown textBoxSpeed;
-        private System.Windows.Forms.NumericUpDown textBoxConsumption;
+        private System.Windows.Forms.MaskedTextBox textBoxConsumption;
+        private System.Windows.Forms.MaskedTextBox textBoxSpeed;
     }
 }

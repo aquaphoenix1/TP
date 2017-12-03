@@ -32,8 +32,7 @@
             this.textBoxTypeCoating = new System.Windows.Forms.TextBox();
             this.labelCoefficient = new System.Windows.Forms.Label();
             this.labelType = new System.Windows.Forms.Label();
-            this.textBoxCoefficient = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxCoefficient)).BeginInit();
+            this.textBoxCoefficient = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
             // buttonAccept
@@ -62,7 +61,7 @@
             // 
             this.labelCoefficient.AutoSize = true;
             this.labelCoefficient.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelCoefficient.Location = new System.Drawing.Point(14, 44);
+            this.labelCoefficient.Location = new System.Drawing.Point(13, 47);
             this.labelCoefficient.Name = "labelCoefficient";
             this.labelCoefficient.Size = new System.Drawing.Size(157, 15);
             this.labelCoefficient.TabIndex = 11;
@@ -80,26 +79,11 @@
             // 
             // textBoxCoefficient
             // 
-            this.textBoxCoefficient.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.textBoxCoefficient.Location = new System.Drawing.Point(175, 42);
-            this.textBoxCoefficient.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.textBoxCoefficient.Location = new System.Drawing.Point(174, 39);
+            this.textBoxCoefficient.Mask = "0.0";
             this.textBoxCoefficient.Name = "textBoxCoefficient";
-            this.textBoxCoefficient.Size = new System.Drawing.Size(152, 23);
-            this.textBoxCoefficient.TabIndex = 15;
-            this.textBoxCoefficient.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.textBoxCoefficient.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxCoefficient_KeyUp);
+            this.textBoxCoefficient.Size = new System.Drawing.Size(151, 23);
+            this.textBoxCoefficient.TabIndex = 0;
             // 
             // CoatingForm
             // 
@@ -118,7 +102,6 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Параметры покрытия";
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxCoefficient)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -130,6 +113,6 @@
         private System.Windows.Forms.TextBox textBoxTypeCoating;
         private System.Windows.Forms.Label labelCoefficient;
         private System.Windows.Forms.Label labelType;
-        private System.Windows.Forms.NumericUpDown textBoxCoefficient;
+        private System.Windows.Forms.MaskedTextBox textBoxCoefficient;
     }
 }

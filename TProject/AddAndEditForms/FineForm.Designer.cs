@@ -34,8 +34,7 @@ namespace TProject
             this.labelValue = new System.Windows.Forms.Label();
             this.textBoxNameFine = new System.Windows.Forms.TextBox();
             this.labelName = new System.Windows.Forms.Label();
-            this.textBoxValueFine = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxValueFine)).BeginInit();
+            this.textBoxValueFine = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
             // buttonAccept
@@ -82,27 +81,11 @@ namespace TProject
             // 
             // textBoxValueFine
             // 
-            this.textBoxValueFine.DecimalPlaces = 1;
-            this.textBoxValueFine.Location = new System.Drawing.Point(143, 39);
-            this.textBoxValueFine.Maximum = new decimal(new int[] {
-            40000,
-            0,
-            0,
-            0});
-            this.textBoxValueFine.Minimum = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
+            this.textBoxValueFine.Location = new System.Drawing.Point(143, 40);
+            this.textBoxValueFine.Mask = "00000.00";
             this.textBoxValueFine.Name = "textBoxValueFine";
-            this.textBoxValueFine.Size = new System.Drawing.Size(147, 23);
+            this.textBoxValueFine.Size = new System.Drawing.Size(143, 23);
             this.textBoxValueFine.TabIndex = 12;
-            this.textBoxValueFine.Value = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
-            this.textBoxValueFine.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxValueFine_KeyUp);
             // 
             // FineForm
             // 
@@ -121,7 +104,6 @@ namespace TProject
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Параметры штрафа";
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxValueFine)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -133,6 +115,6 @@ namespace TProject
         private System.Windows.Forms.Label labelValue;
         private System.Windows.Forms.TextBox textBoxNameFine;
         private System.Windows.Forms.Label labelName;
-        private System.Windows.Forms.NumericUpDown textBoxValueFine;
+        private System.Windows.Forms.MaskedTextBox textBoxValueFine;
     }
 }

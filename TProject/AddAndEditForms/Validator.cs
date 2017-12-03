@@ -27,8 +27,8 @@ namespace TProject.AddAndEditForms
                     }
                 }
             }
-
-            decimal.TryParse(outS, out decimal value);
+            decimal value;
+            decimal.TryParse(outS, out value);
             nUD.Value = value;
         }
     }

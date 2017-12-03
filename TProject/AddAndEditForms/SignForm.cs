@@ -37,7 +37,7 @@ namespace TProject
         private void Accept()
         {
             textBoxTypeSign.BackColor = Color.White;
-
+            double d;
             string type = textBoxTypeSign.Text;
 
             if (string.IsNullOrWhiteSpace(type) || string.IsNullOrEmpty(type))
@@ -47,25 +47,32 @@ namespace TProject
             }
             else
             {
-                if (double.TryParse(textBoxValueSign.Text, out double d))
+                if (double.TryParse(textBoxValueSign.Text, out d))
                 {
-                    if (sign == null)
+                    if (d < 3 || d > 140)
                     {
-                        sign = new Sign(type, d);
+                        MessageBox.Show("Допустимый диапазон значений от 3 до 140!");
                     }
                     else
                     {
-                        sign.TypeName = type;
-                        sign.Count = d;
-                    }
+                        if (sign == null)
+                        {
+                            sign = new Sign(type, d);
+                        }
+                        else
+                        {
+                            sign.TypeName = type;
+                            sign.Count = d;
+                        }
 
-                    if (addOrEdit)
-                    {
-                        Add();
-                    }
-                    else
-                    {
-                        Edit();
+                        if (addOrEdit)
+                        {
+                            Add();
+                        }
+                        else
+                        {
+                            Edit();
+                        }
                     }
                 }
             }

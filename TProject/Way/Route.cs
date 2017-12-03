@@ -80,6 +80,8 @@ namespace TProject.Way
 
         public void FindMinLengthWay(Vertexes vertColl, Edges edgColl, Main.Criterial criterial, Driver.Driver driver)
         {
+            long[,] parents;
+            long[] IDs;
             long fromVertex = 0, toVertex = 0;
             for (int i = 0; i < Map.vertexes.GetCountElements(); i++)
             {
@@ -93,7 +95,7 @@ namespace TProject.Way
                     toVertex = i;
                 }
             }
-            double[,] matrix = GetMatrixWay(out long[,] parents, out long[] IDs, vertColl, edgColl, criterial, driver);
+            double[,] matrix = GetMatrixWay(out parents, out  IDs, vertColl, edgColl, criterial, driver);
             int size = (int)Math.Sqrt(matrix.Length);
 
             for (int k = 0; k < size; ++k)
