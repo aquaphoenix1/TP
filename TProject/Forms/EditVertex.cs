@@ -48,22 +48,37 @@ namespace TProject
 
         private void OkEditCrossroadButton_Click(object sender, EventArgs e)
         {
+            int green;
+            int red;
             if (!trafficlightCheckBox.Checked)
             {
                 Vertex.TrafficLight = null;
             }
             else
             {
-                if (!int.TryParse(timeGreenLightComboBox.Text, out int green))
+                if(timeGreenLightComboBox.Text=="")
                 {
                     MessageBox.Show("Введите значение длительности зеленой фазы");
                     return;
                 }
-                if (!int.TryParse(timeRedLightComboBox.Text, out int red))
+                int.TryParse(timeGreenLightComboBox.Text,out green);               
+                if (green < 10 || green > 40)
+                {
+                     MessageBox.Show("Допустимый диапазон значений зеленой фазы от 10 до 40");
+                     return;
+                }                               
+
+                if (timeRedLightComboBox.Text == "")
                 {
                     MessageBox.Show("Введите значение длительности красной фазы");
                     return;
                 }
+                int.TryParse(timeRedLightComboBox.Text, out red);
+                if (red < 20 || red > 70)
+                {
+                     MessageBox.Show("Допустимый диапазон значений красной фазы от 20 до 70");
+                     return;
+                }                         
                 Vertex.TrafficLight = new TrafficLight(green, red);
             }
             Viewer.ViewPort.Invalidate();
