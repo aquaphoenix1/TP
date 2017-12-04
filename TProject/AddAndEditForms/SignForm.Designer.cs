@@ -93,11 +93,12 @@
             0,
             0});
             this.textBoxValueSign.Minimum = new decimal(new int[] {
-            1,
+            5,
             0,
             0,
             0});
             this.textBoxValueSign.Name = "textBoxValueSign";
+            this.textBoxValueSign.ReadOnly = true;
             this.textBoxValueSign.Size = new System.Drawing.Size(189, 23);
             this.textBoxValueSign.TabIndex = 10;
             this.textBoxValueSign.Value = new decimal(new int[] {

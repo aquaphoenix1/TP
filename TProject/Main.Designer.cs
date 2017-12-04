@@ -160,7 +160,7 @@
             this.удалитьПерекрестокToolStripMenuItem.Name = "удалитьПерекрестокToolStripMenuItem";
             this.удалитьПерекрестокToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.удалитьПерекрестокToolStripMenuItem.Text = "Удалить перекресток";
-            this.удалитьПерекрестокToolStripMenuItem.Click += new System.EventHandler(this.УдалитьПерекрестокToolStripMenuItem_Click);
+            this.удалитьПерекрестокToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItem_DeleteVertex_Click);
             // 
             // toolStripStatusLabel1
             // 
@@ -661,7 +661,7 @@
             this.удалитьПерегонToolStripMenuItem.Name = "удалитьПерегонToolStripMenuItem";
             this.удалитьПерегонToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.удалитьПерегонToolStripMenuItem.Text = "Удалить перегон";
-            this.удалитьПерегонToolStripMenuItem.Click += new System.EventHandler(this.УдалитьПерегонToolStripMenuItem_Click);
+            this.удалитьПерегонToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItem_DeleteEdge_Click);
             // 
             // contextMenuMap
             // 

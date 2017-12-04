@@ -41,6 +41,8 @@ namespace TProject
                 coatingComboBox.SelectedIndex = coatingComboBox.FindString(_edge.Coat.TypeName);
             }
             catch { }
+            signMaxSpeedComboBox.Enabled = signMaxSpeedCheckBox.Checked;
+            policemanComboBox.Enabled = policemanCheckBox.Checked;
         }
 
         private void CheckBoxWay_CheckedChanged(object sender, EventArgs e)
@@ -54,10 +56,12 @@ namespace TProject
             if(nameStreetComboBox.SelectedItem == null)
             {
                 MessageBox.Show("Выберите название улицы");
+                return;
             }
             else if(coatingComboBox.SelectedItem == null)
             {
                 MessageBox.Show("Выберите покрытие");
+                return;
             }
             else
             {
@@ -104,6 +108,7 @@ namespace TProject
                 Edge.SignTwoWay = signTwoWayCheckBox.Checked;
             }
 
+            DialogResult = DialogResult.OK;
             Close();
         }
 
@@ -114,7 +119,7 @@ namespace TProject
 
         private void PolicemanCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            policemanGroupBox.Enabled = ((CheckBox)sender).Checked;
+            policemanComboBox.Enabled = ((CheckBox)sender).Checked;
         }
 
         private void SignMaxSpeedCheckBox_CheckedChanged(object sender, EventArgs e)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using TProject.Driver;
@@ -539,25 +540,53 @@ namespace TProject
 
         private void ToolStripMenu_SubMap_Click(object sender, EventArgs e)
         {
-            Map.InitMap();
-            Viewer.CreateViewer(pictureBoxMap, panelMapSubstrate, Font);
 
-            Map.vertexes.RePaint += Viewer.ViewPort.Invalidate;
-            Map.edges.RePaint += Viewer.ViewPort.Invalidate;
-
-            if (openSubMapFileDialog.ShowDialog() == DialogResult.OK)
+            try
             {
-                Viewer.ViewPort.OpenPicture(openSubMapFileDialog.FileName);
+                if (openSubMapFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    int w = 0;
+                    int h = 0;
 
-                Viewer.ViewPort.View.MouseDown += PictureBoxMap_MouseDown;
-                Viewer.ViewPort.View.MouseMove += PictureBoxMap_MouseMove;
-                Viewer.ViewPort.View.MouseUp += PictureBoxMap_MouseUp;
+                    if (Viewer.ViewPort != null)
+                    {
+                        w = Viewer.ViewPort.View.Width;
+                        h = Viewer.ViewPort.View.Height;
+                        Map.vertexes.RePaint -= Viewer.ViewPort.Invalidate;
+                        Map.edges.RePaint -= Viewer.ViewPort.Invalidate;
+                        Viewer.ViewPort.View.MouseDown -= PictureBoxMap_MouseDown;
+                        Viewer.ViewPort.View.MouseMove -= PictureBoxMap_MouseMove;
+                        Viewer.ViewPort.View.MouseUp -= PictureBoxMap_MouseUp;
+                    }
+                    else
+                    {
+                        Map.InitMap();
+                    }
+                    Viewer.CreateViewer(pictureBoxMap, panelMapSubstrate, Font);
 
-                Viewer.ViewPort.View.ContextMenuStrip = contextMenuVertex;
+                    Map.vertexes.RePaint += Viewer.ViewPort.Invalidate;
+                    Map.edges.RePaint += Viewer.ViewPort.Invalidate;
 
+
+                    Viewer.ViewPort.OpenPicture(h, w, openSubMapFileDialog.FileName);
+
+                    Viewer.ViewPort.IsStreetLength_Visible = checkBox_StreetLength.Checked;
+                    Viewer.ViewPort.IsPolice_Visible = checkBox_Police.Checked;
+                    Viewer.ViewPort.IsSign_Visible = checkBox_Sign.Checked;
+                    Viewer.ViewPort.IsStreetName_Visible = checkBox_StreetName.Checked;
+                    Viewer.ViewPort.IsTrafficLight_Visible = checkBox__TrafficLight.Checked;
+
+                    Viewer.ViewPort.View.MouseDown += PictureBoxMap_MouseDown;
+                    Viewer.ViewPort.View.MouseMove += PictureBoxMap_MouseMove;
+                    Viewer.ViewPort.View.MouseUp += PictureBoxMap_MouseUp;
+
+                    Viewer.ViewPort.View.ContextMenuStrip = contextMenuVertex;
+                    Calibration(100);
+                }
+
+                Viewer.ViewPort.Invalidate();
             }
-
-            Viewer.ViewPort.Invalidate();
+            catch (Exception){}
         }
 
         private void ToolStripMenu_AddVertex_Click(object sender, EventArgs e)
@@ -594,15 +623,8 @@ namespace TProject
 
         private void PanelSlide_Click(object sender, EventArgs e)
         {
-            if ((slide = !slide))
-            {
-                panelSlideContainer.Size = new Size(205, panelSlideContainer.Size.Width);
-            }
-            else
-            {
-                panelSlideContainer.Size = new Size(23, panelSlideContainer.Size.Width);
-            }
-
+            panelSlideContainer.Size = (slide = !slide) ? new Size(205, panelSlideContainer.Size.Width) :
+                new Size(23, panelSlideContainer.Size.Width);
             panelSlide.SendToBack();
         }
 
@@ -626,9 +648,7 @@ namespace TProject
 
         private void Button_Ok_Сalibration_Click(object sender, EventArgs e)
         {
-            Viewer.ViewPort.ScaleCoefficient = 100 / (callibrationEdge.GetLength(1));
-
-            textBox_CurrentCoefficient.Text = Viewer.ViewPort.ScaleCoefficient.ToString();
+            Calibration(callibrationEdge.GetLength(1));
 
             Viewer.ViewPort.View.MouseDown += PictureBoxMap_MouseDown;
             Viewer.ViewPort.View.MouseMove += PictureBoxMap_MouseMove;
@@ -645,7 +665,12 @@ namespace TProject
             button_Ok_Сalibration.Enabled = false;
             button_Calibration.Enabled = true;
         }
+        private void Calibration(double value)
+        {
+            Viewer.ViewPort.ScaleCoefficient = 100 / (value);
 
+            textBox_CurrentCoefficient.Text = Viewer.ViewPort.ScaleCoefficient.ToString();
+        }
 
         #region Калибровка
         private void View_Paint(object sender, PaintEventArgs e)
@@ -837,12 +862,12 @@ namespace TProject
             }
         }
 
-        private void УдалитьПерегонToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ToolStripMenuItem_DeleteEdge_Click(object sender, EventArgs e)
         {
             Viewer.ViewPort.DeleteEdge(lastClickCoordX, lastClickCoordY);
         }
 
-        private void УдалитьПерекрестокToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ToolStripMenuItem_DeleteVertex_Click(object sender, EventArgs e)
         {
             Viewer.ViewPort.DelteVertex(lastClickCoordX, lastClickCoordY);
         }
@@ -872,7 +897,7 @@ namespace TProject
 
         private void ToolStripMenuItem_Route_Click(object sender, EventArgs e)
         {
-            if(Route.Start == null || Route.End == null)
+            if (Route.Start == null || Route.End == null)
             {
                 ToolStripMenuItem_StaticView.Enabled = false;
                 ToolStripMenuItem_RouteParameters.Enabled = false;

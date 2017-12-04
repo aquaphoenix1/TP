@@ -34,9 +34,9 @@
             this.panelContainer = new System.Windows.Forms.Panel();
             this.timeGreenLightLabel = new System.Windows.Forms.Label();
             this.timeRedLightLabel = new System.Windows.Forms.Label();
-            this.timeGreenLightComboBox = new System.Windows.Forms.ComboBox();
-            this.timeRedLightComboBox = new System.Windows.Forms.ComboBox();
             this.trafficlightCheckBox = new System.Windows.Forms.CheckBox();
+            this.timeRedLightComboBox = new System.Windows.Forms.MaskedTextBox();
+            this.timeGreenLightComboBox = new System.Windows.Forms.MaskedTextBox();
             this.crossroadGroupBox.SuspendLayout();
             this.panelContainer.SuspendLayout();
             this.SuspendLayout();
@@ -76,10 +76,10 @@
             // 
             // panelContainer
             // 
-            this.panelContainer.Controls.Add(this.timeGreenLightLabel);
-            this.panelContainer.Controls.Add(this.timeRedLightLabel);
             this.panelContainer.Controls.Add(this.timeGreenLightComboBox);
             this.panelContainer.Controls.Add(this.timeRedLightComboBox);
+            this.panelContainer.Controls.Add(this.timeGreenLightLabel);
+            this.panelContainer.Controls.Add(this.timeRedLightLabel);
             this.panelContainer.Location = new System.Drawing.Point(6, 19);
             this.panelContainer.Name = "panelContainer";
             this.panelContainer.Size = new System.Drawing.Size(275, 93);
@@ -103,28 +103,6 @@
             this.timeRedLightLabel.TabIndex = 4;
             this.timeRedLightLabel.Text = "Светофорная фаза красного света:";
             // 
-            // timeGreenLightComboBox
-            // 
-            this.timeGreenLightComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.timeGreenLightComboBox.FormattingEnabled = true;
-            this.timeGreenLightComboBox.Items.AddRange(new object[] {
-            "10"});
-            this.timeGreenLightComboBox.Location = new System.Drawing.Point(196, 22);
-            this.timeGreenLightComboBox.Name = "timeGreenLightComboBox";
-            this.timeGreenLightComboBox.Size = new System.Drawing.Size(77, 21);
-            this.timeGreenLightComboBox.TabIndex = 1;
-            // 
-            // timeRedLightComboBox
-            // 
-            this.timeRedLightComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.timeRedLightComboBox.FormattingEnabled = true;
-            this.timeRedLightComboBox.Items.AddRange(new object[] {
-            "20"});
-            this.timeRedLightComboBox.Location = new System.Drawing.Point(196, 59);
-            this.timeRedLightComboBox.Name = "timeRedLightComboBox";
-            this.timeRedLightComboBox.Size = new System.Drawing.Size(77, 21);
-            this.timeRedLightComboBox.TabIndex = 2;
-            // 
             // trafficlightCheckBox
             // 
             this.trafficlightCheckBox.AutoSize = true;
@@ -135,6 +113,22 @@
             this.trafficlightCheckBox.Text = "Наличие светофора";
             this.trafficlightCheckBox.UseVisualStyleBackColor = true;
             this.trafficlightCheckBox.CheckedChanged += new System.EventHandler(this.TrafficlightCheckBox_CheckedChanged);
+            // 
+            // timeRedLightComboBox
+            // 
+            this.timeRedLightComboBox.Location = new System.Drawing.Point(196, 59);
+            this.timeRedLightComboBox.Mask = "000";
+            this.timeRedLightComboBox.Name = "timeRedLightComboBox";
+            this.timeRedLightComboBox.Size = new System.Drawing.Size(76, 20);
+            this.timeRedLightComboBox.TabIndex = 5;
+            // 
+            // timeGreenLightComboBox
+            // 
+            this.timeGreenLightComboBox.Location = new System.Drawing.Point(196, 25);
+            this.timeGreenLightComboBox.Mask = "000";
+            this.timeGreenLightComboBox.Name = "timeGreenLightComboBox";
+            this.timeGreenLightComboBox.Size = new System.Drawing.Size(76, 20);
+            this.timeGreenLightComboBox.TabIndex = 6;
             // 
             // EditVertex
             // 
@@ -171,9 +165,9 @@
         private System.Windows.Forms.GroupBox crossroadGroupBox;
         private System.Windows.Forms.Label timeRedLightLabel;
         private System.Windows.Forms.Label timeGreenLightLabel;
-        private System.Windows.Forms.ComboBox timeRedLightComboBox;
-        private System.Windows.Forms.ComboBox timeGreenLightComboBox;
         private System.Windows.Forms.CheckBox trafficlightCheckBox;
         private System.Windows.Forms.Panel panelContainer;
+        private System.Windows.Forms.MaskedTextBox timeGreenLightComboBox;
+        private System.Windows.Forms.MaskedTextBox timeRedLightComboBox;
     }
 }

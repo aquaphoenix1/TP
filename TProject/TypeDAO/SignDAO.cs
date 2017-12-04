@@ -13,7 +13,7 @@ namespace TProject.TypeDAO
             try
             {
                 Sign s = (Sign)obj;
-                new SQLiteCommand(string.Format("Insert into Sign values ('{0}', {1})", s.TypeName, s.Count), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("Insert into Sign values ('{0}', {1})", s.TypeName, s.Count.ToString().Replace(',', '.')), DAO.GetConnection()).ExecuteNonQuery();
 
                 List<object> list = new List<object>
                 {
@@ -51,7 +51,7 @@ namespace TProject.TypeDAO
             try
             {
                 Sign s = (Sign)obj;
-                new SQLiteCommand(string.Format("UPDATE Sign SET [Type] = '{0}', [Value] = {1} where Type = '{2}'", s.TypeName, s.Count, ID), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("UPDATE Sign SET [Type] = '{0}', [Value] = {1} where Type = '{2}'", s.TypeName, s.Count.ToString().Replace(',', '.'), ID), DAO.GetConnection()).ExecuteNonQuery();
 
                 var updatedSign = Sign.ListSigns.FirstOrDefault(l => l.ElementAt(0).ToString().Equals(ID));
                 if (updatedSign != null)

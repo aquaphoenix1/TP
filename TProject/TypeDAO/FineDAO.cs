@@ -13,7 +13,7 @@ namespace TProject.TypeDAO
             try
             {
                 Fine f = (Fine)obj;
-                new SQLiteCommand(string.Format("Insert into Fine values ('{0}', {1})", f.TypeName, f.Count), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("Insert into Fine values ('{0}', {1})", f.TypeName, f.Count.ToString().Replace(',', '.')), DAO.GetConnection()).ExecuteNonQuery();
 
                 List<object> list = new List<object>
                 {
@@ -51,7 +51,7 @@ namespace TProject.TypeDAO
             try
             {
                 Fine f = (Fine)obj;
-                new SQLiteCommand(string.Format("UPDATE Fine SET [NameFine] = '{0}', [CostFine] = {1} where NameFine = '{2}'", f.TypeName, f.Count, ID), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("UPDATE Fine SET [NameFine] = '{0}', [CostFine] = {1} where NameFine = '{2}'", f.TypeName, f.Count.ToString().Replace(',', '.'), ID), DAO.GetConnection()).ExecuteNonQuery();
 
                 var updatedFine = Fine.ListFine.FirstOrDefault(l => l.ElementAt(0).ToString().Equals(ID));
                 if (updatedFine != null)

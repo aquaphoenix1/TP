@@ -13,7 +13,7 @@ namespace TProject.TypeDAO
             try
             {
                 Coating c = (Coating)obj;
-                new SQLiteCommand(string.Format("Insert into Surface values ('{0}', {1})", c.TypeName, c.Coeff), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("Insert into Surface values ('{0}', {1})", c.TypeName, c.Coeff.ToString().Replace(',', '.')), DAO.GetConnection()).ExecuteNonQuery();
 
                 List<object> list = new List<object>
                 {
@@ -51,7 +51,7 @@ namespace TProject.TypeDAO
             try
             {
                 Coating c = (Coating)obj;
-                new SQLiteCommand(string.Format("UPDATE Surface SET [NameSurface] = '{0}', [KoefSurface] = {1} where NameSurface = '{2}'", c.TypeName, c.Coeff, ID), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("UPDATE Surface SET [NameSurface] = '{0}', [KoefSurface] = {1} where NameSurface = '{2}'", c.TypeName, c.Coeff.ToString().Replace(',', '.'), ID), DAO.GetConnection()).ExecuteNonQuery();
 
                 var updatedCoating = Coating.ListSurface.FirstOrDefault(l => l.ElementAt(0).ToString().Equals(ID));
                 if (updatedCoating != null)

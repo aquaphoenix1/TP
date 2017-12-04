@@ -26,8 +26,8 @@ namespace TProject
                 panelContainer.Enabled = true;
                 trafficlightCheckBox.Checked = isChecked;
                 TrafficLight trafficLight = Vertex.TrafficLight;
-                timeRedLightComboBox.SelectedItem = trafficLight.RedSeconds;
-                timeGreenLightComboBox.SelectedItem = trafficLight.GreenSeconds;
+                timeRedLightComboBox.Text = trafficLight.RedSeconds.ToString();
+                timeGreenLightComboBox.Text = trafficLight.GreenSeconds.ToString();
             }
             else
             {
@@ -40,28 +40,39 @@ namespace TProject
         private void TrafficlightCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             panelContainer.Enabled = ((CheckBox)sender).Checked;
+            timeGreenLightComboBox.Enabled = panelContainer.Enabled;
+            timeRedLightComboBox.Enabled = panelContainer.Enabled;
+
         }
 
 
         private void OkEditCrossroadButton_Click(object sender, EventArgs e)
         {
-            if (trafficlightCheckBox.Checked)
+            if (!trafficlightCheckBox.Checked)
             {
                 Vertex.TrafficLight = null;
             }
             else
             {
-                Vertex.TrafficLight = new TrafficLight(int.Parse(timeGreenLightComboBox.SelectedItem.ToString()),
-                    int.Parse(timeRedLightComboBox.SelectedItem.ToString()));
+                if (!int.TryParse(timeGreenLightComboBox.Text, out int green))
+                {
+                    MessageBox.Show("Введите значение длительности зеленой фазы");
+                    return;
+                }
+                if (!int.TryParse(timeRedLightComboBox.Text, out int red))
+                {
+                    MessageBox.Show("Введите значение длительности красной фазы");
+                    return;
+                }
+                Vertex.TrafficLight = new TrafficLight(green, red);
             }
-
-            Close();
+            Viewer.ViewPort.Invalidate();
+            DialogResult = DialogResult.OK;
         }
 
         private void CancelEditCrossroadButton_Click(object sender, EventArgs e)
         {
             Vertex.TrafficLight = SaveTF;
-            Close();
         }
     }
 }

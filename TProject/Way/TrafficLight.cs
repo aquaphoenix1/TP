@@ -11,6 +11,7 @@ namespace TProject.Way
         public static event TLightTurnMethod TLightTurn;
 
         public bool IsGreen { get; set; }
+        public bool IsRun { get; set; }
 
         private int CurrentTime { get; set; }
 
@@ -19,6 +20,7 @@ namespace TProject.Way
             Random rand = new Random();
             CurrentTime = rand.Next();
             IsGreen = false;
+            IsRun = false;
 
             this.GreenSeconds = greenSeconds;
             this.RedSeconds = redSeconds;
