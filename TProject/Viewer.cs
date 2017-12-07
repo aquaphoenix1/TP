@@ -400,6 +400,11 @@ namespace TProject
                             (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 10));
                     }
                 }
+                if (item.Policemen != null && IsPolice_Visible)
+                {
+                    graph.DrawImage(Resources.star, new Rectangle(item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 + 25,
+                            (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 + 10), Width * 2, Height * 2));
+                }
             }
             if (selectedEdge != null)
             {
@@ -413,6 +418,7 @@ namespace TProject
                         (selectedEdge.GetHead().Y.UnScaling() + (selectedEdge.GetEnd().Y.UnScaling() - selectedEdge.GetHead().Y.UnScaling()) / 2 - 10));
                 }
             }
+
         }
 
         /// <summary>
