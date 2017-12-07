@@ -358,7 +358,7 @@ namespace TProject
 
         private void DrawStartPoint(Graphics graph)
         {
-            Pen pen = new Pen(Color.LightGreen);
+            Pen pen = new Pen(Color.Red);
             DrawPointFlag(graph, pen, Route.Start.X, Route.Start.Y);
         }
 
@@ -374,7 +374,7 @@ namespace TProject
         }
         private void DrawEndPoint(Graphics graph)
         {
-            Pen pen = new Pen(Color.Green);
+            Pen pen = new Pen(Color.Blue);
             DrawPointFlag(graph, pen, Route.End.X - Width / 2, Route.End.Y - Width / 2);
         }
 

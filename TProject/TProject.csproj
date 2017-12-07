@@ -281,6 +281,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Image1.bmp" />
     <None Include="icon\greenLight.jpg" />
     <None Include="icon\greenLight2.jpg" />
     <None Include="icon\nonLight.jpg" />

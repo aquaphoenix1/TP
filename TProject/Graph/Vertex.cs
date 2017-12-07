@@ -60,5 +60,6 @@ namespace TProject.Graph
             pointOnMap = new Rectangle(x, y, Radius, Radius);
             TrafficLight = null;
         }
+
     }
 }

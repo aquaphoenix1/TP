@@ -50,7 +50,7 @@ namespace TProject
                             Criterial = Main.Criterial.Price;
 
                             System.Collections.Generic.List<object> cars = Driver.Car.ListAuto.First(car => car[0].ToString().Equals(driver[2].ToString()));
-                            System.Collections.Generic.List<object> fuels = Driver.Fuel.ListFuel.First(fuel => fuel[0].ToString().Equals(cars[2].ToString()));
+                            System.Collections.Generic.List<object> fuels = Driver.Fuel.ListFuel.First(fuel => fuel[0].ToString().Equals(cars[1].ToString()));
 
                             Driver.Fuel curFuel = Driver.Fuel.CreateFuel(fuels[0].ToString(), double.Parse(fuels[1].ToString()));
                             Driver.Car curCar = Driver.Car.CreateCar(cars[0].ToString(), curFuel, double.Parse(cars[2].ToString()), double.Parse(cars[3].ToString()));
