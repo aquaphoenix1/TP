@@ -43,7 +43,7 @@ namespace TProject.Graph
             EndVertex = B;
         }
 
-        internal double GetCriterialValue(Main.Criterial criterial, Driver.Driver driver, Vertex v)
+        internal double GetCriterialValue(Main.Criterial criterial, Driver.Driver driver)
         {
             switch (criterial)
             {
@@ -57,7 +57,7 @@ namespace TProject.Graph
                     }
                 case Main.Criterial.Time:
                     {
-                        return GetTime(v, driver);
+                        return GetTime(driver);
                     }
             }
 
@@ -68,7 +68,7 @@ namespace TProject.Graph
         {
             double price = 0.0;
 
-            price += driver.Car.FuelConsumption * length * driver.Car.CarFuel.Price;
+            price += (driver.Car.FuelConsumption / 100) * (length / 1000) * driver.Car.CarFuel.Price;
 
             if(driver.IsViolateTL && this.Policemen != null && SignMaxSpeed != null)
             {
@@ -98,11 +98,9 @@ namespace TProject.Graph
             return price;
         }
 
-        public double GetTime(Vertex end, Driver.Driver driver)
+        public double GetTime(Driver.Driver driver)
         {
-            end.TrafficLight.CurrentTime = new Random().Next(0, end.TrafficLight.GreenSeconds + 1);
-            end.TrafficLight.IsGreen = true;
-
+            Vertex end = this.EndVertex;
             int currentTime;
             bool isGreen;
 
@@ -114,10 +112,13 @@ namespace TProject.Graph
 
             if (end.TrafficLight != null)
             {
+                end.TrafficLight.CurrentTime = new Random().Next(0, end.TrafficLight.GreenSeconds + 1);
+                end.TrafficLight.IsGreen = true;
+                
                 currentTime = end.TrafficLight.CurrentTime;
                 isGreen = end.TrafficLight.IsGreen;
 
-                end.TrafficLight.Inc((int)time);
+                end.TrafficLight.Inc((int)(time * 60 * 60));
 
                 if (!end.TrafficLight.IsGreen)
                 {

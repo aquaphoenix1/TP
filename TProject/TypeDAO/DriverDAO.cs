@@ -51,7 +51,7 @@ namespace TProject.TypeDAO
             try
             {
                 Driver.Driver d = (Driver.Driver)obj;
-                new SQLiteCommand(string.Format("UPDATE Driver SET [FIO] = '{0}, [TypeDriver] = '{1}', [Model] = '{2}' where FIO= '{3}'", d.FIO, d.IsViolateTL.ToString(), d.Car.TypeName, ID), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("UPDATE Driver SET [FIO] = '{0}', [TypeDriver] = '{1}', [Model] = '{2}' where FIO= '{3}'", d.FIO, d.IsViolateTL.ToString(), d.Car.TypeName, ID), DAO.GetConnection()).ExecuteNonQuery();
 
                 var updatedDriver = Driver.Driver.ListDriver.FirstOrDefault(l => l.ElementAt(0).ToString().Equals(ID));
                 if (updatedDriver != null)

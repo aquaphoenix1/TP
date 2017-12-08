@@ -36,7 +36,7 @@ namespace TProject.Way
                     else
                     {
                         Edge edge = GetEdge(vertexList[i], vertexList[j], edges);
-                        array[i, j] = (edge != null) ? edge.GetCriterialValue(criterial, driver, vertexList[j]) : Double.MaxValue;
+                        array[i, j] = (edge != null) ? edge.GetCriterialValue(criterial, driver) : Double.MaxValue;
 
                         if (edge != null)
                         {
