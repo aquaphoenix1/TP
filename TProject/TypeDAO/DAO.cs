@@ -144,19 +144,27 @@ namespace TProject
                     command.ExecuteNonQuery();
                 }
 
-                for (int i = 0; i < vertexes.GetCountElements(); i++)
+                if (vertexes != null)
                 {
-                    var vert = vertexes.GetElement(i);
-                    new SQLiteCommand(string.Format("Insert into Vertex values ({0}, {1}, {2}, '{3}')", vert.ID, vert.X, vert.Y, name), GetConnection()).ExecuteNonQuery();
+                    for (int i = 0; i < vertexes.GetCountElements(); i++)
+                    {
+                        var vert = vertexes.GetElement(i);
+                        new SQLiteCommand(string.Format("Insert into Vertex values ({0}, {1}, {2}, '{3}')", vert.ID, vert.X, vert.Y, name), GetConnection()).ExecuteNonQuery();
+                    }
+
                 }
-
-                for (int i = 0; i < edges.GetCountElements(); i++)
+                if (edges != null)
                 {
-                    var edge = edges.GetElement(i);
+                    for (int i = 0; i < edges.GetCountElements(); i++)
+                    {
+                        var edge = edges.GetElement(i);
 
-                    string idSign = (edge.SignMaxSpeed != null) ? edge.SignMaxSpeed.TypeName : "null";
+                        string idSign = (edge.SignMaxSpeed != null) ? edge.SignMaxSpeed.TypeName : "null";
 
-                    new SQLiteCommand(string.Format("Insert into Edge values ({0}, '{1}', '{2}', '{3}', {4}, {5}, '{6}', '{7}', '{8}', '{9}')", edge.ID, edge.IsBilateral.ToString(), idSign, edge.SignTwoWay.ToString(), edge.GetHead().ID, edge.GetEnd().ID, edge.NameStreet, edge.Coat.TypeName, edge.Policemen.TypeName, name), GetConnection()).ExecuteNonQuery();
+                        string police = (edge.Policemen != null) ? edge.Policemen.TypeName : "null";
+
+                        new SQLiteCommand(string.Format("Insert into Edge values ({0}, '{1}', '{2}', '{3}', {4}, {5}, '{6}', '{7}', '{8}', '{9}')", edge.ID, edge.IsBilateral.ToString(), idSign, edge.SignTwoWay.ToString(), edge.GetHead().ID, edge.GetEnd().ID, edge.NameStreet, edge.Coat.TypeName, police, name), GetConnection()).ExecuteNonQuery();
+                    }
                 }
 
                 return true;
@@ -186,7 +194,7 @@ namespace TProject
 
                 foreach (var vert in list)
                 {
-                    vertexes.Add(Vertex.CreateVertex(long.Parse(vert[0].ToString()), int.Parse(vert[1].ToString()), int.Parse(vert[2].ToString())));
+                    vertexes.AddNoEvent(Vertex.CreateVertex(long.Parse(vert[0].ToString()), int.Parse(vert[1].ToString()), int.Parse(vert[2].ToString())));
                 }
 
                 edges = new Edges();
@@ -195,13 +203,13 @@ namespace TProject
 
                 foreach (var edge in list)
                 {
-                    Vertex head = Map.vertexes.GetForId(long.Parse(edge[4].ToString()));
-                    Vertex end = Map.vertexes.GetForId(long.Parse(edge[5].ToString()));
+                    Vertex head = vertexes.GetForId(long.Parse(edge[4].ToString()));
+                    Vertex end = vertexes.GetForId(long.Parse(edge[5].ToString()));
                     Way.Coating coat = Way.Coating.GetCoatingByName(edge[7].ToString());
                     Way.Sign sign = Way.Sign.GetSignByName(edge[2].ToString());
                     Way.Police police = Way.Police.GetPoliceByName(edge[8].ToString());
 
-                    edges.Add(Edge.CreateEdge(long.Parse(edge[0].ToString()), head, end, coat, edge[6].ToString(), bool.Parse(edge[1].ToString()), bool.Parse(edge[3].ToString()), sign, police));
+                    edges.AddNoEvent(Edge.CreateEdge(long.Parse(edge[0].ToString()), head, end, coat, edge[6].ToString(), bool.Parse(edge[1].ToString()), bool.Parse(edge[3].ToString()), sign, police));
                 }
 
                 return bmp;

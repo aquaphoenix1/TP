@@ -217,6 +217,39 @@ namespace TProject
             view.Location = new Point(view.Location.X + x - MapLocationX, view.Location.Y + y - MapLocationY);
         }
 
+        public void OpenPicture(int h, int w, Image img)
+        {
+            view.Image = img;
+            sourceImage = img;
+
+            if (h != 0 && w != 0)
+            {
+                view.Paint -= Paint;
+                view.MouseWheel -= Zoom;
+
+                this.View.Height = startHeightPB = h;
+                this.View.Width = startWidthPB = w;
+                this.View.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            }
+            else
+            {
+
+
+                view.Width = startWidthPB = img.Width;
+                view.Height = startHeightPB = img.Height;
+            }
+
+
+            cache = new SortedList<double, Image>();
+            ToList();
+
+            view.Enabled = true;
+            view.Visible = true;
+            view.Paint += Paint;
+            view.MouseWheel += Zoom;
+        }
+
         /// <summary>
         /// Открывает Указанный в fname графический файл
         /// </summary>
@@ -225,38 +258,10 @@ namespace TProject
         {
             using (FileStream fs = new FileStream(fname, FileMode.Open))
             {
-
                 Image img = Image.FromStream(fs);
-                view.Image = img;
-                sourceImage = img;
-
-                if (h != 0 && w != 0)
-                {
-                    view.Paint -= Paint;
-                    view.MouseWheel -= Zoom;
-
-                    this.View.Height = startHeightPB = h;
-                    this.View.Width = startWidthPB = w;
-                    this.View.SizeMode = PictureBoxSizeMode.StretchImage;
-
-                }
-                else
-                {
-
-
-                    view.Width = startWidthPB = img.Width;
-                    view.Height = startHeightPB = img.Height;
-                }
-
-
-                cache = new SortedList<double, Image>();
-                ToList();
-
-                view.Enabled = true;
-                view.Visible = true;
-                view.Paint += Paint;
-                view.MouseWheel += Zoom;
+                OpenPicture(h, w, img);
             }
+
         }
 
         #endregion
@@ -358,7 +363,7 @@ namespace TProject
 
         private void DrawStartPoint(Graphics graph)
         {
-            Pen pen = new Pen(Color.LightGreen);
+            Pen pen = new Pen(Color.Red);
             DrawPointFlag(graph, pen, Route.Start.X, Route.Start.Y);
         }
 
@@ -374,7 +379,7 @@ namespace TProject
         }
         private void DrawEndPoint(Graphics graph)
         {
-            Pen pen = new Pen(Color.Green);
+            Pen pen = new Pen(Color.Blue);
             DrawPointFlag(graph, pen, Route.End.X - Width / 2, Route.End.Y - Width / 2);
         }
 

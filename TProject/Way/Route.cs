@@ -95,7 +95,7 @@ namespace TProject.Way
                     toVertex = i;
                 }
             }
-            double[,] matrix = GetMatrixWay(out parents, out  IDs, vertColl, edgColl, criterial, driver);
+            double[,] matrix = GetMatrixWay(out parents, out IDs, vertColl, edgColl, criterial, driver);
             int size = (int)Math.Sqrt(matrix.Length);
 
             for (int k = 0; k < size; ++k)
@@ -127,7 +127,7 @@ namespace TProject.Way
                 {
                     Way.Add(IDs[wayList[i]]);
                 }
-                
+
                 Value = matrix[fromVertex, toVertex];
             }
         }
@@ -157,5 +157,56 @@ namespace TProject.Way
             }
             return null;
         }
+
+        private bool[] isWas = new bool[Map.edges.GetCountElements()];
+
+        //private List<Vertex> GetWayOfBestTime(Vertexes vertexes, Edges edges, Driver.Driver driver)
+        //{
+        //    for(int i = 0; i < Map.edges.GetCountElements(); i++)
+        //    {
+        //        isWas[i] = false;
+        //    }
+
+        //    var list = new List<Edge>();
+
+        //    double[,] timeMatrix = new double[list.Count, list.Count];
+        //    double[,] traficLightMatrix = new double[list.Count, list.Count];
+
+        //    // double speed = driver.IsViolateTL ? driver.Car.Speed : 60;
+        //    double speed;
+
+        //    foreach (var o in list)
+        //    {
+        //        speed = o.SignMaxSpeed != null ? o.SignMaxSpeed.Count : 60;
+        //        speed = driver.IsViolateTL ? driver.Car.Speed : speed;
+
+        //        timeMatrix[o.GetHead().ID, o.GetEnd().ID] = o.GetLength(Viewer.ViewPort.ScaleCoefficient) / speed;
+        //    }
+
+        //    Vertex start = Start;
+        //    Vertex end = End;
+
+        //    //List<List<long>> wayList = new List<List<long>>();
+        //    //List<Edge> edgeList = new List<Edge>();
+        //    //foreach (var obj in list)
+        //    //{
+        //    //    if (obj.IsConnected(start))
+        //    //        edgeList.Add(obj);
+        //    //}
+        //    List<List<long>> wayList = new List<List<long>>();
+        //    return null;
+        //}
+
+        //private void GetAllConnectedEdges(Vertex start)
+        //{
+        //    List<Edge> edgeList = new List<Edge>();
+        //    foreach (var obj in Map.edges.List)
+        //    {
+        //        if (obj.IsConnected(start))
+        //        {
+        //            edgeList.Add(obj);
+        //        }
+        //    }
+        //}
     }
 }

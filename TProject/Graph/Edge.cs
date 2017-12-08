@@ -57,7 +57,7 @@ namespace TProject.Graph
                     }
                 case Main.Criterial.Time:
                     {
-                        return GetLength(Viewer.ViewPort.ScaleCoefficient);
+                        return GetTime(driver);
                     }
             }
 
@@ -68,7 +68,7 @@ namespace TProject.Graph
         {
             double price = 0.0;
 
-            price += driver.Car.FuelConsumption * length * driver.Car.CarFuel.Price;
+            price += (driver.Car.FuelConsumption / 100) * (length / 1000) * driver.Car.CarFuel.Price;
 
             if(driver.IsViolateTL && this.Policemen != null && SignMaxSpeed != null)
             {
@@ -94,6 +94,40 @@ namespace TProject.Graph
                     }
                 }
             }
+
+            return price;
+        }
+
+        public double GetTime(Driver.Driver driver)
+        {
+            Vertex end = this.EndVertex;
+            int currentTime;
+            bool isGreen;
+
+            double price = 0;
+            double speed = SignMaxSpeed != null ? SignMaxSpeed.Count : 60;
+            speed = driver.IsViolateTL ? driver.Car.Speed : speed;
+
+            double time = GetLength(Viewer.ViewPort.ScaleCoefficient) / speed * Coat.Coeff;
+
+            if (end.TrafficLight != null)
+            {
+                end.TrafficLight.CurrentTime = new Random().Next(0, end.TrafficLight.GreenSeconds + 1);
+                end.TrafficLight.IsGreen = true;
+                
+                currentTime = end.TrafficLight.CurrentTime;
+                isGreen = end.TrafficLight.IsGreen;
+
+                end.TrafficLight.Inc((int)(time * 60 * 60));
+
+                if (!end.TrafficLight.IsGreen)
+                {
+                    price += end.TrafficLight.RedSeconds - end.TrafficLight.CurrentTime;
+                }
+                end.TrafficLight.CurrentTime = currentTime;
+                end.TrafficLight.IsGreen = isGreen;
+            }
+            price += time;
 
             return price;
         }

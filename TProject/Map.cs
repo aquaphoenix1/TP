@@ -6,6 +6,7 @@ namespace TProject
 {
     static class Map
     {
+        public static string Name;
         public static Vertexes vertexes;
         public static Edges edges;
         public static List<Vertex> Way;

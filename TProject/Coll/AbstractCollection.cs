@@ -31,6 +31,10 @@ namespace TProject.Coll
             List.Add(vertex);
             RePaint();
         }
+        public void AddNoEvent(T element)
+        {
+            List.Add(element);
+        }
 
         public void Delete(int index)
         {

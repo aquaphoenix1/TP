@@ -31,6 +31,7 @@
             this.firstChoiceGroupBox = new System.Windows.Forms.GroupBox();
             this.createNewButton = new System.Windows.Forms.Button();
             this.openButton = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.firstChoiceGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,6 +55,7 @@
             this.createNewButton.TabIndex = 2;
             this.createNewButton.Text = "Создать новую";
             this.createNewButton.UseVisualStyleBackColor = true;
+            this.createNewButton.Click += new System.EventHandler(this.createNewButton_Click);
             // 
             // openButton
             // 
@@ -65,6 +67,11 @@
             this.openButton.TabIndex = 1;
             this.openButton.Text = "Открыть существующую";
             this.openButton.UseVisualStyleBackColor = true;
+            this.openButton.Click += new System.EventHandler(this.openButton_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // FirstForm
             // 
@@ -74,6 +81,7 @@
             this.Controls.Add(this.firstChoiceGroupBox);
             this.Name = "FirstForm";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Выберети действие";
             this.firstChoiceGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -85,5 +93,6 @@
         private System.Windows.Forms.GroupBox firstChoiceGroupBox;
         private System.Windows.Forms.Button createNewButton;
         private System.Windows.Forms.Button openButton;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

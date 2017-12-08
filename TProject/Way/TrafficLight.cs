@@ -13,7 +13,7 @@ namespace TProject.Way
         public bool IsGreen { get; set; }
         public bool IsRun { get; set; }
 
-        private int CurrentTime { get; set; }
+        public int CurrentTime { get; set; }
 
         public TrafficLight(int greenSeconds, int redSeconds) : base()
         {
@@ -27,14 +27,21 @@ namespace TProject.Way
             this.CurrentTime = 0;
         }
 
-        public void Inc()
+        public void Inc(int val = 1)
         {
-            int time = CurrentTime++;
-            if (IsGreen && (time + 1) > GreenSeconds || !IsGreen && (time + 1) > RedSeconds)
+            while (val-- != 0)
             {
-                TLightTurn();
-                CurrentTime = 0;
-                IsGreen = !IsGreen;
+                int time = CurrentTime++;
+                if (IsGreen && (time + 1) > GreenSeconds || !IsGreen && (time + 1) > RedSeconds)
+                {
+                    if (TLightTurn != null)
+                    {
+                        TLightTurn();
+                    }
+
+                    CurrentTime = 0;
+                    IsGreen = !IsGreen;
+                }
             }
         }
 

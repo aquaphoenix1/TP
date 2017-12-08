@@ -5,6 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using TProject.Coll;
 using TProject.Driver;
 using TProject.Forms;
 using TProject.Graph;
@@ -543,53 +544,24 @@ namespace TProject
 
         private void ToolStripMenu_SubMap_Click(object sender, EventArgs e)
         {
-
             try
             {
                 if (openSubMapFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    int w = 0;
-                    int h = 0;
-
-                    if (Viewer.ViewPort != null)
-                    {
-                        w = Viewer.ViewPort.View.Width;
-                        h = Viewer.ViewPort.View.Height;
-                        Map.vertexes.RePaint -= Viewer.ViewPort.Invalidate;
-                        Map.edges.RePaint -= Viewer.ViewPort.Invalidate;
-                        Viewer.ViewPort.View.MouseDown -= PictureBoxMap_MouseDown;
-                        Viewer.ViewPort.View.MouseMove -= PictureBoxMap_MouseMove;
-                        Viewer.ViewPort.View.MouseUp -= PictureBoxMap_MouseUp;
-                    }
-                    else
-                    {
-                        Map.InitMap();
-                    }
-                    Viewer.CreateViewer(pictureBoxMap, panelMapSubstrate, Font);
-
-                    Map.vertexes.RePaint += Viewer.ViewPort.Invalidate;
-                    Map.edges.RePaint += Viewer.ViewPort.Invalidate;
-
-
-                    Viewer.ViewPort.OpenPicture(h, w, openSubMapFileDialog.FileName);
-
-                    Viewer.ViewPort.IsStreetLength_Visible = checkBox_StreetLength.Checked;
-                    Viewer.ViewPort.IsPolice_Visible = checkBox_Police.Checked;
-                    Viewer.ViewPort.IsSign_Visible = checkBox_Sign.Checked;
-                    Viewer.ViewPort.IsStreetName_Visible = checkBox_StreetName.Checked;
-                    Viewer.ViewPort.IsTrafficLight_Visible = checkBox__TrafficLight.Checked;
-
-                    Viewer.ViewPort.View.MouseDown += PictureBoxMap_MouseDown;
-                    Viewer.ViewPort.View.MouseMove += PictureBoxMap_MouseMove;
-                    Viewer.ViewPort.View.MouseUp += PictureBoxMap_MouseUp;
-
-                    Viewer.ViewPort.View.ContextMenuStrip = contextMenuVertex;
-                    Calibration(100);
+                    Init(path: openSubMapFileDialog.FileName);
                 }
 
                 Viewer.ViewPort.Invalidate();
             }
-            catch (Exception){}
+            catch (Exception) { }
+        }
+
+        public void OpenPicture()
+        {
+            if (openSubMapFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                Init(path: openSubMapFileDialog.FileName);
+            }
         }
 
         private void ToolStripMenu_AddVertex_Click(object sender, EventArgs e)
@@ -912,11 +884,109 @@ namespace TProject
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public void Init(Image img = null, string path = null)
         {
-            pictureBoxMap.Image = DAO.LoadMap("qwe", out Map.vertexes, out Map.edges) as Image;
+            int w = 0;
+            int h = 0;
 
-            //DAO.InsertMap(Map.vertexes, Map.edges, pictureBoxMap.Image, "qwe");
+            if (Viewer.ViewPort != null)
+            {
+                w = Viewer.ViewPort.View.Width;
+                h = Viewer.ViewPort.View.Height;
+                Map.vertexes.RePaint -= Viewer.ViewPort.Invalidate;
+                Map.edges.RePaint -= Viewer.ViewPort.Invalidate;
+                Viewer.ViewPort.View.MouseDown -= PictureBoxMap_MouseDown;
+                Viewer.ViewPort.View.MouseMove -= PictureBoxMap_MouseMove;
+                Viewer.ViewPort.View.MouseUp -= PictureBoxMap_MouseUp;
+            }
+            else
+            {
+                Map.InitMap();
+            }
+            Viewer.CreateViewer(pictureBoxMap, panelMapSubstrate, Font);
+
+            Map.vertexes.RePaint += Viewer.ViewPort.Invalidate;
+            Map.edges.RePaint += Viewer.ViewPort.Invalidate;
+
+            if (path == null)
+                Viewer.ViewPort.OpenPicture(h, w, img);
+            else
+                Viewer.ViewPort.OpenPicture(h, w, path);
+
+            Viewer.ViewPort.IsStreetLength_Visible = checkBox_StreetLength.Checked;
+            Viewer.ViewPort.IsPolice_Visible = checkBox_Police.Checked;
+            Viewer.ViewPort.IsSign_Visible = checkBox_Sign.Checked;
+            Viewer.ViewPort.IsStreetName_Visible = checkBox_StreetName.Checked;
+            Viewer.ViewPort.IsTrafficLight_Visible = checkBox__TrafficLight.Checked;
+
+            Viewer.ViewPort.View.MouseDown += PictureBoxMap_MouseDown;
+            Viewer.ViewPort.View.MouseMove += PictureBoxMap_MouseMove;
+            Viewer.ViewPort.View.MouseUp += PictureBoxMap_MouseUp;
+
+            Viewer.ViewPort.View.ContextMenuStrip = contextMenuVertex;
+            Calibration(100);
+        }
+        private void ToolStripMenuItem_Save_Click(object sender, EventArgs e)
+        {
+            DAO.InsertMap(Map.vertexes, Map.edges, Viewer.ViewPort.View.Image, Map.Name);
+        }
+
+        private void ToolStripMenuItem_SaveAS_Click(object sender, EventArgs e)
+        {
+            SaveAs();
+        }
+        
+        public string SaveAs()
+        {
+            new SaveAs().ShowDialog();
+            return Map.Name;
+        }
+
+        public DialogResult Open()
+        {
+            SaveAs sa = new SaveAs(true);
+            sa.ShowDialog();
+
+            if (sa.DialogResult == DialogResult.OK)
+            {
+                Vertexes vert = new Vertexes();
+                Edges edg = new Edges();
+                Image image = DAO.LoadMap(sa.nameMap, out vert, out edg) as Image;
+
+                Init(img: image);
+                Map.vertexes = vert;
+                Map.edges = edg;
+
+                Map.vertexes.RePaint += Viewer.ViewPort.Invalidate;
+                Map.edges.RePaint += Viewer.ViewPort.Invalidate;
+
+                ToolStripMenuItem_Save.Enabled = true;
+                ToolStripMenuItem_SaveAs.Enabled = true;
+                ToolStripMenuItem_ChooseSubstrate.Enabled = true;
+            }
+            return sa.DialogResult;
+        }
+        public void Open(string name)
+        {
+            Vertexes vert = new Vertexes();
+            Edges edg = new Edges();
+ 
+            Image image = DAO.LoadMap(name, out vert, out edg) as Image;
+            if (image == null) return;
+            Init(img: image);
+            Map.vertexes = vert;
+            Map.edges = edg;
+
+            Map.vertexes.RePaint += Viewer.ViewPort.Invalidate;
+            Map.edges.RePaint += Viewer.ViewPort.Invalidate;
+
+            ToolStripMenuItem_Save.Enabled = true;
+            ToolStripMenuItem_SaveAs.Enabled = true;
+            ToolStripMenuItem_ChooseSubstrate.Enabled = true;
+        }
+        private void ToolStripMenuItem_Open_Click(object sender, EventArgs e)
+        {
+            Open();
         }
 
         private void ToolStripMenuItem_AboutSystem_Click(object sender, EventArgs e)
