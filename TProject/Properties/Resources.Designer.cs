@@ -91,6 +91,26 @@ namespace TProject.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///	&lt;head&gt;
+        ///		&lt;meta charset=&quot;UTF-8&quot;&gt;
+        ///		&lt;title&gt;Руководство пользователя&lt;/title&gt;
+        ///		&lt;link rel=&quot;stylesheet&quot; href=&quot;C:\Users\matek3022\Desktop\Руководство пользователя\css.css&quot;&gt;
+        ///	&lt;/head&gt;
+        ///&lt;body&gt;
+        ///  &lt;h1&gt;Руководство пользователя&lt;/h1&gt;
+        ///  &lt;p&gt; 
+        ///&lt;/body&gt;
+        ///&lt;/html&gt;.
+        /// </summary>
+        internal static string index {
+            get {
+                return ResourceManager.GetString("index", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap load {

@@ -110,6 +110,12 @@
     <Compile Include="AddAndEditForms\FormStreet.Designer.cs">
       <DependentUpon>FormStreet.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AboutDeveloperForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AboutDeveloperForm.Designer.cs">
+      <DependentUpon>AboutDeveloperForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ErrorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -224,6 +230,9 @@
     <EmbeddedResource Include="AddAndEditForms\FormStreet.resx">
       <DependentUpon>FormStreet.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AboutDeveloperForm.resx">
+      <DependentUpon>AboutDeveloperForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditEdge.resx">
       <DependentUpon>EditEdge.cs</DependentUpon>
     </EmbeddedResource>
@@ -281,6 +290,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\index.html" />
     <None Include="Resources\star.jpg" />
     <None Include="Resources\Image1.bmp" />
     <None Include="icon\greenLight.jpg" />

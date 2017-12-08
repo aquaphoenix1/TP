@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using TProject.Driver;
+using TProject.Forms;
 using TProject.Graph;
+using TProject.Properties;
 using TProject.TypeDAO;
 using TProject.Way;
 
@@ -914,6 +917,19 @@ namespace TProject
             pictureBoxMap.Image = DAO.LoadMap("qwe", out Map.vertexes, out Map.edges) as Image;
 
             //DAO.InsertMap(Map.vertexes, Map.edges, pictureBoxMap.Image, "qwe");
+        }
+
+        private void ToolStripMenuItem_AboutSystem_Click(object sender, EventArgs e)
+        {
+            string path = System.IO.Directory.GetCurrentDirectory();
+            path =  path.Replace(@"bin\Debug","");
+            Process.Start("chrome.exe", path + "Resources\\index.html");
+        }
+
+        private void ToolStripMenuItem_AboutDeveloper_Click(object sender, EventArgs e)
+        {
+            AboutDeveloperForm aboutDeveloperForm = new AboutDeveloperForm();
+            aboutDeveloperForm.ShowDialog();
         }
     }
 }
