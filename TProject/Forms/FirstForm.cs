@@ -14,10 +14,12 @@ namespace TProject.Forms
         private void openButton_Click(object sender, System.EventArgs e)
         {
             Main form = new Main();
-            form.Open();
-            this.Hide();
-            form.ShowDialog();
-            this.Close();
+            if (form.Open() == DialogResult.OK)
+            {
+                this.Hide();
+                form.ShowDialog();
+                this.Close();
+            }
         }
 
         private void createNewButton_Click(object sender, System.EventArgs e)
@@ -30,9 +32,12 @@ namespace TProject.Forms
                 {
                     backPicture = Image.FromStream(fs);
                 }
-                Main form = new Main();
-                if (form.SaveAs() != null)
+
+                SaveAs saForm = new SaveAs(backPicture);
+                saForm.ShowDialog();
+                if (saForm.DialogResult == DialogResult.OK)
                 {
+                    Main form = new Main();
                     form.Init(backPicture);
                     this.Hide();
                     form.ShowDialog();

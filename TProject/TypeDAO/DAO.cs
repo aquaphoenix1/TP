@@ -144,21 +144,27 @@ namespace TProject
                     command.ExecuteNonQuery();
                 }
 
-                for (int i = 0; i < vertexes.GetCountElements(); i++)
+                if (vertexes != null)
                 {
-                    var vert = vertexes.GetElement(i);
-                    new SQLiteCommand(string.Format("Insert into Vertex values ({0}, {1}, {2}, '{3}')", vert.ID, vert.X, vert.Y, name), GetConnection()).ExecuteNonQuery();
+                    for (int i = 0; i < vertexes.GetCountElements(); i++)
+                    {
+                        var vert = vertexes.GetElement(i);
+                        new SQLiteCommand(string.Format("Insert into Vertex values ({0}, {1}, {2}, '{3}')", vert.ID, vert.X, vert.Y, name), GetConnection()).ExecuteNonQuery();
+                    }
+
                 }
-
-                for (int i = 0; i < edges.GetCountElements(); i++)
+                if (edges != null)
                 {
-                    var edge = edges.GetElement(i);
+                    for (int i = 0; i < edges.GetCountElements(); i++)
+                    {
+                        var edge = edges.GetElement(i);
 
-                    string idSign = (edge.SignMaxSpeed != null) ? edge.SignMaxSpeed.TypeName : "null";
+                        string idSign = (edge.SignMaxSpeed != null) ? edge.SignMaxSpeed.TypeName : "null";
 
-                    string police = (edge.Policemen != null) ? edge.Policemen.TypeName : "null";
+                        string police = (edge.Policemen != null) ? edge.Policemen.TypeName : "null";
 
-                    new SQLiteCommand(string.Format("Insert into Edge values ({0}, '{1}', '{2}', '{3}', {4}, {5}, '{6}', '{7}', '{8}', '{9}')", edge.ID, edge.IsBilateral.ToString(), idSign, edge.SignTwoWay.ToString(), edge.GetHead().ID, edge.GetEnd().ID, edge.NameStreet, edge.Coat.TypeName, police, name), GetConnection()).ExecuteNonQuery();
+                        new SQLiteCommand(string.Format("Insert into Edge values ({0}, '{1}', '{2}', '{3}', {4}, {5}, '{6}', '{7}', '{8}', '{9}')", edge.ID, edge.IsBilateral.ToString(), idSign, edge.SignTwoWay.ToString(), edge.GetHead().ID, edge.GetEnd().ID, edge.NameStreet, edge.Coat.TypeName, police, name), GetConnection()).ExecuteNonQuery();
+                    }
                 }
 
                 return true;

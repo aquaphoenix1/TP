@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace TProject.Forms
@@ -8,6 +9,12 @@ namespace TProject.Forms
     {
         public string nameMap;
         private bool flag = false;
+        Image img;
+        public SaveAs(Image img):this()
+        {
+            this.img = img;
+        }
+
         public SaveAs()
         {
             InitializeComponent();
@@ -47,7 +54,10 @@ namespace TProject.Forms
                     {
                         try
                         {
-                            DAO.InsertMap(Map.vertexes, Map.edges, Viewer.ViewPort.View.Image, name);
+                            if (Viewer.ViewPort != null)
+                                DAO.InsertMap(Map.vertexes, Map.edges, Viewer.ViewPort.View.Image, name);
+                            else
+                                DAO.InsertMap(Map.vertexes, Map.edges, img, name);
                             Map.Name = name;
                             DialogResult = DialogResult.OK;
                             Close();

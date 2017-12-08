@@ -940,7 +940,7 @@ namespace TProject
             return Map.Name;
         }
 
-        public void Open()
+        public DialogResult Open()
         {
             SaveAs sa = new SaveAs(true);
             sa.ShowDialog();
@@ -962,6 +962,7 @@ namespace TProject
                 ToolStripMenuItem_SaveAs.Enabled = true;
                 ToolStripMenuItem_ChooseSubstrate.Enabled = true;
             }
+            return sa.DialogResult;
         }
         public void Open(string name)
         {
