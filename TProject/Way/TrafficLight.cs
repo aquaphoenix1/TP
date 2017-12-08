@@ -34,7 +34,11 @@ namespace TProject.Way
                 int time = CurrentTime++;
                 if (IsGreen && (time + 1) > GreenSeconds || !IsGreen && (time + 1) > RedSeconds)
                 {
-                    TLightTurn();
+                    if (TLightTurn != null)
+                    {
+                        TLightTurn();
+                    }
+
                     CurrentTime = 0;
                     IsGreen = !IsGreen;
                 }
