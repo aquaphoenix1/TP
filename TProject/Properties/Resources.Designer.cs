@@ -96,7 +96,6 @@ namespace TProject.Properties {
         ///	&lt;head&gt;
         ///		&lt;meta charset=&quot;UTF-8&quot;&gt;
         ///		&lt;title&gt;Руководство пользователя&lt;/title&gt;
-        ///		&lt;link rel=&quot;stylesheet&quot; href=&quot;C:\Users\matek3022\Desktop\Руководство пользователя\css.css&quot;&gt;
         ///	&lt;/head&gt;
         ///&lt;body&gt;
         ///  &lt;h1&gt;Руководство пользователя&lt;/h1&gt;
@@ -107,6 +106,16 @@ namespace TProject.Properties {
         internal static string index {
             get {
                 return ResourceManager.GetString("index", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap limitSpeedSign {
+            get {
+                object obj = ResourceManager.GetObject("limitSpeedSign", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -136,6 +145,16 @@ namespace TProject.Properties {
         internal static System.Drawing.Bitmap nonLight3 {
             get {
                 object obj = ResourceManager.GetObject("nonLight3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap oneWaySign {
+            get {
+                object obj = ResourceManager.GetObject("oneWaySign", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
