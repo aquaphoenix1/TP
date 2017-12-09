@@ -62,7 +62,7 @@
             this.signGroupBox.Location = new System.Drawing.Point(12, 167);
             this.signGroupBox.Name = "signGroupBox";
             this.signGroupBox.Size = new System.Drawing.Size(354, 91);
-            this.signGroupBox.TabIndex = 13;
+            this.signGroupBox.TabIndex = 15;
             this.signGroupBox.TabStop = false;
             // 
             // signMaxSpeedLabel
@@ -71,7 +71,7 @@
             this.signMaxSpeedLabel.Location = new System.Drawing.Point(4, 41);
             this.signMaxSpeedLabel.Name = "signMaxSpeedLabel";
             this.signMaxSpeedLabel.Size = new System.Drawing.Size(294, 13);
-            this.signMaxSpeedLabel.TabIndex = 10;
+            this.signMaxSpeedLabel.TabIndex = 13;
             this.signMaxSpeedLabel.Text = "Наличие знака \"Ограничение максимальной скорости\":";
             // 
             // signMaxSpeedCheckBox
@@ -80,7 +80,7 @@
             this.signMaxSpeedCheckBox.Location = new System.Drawing.Point(333, 41);
             this.signMaxSpeedCheckBox.Name = "signMaxSpeedCheckBox";
             this.signMaxSpeedCheckBox.Size = new System.Drawing.Size(15, 14);
-            this.signMaxSpeedCheckBox.TabIndex = 9;
+            this.signMaxSpeedCheckBox.TabIndex = 5;
             this.signMaxSpeedCheckBox.UseVisualStyleBackColor = true;
             this.signMaxSpeedCheckBox.CheckedChanged += new System.EventHandler(this.SignMaxSpeedCheckBox_CheckedChanged);
             // 
@@ -90,7 +90,7 @@
             this.signTwoWayCheckBox.Location = new System.Drawing.Point(333, 16);
             this.signTwoWayCheckBox.Name = "signTwoWayCheckBox";
             this.signTwoWayCheckBox.Size = new System.Drawing.Size(15, 14);
-            this.signTwoWayCheckBox.TabIndex = 8;
+            this.signTwoWayCheckBox.TabIndex = 4;
             this.signTwoWayCheckBox.UseVisualStyleBackColor = true;
             // 
             // signMaxSpeedKindabel
@@ -99,7 +99,7 @@
             this.signMaxSpeedKindabel.Location = new System.Drawing.Point(4, 66);
             this.signMaxSpeedKindabel.Name = "signMaxSpeedKindabel";
             this.signMaxSpeedKindabel.Size = new System.Drawing.Size(205, 13);
-            this.signMaxSpeedKindabel.TabIndex = 7;
+            this.signMaxSpeedKindabel.TabIndex = 14;
             this.signMaxSpeedKindabel.Text = "Ограничение максимальной скорости:";
             // 
             // signMaxSpeedComboBox
@@ -117,7 +117,7 @@
             this.signTwoWayLabel.Location = new System.Drawing.Point(4, 16);
             this.signTwoWayLabel.Name = "signTwoWayLabel";
             this.signTwoWayLabel.Size = new System.Drawing.Size(225, 13);
-            this.signTwoWayLabel.TabIndex = 5;
+            this.signTwoWayLabel.TabIndex = 12;
             this.signTwoWayLabel.Text = "Наличие знака \"Двустороннее движение\":";
             // 
             // streetGroupBox
@@ -129,7 +129,7 @@
             this.streetGroupBox.Location = new System.Drawing.Point(12, 12);
             this.streetGroupBox.Name = "streetGroupBox";
             this.streetGroupBox.Size = new System.Drawing.Size(354, 82);
-            this.streetGroupBox.TabIndex = 11;
+            this.streetGroupBox.TabIndex = 17;
             this.streetGroupBox.TabStop = false;
             // 
             // coatingLabel
@@ -138,17 +138,18 @@
             this.coatingLabel.Location = new System.Drawing.Point(13, 50);
             this.coatingLabel.Name = "coatingLabel";
             this.coatingLabel.Size = new System.Drawing.Size(139, 13);
-            this.coatingLabel.TabIndex = 7;
+            this.coatingLabel.TabIndex = 10;
             this.coatingLabel.Text = "Тип дорожного покрытия:";
             // 
             // nameStreetComboBox
             // 
+            this.nameStreetComboBox.CausesValidation = false;
             this.nameStreetComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.nameStreetComboBox.FormattingEnabled = true;
             this.nameStreetComboBox.Location = new System.Drawing.Point(160, 13);
             this.nameStreetComboBox.Name = "nameStreetComboBox";
             this.nameStreetComboBox.Size = new System.Drawing.Size(185, 21);
-            this.nameStreetComboBox.TabIndex = 4;
+            this.nameStreetComboBox.TabIndex = 0;
             // 
             // coatingComboBox
             // 
@@ -157,7 +158,7 @@
             this.coatingComboBox.Location = new System.Drawing.Point(160, 47);
             this.coatingComboBox.Name = "coatingComboBox";
             this.coatingComboBox.Size = new System.Drawing.Size(185, 21);
-            this.coatingComboBox.TabIndex = 6;
+            this.coatingComboBox.TabIndex = 1;
             // 
             // nameStreetLabel
             // 
@@ -165,7 +166,7 @@
             this.nameStreetLabel.Location = new System.Drawing.Point(13, 16);
             this.nameStreetLabel.Name = "nameStreetLabel";
             this.nameStreetLabel.Size = new System.Drawing.Size(94, 13);
-            this.nameStreetLabel.TabIndex = 5;
+            this.nameStreetLabel.TabIndex = 9;
             this.nameStreetLabel.Text = "Название улицы:";
             // 
             // okEditEgdeButton
@@ -174,7 +175,7 @@
             this.okEditEgdeButton.Location = new System.Drawing.Point(212, 267);
             this.okEditEgdeButton.Name = "okEditEgdeButton";
             this.okEditEgdeButton.Size = new System.Drawing.Size(75, 25);
-            this.okEditEgdeButton.TabIndex = 12;
+            this.okEditEgdeButton.TabIndex = 7;
             this.okEditEgdeButton.Text = "Ок";
             this.okEditEgdeButton.UseVisualStyleBackColor = true;
             this.okEditEgdeButton.Click += new System.EventHandler(this.OkEditEgdeButton_Click);
@@ -186,7 +187,7 @@
             this.cancelEditEgdeButton.Location = new System.Drawing.Point(293, 267);
             this.cancelEditEgdeButton.Name = "cancelEditEgdeButton";
             this.cancelEditEgdeButton.Size = new System.Drawing.Size(75, 25);
-            this.cancelEditEgdeButton.TabIndex = 10;
+            this.cancelEditEgdeButton.TabIndex = 8;
             this.cancelEditEgdeButton.Text = "Отмена";
             this.cancelEditEgdeButton.UseVisualStyleBackColor = true;
             this.cancelEditEgdeButton.Click += new System.EventHandler(this.CancelEditEgdeButton_Click);
@@ -199,7 +200,7 @@
             this.policemanGroupBox.Location = new System.Drawing.Point(12, 100);
             this.policemanGroupBox.Name = "policemanGroupBox";
             this.policemanGroupBox.Size = new System.Drawing.Size(354, 61);
-            this.policemanGroupBox.TabIndex = 9;
+            this.policemanGroupBox.TabIndex = 16;
             this.policemanGroupBox.TabStop = false;
             // 
             // policemanCheckBox
@@ -208,7 +209,7 @@
             this.policemanCheckBox.Location = new System.Drawing.Point(9, 0);
             this.policemanCheckBox.Name = "policemanCheckBox";
             this.policemanCheckBox.Size = new System.Drawing.Size(143, 17);
-            this.policemanCheckBox.TabIndex = 4;
+            this.policemanCheckBox.TabIndex = 2;
             this.policemanCheckBox.Text = "Наличие полицейского";
             this.policemanCheckBox.UseVisualStyleBackColor = true;
             this.policemanCheckBox.CheckedChanged += new System.EventHandler(this.PolicemanCheckBox_CheckedChanged);
@@ -219,7 +220,7 @@
             this.policemanLabel.Location = new System.Drawing.Point(6, 27);
             this.policemanLabel.Name = "policemanLabel";
             this.policemanLabel.Size = new System.Drawing.Size(78, 13);
-            this.policemanLabel.TabIndex = 3;
+            this.policemanLabel.TabIndex = 11;
             this.policemanLabel.Text = "Полицейский:";
             // 
             // policemanComboBox
@@ -229,7 +230,7 @@
             this.policemanComboBox.Location = new System.Drawing.Point(160, 24);
             this.policemanComboBox.Name = "policemanComboBox";
             this.policemanComboBox.Size = new System.Drawing.Size(185, 21);
-            this.policemanComboBox.TabIndex = 1;
+            this.policemanComboBox.TabIndex = 3;
             // 
             // EditEdge
             // 

@@ -8,6 +8,8 @@ namespace TProject.Graph
     {
         public static List<List<object>> StreetList { get; set; }
 
+        public bool IsInWay = false;
+
         private Vertex HeadVertex { get; set; }
         private Vertex EndVertex { get; set; }
 

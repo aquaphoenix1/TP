@@ -65,16 +65,18 @@ namespace TProject.Way
             List<long> list = new List<long>();
 
             long vert = arrayOfParents[from, to];
-
-            list.Add(from);
+            list.Add(to);
+            //list.Add(from);
 
             while (vert != from)
             {
                 list.Add(vert);
-                vert = arrayOfParents[vert, to];
+                vert = arrayOfParents[from, vert];
             }
-            list.Add(to);
+            //list.Add(to);
+            list.Add(from);
 
+            list.Reverse();
             return list;
         }
 
@@ -132,7 +134,7 @@ namespace TProject.Way
             }
         }
 
-        private Edge GetEdge(Vertex one, Vertex two, Edges edges)
+        public Edge GetEdge(Vertex one, Vertex two, Edges edges)
         {
             List<Edge> list = edges.List;
             Vertex first = null, second = null;
@@ -157,6 +159,8 @@ namespace TProject.Way
             }
             return null;
         }
+
+
 
         private bool[] isWas = new bool[Map.edges.GetCountElements()];
 

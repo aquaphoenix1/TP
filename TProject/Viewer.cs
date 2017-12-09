@@ -19,6 +19,7 @@ namespace TProject
         private PictureBox view;
         private Font mainFormFont;
         public PictureBox View => view;
+
         /// <summary>
         /// Расположение pb в контейнере до перемещения
         /// </summary>
@@ -316,7 +317,7 @@ namespace TProject
         /// и сбрасывает все выделения
         /// </summary>
         public void SaveCreatedEdge()
-        { 
+        {
             if (selectedVertex.ID != selectedEdge.GetHead().ID
                 && Map.edges.TryCopy(selectedVertex.ID, selectedEdge.GetHead().ID))
             {
@@ -345,19 +346,13 @@ namespace TProject
             graph.SmoothingMode = SmoothingMode.HighQuality;
             DrawEdges(graph);
             DrawVertexes(graph);
-
-            if (Route.End != null)
-            {
-                DrawEndPoint(graph);
-            }
             if (Route.Start != null)
             {
                 DrawStartPoint(graph);
             }
-
-            if (Map.Way != null)
+            if (Route.End != null)
             {
-                DrawRoute(graph);
+                DrawEndPoint(graph);
             }
         }
 
@@ -365,7 +360,7 @@ namespace TProject
         private void DrawStartPoint(Graphics graph)
         {
             Pen pen = new Pen(Color.Red);
-            DrawPointFlag(graph, pen, Route.Start.X, Route.Start.Y);
+            DrawPointFlag(graph, pen, Route.Start.X - Width / 2, Route.Start.Y - Width / 2);
         }
 
         private void DrawPointFlag(Graphics graph, Pen pen, int x, int y)
@@ -388,8 +383,15 @@ namespace TProject
         /// отрисовывает все перегоны, содержащиеся на карте
         /// </summary>
         /// <param name="graph"></param>
+        /// 
         private void DrawEdges(Graphics graph)
         {
+            Pen pen = new Pen(Color.Green, Width.UnScaling() - 2)
+            {
+                StartCap = LineCap.Round,
+                EndCap = LineCap.ArrowAnchor
+            };
+
             foreach (var item in Map.edges.List)
             {
                 if (!item.Equals(selectedEdge))
@@ -398,6 +400,15 @@ namespace TProject
                         item.GetEnd().X.UnScaling() + dX, item.GetEnd().Y.UnScaling() + dY);
                     graph.DrawLine(PensCase.GetPenForEdge(false, false, Width.UnScaling()), item.GetHead().X.UnScaling() + dX, item.GetHead().Y.UnScaling() + dY,
                         item.GetEnd().X.UnScaling() + dX, item.GetEnd().Y.UnScaling() + dY);
+                    if (item.IsInWay)
+                    {
+                        graph.DrawLine(pen,
+                          (item.GetHead().X).UnScaling() + Width / 2, (item.GetHead().Y).UnScaling() + Width / 2,
+                          (item.GetEnd().X).UnScaling() + Width / 2, (item.GetEnd().Y).UnScaling() + Width / 2);
+                    }
+
+
+
                     if (IsStreetLength_Visible)
                     {
                         graph.DrawString(Math.Round(item.GetLength(ScaleCoefficient), 2).ToString(), new Font(mainFormFont.FontFamily, 10f, FontStyle.Italic | FontStyle.Bold,
@@ -431,8 +442,8 @@ namespace TProject
                         (selectedEdge.GetHead().Y.UnScaling() + (selectedEdge.GetEnd().Y.UnScaling() - selectedEdge.GetHead().Y.UnScaling()) / 2 - 10));
                 }
             }
-
         }
+
 
         /// <summary>
         /// Отрисовывает все перекрестки, содержащиеся на карте
@@ -458,32 +469,27 @@ namespace TProject
                 graph.FillEllipse(PensCase.SelectedVertex, selectedVertex.X.UnScaling(), selectedVertex.Y.UnScaling(), Width, Height);
             }
         }
-
-        private void DrawRoute(Graphics graph)
-        {
-            Pen pen = new Pen(Color.Green, Width.UnScaling() - 2)
-            {
-                StartCap = LineCap.Round,
-                EndCap = LineCap.ArrowAnchor
-            };
-
-            for (int i = 0; i < Map.Way.Count - 1; i++)
-            {
-                graph.DrawLine(pen,
-                  (Map.Way.ElementAt(i).X).UnScaling() + Width / 2, (Map.Way.ElementAt(i).Y).UnScaling() + Width / 2,
-                  (Map.Way.ElementAt(i + 1).X).UnScaling() + Width / 2, (Map.Way.ElementAt(i + 1).Y).UnScaling() + Width / 2);
-            }
-        }
-
         public void MakeStaticRoute()
         {
-            /*List<long> way = new List<long>();
-            Route route = new Route();
-            route.FindMinLengthWay(Map.vertexes, Map.edges, out way);*/
             if (Route.Way != null)
             {
-                Map.SetWay(Route.Way);
-                MessageBox.Show(Route.Value.ToString());
+                foreach (var item in Map.edges.List)
+                {
+                    bool fl = false;
+                    int k = 0;
+                    while (!fl && k < Route.Way.Count - 1)
+                    {
+                        fl = item.GetHead().ID == Route.Way.ElementAt(k) &&
+                            item.GetEnd().ID == Route.Way.ElementAt(k + 1) ||
+                             item.GetHead().ID == Route.Way.ElementAt(k + 1) &&
+                            item.GetEnd().ID == Route.Way.ElementAt(k);
+                        k++;
+                    }
+                    item.IsInWay = fl;
+                }
+
+
+                MessageBox.Show(Math.Round(Route.Value, 2).ToString());
             }
             else
             {
