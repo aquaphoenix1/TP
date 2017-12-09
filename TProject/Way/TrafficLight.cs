@@ -27,6 +27,8 @@ namespace TProject.Way
             this.CurrentTime = 0;
         }
 
+        private TrafficLight() { }
+
         public void Inc(int val = 1)
         {
             while (val-- != 0)
@@ -41,5 +43,14 @@ namespace TProject.Way
             }
         }
 
+        internal static TrafficLight CreateTrafficLight(long ID, int green, int red)
+        {
+            return new TrafficLight
+            {
+                ID = ID,
+                GreenSeconds = green,
+                RedSeconds = red
+            };
+        }
     }
 }

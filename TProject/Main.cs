@@ -923,6 +923,10 @@ namespace TProject
 
             Viewer.ViewPort.View.ContextMenuStrip = contextMenuVertex;
             Calibration(100);
+
+            ToolStripMenuItem_Save.Enabled = true;
+            ToolStripMenuItem_SaveAs.Enabled = true;
+            ToolStripMenuItem_ChooseSubstrate.Enabled = true;
         }
         private void ToolStripMenuItem_Save_Click(object sender, EventArgs e)
         {

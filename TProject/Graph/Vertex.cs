@@ -16,13 +16,14 @@ namespace TProject.Graph
 
         private Vertex() { }
 
-        internal static Vertex CreateVertex(long ID, int X, int Y)
+        internal static Vertex CreateVertex(long ID, int X, int Y, TrafficLight trafficLight)
         {
             return new Vertex
             {
                 ID = ID,
                 X = X,
-                Y = Y
+                Y = Y,
+                TrafficLight = trafficLight
             };
         }
 

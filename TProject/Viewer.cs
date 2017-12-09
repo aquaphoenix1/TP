@@ -26,6 +26,7 @@ namespace TProject
         public int MapLocationY { get; set; }
 
         Brush blackFontBrush = new SolidBrush(Color.Black);
+        Brush redFontBrush = new SolidBrush(Color.Red);
 
         public int VertexLocationX { get; set; }
         public int VertexLocationY { get; set; }
@@ -404,6 +405,13 @@ namespace TProject
                             (item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 - 25),
                             (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 10));
                     }
+                    if (IsSign_Visible && item.SignMaxSpeed != null)
+                    {
+                        graph.DrawString(item.SignMaxSpeed.Count.ToString(), new Font(mainFormFont.FontFamily, 10f, FontStyle.Bold,
+                           GraphicsUnit.Point, mainFormFont.GdiCharSet), redFontBrush,
+                           (item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 + 25),
+                           (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 10));
+                    }
                 }
                 if (item.Policemen != null && IsPolice_Visible)
                 {
@@ -441,7 +449,7 @@ namespace TProject
                     graph.DrawImage(item.TrafficLight.IsRun ?
                         item.TrafficLight.IsGreen ? Resources.greenLight3 : Resources.redLight3
                         : Resources.nonLight3,
-                        new Rectangle(item.X + Width, item.Y + Height, (int)Math.Round(Width * 1.2), Height * 2));
+                        new Rectangle((item.X + Width).UnScaling(), (item.Y + Height).UnScaling(), (int)Math.Round(Width * 1.2), Height * 2));
                 }
             }
 

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Drawing;
+using System.Linq;
 using TProject.Coll;
 using TProject.Graph;
+using TProject.Way;
 
 namespace TProject
 {
@@ -50,13 +52,13 @@ namespace TProject
 
                 #region SQLCommands
                 new SQLiteCommand("Create table Maps ([Name] char(30) primary key, [Image] BLOB not null)", GetConnection()).ExecuteNonQuery();
-                new SQLiteCommand("Create table Vertex ([ID] Integer primary key, [XVertex] Integer not null, [YVertex] Integer not null, [Map] char(30) References Maps ([Name]))", GetConnection()).ExecuteNonQuery();
-                new SQLiteCommand("Create table TrafficLight ([ID]Integer primary key, [GreenSeconds] Integer not null, [RedSeconds] Integer not null)", GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand("Create table Vertex ([ID] Integer primary key, [XVertex] Integer not null, [YVertex] Integer not null, [Map] char(30) References Maps ([Name]), [TfId] Integer References TrafficLight ([ID]))", GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand("Create table TrafficLight ([ID]Integer, [GreenSeconds] Integer not null, [RedSeconds] Integer not null, [Map] char(30) References Maps ([Name]), Primary Key([ID], [Map]))", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Sign ([Type] char(20) primary key, [Value] Integer)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Surface ([NameSurface] char(20) primary key, [KoefSurface] real not null)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Street ([Name] char(50) primary key)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Policeman ([TypePolice] char(20) primary key, [Koefficient] real not null)", GetConnection()).ExecuteNonQuery();
-                new SQLiteCommand("Create table Edge ([ID] Integer primary key, [Direction] bool not null, [SignMaxSpeed] char(20) References Sign ([Type]), [SignTwoWay] bool, [IDVertexFirst] Integer References Vertex ([ID]), [IDVertexSecond] Integer References Vertex ([ID]),  [Name] char(50) References Street ([Name]), [Surface] char(20) References Surface ([NameSurface]), [Police] char(20) references Policeman([TypePolice]), [Map] char(30) References Maps ([Name]))", GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand("Create table Edge ([ID] Integer, [Direction] bool not null, [SignMaxSpeed] char(20) References Sign ([Type]), [SignTwoWay] bool, [IDVertexFirst] Integer References Vertex ([ID]), [IDVertexSecond] Integer References Vertex ([ID]),  [Name] char(50) References Street ([Name]), [Surface] char(20) References Surface ([NameSurface]), [Police] char(20) references Policeman([TypePolice]), [Map] char(30) References Maps ([Name]), Primary Key([ID], [Map]))", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Auto ([Model] char(30) primary key, [Fuel] char(30) References Fuel ([Name]), [Сonsumption] real not null, [Speed] real not null)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Driver ([FIO] char(30) primary key, [TypeDriver] char(20) not null, [Model] char(30) References Auto ([Model]))", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Fuel ([Name] char(30) primary key, [Cost] real not null)", GetConnection()).ExecuteNonQuery();
@@ -67,7 +69,7 @@ namespace TProject
                 new SQLiteCommand("Insert into Policeman values ('Супер-жадный', 2.5)", GetConnection()).ExecuteNonQuery();
                 #endregion SQLCommands
             }
-            catch (SQLiteException) { throw new SQLiteException(String.Format("Невозможно подключиться к файлу базы данных {0}", path)); }
+            catch (SQLiteException exc) { throw new SQLiteException(String.Format("Невозможно подключиться к файлу базы данных {0}", path)); }
             catch (Exception) { throw new Exception(String.Format("Не найден файл {0}, и отсутствует возможность его создать.", path)); }
         }
 
@@ -129,6 +131,7 @@ namespace TProject
                 new SQLiteCommand(string.Format("DELETE FROM Vertex where Map = '{0}'", name), GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand(string.Format("DELETE FROM Edge where Map = '{0}'", name), GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand(string.Format("DELETE FROM Maps where Name = '{0}'", name), GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("DELETE FROM TrafficLight where Map = '{0}'", name), GetConnection()).ExecuteNonQuery();
 
                 using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
                 {
@@ -149,7 +152,15 @@ namespace TProject
                     for (int i = 0; i < vertexes.GetCountElements(); i++)
                     {
                         var vert = vertexes.GetElement(i);
-                        new SQLiteCommand(string.Format("Insert into Vertex values ({0}, {1}, {2}, '{3}')", vert.ID, vert.X, vert.Y, name), GetConnection()).ExecuteNonQuery();
+                        if (vert.TrafficLight != null)
+                        {
+                            new SQLiteCommand(string.Format("Insert into TrafficLight values ({0}, {1}, {2}, '{3}')", vert.TrafficLight.ID, vert.TrafficLight.GreenSeconds, vert.TrafficLight.RedSeconds, name), GetConnection()).ExecuteNonQuery();
+                            new SQLiteCommand(string.Format("Insert into Vertex values ({0}, {1}, {2}, '{3}', {4})", vert.ID, vert.X, vert.Y, name, vert.TrafficLight.ID), GetConnection()).ExecuteNonQuery();
+                        }
+                        else
+                        {
+                            new SQLiteCommand(string.Format("Insert into Vertex values ({0}, {1}, {2}, '{3}', {4})", vert.ID, vert.X, vert.Y, name, "null"), GetConnection()).ExecuteNonQuery();
+                        }
                     }
 
                 }
@@ -169,7 +180,7 @@ namespace TProject
 
                 return true;
             }
-            catch
+            catch (Exception exc)
             {
                 return false;
             }
@@ -192,9 +203,17 @@ namespace TProject
 
                 var list = GetAll("Vertex", string.Format("Map = '{0}'", name));
 
+                List<List<object>> listTF = DAO.GetAll("TrafficLight", string.Format("Map = '{0}'", name));
+
                 foreach (var vert in list)
                 {
-                    vertexes.AddNoEvent(Vertex.CreateVertex(long.Parse(vert[0].ToString()), int.Parse(vert[1].ToString()), int.Parse(vert[2].ToString())));
+                    TrafficLight tf = null;
+                    if (!vert[3].ToString().Equals("null"))
+                    {
+                        List<object> l = listTF.First(fl => fl[3].ToString().Equals(vert[3].ToString()));
+                        tf = TrafficLight.CreateTrafficLight(long.Parse(l[0].ToString()), int.Parse(l[1].ToString()), int.Parse(l[2].ToString()));
+                    }
+                    vertexes.AddNoEvent(Vertex.CreateVertex(long.Parse(vert[0].ToString()), int.Parse(vert[1].ToString()),int.Parse(vert[2].ToString()), tf));
                 }
 
                 edges = new Edges();
