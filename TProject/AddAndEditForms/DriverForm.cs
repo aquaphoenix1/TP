@@ -100,7 +100,7 @@ namespace TProject
             }
             else
             {
-                MessageBox.Show("Ошибка добавления");
+                MessageBox.Show("Нарушение первичного ключа");
             }
         }
 
@@ -113,7 +113,7 @@ namespace TProject
             }
             else
             {
-                MessageBox.Show("Ошибка изменения");
+                MessageBox.Show("Нарушение первичного ключа");
             }
         }
 

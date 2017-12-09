@@ -4,32 +4,31 @@ using System.Linq;
 
 namespace TProject.Way
 {
-    public class Sign : Type
+    public class Sign
     {
         public static List<List<object>> ListSigns { get; set; }
-        public double Count { get; set; }
+        public int Count { get; set; }
 
-        public Sign(string text, double count) : base(text)
+        public Sign(int count)
         {
             this.Count = count;
         }
 
         private Sign() { }
 
-        public static Sign CreateSign(string text, double count)
+        public static Sign CreateSign(int count)
         {
             return new Sign
             {
-                Count = count,
-                TypeName = text
+                Count = count
             };
         }
 
-        internal static Sign GetSignByName(string name)
+        internal static Sign GetSignBySpeed(int speed)
         {
-            List<object> sign = ListSigns.FirstOrDefault(sgn => sgn[0].ToString().Equals(name));
+            List<object> sign = ListSigns.FirstOrDefault(sgn => int.Parse(sgn[0].ToString()) == speed);
 
-            return (sign != null) ? CreateSign(sign[0].ToString(), double.Parse(sign[1].ToString())) : null;
+            return (sign != null) ? CreateSign(int.Parse(sign[0].ToString())) : null;
         }
     }
 }

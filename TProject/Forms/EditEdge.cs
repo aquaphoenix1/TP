@@ -32,7 +32,7 @@ namespace TProject
             if (_edge.SignMaxSpeed != null)
             {
                 signMaxSpeedCheckBox.Checked = true;
-                signMaxSpeedComboBox.SelectedIndex = signMaxSpeedComboBox.FindString(_edge.SignMaxSpeed.TypeName);
+                signMaxSpeedComboBox.SelectedIndex = signMaxSpeedComboBox.FindString(_edge.SignMaxSpeed.Count.ToString());
             }
 
             try
@@ -94,8 +94,8 @@ namespace TProject
 
                 if (isSignMaxSpeed)
                 {
-                    List<object> sign = Sign.ListSigns.First(sg => sg[0].ToString().Equals(signMaxSpeedComboBox.SelectedItem.ToString()));
-                    Edge.SignMaxSpeed = Sign.CreateSign(sign[0].ToString(), double.Parse(sign[1].ToString()));
+                    List<object> sign = Sign.ListSigns.First(sg => int.Parse(sg[0].ToString()) == int.Parse(signMaxSpeedComboBox.SelectedItem.ToString()));
+                    Edge.SignMaxSpeed = Sign.CreateSign(int.Parse(sign[0].ToString()));
                 }
 
                 Edge.NameStreet = nameStreetComboBox.SelectedItem.ToString();

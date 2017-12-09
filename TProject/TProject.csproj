@@ -82,12 +82,6 @@
     <Compile Include="AddAndEditForms\CoatingForm.Designer.cs">
       <DependentUpon>CoatingForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddAndEditForms\SignForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddAndEditForms\SignForm.Designer.cs">
-      <DependentUpon>SignForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="AddAndEditForms\Validator.cs" />
     <Compile Include="Coll\AbstractCollection.cs" />
     <Compile Include="Coll\Edges.cs" />
@@ -191,7 +185,6 @@
     </Compile>
     <Compile Include="Entity.cs" />
     <Compile Include="PensCase.cs" />
-    <Compile Include="TypeDAO\SignDAO.cs" />
     <Compile Include="TypeDAO\StreetDAO.cs" />
     <Compile Include="VerticalLabel.cs">
       <SubType>Component</SubType>
@@ -273,9 +266,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AddAndEditForms\SignForm.resx">
-      <DependentUpon>SignForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VertexInfoControl.resx">
       <DependentUpon>VertexInfoControl.cs</DependentUpon>
