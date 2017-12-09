@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace TProject.Way
@@ -8,7 +7,6 @@ namespace TProject.Way
     {
         public static List<List<object>> ListTypePolicemen { get; set; }
         public double Coeff { get; set; }
-
 
         public Police(string typeName) : base(typeName)
         {

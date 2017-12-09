@@ -316,7 +316,7 @@ namespace TProject
         /// и сбрасывает все выделения
         /// </summary>
         public void SaveCreatedEdge()
-        { 
+        {
             if (selectedVertex.ID != selectedEdge.GetHead().ID
                 && Map.edges.TryCopy(selectedVertex.ID, selectedEdge.GetHead().ID))
             {

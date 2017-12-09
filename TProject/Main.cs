@@ -81,6 +81,10 @@ namespace TProject
         {
             if (tabControlMain.SelectedIndex == 1)
             {
+                buttonAdd.Enabled = true;
+                buttonEdit.Enabled = true;
+                buttonRemove.Enabled = true;
+
                 ClearDataGrid();
                 switch (comboBoxSelectTable.SelectedItem.ToString())
                 {
@@ -99,6 +103,11 @@ namespace TProject
                             dataGridViewDataBase.Columns.Add("koefficient", "Коэффициент жадности полицейского");
 
                             FillGrid(Police.ListTypePolicemen);
+
+                            buttonAdd.Enabled = false;
+                            buttonEdit.Enabled = false;
+                            buttonRemove.Enabled = false;
+
                             break;
                         }
                     case "Топливо":
@@ -138,14 +147,6 @@ namespace TProject
 
                             break;
                         }
-                    case "Дорожные знаки":
-                        {
-                            dataGridViewDataBase.Columns.Add("type", "Тип знака");
-                            dataGridViewDataBase.Columns.Add("value", "Значение");
-
-                            FillGrid(Sign.ListSigns);
-                            break;
-                        }
                     case "Улицы":
                         {
                             dataGridViewDataBase.Columns.Add("name", "Название улицы");
@@ -174,10 +175,6 @@ namespace TProject
             {
                 switch (comboBoxSelectTable.SelectedItem.ToString())
                 {
-                    case "Типы полицейских":
-                        {
-                            break;
-                        }
                     case "Дорожные покрытия":
                         {
                             if (Coating.ListSurface.Count == 10)
@@ -222,17 +219,6 @@ namespace TProject
                                     dataGridViewDataBase.Rows.Clear();
                                     FillGrid(Fuel.ListFuel);
                                 }
-                            }
-                            break;
-                        }
-                    case "Дорожные знаки":
-                        {
-                            IsChanged = false;
-                            new SignForm(true).ShowDialog();
-                            if (IsChanged)
-                            {
-                                dataGridViewDataBase.Rows.Clear();
-                                FillGrid(Sign.ListSigns);
                             }
                             break;
                         }
@@ -303,11 +289,6 @@ namespace TProject
             {
                 switch (comboBoxSelectTable.SelectedItem.ToString())
                 {
-                    case "Типы полицейских":
-                        {
-
-                            break;
-                        }
                     case "Дорожные покрытия":
                         {
                             if (Coating.ListSurface.Count == 1)
@@ -355,18 +336,6 @@ namespace TProject
                                 {
                                     MessageBox.Show("Невозможно удалить");
                                 }
-                            }
-                            break;
-                        }
-                    case "Дорожные знаки":
-                        {
-                            if (new SignDAO().Delete(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString()))
-                            {
-                                dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
-                            }
-                            else
-                            {
-                                MessageBox.Show("Невозможно удалить");
                             }
                             break;
                         }
@@ -769,20 +738,6 @@ namespace TProject
 
                             break;
                         }
-                    case "Дорожные знаки":
-                        {
-                            string name = dataGridViewDataBase.SelectedRows[0].Cells["type"].Value.ToString();
-                            List<object> sign = Sign.ListSigns.First(sg => sg[0].ToString().Equals(name));
-                            new SignForm(sign[0].ToString(), int.Parse(sign[1].ToString())).ShowDialog();
-
-                            if (IsChanged)
-                            {
-                                dataGridViewDataBase.Rows.Clear();
-                                FillGrid(Sign.ListSigns);
-                            }
-
-                            break;
-                        }
                     case "Автомобили":
                         {
                             string name = dataGridViewDataBase.SelectedRows[0].Cells["model"].Value.ToString();
@@ -939,7 +894,7 @@ namespace TProject
         {
             SaveAs();
         }
-        
+
         public string SaveAs()
         {
             new SaveAs().ShowDialog();
@@ -974,9 +929,10 @@ namespace TProject
         {
             Vertexes vert = new Vertexes();
             Edges edg = new Edges();
- 
+
             Image image = DAO.LoadMap(name, out vert, out edg) as Image;
-            if (image == null) return;
+            if (image == null)
+                return;
             Init(img: image);
             Map.vertexes = vert;
             Map.edges = edg;
@@ -996,7 +952,7 @@ namespace TProject
         private void ToolStripMenuItem_AboutSystem_Click(object sender, EventArgs e)
         {
             string path = System.IO.Directory.GetCurrentDirectory();
-            path =  path.Replace(@"bin\Debug","");
+            path = path.Replace(@"bin\Debug", "");
             Process.Start("chrome.exe", path + "Resources\\index.html");
         }
 

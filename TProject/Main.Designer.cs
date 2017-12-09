@@ -261,7 +261,6 @@
             "Автомобили",
             "Штрафы",
             "Водители",
-            "Дорожные знаки",
             "Улицы"});
             this.comboBoxSelectTable.Location = new System.Drawing.Point(604, 36);
             this.comboBoxSelectTable.Name = "comboBoxSelectTable";
@@ -305,7 +304,7 @@
             this.tabPageMap.Location = new System.Drawing.Point(4, 22);
             this.tabPageMap.Name = "tabPageMap";
             this.tabPageMap.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageMap.Size = new System.Drawing.Size(711, 304);
+            this.tabPageMap.Size = new System.Drawing.Size(769, 304);
             this.tabPageMap.TabIndex = 0;
             this.tabPageMap.Text = "Карта";
             this.tabPageMap.UseVisualStyleBackColor = true;
@@ -318,7 +317,7 @@
             this.panelSlideContainer.Controls.Add(this.panelSlide);
             this.panelSlideContainer.Controls.Add(this.groupBox1);
             this.panelSlideContainer.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelSlideContainer.Location = new System.Drawing.Point(683, 3);
+            this.panelSlideContainer.Location = new System.Drawing.Point(741, 3);
             this.panelSlideContainer.Name = "panelSlideContainer";
             this.panelSlideContainer.Size = new System.Drawing.Size(25, 298);
             this.panelSlideContainer.TabIndex = 13;
@@ -700,7 +699,6 @@
             this.toolStripMenuItem9.Size = new System.Drawing.Size(198, 22);
             this.toolStripMenuItem9.Text = "Добавить перекресток";
             this.toolStripMenuItem9.Click += new System.EventHandler(this.ToolStripMenu_AddVertex_Click);
-            // 
             // 
             // Main
             // 
