@@ -80,6 +80,8 @@
             this.ToolStripMenuItem_ChooseSubstrate = new System.Windows.Forms.ToolStripMenuItem();
             this.базаДанныхToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.оToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.оСистемеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_Route = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_StaticView = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_RouteParameters = new System.Windows.Forms.ToolStripMenuItem();
@@ -174,7 +176,7 @@
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 360);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(719, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(778, 22);
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -195,7 +197,7 @@
             this.tabPageWorkWithBD.Location = new System.Drawing.Point(4, 22);
             this.tabPageWorkWithBD.Name = "tabPageWorkWithBD";
             this.tabPageWorkWithBD.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageWorkWithBD.Size = new System.Drawing.Size(711, 304);
+            this.tabPageWorkWithBD.Size = new System.Drawing.Size(769, 304);
             this.tabPageWorkWithBD.TabIndex = 1;
             this.tabPageWorkWithBD.Text = "Работа с БД";
             this.tabPageWorkWithBD.UseVisualStyleBackColor = true;
@@ -292,7 +294,7 @@
             this.tabControlMain.Location = new System.Drawing.Point(1, 27);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(719, 330);
+            this.tabControlMain.Size = new System.Drawing.Size(777, 330);
             this.tabControlMain.TabIndex = 5;
             this.tabControlMain.SelectedIndexChanged += new System.EventHandler(this.TabControlMain_SelectedIndexChanged);
             // 
@@ -563,7 +565,7 @@
             this.ToolStripMenuItem_Route});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(719, 24);
+            this.menuStrip2.Size = new System.Drawing.Size(778, 24);
             this.menuStrip2.TabIndex = 12;
             this.menuStrip2.Text = "menuStrip1";
             // 
@@ -601,10 +603,10 @@
             this.ToolStripMenuItem_SaveAs.Text = "Сохранить как...";
             this.ToolStripMenuItem_SaveAs.Click += new System.EventHandler(this.ToolStripMenuItem_SaveAS_Click);
             // 
-            // сменитьПодложкуToolStripMenuItem
+            // ToolStripMenuItem_ChooseSubstrate
             // 
             this.ToolStripMenuItem_ChooseSubstrate.Enabled = false;
-            this.ToolStripMenuItem_ChooseSubstrate.Name = "сменитьПодложкуToolStripMenuItem";
+            this.ToolStripMenuItem_ChooseSubstrate.Name = "ToolStripMenuItem_ChooseSubstrate";
             this.ToolStripMenuItem_ChooseSubstrate.Size = new System.Drawing.Size(180, 22);
             this.ToolStripMenuItem_ChooseSubstrate.Text = "Сменить подложку";
             this.ToolStripMenuItem_ChooseSubstrate.Click += new System.EventHandler(this.ToolStripMenu_SubMap_Click);
@@ -618,9 +620,26 @@
             // справкаToolStripMenuItem
             // 
             this.справкаToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.справкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.оToolStripMenuItem,
+            this.оСистемеToolStripMenuItem});
             this.справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
             this.справкаToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.справкаToolStripMenuItem.Text = "Справка";
+            // 
+            // оToolStripMenuItem
+            // 
+            this.оToolStripMenuItem.Name = "оToolStripMenuItem";
+            this.оToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.оToolStripMenuItem.Text = "О разработчиках";
+            this.оToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItem_AboutDeveloper_Click);
+            // 
+            // оСистемеToolStripMenuItem
+            // 
+            this.оСистемеToolStripMenuItem.Name = "оСистемеToolStripMenuItem";
+            this.оСистемеToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.оСистемеToolStripMenuItem.Text = "О системе";
+            this.оСистемеToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItem_AboutSystem_Click);
             // 
             // ToolStripMenuItem_Route
             // 
@@ -682,11 +701,12 @@
             this.toolStripMenuItem9.Text = "Добавить перекресток";
             this.toolStripMenuItem9.Click += new System.EventHandler(this.ToolStripMenu_AddVertex_Click);
             // 
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(719, 382);
+            this.ClientSize = new System.Drawing.Size(778, 382);
             this.Controls.Add(this.menuStrip2);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tabControlMain);
@@ -781,5 +801,8 @@
         private System.Windows.Forms.ToolStripMenuItem удалитьПерекрестокToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_StaticView;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_RouteParameters;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripMenuItem оToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem оСистемеToolStripMenuItem;
     }
 }

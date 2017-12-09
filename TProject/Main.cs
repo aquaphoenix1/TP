@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -8,6 +9,7 @@ using TProject.Coll;
 using TProject.Driver;
 using TProject.Forms;
 using TProject.Graph;
+using TProject.Properties;
 using TProject.TypeDAO;
 using TProject.Way;
 
@@ -989,6 +991,19 @@ namespace TProject
         private void ToolStripMenuItem_Open_Click(object sender, EventArgs e)
         {
             Open();
+        }
+
+        private void ToolStripMenuItem_AboutSystem_Click(object sender, EventArgs e)
+        {
+            string path = System.IO.Directory.GetCurrentDirectory();
+            path =  path.Replace(@"bin\Debug","");
+            Process.Start("chrome.exe", path + "Resources\\index.html");
+        }
+
+        private void ToolStripMenuItem_AboutDeveloper_Click(object sender, EventArgs e)
+        {
+            AboutDeveloperForm aboutDeveloperForm = new AboutDeveloperForm();
+            aboutDeveloperForm.ShowDialog();
         }
     }
 }

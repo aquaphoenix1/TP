@@ -49,7 +49,7 @@ namespace TProject
             {
                 if (double.TryParse(textBoxPrice.Text, out d))
                 {
-                    if (d <= 20)
+                    if (d < 20)
                     {
                         MessageBox.Show("Минимальная цена равна 20!");
                     }
