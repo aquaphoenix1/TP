@@ -32,11 +32,11 @@
             this.cancelEditCrossroadButton = new System.Windows.Forms.Button();
             this.crossroadGroupBox = new System.Windows.Forms.GroupBox();
             this.panelContainer = new System.Windows.Forms.Panel();
+            this.timeGreenLightComboBox = new System.Windows.Forms.MaskedTextBox();
+            this.timeRedLightComboBox = new System.Windows.Forms.MaskedTextBox();
             this.timeGreenLightLabel = new System.Windows.Forms.Label();
             this.timeRedLightLabel = new System.Windows.Forms.Label();
             this.trafficlightCheckBox = new System.Windows.Forms.CheckBox();
-            this.timeRedLightComboBox = new System.Windows.Forms.MaskedTextBox();
-            this.timeGreenLightComboBox = new System.Windows.Forms.MaskedTextBox();
             this.crossroadGroupBox.SuspendLayout();
             this.panelContainer.SuspendLayout();
             this.SuspendLayout();
@@ -47,7 +47,7 @@
             this.okEditCrossroadButton.Location = new System.Drawing.Point(143, 135);
             this.okEditCrossroadButton.Name = "okEditCrossroadButton";
             this.okEditCrossroadButton.Size = new System.Drawing.Size(75, 25);
-            this.okEditCrossroadButton.TabIndex = 5;
+            this.okEditCrossroadButton.TabIndex = 3;
             this.okEditCrossroadButton.Text = "Ок";
             this.okEditCrossroadButton.UseVisualStyleBackColor = true;
             this.okEditCrossroadButton.Click += new System.EventHandler(this.OkEditCrossroadButton_Click);
@@ -71,7 +71,7 @@
             this.crossroadGroupBox.Location = new System.Drawing.Point(12, 12);
             this.crossroadGroupBox.Name = "crossroadGroupBox";
             this.crossroadGroupBox.Size = new System.Drawing.Size(287, 118);
-            this.crossroadGroupBox.TabIndex = 3;
+            this.crossroadGroupBox.TabIndex = 5;
             this.crossroadGroupBox.TabStop = false;
             // 
             // panelContainer
@@ -85,13 +85,29 @@
             this.panelContainer.Size = new System.Drawing.Size(275, 93);
             this.panelContainer.TabIndex = 5;
             // 
+            // timeGreenLightComboBox
+            // 
+            this.timeGreenLightComboBox.Location = new System.Drawing.Point(196, 25);
+            this.timeGreenLightComboBox.Mask = "000";
+            this.timeGreenLightComboBox.Name = "timeGreenLightComboBox";
+            this.timeGreenLightComboBox.Size = new System.Drawing.Size(76, 20);
+            this.timeGreenLightComboBox.TabIndex = 1;
+            // 
+            // timeRedLightComboBox
+            // 
+            this.timeRedLightComboBox.Location = new System.Drawing.Point(196, 59);
+            this.timeRedLightComboBox.Mask = "000";
+            this.timeRedLightComboBox.Name = "timeRedLightComboBox";
+            this.timeRedLightComboBox.Size = new System.Drawing.Size(76, 20);
+            this.timeRedLightComboBox.TabIndex = 2;
+            // 
             // timeGreenLightLabel
             // 
             this.timeGreenLightLabel.AutoSize = true;
             this.timeGreenLightLabel.Location = new System.Drawing.Point(1, 25);
             this.timeGreenLightLabel.Name = "timeGreenLightLabel";
             this.timeGreenLightLabel.Size = new System.Drawing.Size(189, 13);
-            this.timeGreenLightLabel.TabIndex = 3;
+            this.timeGreenLightLabel.TabIndex = 6;
             this.timeGreenLightLabel.Text = "Светофорная фаза зеленого света:";
             // 
             // timeRedLightLabel
@@ -100,7 +116,7 @@
             this.timeRedLightLabel.Location = new System.Drawing.Point(1, 62);
             this.timeRedLightLabel.Name = "timeRedLightLabel";
             this.timeRedLightLabel.Size = new System.Drawing.Size(189, 13);
-            this.timeRedLightLabel.TabIndex = 4;
+            this.timeRedLightLabel.TabIndex = 7;
             this.timeRedLightLabel.Text = "Светофорная фаза красного света:";
             // 
             // trafficlightCheckBox
@@ -113,22 +129,6 @@
             this.trafficlightCheckBox.Text = "Наличие светофора";
             this.trafficlightCheckBox.UseVisualStyleBackColor = true;
             this.trafficlightCheckBox.CheckedChanged += new System.EventHandler(this.TrafficlightCheckBox_CheckedChanged);
-            // 
-            // timeRedLightComboBox
-            // 
-            this.timeRedLightComboBox.Location = new System.Drawing.Point(196, 59);
-            this.timeRedLightComboBox.Mask = "000";
-            this.timeRedLightComboBox.Name = "timeRedLightComboBox";
-            this.timeRedLightComboBox.Size = new System.Drawing.Size(76, 20);
-            this.timeRedLightComboBox.TabIndex = 5;
-            // 
-            // timeGreenLightComboBox
-            // 
-            this.timeGreenLightComboBox.Location = new System.Drawing.Point(196, 25);
-            this.timeGreenLightComboBox.Mask = "000";
-            this.timeGreenLightComboBox.Name = "timeGreenLightComboBox";
-            this.timeGreenLightComboBox.Size = new System.Drawing.Size(76, 20);
-            this.timeGreenLightComboBox.TabIndex = 6;
             // 
             // EditVertex
             // 

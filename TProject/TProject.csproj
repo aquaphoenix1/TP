@@ -110,30 +110,17 @@
     <Compile Include="Forms\AboutDeveloperForm.Designer.cs">
       <DependentUpon>AboutDeveloperForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ErrorForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ErrorForm.Designer.cs">
-      <DependentUpon>ErrorForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FirstForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FirstForm.Designer.cs">
       <DependentUpon>FirstForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ModifyRecordForm.cs" />
-    <Compile Include="Forms\ModifyTableForm.cs">
+    <Compile Include="Forms\ConductingForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ModifyTableForm.Designer.cs">
-      <DependentUpon>ModifyTableForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SaveAs.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SaveAs.Designer.cs">
-      <DependentUpon>SaveAs.cs</DependentUpon>
+    <Compile Include="Forms\ConductingForm.Designer.cs">
+      <DependentUpon>ConductingForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\SystemInfoForm.cs">
       <SubType>Form</SubType>
@@ -238,17 +225,11 @@
     <EmbeddedResource Include="Forms\EditVertex.resx">
       <DependentUpon>EditVertex.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ErrorForm.resx">
-      <DependentUpon>ErrorForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FirstForm.resx">
       <DependentUpon>FirstForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ModifyTableForm.resx">
-      <DependentUpon>ModifyTableForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SaveAs.resx">
-      <DependentUpon>SaveAs.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\ConductingForm.resx">
+      <DependentUpon>ConductingForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SystemInfoForm.resx">
       <DependentUpon>SystemInfoForm.cs</DependentUpon>

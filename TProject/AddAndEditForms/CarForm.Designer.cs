@@ -47,7 +47,7 @@
             this.comboBoxIDFuel.Location = new System.Drawing.Point(147, 38);
             this.comboBoxIDFuel.Name = "comboBoxIDFuel";
             this.comboBoxIDFuel.Size = new System.Drawing.Size(161, 23);
-            this.comboBoxIDFuel.TabIndex = 16;
+            this.comboBoxIDFuel.TabIndex = 1;
             this.comboBoxIDFuel.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ComboBoxIDFuel_KeyUp);
             // 
             // buttonAccept
@@ -56,7 +56,7 @@
             this.buttonAccept.Location = new System.Drawing.Point(213, 141);
             this.buttonAccept.Name = "buttonAccept";
             this.buttonAccept.Size = new System.Drawing.Size(100, 27);
-            this.buttonAccept.TabIndex = 15;
+            this.buttonAccept.TabIndex = 4;
             this.buttonAccept.Text = "Принять";
             this.buttonAccept.UseVisualStyleBackColor = true;
             this.buttonAccept.Click += new System.EventHandler(this.ButtonAccept_Click);
@@ -69,7 +69,7 @@
             this.labelConsumption.Location = new System.Drawing.Point(14, 75);
             this.labelConsumption.Name = "labelConsumption";
             this.labelConsumption.Size = new System.Drawing.Size(95, 15);
-            this.labelConsumption.TabIndex = 14;
+            this.labelConsumption.TabIndex = 7;
             this.labelConsumption.Text = "Расход топлива:";
             // 
             // textBoxModel
@@ -78,7 +78,7 @@
             this.textBoxModel.Location = new System.Drawing.Point(147, 6);
             this.textBoxModel.Name = "textBoxModel";
             this.textBoxModel.Size = new System.Drawing.Size(161, 23);
-            this.textBoxModel.TabIndex = 12;
+            this.textBoxModel.TabIndex = 0;
             this.textBoxModel.TextChanged += new System.EventHandler(this.TextBoxModel_TextChanged);
             this.textBoxModel.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxModel_KeyUp);
             // 
@@ -97,7 +97,7 @@
             this.labelIDFuel.Location = new System.Drawing.Point(14, 39);
             this.labelIDFuel.Name = "labelIDFuel";
             this.labelIDFuel.Size = new System.Drawing.Size(58, 15);
-            this.labelIDFuel.TabIndex = 10;
+            this.labelIDFuel.TabIndex = 6;
             this.labelIDFuel.Text = "Топливо:";
             // 
             // labelModel
@@ -107,7 +107,7 @@
             this.labelModel.Location = new System.Drawing.Point(14, 9);
             this.labelModel.Name = "labelModel";
             this.labelModel.Size = new System.Drawing.Size(53, 15);
-            this.labelModel.TabIndex = 9;
+            this.labelModel.TabIndex = 5;
             this.labelModel.Text = "Модель:";
             // 
             // labelSpeed
@@ -117,7 +117,7 @@
             this.labelSpeed.Location = new System.Drawing.Point(12, 112);
             this.labelSpeed.Name = "labelSpeed";
             this.labelSpeed.Size = new System.Drawing.Size(62, 15);
-            this.labelSpeed.TabIndex = 17;
+            this.labelSpeed.TabIndex = 8;
             this.labelSpeed.Text = "Скорость:";
             // 
             // textBoxConsumption
@@ -126,7 +126,7 @@
             this.textBoxConsumption.Mask = "00.0";
             this.textBoxConsumption.Name = "textBoxConsumption";
             this.textBoxConsumption.Size = new System.Drawing.Size(161, 23);
-            this.textBoxConsumption.TabIndex = 19;
+            this.textBoxConsumption.TabIndex = 2;
             // 
             // textBoxSpeed
             // 
@@ -134,7 +134,7 @@
             this.textBoxSpeed.Mask = "000";
             this.textBoxSpeed.Name = "textBoxSpeed";
             this.textBoxSpeed.Size = new System.Drawing.Size(161, 23);
-            this.textBoxSpeed.TabIndex = 20;
+            this.textBoxSpeed.TabIndex = 3;
             // 
             // CarForm
             // 

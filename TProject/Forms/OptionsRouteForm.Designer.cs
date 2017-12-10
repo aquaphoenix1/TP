@@ -43,7 +43,7 @@
             this.cancelRouteButton.Location = new System.Drawing.Point(224, 87);
             this.cancelRouteButton.Name = "cancelRouteButton";
             this.cancelRouteButton.Size = new System.Drawing.Size(75, 25);
-            this.cancelRouteButton.TabIndex = 11;
+            this.cancelRouteButton.TabIndex = 3;
             this.cancelRouteButton.Text = "Отмена";
             this.cancelRouteButton.UseVisualStyleBackColor = true;
             this.cancelRouteButton.Click += new System.EventHandler(this.CancelRouteButton_Click);
@@ -57,7 +57,7 @@
             this.routeGroupBox.Location = new System.Drawing.Point(12, 12);
             this.routeGroupBox.Name = "routeGroupBox";
             this.routeGroupBox.Size = new System.Drawing.Size(288, 69);
-            this.routeGroupBox.TabIndex = 13;
+            this.routeGroupBox.TabIndex = 6;
             this.routeGroupBox.TabStop = false;
             // 
             // driverLabel
@@ -66,7 +66,7 @@
             this.driverLabel.Location = new System.Drawing.Point(6, 16);
             this.driverLabel.Name = "driverLabel";
             this.driverLabel.Size = new System.Drawing.Size(93, 13);
-            this.driverLabel.TabIndex = 0;
+            this.driverLabel.TabIndex = 4;
             this.driverLabel.Text = "Выбор водителя:";
             // 
             // critSearchLabel
@@ -75,7 +75,7 @@
             this.critSearchLabel.Location = new System.Drawing.Point(6, 43);
             this.critSearchLabel.Name = "critSearchLabel";
             this.critSearchLabel.Size = new System.Drawing.Size(132, 13);
-            this.critSearchLabel.TabIndex = 3;
+            this.critSearchLabel.TabIndex = 5;
             this.critSearchLabel.Text = "Выбор критерия поиска:";
             // 
             // driverComboBox
@@ -85,7 +85,7 @@
             this.driverComboBox.Location = new System.Drawing.Point(151, 13);
             this.driverComboBox.Name = "driverComboBox";
             this.driverComboBox.Size = new System.Drawing.Size(131, 21);
-            this.driverComboBox.TabIndex = 4;
+            this.driverComboBox.TabIndex = 0;
             // 
             // critSearchComboBox
             // 
@@ -98,14 +98,14 @@
             this.critSearchComboBox.Location = new System.Drawing.Point(151, 40);
             this.critSearchComboBox.Name = "critSearchComboBox";
             this.critSearchComboBox.Size = new System.Drawing.Size(131, 21);
-            this.critSearchComboBox.TabIndex = 7;
+            this.critSearchComboBox.TabIndex = 1;
             // 
             // okRouteButton
             // 
             this.okRouteButton.Location = new System.Drawing.Point(146, 87);
             this.okRouteButton.Name = "okRouteButton";
             this.okRouteButton.Size = new System.Drawing.Size(75, 25);
-            this.okRouteButton.TabIndex = 12;
+            this.okRouteButton.TabIndex = 2;
             this.okRouteButton.Text = "Ок";
             this.okRouteButton.UseVisualStyleBackColor = true;
             this.okRouteButton.Click += new System.EventHandler(this.OkRouteButton_Click);

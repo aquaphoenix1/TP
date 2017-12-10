@@ -114,7 +114,9 @@ namespace TProject
             EditVertex ev = new EditVertex(newVertex);
             ev.ShowDialog();
             if (ev.DialogResult == DialogResult.OK)
+            {
                 Map.vertexes.Add(newVertex);
+            }
         }
 
         public void EditVertexOptions()
@@ -326,7 +328,9 @@ namespace TProject
                 fe.ShowDialog();
 
                 if (fe.DialogResult == DialogResult.OK)
+                {
                     Map.edges.Add(selectedEdge);
+                }
             }
             selectedVertex = null;
             selectedEdge = null;

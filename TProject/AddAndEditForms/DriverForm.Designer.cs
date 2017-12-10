@@ -42,7 +42,7 @@
             this.buttonAccept.Location = new System.Drawing.Point(145, 87);
             this.buttonAccept.Name = "buttonAccept";
             this.buttonAccept.Size = new System.Drawing.Size(117, 27);
-            this.buttonAccept.TabIndex = 9;
+            this.buttonAccept.TabIndex = 3;
             this.buttonAccept.Text = "Принять";
             this.buttonAccept.UseVisualStyleBackColor = true;
             this.buttonAccept.Click += new System.EventHandler(this.ButtonAccept_Click);
@@ -57,7 +57,7 @@
             this.comboBoxIDAuto.Location = new System.Drawing.Point(122, 35);
             this.comboBoxIDAuto.Name = "comboBoxIDAuto";
             this.comboBoxIDAuto.Size = new System.Drawing.Size(140, 23);
-            this.comboBoxIDAuto.TabIndex = 7;
+            this.comboBoxIDAuto.TabIndex = 1;
             this.comboBoxIDAuto.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ComboBoxIDAuto_KeyUp);
             // 
             // labelIDAuto
@@ -67,7 +67,7 @@
             this.labelIDAuto.Location = new System.Drawing.Point(6, 38);
             this.labelIDAuto.Name = "labelIDAuto";
             this.labelIDAuto.Size = new System.Drawing.Size(79, 15);
-            this.labelIDAuto.TabIndex = 6;
+            this.labelIDAuto.TabIndex = 5;
             this.labelIDAuto.Text = "Автомобиль:";
             // 
             // checkBoxIsIntruder
@@ -76,7 +76,7 @@
             this.checkBoxIsIntruder.Location = new System.Drawing.Point(9, 66);
             this.checkBoxIsIntruder.Name = "checkBoxIsIntruder";
             this.checkBoxIsIntruder.Size = new System.Drawing.Size(96, 19);
-            this.checkBoxIsIntruder.TabIndex = 10;
+            this.checkBoxIsIntruder.TabIndex = 2;
             this.checkBoxIsIntruder.Text = "Нарушитель";
             this.checkBoxIsIntruder.UseVisualStyleBackColor = true;
             // 
@@ -85,7 +85,7 @@
             this.textBoxFIO.Location = new System.Drawing.Point(122, 6);
             this.textBoxFIO.Name = "textBoxFIO";
             this.textBoxFIO.Size = new System.Drawing.Size(140, 23);
-            this.textBoxFIO.TabIndex = 11;
+            this.textBoxFIO.TabIndex = 0;
             this.textBoxFIO.TextChanged += new System.EventHandler(this.TextBoxFIO_TextChanged);
             this.textBoxFIO.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxFIO_KeyUp);
             // 
@@ -96,7 +96,7 @@
             this.labelFIO.Location = new System.Drawing.Point(6, 9);
             this.labelFIO.Name = "labelFIO";
             this.labelFIO.Size = new System.Drawing.Size(37, 15);
-            this.labelFIO.TabIndex = 12;
+            this.labelFIO.TabIndex = 4;
             this.labelFIO.Text = "ФИО:";
             // 
             // DriverForm

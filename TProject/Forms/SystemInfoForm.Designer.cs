@@ -28,19 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.systenInfoButton = new System.Windows.Forms.Button();
+            this.buttonOK = new System.Windows.Forms.Button();
             this.systenInfoRichTextBox = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
-            // systenInfoButton
+            // buttonOK
             // 
-            this.systenInfoButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.systenInfoButton.Location = new System.Drawing.Point(444, 259);
-            this.systenInfoButton.Name = "systenInfoButton";
-            this.systenInfoButton.Size = new System.Drawing.Size(75, 23);
-            this.systenInfoButton.TabIndex = 2;
-            this.systenInfoButton.Text = "Ок";
-            this.systenInfoButton.UseVisualStyleBackColor = true;
+            this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonOK.Location = new System.Drawing.Point(444, 259);
+            this.buttonOK.Name = "buttonOK";
+            this.buttonOK.Size = new System.Drawing.Size(75, 23);
+            this.buttonOK.TabIndex = 0;
+            this.buttonOK.Text = "Ок";
+            this.buttonOK.UseVisualStyleBackColor = true;
             // 
             // systenInfoRichTextBox
             // 
@@ -50,7 +50,7 @@
             this.systenInfoRichTextBox.Location = new System.Drawing.Point(12, 12);
             this.systenInfoRichTextBox.Name = "systenInfoRichTextBox";
             this.systenInfoRichTextBox.Size = new System.Drawing.Size(507, 241);
-            this.systenInfoRichTextBox.TabIndex = 3;
+            this.systenInfoRichTextBox.TabIndex = 1;
             this.systenInfoRichTextBox.Text = "";
             // 
             // SystemInfoForm
@@ -58,18 +58,21 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(531, 294);
+            this.ControlBox = false;
             this.Controls.Add(this.systenInfoRichTextBox);
-            this.Controls.Add(this.systenInfoButton);
+            this.Controls.Add(this.buttonOK);
             this.Name = "SystemInfoForm";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Сведения о системе";
+            this.TopMost = true;
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button systenInfoButton;
+        private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.RichTextBox systenInfoRichTextBox;
     }
 }

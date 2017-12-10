@@ -24,7 +24,7 @@ namespace TProject.TypeDAO
 
                 return true;
             }
-            catch (Exception)
+            catch
             {
                 return false;
             }

@@ -4,6 +4,8 @@ using System.Windows.Forms;
 
 namespace TProject.Forms
 {
+    public enum Act { Add, Load, Delete };
+
     public partial class FirstForm : Form
     {
         public FirstForm()
@@ -11,10 +13,10 @@ namespace TProject.Forms
             InitializeComponent();
         }
 
-        private void openButton_Click(object sender, System.EventArgs e)
+        private void OpenButton_Click(object sender, System.EventArgs e)
         {
             Main form = new Main();
-            if (form.Open() == DialogResult.OK)
+            if (form.Open(Act.Load) == DialogResult.OK)
             {
                 this.Hide();
                 form.ShowDialog();
@@ -22,18 +24,18 @@ namespace TProject.Forms
             }
         }
 
-        private void createNewButton_Click(object sender, System.EventArgs e)
+        private void CreateNewButton_Click(object sender, System.EventArgs e)
         {
             Image backPicture;
 
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                using (FileStream fs = new FileStream(openFileDialog1.FileName, FileMode.Open))
+                using (FileStream fs = new FileStream(openFileDialog.FileName, FileMode.Open))
                 {
                     backPicture = Image.FromStream(fs);
                 }
 
-                SaveAs saForm = new SaveAs(backPicture);
+                ConductingForm saForm = new ConductingForm(backPicture, Act.Add);
                 saForm.ShowDialog();
                 if (saForm.DialogResult == DialogResult.OK)
                 {
@@ -44,6 +46,11 @@ namespace TProject.Forms
                     this.Close();
                 }
             }
+        }
+
+        private void RemoveButton_Click(object sender, System.EventArgs e)
+        {
+            new ConductingForm(Act.Delete).ShowDialog();
         }
     }
 }

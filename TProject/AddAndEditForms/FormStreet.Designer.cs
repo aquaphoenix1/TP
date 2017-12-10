@@ -49,7 +49,7 @@
             this.labelNameStreet.Location = new System.Drawing.Point(14, 10);
             this.labelNameStreet.Name = "labelNameStreet";
             this.labelNameStreet.Size = new System.Drawing.Size(101, 15);
-            this.labelNameStreet.TabIndex = 1;
+            this.labelNameStreet.TabIndex = 2;
             this.labelNameStreet.Text = "Название улицы:";
             // 
             // buttonAccept
@@ -57,7 +57,7 @@
             this.buttonAccept.Location = new System.Drawing.Point(241, 37);
             this.buttonAccept.Name = "buttonAccept";
             this.buttonAccept.Size = new System.Drawing.Size(87, 27);
-            this.buttonAccept.TabIndex = 2;
+            this.buttonAccept.TabIndex = 1;
             this.buttonAccept.Text = "Принять";
             this.buttonAccept.UseVisualStyleBackColor = true;
             this.buttonAccept.Click += new System.EventHandler(this.ButtonAccept_Click);

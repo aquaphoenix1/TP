@@ -41,7 +41,7 @@
             this.buttonAccept.Location = new System.Drawing.Point(220, 72);
             this.buttonAccept.Name = "buttonAccept";
             this.buttonAccept.Size = new System.Drawing.Size(97, 27);
-            this.buttonAccept.TabIndex = 19;
+            this.buttonAccept.TabIndex = 2;
             this.buttonAccept.Text = "Принять";
             this.buttonAccept.UseVisualStyleBackColor = true;
             this.buttonAccept.Click += new System.EventHandler(this.ButtonAccept_Click);
@@ -53,7 +53,7 @@
             this.textBoxNameFuel.Location = new System.Drawing.Point(175, 7);
             this.textBoxNameFuel.Name = "textBoxNameFuel";
             this.textBoxNameFuel.Size = new System.Drawing.Size(142, 23);
-            this.textBoxNameFuel.TabIndex = 17;
+            this.textBoxNameFuel.TabIndex = 0;
             this.textBoxNameFuel.TextChanged += new System.EventHandler(this.TextBoxNameFuel_TextChanged);
             this.textBoxNameFuel.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxNameFuel_KeyUp);
             // 
@@ -64,7 +64,7 @@
             this.labelPrice.Location = new System.Drawing.Point(14, 39);
             this.labelPrice.Name = "labelPrice";
             this.labelPrice.Size = new System.Drawing.Size(38, 15);
-            this.labelPrice.TabIndex = 16;
+            this.labelPrice.TabIndex = 4;
             this.labelPrice.Text = "Цена:";
             // 
             // labelNameFuel
@@ -74,7 +74,7 @@
             this.labelNameFuel.Location = new System.Drawing.Point(14, 10);
             this.labelNameFuel.Name = "labelNameFuel";
             this.labelNameFuel.Size = new System.Drawing.Size(110, 15);
-            this.labelNameFuel.TabIndex = 15;
+            this.labelNameFuel.TabIndex = 3;
             this.labelNameFuel.Text = "Название топлива:";
             // 
             // textBoxPrice
@@ -83,7 +83,7 @@
             this.textBoxPrice.Mask = "00.00";
             this.textBoxPrice.Name = "textBoxPrice";
             this.textBoxPrice.Size = new System.Drawing.Size(142, 23);
-            this.textBoxPrice.TabIndex = 20;
+            this.textBoxPrice.TabIndex = 1;
             // 
             // FuelForm
             // 

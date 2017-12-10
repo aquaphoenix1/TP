@@ -163,7 +163,16 @@ namespace TProject
             if (tabControlMain.SelectedIndex == 0)
             {
                 ClearDataGrid();
+
+                toolStripMenuItem_Main.Enabled = true;
+                ToolStripMenuItem_Route.Enabled = true;
+                
                 comboBoxSelectTable.SelectedItem = null;
+            }
+            else
+            {
+                toolStripMenuItem_Main.Enabled = false;
+                ToolStripMenuItem_Route.Enabled = false;
             }
         }
 
@@ -864,9 +873,13 @@ namespace TProject
             Map.edges.RePaint += Viewer.ViewPort.Invalidate;
 
             if (path == null)
+            {
                 Viewer.ViewPort.OpenPicture(h, w, img);
+            }
             else
+            {
                 Viewer.ViewPort.OpenPicture(h, w, path);
+            }
 
             Viewer.ViewPort.IsStreetLength_Visible = checkBox_StreetLength.Checked;
             Viewer.ViewPort.IsPolice_Visible = checkBox_Police.Checked;
@@ -897,13 +910,13 @@ namespace TProject
 
         public string SaveAs()
         {
-            new SaveAs().ShowDialog();
+            new ConductingForm().ShowDialog();
             return Map.Name;
         }
 
-        public DialogResult Open()
+        public DialogResult Open(Act act)
         {
-            SaveAs sa = new SaveAs(true);
+            ConductingForm sa = new ConductingForm(act);
             sa.ShowDialog();
 
             if (sa.DialogResult == DialogResult.OK)
@@ -932,7 +945,10 @@ namespace TProject
 
             Image image = DAO.LoadMap(name, out vert, out edg) as Image;
             if (image == null)
+            {
                 return;
+            }
+
             Init(img: image);
             Map.vertexes = vert;
             Map.edges = edg;
@@ -946,7 +962,7 @@ namespace TProject
         }
         private void ToolStripMenuItem_Open_Click(object sender, EventArgs e)
         {
-            Open();
+            Open(Act.Load);
         }
 
         private void ToolStripMenuItem_AboutSystem_Click(object sender, EventArgs e)

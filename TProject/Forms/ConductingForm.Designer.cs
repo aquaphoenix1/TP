@@ -1,6 +1,6 @@
 ﻿namespace TProject.Forms
 {
-    partial class SaveAs
+    partial class ConductingForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,46 +31,48 @@
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.textBoxMapName = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelNameMapSave = new System.Windows.Forms.Label();
             this.comboBoxNames = new System.Windows.Forms.ComboBox();
+            this.pictureBoxMiniMap = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMiniMap)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(249, 54);
+            this.buttonOk.Location = new System.Drawing.Point(249, 218);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 23);
-            this.buttonOk.TabIndex = 0;
+            this.buttonOk.TabIndex = 1;
             this.buttonOk.Text = "Ок";
             this.buttonOk.UseVisualStyleBackColor = true;
-            this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
+            this.buttonOk.Click += new System.EventHandler(this.ButtonOk_Click);
             // 
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(330, 54);
+            this.buttonCancel.Location = new System.Drawing.Point(330, 217);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 1;
+            this.buttonCancel.TabIndex = 2;
             this.buttonCancel.Text = "Отмена";
             this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            this.buttonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
             // 
             // textBoxMapName
             // 
             this.textBoxMapName.Location = new System.Drawing.Point(12, 21);
             this.textBoxMapName.Name = "textBoxMapName";
             this.textBoxMapName.Size = new System.Drawing.Size(393, 20);
-            this.textBoxMapName.TabIndex = 2;
+            this.textBoxMapName.TabIndex = 0;
             // 
-            // label1
+            // labelNameMapSave
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 5);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(227, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Введите имя карты перед её сохранением:";
+            this.labelNameMapSave.AutoSize = true;
+            this.labelNameMapSave.Location = new System.Drawing.Point(12, 5);
+            this.labelNameMapSave.Name = "labelNameMapSave";
+            this.labelNameMapSave.Size = new System.Drawing.Size(227, 13);
+            this.labelNameMapSave.TabIndex = 3;
+            this.labelNameMapSave.Text = "Введите имя карты перед её сохранением:";
             // 
             // comboBoxNames
             // 
@@ -79,7 +81,16 @@
             this.comboBoxNames.Location = new System.Drawing.Point(12, 21);
             this.comboBoxNames.Name = "comboBoxNames";
             this.comboBoxNames.Size = new System.Drawing.Size(393, 21);
-            this.comboBoxNames.TabIndex = 4;
+            this.comboBoxNames.TabIndex = 0;
+            this.comboBoxNames.SelectedIndexChanged += new System.EventHandler(this.ComboBoxNames_SelectedIndexChanged);
+            // 
+            // pictureBoxMiniMap
+            // 
+            this.pictureBoxMiniMap.Location = new System.Drawing.Point(12, 47);
+            this.pictureBoxMiniMap.Name = "pictureBoxMiniMap";
+            this.pictureBoxMiniMap.Size = new System.Drawing.Size(393, 164);
+            this.pictureBoxMiniMap.TabIndex = 4;
+            this.pictureBoxMiniMap.TabStop = false;
             // 
             // SaveAs
             // 
@@ -87,22 +98,24 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(417, 87);
+            this.ClientSize = new System.Drawing.Size(417, 245);
             this.ControlBox = false;
+            this.Controls.Add(this.pictureBoxMiniMap);
             this.Controls.Add(this.comboBoxNames);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelNameMapSave);
             this.Controls.Add(this.textBoxMapName);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOk);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(433, 126);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(433, 126);
             this.Name = "SaveAs";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Сохранить как...";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.SaveAs_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMiniMap)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -113,7 +126,8 @@
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.TextBox textBoxMapName;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelNameMapSave;
         private System.Windows.Forms.ComboBox comboBoxNames;
+        private System.Windows.Forms.PictureBox pictureBoxMiniMap;
     }
 }

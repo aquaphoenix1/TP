@@ -127,16 +127,18 @@ namespace TProject
 
             return list;
         }
-
-        public static long GetMaxID(string table)
+        public static bool RemoveMap(string name)
         {
-            long val = 0;
             try
             {
-                val = (long)new SQLiteCommand(string.Format("SELECT * FROM {0} ORDER BY ID DESC LIMIT 1", table), GetConnection()).ExecuteScalar();
+                new SQLiteCommand(string.Format("DELETE FROM Maps where Name = '{0}'", name), GetConnection()).ExecuteNonQuery();
+
+                return true;
             }
-            catch { }
-            return val;
+            catch
+            {
+                return false;
+            }
         }
 
         internal static bool InsertMap(Vertexes vertexes, Edges edges, Image img, string name)
@@ -145,63 +147,69 @@ namespace TProject
             {
                 new SQLiteCommand(string.Format("DELETE FROM Vertex where Map = '{0}'", name), GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand(string.Format("DELETE FROM Edge where Map = '{0}'", name), GetConnection()).ExecuteNonQuery();
-                new SQLiteCommand(string.Format("DELETE FROM Maps where Name = '{0}'", name), GetConnection()).ExecuteNonQuery();
-                new SQLiteCommand(string.Format("DELETE FROM TrafficLight where Map = '{0}'", name), GetConnection()).ExecuteNonQuery();
-
-                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                if (RemoveMap(name))
                 {
-                    System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-                    formatter.Serialize(stream, new Bitmap(img));
-                    var command = GetConnection().CreateCommand();
-                    command.CommandText = string.Format("INSERT INTO Maps VALUES ('{0}', @0);", name);
-                    SQLiteParameter param = new SQLiteParameter("@0", System.Data.DbType.Binary)
-                    {
-                        Value = stream.ToArray()
-                    };
-                    command.Parameters.Add(param);
-                    command.ExecuteNonQuery();
-                }
+                    new SQLiteCommand(string.Format("DELETE FROM TrafficLight where Map = '{0}'", name), GetConnection()).ExecuteNonQuery();
 
-                if (vertexes != null)
-                {
-                    for (int i = 0; i < vertexes.GetCountElements(); i++)
+                    using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
                     {
-                        var vert = vertexes.GetElement(i);
-                        if (vert.TrafficLight != null)
+                        System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+                        formatter.Serialize(stream, new Bitmap(img));
+                        var command = GetConnection().CreateCommand();
+                        command.CommandText = string.Format("INSERT INTO Maps VALUES ('{0}', @0);", name);
+                        SQLiteParameter param = new SQLiteParameter("@0", System.Data.DbType.Binary)
                         {
-                            new SQLiteCommand(string.Format("Insert into TrafficLight values ({0}, {1}, {2}, '{3}')", vert.TrafficLight.ID, vert.TrafficLight.GreenSeconds, vert.TrafficLight.RedSeconds, name), GetConnection()).ExecuteNonQuery();
-                            new SQLiteCommand(string.Format("Insert into Vertex values ({0}, {1}, {2}, '{3}', {4})", vert.ID, vert.X, vert.Y, name, vert.TrafficLight.ID), GetConnection()).ExecuteNonQuery();
+                            Value = stream.ToArray()
+                        };
+                        command.Parameters.Add(param);
+                        command.ExecuteNonQuery();
+                    }
+
+                    if (vertexes != null)
+                    {
+                        for (int i = 0; i < vertexes.GetCountElements(); i++)
+                        {
+                            var vert = vertexes.GetElement(i);
+                            if (vert.TrafficLight != null)
+                            {
+                                new SQLiteCommand(string.Format("Insert into TrafficLight values ({0}, {1}, {2}, '{3}')", vert.TrafficLight.ID, vert.TrafficLight.GreenSeconds, vert.TrafficLight.RedSeconds, name), GetConnection()).ExecuteNonQuery();
+                                new SQLiteCommand(string.Format("Insert into Vertex values ({0}, {1}, {2}, '{3}', {4})", vert.ID, vert.X, vert.Y, name, vert.TrafficLight.ID), GetConnection()).ExecuteNonQuery();
+                            }
+                            else
+                            {
+                                new SQLiteCommand(string.Format("Insert into Vertex values ({0}, {1}, {2}, '{3}', {4})", vert.ID, vert.X, vert.Y, name, "null"), GetConnection()).ExecuteNonQuery();
+                            }
                         }
-                        else
+
+                    }
+                    if (edges != null)
+                    {
+                        for (int i = 0; i < edges.GetCountElements(); i++)
                         {
-                            new SQLiteCommand(string.Format("Insert into Vertex values ({0}, {1}, {2}, '{3}', {4})", vert.ID, vert.X, vert.Y, name, "null"), GetConnection()).ExecuteNonQuery();
+                            var edge = edges.GetElement(i);
+
+                            string idSign = (edge.SignMaxSpeed != null) ? edge.SignMaxSpeed.Count.ToString() : "null";
+
+                            string police = (edge.Policemen != null) ? edge.Policemen.TypeName : "null";
+
+                            new SQLiteCommand(string.Format("Insert into Edge values ({0}, '{1}', '{2}', '{3}', {4}, {5}, '{6}', '{7}', '{8}', '{9}')", edge.ID, edge.IsBilateral.ToString(), idSign, edge.SignTwoWay.ToString(), edge.GetHead().ID, edge.GetEnd().ID, edge.NameStreet, edge.Coat.TypeName, police, name), GetConnection()).ExecuteNonQuery();
                         }
                     }
 
+                    return true;
                 }
-                if (edges != null)
+                else
                 {
-                    for (int i = 0; i < edges.GetCountElements(); i++)
-                    {
-                        var edge = edges.GetElement(i);
-
-                        string idSign = (edge.SignMaxSpeed != null) ? edge.SignMaxSpeed.Count.ToString() : "null";
-
-                        string police = (edge.Policemen != null) ? edge.Policemen.TypeName : "null";
-
-                        new SQLiteCommand(string.Format("Insert into Edge values ({0}, '{1}', '{2}', '{3}', {4}, {5}, '{6}', '{7}', '{8}', '{9}')", edge.ID, edge.IsBilateral.ToString(), idSign, edge.SignTwoWay.ToString(), edge.GetHead().ID, edge.GetEnd().ID, edge.NameStreet, edge.Coat.TypeName, police, name), GetConnection()).ExecuteNonQuery();
-                    }
+                    return false;
                 }
-
-                return true;
             }
-            catch (Exception exc)
+            catch
             {
                 return false;
             }
         }
 
-        internal static Bitmap LoadMap(string name, out Vertexes vertexes, out Edges edges)
+        public static Bitmap LoadPicture(string name)
         {
             try
             {
@@ -213,6 +221,20 @@ namespace TProject
                 {
                     bmp = (Bitmap)new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter().Deserialize(stream);
                 }
+
+                return bmp;
+            }
+            catch
+            {
+                throw new Exception();
+            }
+        }
+
+        public static Bitmap LoadMap(string name, out Vertexes vertexes, out Edges edges)
+        {
+            try
+            {
+                Bitmap bmp = LoadPicture(name);
 
                 vertexes = new Vertexes();
 
@@ -248,7 +270,7 @@ namespace TProject
 
                 return bmp;
             }
-            catch(Exception)
+            catch
             {
                 vertexes = null;
                 edges = null;

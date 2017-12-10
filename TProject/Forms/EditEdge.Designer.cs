@@ -62,7 +62,7 @@
             this.signGroupBox.Location = new System.Drawing.Point(12, 167);
             this.signGroupBox.Name = "signGroupBox";
             this.signGroupBox.Size = new System.Drawing.Size(354, 91);
-            this.signGroupBox.TabIndex = 15;
+            this.signGroupBox.TabIndex = 16;
             this.signGroupBox.TabStop = false;
             // 
             // signMaxSpeedLabel
@@ -129,7 +129,7 @@
             this.streetGroupBox.Location = new System.Drawing.Point(12, 12);
             this.streetGroupBox.Name = "streetGroupBox";
             this.streetGroupBox.Size = new System.Drawing.Size(354, 82);
-            this.streetGroupBox.TabIndex = 17;
+            this.streetGroupBox.TabIndex = 15;
             this.streetGroupBox.TabStop = false;
             // 
             // coatingLabel

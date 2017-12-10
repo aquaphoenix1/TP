@@ -43,7 +43,7 @@ namespace TProject
             this.buttonAccept.Location = new System.Drawing.Point(202, 73);
             this.buttonAccept.Name = "buttonAccept";
             this.buttonAccept.Size = new System.Drawing.Size(89, 27);
-            this.buttonAccept.TabIndex = 11;
+            this.buttonAccept.TabIndex = 2;
             this.buttonAccept.Text = "Принять";
             this.buttonAccept.UseVisualStyleBackColor = true;
             this.buttonAccept.Click += new System.EventHandler(this.ButtonAccept_Click);
@@ -56,7 +56,7 @@ namespace TProject
             this.labelValue.Location = new System.Drawing.Point(14, 39);
             this.labelValue.Name = "labelValue";
             this.labelValue.Size = new System.Drawing.Size(95, 15);
-            this.labelValue.TabIndex = 10;
+            this.labelValue.TabIndex = 4;
             this.labelValue.Text = "Сумма штрафа:";
             // 
             // textBoxNameFine
@@ -65,7 +65,7 @@ namespace TProject
             this.textBoxNameFine.Location = new System.Drawing.Point(143, 10);
             this.textBoxNameFine.Name = "textBoxNameFine";
             this.textBoxNameFine.Size = new System.Drawing.Size(145, 23);
-            this.textBoxNameFine.TabIndex = 8;
+            this.textBoxNameFine.TabIndex = 0;
             this.textBoxNameFine.TextChanged += new System.EventHandler(this.TextBoxNameFine_TextChanged);
             this.textBoxNameFine.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxNameFine_KeyUp);
             // 
@@ -76,7 +76,7 @@ namespace TProject
             this.labelName.Location = new System.Drawing.Point(14, 10);
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(62, 15);
-            this.labelName.TabIndex = 6;
+            this.labelName.TabIndex = 3;
             this.labelName.Text = "Название:";
             // 
             // textBoxValueFine
@@ -85,7 +85,7 @@ namespace TProject
             this.textBoxValueFine.Mask = "00000.00";
             this.textBoxValueFine.Name = "textBoxValueFine";
             this.textBoxValueFine.Size = new System.Drawing.Size(143, 23);
-            this.textBoxValueFine.TabIndex = 12;
+            this.textBoxValueFine.TabIndex = 1;
             // 
             // FineForm
             // 

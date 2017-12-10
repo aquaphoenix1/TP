@@ -41,7 +41,7 @@
             this.buttonAccept.Location = new System.Drawing.Point(225, 75);
             this.buttonAccept.Name = "buttonAccept";
             this.buttonAccept.Size = new System.Drawing.Size(101, 27);
-            this.buttonAccept.TabIndex = 14;
+            this.buttonAccept.TabIndex = 2;
             this.buttonAccept.Text = "Принять";
             this.buttonAccept.UseVisualStyleBackColor = true;
             this.buttonAccept.Click += new System.EventHandler(this.ButtonAccept_Click);
@@ -53,7 +53,7 @@
             this.textBoxTypeCoating.Location = new System.Drawing.Point(175, 10);
             this.textBoxTypeCoating.Name = "textBoxTypeCoating";
             this.textBoxTypeCoating.Size = new System.Drawing.Size(151, 23);
-            this.textBoxTypeCoating.TabIndex = 12;
+            this.textBoxTypeCoating.TabIndex = 0;
             this.textBoxTypeCoating.TextChanged += new System.EventHandler(this.TextBoxTypeCoating_TextChanged);
             this.textBoxTypeCoating.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxTypeCoating_KeyUp);
             // 
@@ -64,7 +64,7 @@
             this.labelCoefficient.Location = new System.Drawing.Point(13, 47);
             this.labelCoefficient.Name = "labelCoefficient";
             this.labelCoefficient.Size = new System.Drawing.Size(157, 15);
-            this.labelCoefficient.TabIndex = 11;
+            this.labelCoefficient.TabIndex = 4;
             this.labelCoefficient.Text = "Коэффициент скольжения:";
             // 
             // labelType
@@ -74,7 +74,7 @@
             this.labelType.Location = new System.Drawing.Point(14, 13);
             this.labelType.Name = "labelType";
             this.labelType.Size = new System.Drawing.Size(88, 15);
-            this.labelType.TabIndex = 10;
+            this.labelType.TabIndex = 3;
             this.labelType.Text = "Тип покрытия:";
             // 
             // textBoxCoefficient
@@ -83,7 +83,7 @@
             this.textBoxCoefficient.Mask = "0.0";
             this.textBoxCoefficient.Name = "textBoxCoefficient";
             this.textBoxCoefficient.Size = new System.Drawing.Size(151, 23);
-            this.textBoxCoefficient.TabIndex = 0;
+            this.textBoxCoefficient.TabIndex = 1;
             // 
             // CoatingForm
             // 
