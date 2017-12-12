@@ -18,7 +18,7 @@ namespace TProject.Forms
             AddOrRemoveAct();
         }
 
-        public ConductingForm()
+        private ConductingForm()
         {
             InitializeComponent();
         }
@@ -127,6 +127,10 @@ namespace TProject.Forms
                         {
                             MessageBox.Show(ex.Message);
                         }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Карта с таким именем уже существует!");
                     }
                 }
             }

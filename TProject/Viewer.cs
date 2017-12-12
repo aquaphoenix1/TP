@@ -536,8 +536,9 @@ namespace TProject
                     }
                     item.IsInWay = fl;
                 }
+                string criterial = (Route.Criterial == Main.Criterial.Length) ? "Длина" : (Route.Criterial == Main.Criterial.Price) ? "Цена" : "Время";
 
-                MessageBox.Show(Math.Round(Route.Value, 2).ToString());
+                MessageBox.Show(string.Format("{0} пути {1}", criterial, Math.Round(Route.Value, 2).ToString()), "Цена маршрута");
             }
             else
             {

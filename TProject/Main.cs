@@ -911,7 +911,7 @@ namespace TProject
 
         public string SaveAs()
         {
-            new ConductingForm().ShowDialog();
+            new ConductingForm(Act.Add).ShowDialog();
             return Map.Name;
         }
 
