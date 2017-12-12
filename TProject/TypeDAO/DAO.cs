@@ -62,7 +62,6 @@ namespace TProject
                 new SQLiteCommand("Create table Auto ([Model] char(30) primary key, [Fuel] char(30) References Fuel ([Name]), [Сonsumption] real not null, [Speed] real not null)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Driver ([FIO] char(30) primary key, [TypeDriver] char(20) not null, [Model] char(30) References Auto ([Model]))", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Fuel ([Name] char(30) primary key, [Cost] real not null)", GetConnection()).ExecuteNonQuery();
-                new SQLiteCommand("Create table Fine ([NameFine] char(20) primary key, [CostFine] real not null)", GetConnection()).ExecuteNonQuery();
 
                 new SQLiteCommand("Insert into Policeman values ('Добрый', 1)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Insert into Policeman values ('Жадный', 1.5)", GetConnection()).ExecuteNonQuery();
