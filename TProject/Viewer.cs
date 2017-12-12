@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using TProject.Graph;
 using TProject.Properties;
@@ -19,6 +20,8 @@ namespace TProject
         private PictureBox view;
         private Font mainFormFont;
         public PictureBox View => view;
+        private int globalTime = 0;
+        Dynamic dynamic;
 
         /// <summary>
         /// Расположение pb в контейнере до перемещения
@@ -410,22 +413,12 @@ namespace TProject
                           (item.GetHead().X).UnScaling() + Width / 2, (item.GetHead().Y).UnScaling() + Width / 2,
                           (item.GetEnd().X).UnScaling() + Width / 2, (item.GetEnd().Y).UnScaling() + Width / 2);
                     }
-
-
-
                     if (IsStreetLength_Visible)
                     {
                         graph.DrawString(Math.Round(item.GetLength(ScaleCoefficient), 2).ToString(), new Font(mainFormFont.FontFamily, 10f, FontStyle.Italic | FontStyle.Bold,
                             GraphicsUnit.Point, mainFormFont.GdiCharSet), blackFontBrush,
                             (item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 - 25),
                             (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 10));
-                    }
-                    if (IsSign_Visible && item.SignMaxSpeed != null)
-                    {
-                        graph.DrawString(item.SignMaxSpeed.Count.ToString(), new Font(mainFormFont.FontFamily, 10f, FontStyle.Bold,
-                           GraphicsUnit.Point, mainFormFont.GdiCharSet), redFontBrush,
-                           (item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 + 25),
-                           (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 10));
                     }
                 }
                 if (item.Policemen != null && IsPolice_Visible)
@@ -434,6 +427,25 @@ namespace TProject
                             (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 + 10), Width * 2, Height * 2));
                 }
             }
+            if (IsSign_Visible)
+            {
+                foreach (var item in Map.edges.List.Where(o => o.SignMaxSpeed != null))
+                {
+                    graph.FillEllipse(new SolidBrush(Color.White),
+                        (item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 + 24)
+                        , (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 11), Width * 2 + 3, Width * 2 + 3);
+                    graph.DrawEllipse(new Pen(Color.Red, (float)(Width / 2 - 2)),
+                        (item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 + 24)
+                        , (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 11), Width * 2 + 3, Width * 2 + 3);
+
+
+                    graph.DrawString(item.SignMaxSpeed.Count.ToString(), new Font(mainFormFont.FontFamily, 10f, FontStyle.Bold,
+                       GraphicsUnit.Point, mainFormFont.GdiCharSet), blackFontBrush,
+                       (item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 + 26),
+                       (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 7));
+                }
+            }
+
             if (selectedEdge != null)
             {
                 graph.DrawLine(PensCase.GetPenForEdge(true, false, Width.UnScaling()), selectedEdge.GetHead().X.UnScaling() + dX, selectedEdge.GetHead().Y.UnScaling() + dY,
@@ -467,14 +479,33 @@ namespace TProject
                         new Rectangle((item.X + Width).UnScaling(), (item.Y + Height).UnScaling(), (int)Math.Round(Width * 1.2), Height * 2));
                 }
             }
-
+            if (dynamic != null)
+            {
+                graph.FillEllipse(PensCase.SelectedVertex, dynamic.Drive.X.UnScaling() - Width, dynamic.Drive.Y.UnScaling() - Width, Width * 2, Height * 2);
+            }
             if (selectedVertex != null)
             {
                 graph.FillEllipse(PensCase.SelectedVertex, selectedVertex.X.UnScaling(), selectedVertex.Y.UnScaling(), Width, Height);
             }
         }
+        public void ViewInDynamic()
+        {
+            dynamic = new Dynamic(Route.CurrentDriver);
+
+                foreach (var item in Map.vertexes.List)
+                {
+                    if (item.TrafficLight != null)
+                    {
+                        item.TrafficLight.IsRun = true;
+                        dynamic.timerTL.Tick += (o, e) => item.TrafficLight.Inc();
+                    }
+                }
+                dynamic.Start();
+        }
+
         public void MakeStaticRoute()
         {
+            Map.Way = new List<Vertex>();
             if (Route.Way != null)
             {
                 foreach (var item in Map.edges.List)
@@ -483,15 +514,26 @@ namespace TProject
                     int k = 0;
                     while (!fl && k < Route.Way.Count - 1)
                     {
-                        fl = item.GetHead().ID == Route.Way.ElementAt(k) &&
+                        if (fl = item.GetHead().ID == Route.Way.ElementAt(k) &&
                             item.GetEnd().ID == Route.Way.ElementAt(k + 1) ||
                              item.GetHead().ID == Route.Way.ElementAt(k + 1) &&
-                            item.GetEnd().ID == Route.Way.ElementAt(k);
+                            item.GetEnd().ID == Route.Way.ElementAt(k))
+                        {
+                            if (item.GetHead().ID == Route.Way.ElementAt(k))
+                            {
+                                Map.Way.Add(item.GetHead());
+                                Map.Way.Add(item.GetEnd());
+                            }
+                            else
+                            {
+                                Map.Way.Add(item.GetEnd());
+                                Map.Way.Add(item.GetHead());
+                            }
+                        }
                         k++;
                     }
                     item.IsInWay = fl;
                 }
-
 
                 MessageBox.Show(Math.Round(Route.Value, 2).ToString());
             }
@@ -502,6 +544,7 @@ namespace TProject
 
             ViewPort.Invalidate();
         }
+
         #endregion
 
         #region Работа с выделением объектов

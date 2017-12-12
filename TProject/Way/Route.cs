@@ -13,6 +13,8 @@ namespace TProject.Way
         public static Vertex Start;
         public static Vertex End;
 
+        public static Driver.Driver CurrentDriver;
+
         private double[,] GetMatrixWay(out long[,] parents, out long[] arrayOfID, Vertexes vertexes, Edges edges, Main.Criterial criterial, Driver.Driver driver)
         {
             int count = vertexes.GetCountElements();
@@ -68,6 +70,8 @@ namespace TProject.Way
 
         public void FindMinLengthWay(Vertexes vertColl, Edges edgColl, Main.Criterial criterial, Driver.Driver driver)
         {
+            CurrentDriver = new Driver.Driver(driver.FIO, driver.IsViolateTL, driver.Car);
+
             long[,] parents;
             long[] IDs;
             long fromVertex = 0, toVertex = 0;
@@ -120,7 +124,7 @@ namespace TProject.Way
             }
         }
 
-        public Edge GetEdge(Vertex one, Vertex two, Edges edges)
+        public static Edge GetEdge(Vertex one, Vertex two, Edges edges)
         {
             List<Edge> list = edges.List;
             Vertex first = null, second = null;

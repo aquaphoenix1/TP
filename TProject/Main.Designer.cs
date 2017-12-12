@@ -643,6 +643,7 @@
             this.ToolStripMenuItem_DynamicView.Name = "ToolStripMenuItem_DynamicView";
             this.ToolStripMenuItem_DynamicView.Size = new System.Drawing.Size(215, 22);
             this.ToolStripMenuItem_DynamicView.Text = "Отобразить динамически";
+            this.ToolStripMenuItem_DynamicView.Click += new System.EventHandler(this.ToolStripMenuItem_DynamicView_Click);
             // 
             // contextMenuEdge
             // 

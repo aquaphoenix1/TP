@@ -180,6 +180,7 @@
       <DependentUpon>VerticalLabel.cs</DependentUpon>
     </Compile>
     <Compile Include="Viewer.cs" />
+    <Compile Include="Way\Dynamic.cs" />
     <Compile Include="Way\Fine.cs" />
     <Compile Include="Way\Police.cs" />
     <Compile Include="Program.cs" />
