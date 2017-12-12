@@ -239,7 +239,6 @@
             "Типы полицейских",
             "Топливо",
             "Автомобили",
-            "Штрафы",
             "Водители",
             "Улицы"});
             this.comboBoxSelectTable.Location = new System.Drawing.Point(604, 36);
