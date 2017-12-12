@@ -50,7 +50,7 @@ namespace TProject
                     throw new SQLiteException();
                 }
 
-                #region SQLCommands
+                #region SQLCommands 
                 new SQLiteCommand("Create table Maps ([Name] char(30) primary key, [Image] BLOB not null)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Vertex ([ID] Integer, [XVertex] Integer not null, [YVertex] Integer not null, [Map] char(30) References Maps ([Name]), [TfId] Integer References TrafficLight ([ID]), primary key([ID], [Map]))", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table TrafficLight ([ID]Integer, [GreenSeconds] Integer not null, [RedSeconds] Integer not null, [Map] char(30) References Maps ([Name]), Primary Key([ID], [Map]))", GetConnection()).ExecuteNonQuery();

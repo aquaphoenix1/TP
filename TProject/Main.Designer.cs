@@ -52,6 +52,7 @@
             this.button_Ok_Сalibration = new System.Windows.Forms.Button();
             this.button_Calibration = new System.Windows.Forms.Button();
             this.panelSlide = new System.Windows.Forms.Panel();
+            this.label_Layers = new TProject.VerticalLabel();
             this.labelSlide = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkBox_StreetName = new System.Windows.Forms.CheckBox();
@@ -87,7 +88,6 @@
             this.удалитьПерегонToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuMap = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
-            this.label_Layers = new TProject.VerticalLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMap)).BeginInit();
             this.contextMenuVertex.SuspendLayout();
             this.tabPageWorkWithBD.SuspendLayout();
@@ -344,6 +344,17 @@
             this.panelSlide.TabIndex = 1;
             this.panelSlide.Click += new System.EventHandler(this.PanelSlide_Click);
             // 
+            // label_Layers
+            // 
+            this.label_Layers.AutoSize = true;
+            this.label_Layers.Location = new System.Drawing.Point(3, 111);
+            this.label_Layers.Name = "label_Layers";
+            this.label_Layers.NewText = null;
+            this.label_Layers.RotateAngle = 0;
+            this.label_Layers.Size = new System.Drawing.Size(73, 13);
+            this.label_Layers.TabIndex = 1;
+            this.label_Layers.Text = "verticalLabel1";
+            // 
             // labelSlide
             // 
             this.labelSlide.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -501,7 +512,7 @@
             this.panelMapSubstrate.Controls.Add(this.pictureBoxMap);
             this.panelMapSubstrate.Location = new System.Drawing.Point(3, 3);
             this.panelMapSubstrate.Name = "panelMapSubstrate";
-            this.panelMapSubstrate.Size = new System.Drawing.Size(682, 298);
+            this.panelMapSubstrate.Size = new System.Drawing.Size(736, 295);
             this.panelMapSubstrate.TabIndex = 0;
             // 
             // info
@@ -668,17 +679,6 @@
             this.toolStripMenuItem9.Size = new System.Drawing.Size(198, 22);
             this.toolStripMenuItem9.Text = "Добавить перекресток";
             this.toolStripMenuItem9.Click += new System.EventHandler(this.ToolStripMenu_AddVertex_Click);
-            // 
-            // label_Layers
-            // 
-            this.label_Layers.AutoSize = true;
-            this.label_Layers.Location = new System.Drawing.Point(3, 111);
-            this.label_Layers.Name = "label_Layers";
-            this.label_Layers.NewText = null;
-            this.label_Layers.RotateAngle = 0;
-            this.label_Layers.Size = new System.Drawing.Size(73, 13);
-            this.label_Layers.TabIndex = 1;
-            this.label_Layers.Text = "verticalLabel1";
             // 
             // Main
             // 
