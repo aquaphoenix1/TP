@@ -51,13 +51,14 @@ namespace TProject
 
             DoubleBuffered = true;
 
+
             Initialize();
         }
 
         private void Initialize()
         {
             Coating.ListSurface = DAO.GetAll("Surface");
-            Fine.ListFine = DAO.GetAll("Fine");
+         //   Fine.ListFine = DAO.GetAll("Fine");
             Car.ListAuto = DAO.GetAll("Auto");
             Fuel.ListFuel = DAO.GetAll("Fuel");
             Police.ListTypePolicemen = DAO.GetAll("Policeman");
@@ -319,14 +320,14 @@ namespace TProject
                         }
                     case "Штрафы":
                         {
-                            if (new FineDAO().Delete(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString()))
-                            {
-                                dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
-                            }
-                            else
-                            {
-                                MessageBox.Show("Невозможно удалить");
-                            }
+                            //if (new FineDAO().Delete(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString()))
+                            //{
+                            //    dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
+                            //}
+                            //else
+                            //{
+                            //    MessageBox.Show("Невозможно удалить");
+                            //}
                             break;
                         }
                     case "Топливо":
@@ -817,7 +818,7 @@ namespace TProject
         }
 
         public enum Criterial { Time, Length, Price }
-
+        Driver.Driver driver;
         private void ПараметрыМаршрутаToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OptionsRouteForm optionsRouteForm = new OptionsRouteForm();
@@ -827,7 +828,7 @@ namespace TProject
             if (optionsRouteForm.DialogResult == DialogResult.OK)
             {
                 Criterial criterial = optionsRouteForm.Criterial;
-                Driver.Driver driver = optionsRouteForm.Drive;
+                driver = optionsRouteForm.Drive;
                 optionsRouteForm.Close();
 
                 new Route().FindMinLengthWay(Map.vertexes, Map.edges, criterial, driver);
@@ -976,6 +977,12 @@ namespace TProject
         {
             AboutDeveloperForm aboutDeveloperForm = new AboutDeveloperForm();
             aboutDeveloperForm.ShowDialog();
+        }
+
+        private void ToolStripMenuItem_DynamicView_Click(object sender, EventArgs e)
+        {
+            Viewer.ViewPort.MakeStaticRoute();
+            Viewer.ViewPort.ViewInDynamic();
         }
     }
 }

@@ -47,8 +47,13 @@ namespace TProject
                         }
                     case "Длина":
                         {
+
+                            System.Collections.Generic.List<object> cars = Driver.Car.ListAuto.First(car => car[0].ToString().Equals(driver[2].ToString()));
+                            System.Collections.Generic.List<object> fuels = Driver.Fuel.ListFuel.First(fuel => fuel[0].ToString().Equals(cars[1].ToString()));
                             Criterial = Main.Criterial.Length;
-                            Drive = null;
+                            Driver.Fuel curFuel = Driver.Fuel.CreateFuel(fuels[0].ToString(), double.Parse(fuels[1].ToString()));
+                            Driver.Car curCar = Driver.Car.CreateCar(cars[0].ToString(), curFuel, double.Parse(cars[2].ToString()), double.Parse(cars[3].ToString()));
+                            Drive = Driver.Driver.CreateDriver(driver[0].ToString(), bool.Parse(driver[1].ToString()), curCar);
 
                             break;
                         }
