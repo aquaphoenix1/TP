@@ -40,21 +40,7 @@ namespace TProject.Way
                         Edge edge = GetEdge(vertexList[i], vertexList[j], edges);
                         array[i, j] = (edge != null) ? edge.GetCriterialValue(criterial, driver) : Double.MaxValue;
 
-                        if (edge != null)
-                        {
-                            for (int p = 0; p < Map.vertexes.GetCountElements(); p++)
-                            {
-                                if (Map.vertexes.GetElement(p).ID == Start.ID)
-                                {
-                                    parents[i, j] = p;
-                                    break;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            parents[i, j] = long.MaxValue;
-                        }
+                        parents[i, j] = i;
                     }
                 }
                 arrayOfID[i] = vertexList[i].ID;
@@ -113,7 +99,7 @@ namespace TProject.Way
                         if (matrix[i, k] < Double.MaxValue && matrix[k, j] < Double.MaxValue && matrix[i, k] + matrix[k, j] < matrix[i, j])
                         {
                             matrix[i, j] = matrix[i, k] + matrix[k, j];
-                            parents[i, j] = k;
+                            parents[i, j] = parents[k, j];
                         }
                     }
                 }
