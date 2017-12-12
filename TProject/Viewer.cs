@@ -481,7 +481,9 @@ namespace TProject
             }
             if (dynamic != null)
             {
-                graph.FillEllipse(PensCase.SelectedVertex, dynamic.Drive.X.UnScaling() - Width, dynamic.Drive.Y.UnScaling() - Width, Width * 2, Height * 2);
+                graph.DrawImage(Resources.Car, new Rectangle(dynamic.Drive.X.UnScaling() - Width,
+                           dynamic.Drive.Y.UnScaling() - Width, (int)(Width * 3.5), (int)(Height * 3.5)));
+                // graph.FillEllipse(PensCase.SelectedVertex, dynamic.Drive.X.UnScaling() - Width, dynamic.Drive.Y.UnScaling() - Width, Width * 2, Height * 2);
             }
             if (selectedVertex != null)
             {
