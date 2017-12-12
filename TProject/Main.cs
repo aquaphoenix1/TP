@@ -772,9 +772,10 @@ namespace TProject
         }
 
         public enum Criterial { Time, Length, Price }
-        Driver.Driver driver;
+        
         private void ПараметрыМаршрутаToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Driver.Driver driver;
             OptionsRouteForm optionsRouteForm = new OptionsRouteForm();
 
             optionsRouteForm.ShowDialog();

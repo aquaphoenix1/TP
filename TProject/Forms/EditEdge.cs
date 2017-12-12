@@ -40,15 +40,14 @@ namespace TProject
                 nameStreetComboBox.SelectedIndex = nameStreetComboBox.FindString(_edge.NameStreet);
                 coatingComboBox.SelectedIndex = coatingComboBox.FindString(_edge.Coat.TypeName);
             }
-            catch { }
+            catch
+            {
+                nameStreetComboBox.SelectedIndex = 0;
+                coatingComboBox.SelectedIndex = 0;
+            }
+
             signMaxSpeedComboBox.Enabled = signMaxSpeedCheckBox.Checked;
             policemanComboBox.Enabled = policemanCheckBox.Checked;
-        }
-
-        private void CheckBoxWay_CheckedChanged(object sender, EventArgs e)
-        {
-            Edge.IsBilateral = signTwoWayCheckBox.Checked;
-            Viewer.ViewPort.Invalidate();
         }
 
         private void OkEditEgdeButton_Click(object sender, EventArgs e)

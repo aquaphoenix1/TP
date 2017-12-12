@@ -507,8 +507,61 @@ namespace TProject
 
         public void MakeStaticRoute()
         {
-            Map.Way = new List<Vertex>();
             if (Route.Way != null)
+            {
+                Map.Way = new List<Vertex>();
+
+                int k = 0;
+
+                while (k != Route.Way.Count - 1)
+                {
+                    Vertex first = null,
+                        second = null;
+
+                    for (int i = 0; i < Map.vertexes.GetCountElements(); i++)
+                    {
+                        if(Map.vertexes.GetElement(i).ID == Route.Way[k])
+                        {
+                            first = Map.vertexes.GetElement(i);
+                            break;
+                        }
+                    }
+
+                    k++;
+
+                    for (int i = 0; i < Map.vertexes.GetCountElements(); i++)
+                    {
+                        if (Map.vertexes.GetElement(i).ID == Route.Way[k])
+                        {
+                            second = Map.vertexes.GetElement(i);
+                            break;
+                        }
+                    }
+
+                    Edge edge = Route.GetEdge(first, second, Map.edges);
+
+                    if (edge.GetHead().ID == Route.Way.ElementAt(k-1))
+                    {
+                        Map.Way.Add(edge.GetHead());
+                        Map.Way.Add(edge.GetEnd());
+
+                        edge.IsInWay = true;
+                    }
+                    else
+                    {
+                        Map.Way.Add(edge.GetEnd());
+                        Map.Way.Add(edge.GetHead());
+
+                        edge.IsInWay = true;
+                    }
+                }
+
+                string criterial = (Route.Criterial == Main.Criterial.Length) ? "Длина" : (Route.Criterial == Main.Criterial.Price) ? "Цена" : "Время";
+
+                MessageBox.Show(string.Format("{0} пути {1}", criterial, Math.Round(Route.Value, 2).ToString()), "Цена маршрута");
+            }
+
+            /*if (Route.Way != null)
             {
                 foreach (var item in Map.edges.List)
                 {
@@ -539,7 +592,9 @@ namespace TProject
                 string criterial = (Route.Criterial == Main.Criterial.Length) ? "Длина" : (Route.Criterial == Main.Criterial.Price) ? "Цена" : "Время";
 
                 MessageBox.Show(string.Format("{0} пути {1}", criterial, Math.Round(Route.Value, 2).ToString()), "Цена маршрута");
-            }
+            }*/
+
+            
             else
             {
                 MessageBox.Show("Невозможно построить маршрут");

@@ -13,6 +13,9 @@ namespace TProject
             InitializeComponent();
 
             TProject.Driver.Driver.ListDriver.ForEach((System.Collections.Generic.List<object> drive) => driverComboBox.Items.Add(drive[0]));
+
+            driverComboBox.SelectedIndex = 0;
+            critSearchComboBox.SelectedIndex = 0;
         }
 
         private void OkRouteButton_Click(object sender, System.EventArgs e)
