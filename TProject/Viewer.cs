@@ -508,31 +508,31 @@ namespace TProject
             Map.Way = new List<Vertex>();
             if (Route.Way != null)
             {
-                foreach (var item in Map.edges.List)
+                for (var  i = 0; i < Map.edges.GetCountElements(); i++)
                 {
                     bool fl = false;
                     int k = 0;
                     while (!fl && k < Route.Way.Count - 1)
                     {
-                        if (fl = item.GetHead().ID == Route.Way.ElementAt(k) &&
-                            item.GetEnd().ID == Route.Way.ElementAt(k + 1) ||
-                             item.GetHead().ID == Route.Way.ElementAt(k + 1) &&
-                            item.GetEnd().ID == Route.Way.ElementAt(k))
+                        if (fl = Map.edges.GetElement(i).GetHead().ID == Route.Way.ElementAt(k) &&
+                              Map.edges.GetElement(i).GetEnd().ID == Route.Way.ElementAt(k + 1) ||
+                              Map.edges.GetElement(i).GetHead().ID == Route.Way.ElementAt(k + 1) &&
+                              Map.edges.GetElement(i).GetEnd().ID == Route.Way.ElementAt(k))
                         {
-                            if (item.GetHead().ID == Route.Way.ElementAt(k))
+                            if (Map.edges.GetElement(i).GetHead().ID == Route.Way.ElementAt(k))
                             {
-                                Map.Way.Add(item.GetHead());
-                                Map.Way.Add(item.GetEnd());
+                                Map.Way.Add(Map.edges.GetElement(i).GetHead());
+                                Map.Way.Add(Map.edges.GetElement(i).GetEnd());
                             }
                             else
                             {
-                                Map.Way.Add(item.GetEnd());
-                                Map.Way.Add(item.GetHead());
+                                Map.Way.Add(Map.edges.GetElement(i).GetEnd());
+                                Map.Way.Add(Map.edges.GetElement(i).GetHead());
                             }
                         }
                         k++;
                     }
-                    item.IsInWay = fl;
+                    Map.edges.GetElement(i).IsInWay = fl;
                 }
 
                 MessageBox.Show(Math.Round(Route.Value, 2).ToString());
