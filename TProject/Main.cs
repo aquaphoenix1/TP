@@ -58,7 +58,6 @@ namespace TProject
         private void Initialize()
         {
             Coating.ListSurface = DAO.GetAll("Surface");
-         //   Fine.ListFine = DAO.GetAll("Fine");
             Car.ListAuto = DAO.GetAll("Auto");
             Fuel.ListFuel = DAO.GetAll("Fuel");
             Police.ListTypePolicemen = DAO.GetAll("Policeman");
@@ -130,14 +129,6 @@ namespace TProject
 
                             break;
                         }
-                    case "Штрафы":
-                        {
-                            dataGridViewDataBase.Columns.Add("name", "Название штрафа");
-                            dataGridViewDataBase.Columns.Add("cost", "Цена");
-
-                            FillGrid(Fine.ListFine);
-                            break;
-                        }
                     case "Водители":
                         {
                             dataGridViewDataBase.Columns.Add("name", "ФИО");
@@ -200,17 +191,6 @@ namespace TProject
                                     dataGridViewDataBase.Rows.Clear();
                                     FillGrid(Coating.ListSurface);
                                 }
-                            }
-                            break;
-                        }
-                    case "Штрафы":
-                        {
-                            IsChanged = false;
-                            new FineForm(true).ShowDialog();
-                            if (IsChanged)
-                            {
-                                dataGridViewDataBase.Rows.Clear();
-                                FillGrid(Fine.ListFine);
                             }
                             break;
                         }
@@ -316,18 +296,6 @@ namespace TProject
                                     MessageBox.Show("Невозможно удалить");
                                 }
                             }
-                            break;
-                        }
-                    case "Штрафы":
-                        {
-                            //if (new FineDAO().Delete(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString()))
-                            //{
-                            //    dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
-                            //}
-                            //else
-                            //{
-                            //    MessageBox.Show("Невозможно удалить");
-                            //}
                             break;
                         }
                     case "Топливо":
@@ -720,20 +688,6 @@ namespace TProject
 
                             break;
                         }
-                    case "Штрафы":
-                        {
-                            string name = dataGridViewDataBase.SelectedRows[0].Cells["name"].Value.ToString();
-                            List<object> fine = Fine.ListFine.First(fin => fin[0].ToString().Equals(name));
-                            new FineForm(fine[0].ToString(), double.Parse(fine[1].ToString())).ShowDialog();
-
-                            if (IsChanged)
-                            {
-                                dataGridViewDataBase.Rows.Clear();
-                                FillGrid(Fine.ListFine);
-                            }
-
-                            break;
-                        }
                     case "Топливо":
                         {
                             string name = dataGridViewDataBase.SelectedRows[0].Cells["name"].Value.ToString();
@@ -818,9 +772,10 @@ namespace TProject
         }
 
         public enum Criterial { Time, Length, Price }
-        Driver.Driver driver;
+        
         private void ПараметрыМаршрутаToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Driver.Driver driver;
             OptionsRouteForm optionsRouteForm = new OptionsRouteForm();
 
             optionsRouteForm.ShowDialog();
@@ -911,7 +866,7 @@ namespace TProject
 
         public string SaveAs()
         {
-            new ConductingForm().ShowDialog();
+            new ConductingForm(Act.Add).ShowDialog();
             return Map.Name;
         }
 

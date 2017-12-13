@@ -239,7 +239,6 @@
             "Типы полицейских",
             "Топливо",
             "Автомобили",
-            "Штрафы",
             "Водители",
             "Улицы"});
             this.comboBoxSelectTable.Location = new System.Drawing.Point(604, 36);
@@ -512,7 +511,7 @@
             this.panelMapSubstrate.Controls.Add(this.pictureBoxMap);
             this.panelMapSubstrate.Location = new System.Drawing.Point(3, 3);
             this.panelMapSubstrate.Name = "panelMapSubstrate";
-            this.panelMapSubstrate.Size = new System.Drawing.Size(682, 298);
+            this.panelMapSubstrate.Size = new System.Drawing.Size(736, 295);
             this.panelMapSubstrate.TabIndex = 0;
             // 
             // info

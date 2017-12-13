@@ -50,7 +50,7 @@ namespace TProject
                     throw new SQLiteException();
                 }
 
-                #region SQLCommands
+                #region SQLCommands 
                 new SQLiteCommand("Create table Maps ([Name] char(30) primary key, [Image] BLOB not null)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Vertex ([ID] Integer, [XVertex] Integer not null, [YVertex] Integer not null, [Map] char(30) References Maps ([Name]), [TfId] Integer References TrafficLight ([ID]), primary key([ID], [Map]))", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table TrafficLight ([ID]Integer, [GreenSeconds] Integer not null, [RedSeconds] Integer not null, [Map] char(30) References Maps ([Name]), Primary Key([ID], [Map]))", GetConnection()).ExecuteNonQuery();
@@ -80,6 +80,19 @@ namespace TProject
                 new SQLiteCommand("Insert into Sign values (70)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Insert into Sign values (75)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Insert into Sign values (80)", GetConnection()).ExecuteNonQuery();
+
+                new SQLiteCommand("Insert into Surface values ('Асфальт', 1)", GetConnection()).ExecuteNonQuery();
+
+                new SQLiteCommand("Insert into Street values ('Майская')", GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand("Insert into Street values ('Московское шоссе')", GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand("Insert into Street values ('Революционная')", GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand("Insert into Street values ('Стара-Загора')", GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand("Insert into Street values ('Потапова')", GetConnection()).ExecuteNonQuery();
+
+                new SQLiteCommand("Insert into Fuel values ('АИ-92', 41.5)", GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand("Insert into Auto values ('Ford', 'АИ-92', 5.5, 80)", GetConnection()).ExecuteNonQuery();
+
+                new SQLiteCommand("Insert into Driver values ('Сергеев Артем Петрович', 'True', 'Ford')", GetConnection()).ExecuteNonQuery();
 
                 #endregion SQLCommands
             }

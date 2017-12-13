@@ -271,6 +271,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Car.jpg" />
     <None Include="Resources\oneWaySign.jpg" />
     <None Include="Resources\limitSpeedSign.jpeg" />
     <None Include="Resources\index.html" />

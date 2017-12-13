@@ -13,6 +13,8 @@ namespace TProject.Way
         public static Vertex Start;
         public static Vertex End;
 
+        public static Main.Criterial Criterial { get; set; }
+
         public static Driver.Driver CurrentDriver;
 
         private double[,] GetMatrixWay(out long[,] parents, out long[] arrayOfID, Vertexes vertexes, Edges edges, Main.Criterial criterial, Driver.Driver driver)
@@ -111,6 +113,8 @@ namespace TProject.Way
             }
             else
             {
+                Criterial = criterial;
+
                 List<long> wayList = GetWay(fromVertex, toVertex, parents);
 
                 Way = new List<long>(wayList.Count);
