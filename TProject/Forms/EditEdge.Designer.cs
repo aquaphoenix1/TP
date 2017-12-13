@@ -118,7 +118,7 @@
             this.signTwoWayLabel.Name = "signTwoWayLabel";
             this.signTwoWayLabel.Size = new System.Drawing.Size(225, 13);
             this.signTwoWayLabel.TabIndex = 12;
-            this.signTwoWayLabel.Text = "Наличие знака \"Двустороннее движение\":";
+            this.signTwoWayLabel.Text = "Наличие знака \"Односторонее движение\":";
             // 
             // streetGroupBox
             // 

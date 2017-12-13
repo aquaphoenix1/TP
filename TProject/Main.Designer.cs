@@ -107,9 +107,9 @@
             // pictureBoxMap
             // 
             this.pictureBoxMap.BackColor = System.Drawing.Color.Silver;
-            this.pictureBoxMap.Location = new System.Drawing.Point(-10, -30);
+            this.pictureBoxMap.Location = new System.Drawing.Point(-10, 3);
             this.pictureBoxMap.Name = "pictureBoxMap";
-            this.pictureBoxMap.Size = new System.Drawing.Size(752, 392);
+            this.pictureBoxMap.Size = new System.Drawing.Size(722, 287);
             this.pictureBoxMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxMap.TabIndex = 0;
             this.pictureBoxMap.TabStop = false;
