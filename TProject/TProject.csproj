@@ -270,6 +270,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\oneWaySign.jpg" />
     <None Include="Resources\start.html" />
     <None Include="Resources\route.html" />
     <None Include="Resources\index.html" />
@@ -301,7 +302,6 @@
     <None Include="Resources\img1.jpg" />
     <None Include="Resources\img.png" />
     <None Include="Resources\Car.jpg" />
-    <None Include="Resources\oneWaySign.jpg" />
     <None Include="Resources\limitSpeedSign.jpeg" />
     <None Include="Resources\star.jpg" />
     <None Include="Resources\Image1.bmp" />
