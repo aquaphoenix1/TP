@@ -123,7 +123,7 @@
             this.wayToВToolStripMenuItem,
             this.удалитьПерекрестокToolStripMenuItem});
             this.contextMenuVertex.Name = "contextMenuStripPictBox";
-            this.contextMenuVertex.Size = new System.Drawing.Size(210, 114);
+            this.contextMenuVertex.Size = new System.Drawing.Size(210, 136);
             // 
             // addEdgeToolStripMenuItem
             // 

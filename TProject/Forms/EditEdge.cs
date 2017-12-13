@@ -27,7 +27,7 @@ namespace TProject
                 policemanComboBox.SelectedIndex = policemanComboBox.FindString(_edge.Policemen.TypeName);
             }
 
-            signTwoWayCheckBox.Checked = _edge.SignTwoWay;
+            signOneWayCheckBox.Checked = _edge.SignOneWay;
 
             if (_edge.SignMaxSpeed != null)
             {
@@ -90,11 +90,19 @@ namespace TProject
                 {
                     Edge.Policemen = Police.CreatePolice(policemanComboBox.SelectedItem.ToString());
                 }
+                else
+                {
+                    Edge.Policemen = null;
+                }
 
                 if (isSignMaxSpeed)
                 {
                     List<object> sign = Sign.ListSigns.First(sg => int.Parse(sg[0].ToString()) == int.Parse(signMaxSpeedComboBox.SelectedItem.ToString()));
                     Edge.SignMaxSpeed = Sign.CreateSign(int.Parse(sign[0].ToString()));
+                }
+                else
+                {
+                    Edge.SignMaxSpeed = null;
                 }
 
                 Edge.NameStreet = nameStreetComboBox.SelectedItem.ToString();
@@ -102,9 +110,9 @@ namespace TProject
                 List<object> coat = Coating.ListSurface.First(coating => coating[0].ToString().Equals(coatingComboBox.SelectedItem.ToString()));
                 Edge.Coat = Coating.CreateCoating(coat[0].ToString(), double.Parse(coat[1].ToString()));
 
-                Edge.IsBilateral = signTwoWayCheckBox.Checked;
+                Edge.IsBilateral = signOneWayCheckBox.Checked;
 
-                Edge.SignTwoWay = signTwoWayCheckBox.Checked;
+                Edge.SignOneWay = signOneWayCheckBox.Checked;
             }
 
             DialogResult = DialogResult.OK;

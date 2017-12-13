@@ -31,10 +31,10 @@
             this.signGroupBox = new System.Windows.Forms.GroupBox();
             this.signMaxSpeedLabel = new System.Windows.Forms.Label();
             this.signMaxSpeedCheckBox = new System.Windows.Forms.CheckBox();
-            this.signTwoWayCheckBox = new System.Windows.Forms.CheckBox();
+            this.signOneWayCheckBox = new System.Windows.Forms.CheckBox();
             this.signMaxSpeedKindabel = new System.Windows.Forms.Label();
             this.signMaxSpeedComboBox = new System.Windows.Forms.ComboBox();
-            this.signTwoWayLabel = new System.Windows.Forms.Label();
+            this.signOneWayLabel = new System.Windows.Forms.Label();
             this.streetGroupBox = new System.Windows.Forms.GroupBox();
             this.coatingLabel = new System.Windows.Forms.Label();
             this.nameStreetComboBox = new System.Windows.Forms.ComboBox();
@@ -55,10 +55,10 @@
             // 
             this.signGroupBox.Controls.Add(this.signMaxSpeedLabel);
             this.signGroupBox.Controls.Add(this.signMaxSpeedCheckBox);
-            this.signGroupBox.Controls.Add(this.signTwoWayCheckBox);
+            this.signGroupBox.Controls.Add(this.signOneWayCheckBox);
             this.signGroupBox.Controls.Add(this.signMaxSpeedKindabel);
             this.signGroupBox.Controls.Add(this.signMaxSpeedComboBox);
-            this.signGroupBox.Controls.Add(this.signTwoWayLabel);
+            this.signGroupBox.Controls.Add(this.signOneWayLabel);
             this.signGroupBox.Location = new System.Drawing.Point(12, 167);
             this.signGroupBox.Name = "signGroupBox";
             this.signGroupBox.Size = new System.Drawing.Size(354, 91);
@@ -84,14 +84,14 @@
             this.signMaxSpeedCheckBox.UseVisualStyleBackColor = true;
             this.signMaxSpeedCheckBox.CheckedChanged += new System.EventHandler(this.SignMaxSpeedCheckBox_CheckedChanged);
             // 
-            // signTwoWayCheckBox
+            // signOneWayCheckBox
             // 
-            this.signTwoWayCheckBox.AutoSize = true;
-            this.signTwoWayCheckBox.Location = new System.Drawing.Point(333, 16);
-            this.signTwoWayCheckBox.Name = "signTwoWayCheckBox";
-            this.signTwoWayCheckBox.Size = new System.Drawing.Size(15, 14);
-            this.signTwoWayCheckBox.TabIndex = 4;
-            this.signTwoWayCheckBox.UseVisualStyleBackColor = true;
+            this.signOneWayCheckBox.AutoSize = true;
+            this.signOneWayCheckBox.Location = new System.Drawing.Point(333, 16);
+            this.signOneWayCheckBox.Name = "signOneWayCheckBox";
+            this.signOneWayCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.signOneWayCheckBox.TabIndex = 4;
+            this.signOneWayCheckBox.UseVisualStyleBackColor = true;
             // 
             // signMaxSpeedKindabel
             // 
@@ -111,14 +111,14 @@
             this.signMaxSpeedComboBox.Size = new System.Drawing.Size(66, 21);
             this.signMaxSpeedComboBox.TabIndex = 6;
             // 
-            // signTwoWayLabel
+            // signOneWayLabel
             // 
-            this.signTwoWayLabel.AutoSize = true;
-            this.signTwoWayLabel.Location = new System.Drawing.Point(4, 16);
-            this.signTwoWayLabel.Name = "signTwoWayLabel";
-            this.signTwoWayLabel.Size = new System.Drawing.Size(225, 13);
-            this.signTwoWayLabel.TabIndex = 12;
-            this.signTwoWayLabel.Text = "Наличие знака \"Двустороннее движение\":";
+            this.signOneWayLabel.AutoSize = true;
+            this.signOneWayLabel.Location = new System.Drawing.Point(4, 16);
+            this.signOneWayLabel.Name = "signOneWayLabel";
+            this.signOneWayLabel.Size = new System.Drawing.Size(231, 13);
+            this.signOneWayLabel.TabIndex = 12;
+            this.signOneWayLabel.Text = "Наличие знака \"Одностороннее движение\":";
             // 
             // streetGroupBox
             // 
@@ -269,10 +269,10 @@
         private System.Windows.Forms.GroupBox signGroupBox;
         private System.Windows.Forms.Label signMaxSpeedLabel;
         private System.Windows.Forms.CheckBox signMaxSpeedCheckBox;
-        private System.Windows.Forms.CheckBox signTwoWayCheckBox;
+        private System.Windows.Forms.CheckBox signOneWayCheckBox;
         private System.Windows.Forms.Label signMaxSpeedKindabel;
         private System.Windows.Forms.ComboBox signMaxSpeedComboBox;
-        private System.Windows.Forms.Label signTwoWayLabel;
+        private System.Windows.Forms.Label signOneWayLabel;
         private System.Windows.Forms.GroupBox streetGroupBox;
         private System.Windows.Forms.Label coatingLabel;
         private System.Windows.Forms.ComboBox nameStreetComboBox;
