@@ -51,11 +51,11 @@ namespace TProject.Graph
             {
                 case Main.Criterial.Length:
                     {
-                        return GetLength(Viewer.ViewPort.ScaleCoefficient);
+                        return GetLength(MakeMap.ViewPort.ScaleCoefficient);
                     }
                 case Main.Criterial.Price:
                     {
-                        return GetPrice(GetLength(Viewer.ViewPort.ScaleCoefficient), driver);
+                        return GetPrice(GetLength(MakeMap.ViewPort.ScaleCoefficient), driver);
                     }
                 case Main.Criterial.Time:
                     {
@@ -112,7 +112,7 @@ namespace TProject.Graph
 
             speed = speed * 1000 / 3600;
 
-            double time = GetLength(Viewer.ViewPort.ScaleCoefficient) / speed * Coat.Coeff;
+            double time = GetLength(MakeMap.ViewPort.ScaleCoefficient) / speed * Coat.Coeff;
 
             if (end.TrafficLight != null)
             {

@@ -146,6 +146,7 @@
     <Compile Include="Forms\OptionsRouteForm.Designer.cs">
       <DependentUpon>OptionsRouteForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="StaticViewer.cs" />
     <Compile Include="TypeDAO\CarDAO.cs" />
     <Compile Include="TypeDAO\CoatingDAO.cs" />
     <Compile Include="TypeDAO\DAO.cs" />
@@ -178,8 +179,8 @@
     <Compile Include="VerticalLabel.Designer.cs">
       <DependentUpon>VerticalLabel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Viewer.cs" />
-    <Compile Include="Way\Dynamic.cs" />
+    <Compile Include="MakeMap.cs" />
+    <Compile Include="DynamicViewer.cs" />
     <Compile Include="Way\Fine.cs" />
     <Compile Include="Way\Police.cs" />
     <Compile Include="Program.cs" />

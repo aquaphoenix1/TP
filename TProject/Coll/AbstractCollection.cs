@@ -19,7 +19,7 @@ namespace TProject.Coll
         /// <summary>
         /// Событие, требующее перерисовки pictureBox'a
         /// </summary>
-        public event Viewer.ReDraw RePaint;
+        public event MakeMap.ReDraw RePaint;
 
         public T GetElement(int index)
         {

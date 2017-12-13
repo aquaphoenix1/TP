@@ -38,7 +38,6 @@
             // 
             // openFileDialog
             // 
-            this.openFileDialog.FileName = "openFileDialog1";
             this.openFileDialog.Filter = "JPEG|*.JPG|JPEG|*.JPEG";
             // 
             // removeButton

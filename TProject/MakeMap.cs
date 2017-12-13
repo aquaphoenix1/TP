@@ -12,15 +12,14 @@ using TProject.Way;
 
 namespace TProject
 {
-    public class Viewer
+    public class MakeMap
     {
         /// <summary>
         /// основной на котором отрисовывается подложка и графPictureBox
         /// </summary>
         private PictureBox view;
-        private Font mainFormFont;
+       
         public PictureBox View => view;
-        Dynamic dynamic;
 
         /// <summary>
         /// Расположение pb в контейнере до перемещения
@@ -51,19 +50,11 @@ namespace TProject
         /// <summary>
         /// Смещение курсора от центра точки
         /// </summary>
-        private int dX, dY;
+
         /// <summary>
         /// Исходный размер pictureBox
         /// </summary>
         private int startWidthPB, startHeightPB;
-        /// <summary>
-        /// Высота точки
-        /// </summary>
-        public static int Width { get; private set; }
-        /// <summary>
-        /// Ширина точки
-        /// </summary>
-        public static int Height { get; private set; }
         /// <summary>
         /// Текущий масштаб
         /// </summary>
@@ -74,22 +65,22 @@ namespace TProject
         public bool IsStreetName_Visible { get; set; }
         public bool IsStreetLength_Visible { get; set; }
 
-        public static Viewer ViewPort = null;
+        public static MakeMap ViewPort = null;
 
         private Vertex selectedVertex = null;
         public Vertex SelectedVertex => selectedVertex;
         private Edge selectedEdge = null;
+        public Edge SelectedEdge => selectedEdge;
 
-        private Viewer(PictureBox pb, Panel panel, Font font)
-        {
-            // if (ViewPort == null)
+        private MakeMap(PictureBox pb, Panel panel, Font font)
+        { 
             {
-                mainFormFont = font;
+                StaticViewer.CreateViewer(font);
+
                 MapLocationX = 0;
                 MapLocationY = 0;
 
-                Width = 10;
-                Height = 10;
+                StaticViewer.Width = 10;
 
                 ZoomCurValue = 1;
                 view = pb;
@@ -97,11 +88,7 @@ namespace TProject
                 view.Hide();
                 view.Enabled = false;
 
-                Resize();
-
-
-
-
+               StaticViewer.Viewer.Resize();
                 ViewPort = this;
             }
         }
@@ -113,7 +100,7 @@ namespace TProject
         /// <param name="y"></param>
         public void CreateVertex(int x, int y)
         {
-            Vertex newVertex = new Vertex(x.Scaling() + dX, y.Scaling() + dY);
+            Vertex newVertex = new Vertex(x.Scaling() + StaticViewer.Viewer.dX, y.Scaling() + StaticViewer.Viewer.dY);
             EditVertex ev = new EditVertex(newVertex);
             ev.ShowDialog();
             if (ev.DialogResult == DialogResult.OK)
@@ -183,15 +170,7 @@ namespace TProject
             }
         }
 
-        /// <summary>
-        /// Пересчитывает величину смещения реальных координат точки, 
-        /// относительно положения курсора
-        /// </summary>
-        public void Resize()
-        {
-            dX = Width / 2;
-            dY = Height / 2;
-        }
+       
         #endregion
 
         #region Методы работы с контроллером (инициализация pictureBox для карты и тд.)
@@ -203,7 +182,7 @@ namespace TProject
         /// <param name="panel"></param>
         public static void CreateViewer(PictureBox pb, Panel panel, Font font)
         {
-            ViewPort = new Viewer(pb, panel, font);
+            ViewPort = new MakeMap(pb, panel, font);
         }
 
         /// <summary>
@@ -231,7 +210,7 @@ namespace TProject
 
             if (h != 0 && w != 0)
             {
-                view.Paint -= Paint;
+                view.Paint -=  StaticViewer.Viewer.Paint;
                 view.MouseWheel -= Zoom;
 
                 this.View.Height = startHeightPB = h;
@@ -253,7 +232,7 @@ namespace TProject
 
             view.Enabled = true;
             view.Visible = true;
-            view.Paint += Paint;
+            view.Paint += StaticViewer.Viewer.Paint;
             view.MouseWheel += Zoom;
         }
 
@@ -284,7 +263,7 @@ namespace TProject
         /// <param name="y"></param>
         public void CreateEdge(int x, int y)
         {
-            selectedEdge = new Edge(selectedVertex, new Vertex(x.Scaling() + dX, y.Scaling() + dY));
+            selectedEdge = new Edge(selectedVertex, new Vertex(x.Scaling() + StaticViewer.Viewer.dX, y.Scaling() + StaticViewer.Viewer.dY));
         }
 
         public void DeleteEdge(int x, int y)
@@ -341,178 +320,7 @@ namespace TProject
 
         #endregion
 
-        #region Отрисовка элементов, содержащихся на карте
-        /// <summary>
-        /// Происходит при перерисовке pictureBox, содержащего карту
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void Paint(object sender, PaintEventArgs e)
-        {
-            Graphics graph = e.Graphics;
-            graph.SmoothingMode = SmoothingMode.HighQuality;
-            DrawEdges(graph);
-            DrawVertexes(graph);
-            if (Route.Start != null)
-            {
-                DrawStartPoint(graph);
-            }
-            if (Route.End != null)
-            {
-                DrawEndPoint(graph);
-            }
-        }
-
-
-        private void DrawStartPoint(Graphics graph)
-        {
-            Pen pen = new Pen(Color.Red);
-            DrawPointFlag(graph, pen, Route.Start.X - Width / 2, Route.Start.Y - Width / 2);
-        }
-
-        private void DrawPointFlag(Graphics graph, Pen pen, int x, int y)
-        {
-            pen.Width = 8;
-            graph.DrawPolygon(pen, new Point[]{
-                new Point((x  + Width  / 2).UnScaling(), (y).UnScaling()),
-                new Point((x - Width).UnScaling(), (y - (Width)).UnScaling()),
-                new Point((x - Width).UnScaling(), (y - (Width * 2)).UnScaling()),
-                new Point((x  + Width  / 2).UnScaling(), (y - (Width * 2)).UnScaling())
-            });
-        }
-        private void DrawEndPoint(Graphics graph)
-        {
-            Pen pen = new Pen(Color.Blue);
-            DrawPointFlag(graph, pen, Route.End.X - Width / 2, Route.End.Y - Width / 2);
-        }
-
-        /// <summary>
-        /// отрисовывает все перегоны, содержащиеся на карте
-        /// </summary>
-        /// <param name="graph"></param>
-        /// 
-        private void DrawEdges(Graphics graph)
-        {
-            Pen pen = new Pen(Color.Green, Width.UnScaling() - 2)
-            {
-                StartCap = LineCap.Round,
-                EndCap = LineCap.ArrowAnchor
-            };
-
-            foreach (var item in Map.edges.List)
-            {
-                if (!item.Equals(selectedEdge))
-                {
-                    graph.DrawLine(PensCase.GetCustomPen(false, Width.UnScaling() + 3), item.GetHead().X.UnScaling() + dX, item.GetHead().Y.UnScaling() + dY,
-                        item.GetEnd().X.UnScaling() + dX, item.GetEnd().Y.UnScaling() + dY);
-                    graph.DrawLine(PensCase.GetPenForEdge(false, false, Width.UnScaling()), item.GetHead().X.UnScaling() + dX, item.GetHead().Y.UnScaling() + dY,
-                        item.GetEnd().X.UnScaling() + dX, item.GetEnd().Y.UnScaling() + dY);
-                    if (item.IsInWay)
-                    {
-                        graph.DrawLine(pen,
-                          (item.GetHead().X).UnScaling() + Width / 2, (item.GetHead().Y).UnScaling() + Width / 2,
-                          (item.GetEnd().X).UnScaling() + Width / 2, (item.GetEnd().Y).UnScaling() + Width / 2);
-                    }
-                    if (IsStreetLength_Visible)
-                    {
-                        graph.DrawString(Math.Round(item.GetLength(ScaleCoefficient), 2).ToString(), new Font(mainFormFont.FontFamily, 10f, FontStyle.Italic | FontStyle.Bold,
-                            GraphicsUnit.Point, mainFormFont.GdiCharSet), blackFontBrush,
-                            (item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 - 25),
-                            (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 10));
-                    }
-                }
-                if (item.Policemen != null && IsPolice_Visible)
-                {
-                    graph.DrawImage(Resources.star, new Rectangle(item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 + 25,
-                            (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 + 10), Width * 2, Height * 2));
-                }
-            }
-            if (IsSign_Visible)
-            {
-                foreach (var item in Map.edges.List.Where(o => o.SignMaxSpeed != null || o.SignOneWay))
-                {
-                    if (item.SignMaxSpeed != null)
-                    {
-                        graph.FillEllipse(new SolidBrush(Color.White),
-                            (item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 + 24)
-                            , (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 11), Width * 2 + 3, Width * 2 + 3);
-                        graph.DrawEllipse(new Pen(Color.Red, (float)(Width / 2 - 2)),
-                            (item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 + 24)
-                            , (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 11), Width * 2 + 3, Width * 2 + 3);
-
-
-                        graph.DrawString(item.SignMaxSpeed.Count.ToString(), new Font(mainFormFont.FontFamily, 10f, FontStyle.Bold,
-                           GraphicsUnit.Point, mainFormFont.GdiCharSet), blackFontBrush,
-                           (item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 + 26),
-                           (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 7));
-                    }
-                    if (item.SignOneWay)
-                    {
-                        graph.DrawImage(Resources.oneWaySign, new Rectangle(item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 + 54,
-                           (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2  - 11), Width * 2 + 3, Width * 2 + 3));
-                    }
-                }
-            }
-
-            if (selectedEdge != null)
-            {
-                graph.DrawLine(PensCase.GetPenForEdge(true, false, Width.UnScaling()), selectedEdge.GetHead().X.UnScaling() + dX, selectedEdge.GetHead().Y.UnScaling() + dY,
-                    selectedEdge.GetEnd().X.UnScaling() + dX, selectedEdge.GetEnd().Y.UnScaling() + dY);
-                if (IsStreetLength_Visible)
-                {
-                    graph.DrawString(Math.Round(selectedEdge.GetLength(ScaleCoefficient), 2).ToString(), new Font(mainFormFont.FontFamily, 10f, FontStyle.Italic | FontStyle.Bold,
-                        GraphicsUnit.Point, mainFormFont.GdiCharSet), blackFontBrush,
-                        (selectedEdge.GetHead().X.UnScaling() + (selectedEdge.GetEnd().X.UnScaling() - selectedEdge.GetHead().X.UnScaling()) / 2 - 25),
-                        (selectedEdge.GetHead().Y.UnScaling() + (selectedEdge.GetEnd().Y.UnScaling() - selectedEdge.GetHead().Y.UnScaling()) / 2 - 10));
-                }
-            }
-        }
-
-
-        /// <summary>
-        /// Отрисовывает все перекрестки, содержащиеся на карте
-        /// </summary>
-        /// <param name="graph"></param>
-        private void DrawVertexes(Graphics graph)
-        {
-            foreach (var item in Map.vertexes.List)
-            {
-                //    if (selectedVertex != item)
-                graph.FillEllipse(PensCase.Point, item.X.UnScaling(), item.Y.UnScaling(), Width, Height);
-                if (item.TrafficLight != null && IsTrafficLight_Visible)
-                {
-                    graph.DrawImage(item.TrafficLight.IsRun ?
-                        item.TrafficLight.IsGreen ? Resources.greenLight3 : Resources.redLight3
-                        : Resources.nonLight3,
-                        new Rectangle((item.X + Width).UnScaling(), (item.Y + Height).UnScaling(), (int)Math.Round(Width * 1.2), Height * 2));
-                }
-            }
-            if (dynamic != null)
-            {
-                graph.DrawImage(Resources.Car, new Rectangle(dynamic.Drive.X.UnScaling() - Width,
-                           dynamic.Drive.Y.UnScaling() - Width, (int)(Width * 3.5), (int)(Height * 3.5)));
-                // graph.FillEllipse(PensCase.SelectedVertex, dynamic.Drive.X.UnScaling() - Width, dynamic.Drive.Y.UnScaling() - Width, Width * 2, Height * 2);
-            }
-            if (selectedVertex != null)
-            {
-                graph.FillEllipse(PensCase.SelectedVertex, selectedVertex.X.UnScaling(), selectedVertex.Y.UnScaling(), Width, Height);
-            }
-        }
-        public void ViewInDynamic()
-        {
-            dynamic = new Dynamic(Route.CurrentDriver);
-
-                foreach (var item in Map.vertexes.List)
-                {
-                    if (item.TrafficLight != null)
-                    {
-                        item.TrafficLight.IsRun = true;
-                        dynamic.timerTL.Tick += (o, e) => item.TrafficLight.Inc();
-                    }
-                }
-                dynamic.Start();
-        }
-
+    
         public void MakeStaticRoute()
         {
             if (Route.Way != null)
@@ -611,7 +419,6 @@ namespace TProject
             ViewPort.Invalidate();
         }
 
-        #endregion
 
         #region Работа с выделением объектов
 
@@ -653,8 +460,8 @@ namespace TProject
         /// <param name="y"></param>
         public void MoveVertex(int x, int y)
         {
-            selectedVertex.X = (x - dX).Scaling();
-            selectedVertex.Y = (y - dY).Scaling();
+            selectedVertex.X = (x - StaticViewer.Viewer.dX).Scaling();
+            selectedVertex.Y = (y - StaticViewer.Viewer.dY).Scaling();
         }
         /// <summary>
         /// Определяет, есть ли вершина в заданной точке
@@ -666,25 +473,25 @@ namespace TProject
         /// <returns></returns>
         public static bool IsPointInRectangle(int x1, int y1, int x2, int y2)
         {
-            return x1.UnScaling() + Width >= x2 && y1.UnScaling() + Height >= y2 && x2 >= x1.UnScaling() && y2 >= y1.UnScaling();
+            return x1.UnScaling() + StaticViewer.Width >= x2 && y1.UnScaling() + StaticViewer.Width >= y2 && x2 >= x1.UnScaling() && y2 >= y1.UnScaling();
         }
         public static bool IsPointOnEdge(int x, int y, int x1, int y1, int x2, int y2)
         {
-            if (x.Scaling() - Width <= Math.Max(x1, x2) && x.Scaling() + Width >= Math.Min(x1, x2) && y.Scaling() - Height <= Math.Max(y1, y2) && y.Scaling() + Height >= Math.Min(y1, y2))
+            if (x.Scaling() - StaticViewer.Width <= Math.Max(x1, x2) && x.Scaling() + StaticViewer.Width >= Math.Min(x1, x2) && y.Scaling() - StaticViewer.Width <= Math.Max(y1, y2) && y.Scaling() + StaticViewer.Width >= Math.Min(y1, y2))
             {
                 if (x2 == x1)
                 {
-                    return x.Scaling() >= x1 - Width && x.Scaling() <= x1 + Width;
+                    return x.Scaling() >= x1 - StaticViewer.Width && x.Scaling() <= x1 + StaticViewer.Width;
                 }
                 else if (y2 == y1)
                 {
-                    return y.Scaling() >= y1 - Width && y.Scaling() <= y1 + Width;
+                    return y.Scaling() >= y1 - StaticViewer.Width && y.Scaling() <= y1 + StaticViewer.Width;
                 }
                 else
                 {
                     double k = (double)(y2 - y1) / (double)(x2 - x1);
                     double pointY = k * x.Scaling() + y1 - k * x1;
-                    return pointY - Width <= y.Scaling() && pointY + Width >= y.Scaling();
+                    return pointY - StaticViewer.Width <= y.Scaling() && pointY + StaticViewer.Width >= y.Scaling();
                 }
             }
             return false;
@@ -705,11 +512,11 @@ namespace TProject
     {
         public static int Scaling(this int value)
         {
-            return (int)(value / Viewer.ViewPort.ZoomCurValue);
+            return (int)(value / MakeMap.ViewPort.ZoomCurValue);
         }
         public static int UnScaling(this int value)
         {
-            return (int)(value * Viewer.ViewPort.ZoomCurValue);
+            return (int)(value * MakeMap.ViewPort.ZoomCurValue);
         }
     }
 }

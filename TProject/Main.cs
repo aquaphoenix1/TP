@@ -413,7 +413,7 @@ namespace TProject
         private void Main_SizeChanged(object sender, EventArgs e)
         {
             label_Layers.Location = new Point(-17, panelSlideContainer.Height / 2 - 40);
-            if (Viewer.ViewPort == null || Viewer.ViewPort.View == null)
+            if (MakeMap.ViewPort == null || MakeMap.ViewPort.View == null)
             {
                 pictureBoxMap.Size = this.Size;
             }
@@ -431,11 +431,11 @@ namespace TProject
                             lastClickCoordY = e.Y;
                             if (Map.vertexes.GetSelected(e.X, e.Y))
                             {
-                                Viewer.ViewPort.View.ContextMenuStrip = contextMenuVertex;
-                                if (Viewer.ViewPort.SelectedVertex == Route.Start)
+                                MakeMap.ViewPort.View.ContextMenuStrip = contextMenuVertex;
+                                if (MakeMap.ViewPort.SelectedVertex == Route.Start)
                                 {
                                     wayFromToolStripMenuItem.Text = "Удалить флаг начала маршрута.";
-                                } else if (Viewer.ViewPort.SelectedVertex == Route.End)
+                                } else if (MakeMap.ViewPort.SelectedVertex == Route.End)
                                 {
                                     wayToВToolStripMenuItem.Text = "Удалить флаг конца маршрута.";
                                 }
@@ -447,11 +447,11 @@ namespace TProject
                             }
                             else if (Map.edges.GetSelected(e.X, e.Y))
                             {
-                                Viewer.ViewPort.View.ContextMenuStrip = contextMenuEdge;
+                                MakeMap.ViewPort.View.ContextMenuStrip = contextMenuEdge;
                             }
                             else
                             {
-                                Viewer.ViewPort.View.ContextMenuStrip = contextMenuMap;
+                                MakeMap.ViewPort.View.ContextMenuStrip = contextMenuMap;
                             }
                         }
                         break;
@@ -462,25 +462,25 @@ namespace TProject
                                 if ((isVertexMoved = Map.vertexes.GetSelected(e.X, e.Y)))
                                 {
                                     isVertexMoved = false;
-                                    Viewer.ViewPort.SaveCreatedEdge();
+                                    MakeMap.ViewPort.SaveCreatedEdge();
                                 }
                                 Cursor = Cursors.Arrow;
                             }
                             else if (!(isVertexMoved = Map.vertexes.GetSelected(e.X, e.Y)))
                             {
                                 Map.edges.GetSelected(e.X, e.Y);
-                                Viewer.ViewPort.UnSelectVertex();
+                                MakeMap.ViewPort.UnSelectVertex();
                             }
                             else
                             {
-                                Viewer.ViewPort.UnSelectEdge();
+                                MakeMap.ViewPort.UnSelectEdge();
                             }
                         }
                         break;
                     case MouseButtons.Middle:
                         {
-                            Viewer.ViewPort.MapLocationX = e.X;
-                            Viewer.ViewPort.MapLocationY = e.Y;
+                            MakeMap.ViewPort.MapLocationX = e.X;
+                            MakeMap.ViewPort.MapLocationY = e.Y;
                             isMapMoved = true;
                         }
                         break;
@@ -491,24 +491,24 @@ namespace TProject
             {
                 isCreatedEdge = false;
             }
-            Viewer.ViewPort.Invalidate();
+            MakeMap.ViewPort.Invalidate();
         }
 
         private void PictureBoxMap_MouseMove(object sender, MouseEventArgs e)
         {
             if (isMapMoved)
             {
-                Viewer.ViewPort.MoveViewPort(e.X, e.Y);
+                MakeMap.ViewPort.MoveViewPort(e.X, e.Y);
             }
             if (isVertexMoved)
             {
-                Viewer.ViewPort.MoveVertex(e.X, e.Y);
-                Viewer.ViewPort.Invalidate();
+                MakeMap.ViewPort.MoveVertex(e.X, e.Y);
+                MakeMap.ViewPort.Invalidate();
             }
             if (isCreatedEdge)
             {
-                Viewer.ViewPort.ModifyCreatedEdge(e.X, e.Y);
-                Viewer.ViewPort.Invalidate();
+                MakeMap.ViewPort.ModifyCreatedEdge(e.X, e.Y);
+                MakeMap.ViewPort.Invalidate();
             }
         }
 
@@ -530,7 +530,7 @@ namespace TProject
                     }
                     break;
             }
-            Viewer.ViewPort.Invalidate();
+            MakeMap.ViewPort.Invalidate();
         }
 
         private void ToolStripMenu_SubMap_Click(object sender, EventArgs e)
@@ -542,7 +542,7 @@ namespace TProject
                     Init(path: openSubMapFileDialog.FileName);
                 }
 
-                Viewer.ViewPort.Invalidate();
+                MakeMap.ViewPort.Invalidate();
             }
             catch (Exception) { }
         }
@@ -557,44 +557,44 @@ namespace TProject
 
         private void ToolStripMenu_AddVertex_Click(object sender, EventArgs e)
         {
-            Viewer.ViewPort.CreateVertex(lastClickCoordX, lastClickCoordY);
+            MakeMap.ViewPort.CreateVertex(lastClickCoordX, lastClickCoordY);
         }
 
         private void ToolStripMenu_AddEdge_Click(object sender, EventArgs e)
         {
             isCreatedEdge = true;
-            Viewer.ViewPort.CreateEdge(lastClickCoordX, lastClickCoordY);
+            MakeMap.ViewPort.CreateEdge(lastClickCoordX, lastClickCoordY);
             Cursor = Cursors.Cross;
         }
 
         private void ToolStripMenu_EditVertex_Click(object sender, EventArgs e)
         {
-            Viewer.ViewPort.EditVertexOptions();
+            MakeMap.ViewPort.EditVertexOptions();
         }
 
         private void ToolStripMenu_EditEdge_Click(object sender, EventArgs e)
         {
-            Viewer.ViewPort.EditEdgeOptions();
+            MakeMap.ViewPort.EditEdgeOptions();
         }
 
         private void ToolStripMenu_WayFrom_Click(object sender, EventArgs e)
         {
             if (Route.Start == null)
             {
-                Viewer.ViewPort.SelectStartVertex(lastClickCoordX, lastClickCoordY);
+                MakeMap.ViewPort.SelectStartVertex(lastClickCoordX, lastClickCoordY);
             }
             else
             {
-                if (Viewer.ViewPort.SelectedVertex == Route.Start)
+                if (MakeMap.ViewPort.SelectedVertex == Route.Start)
                     Route.Start = null;
-                else if (Viewer.ViewPort.SelectedVertex == Route.End)
+                else if (MakeMap.ViewPort.SelectedVertex == Route.End)
                 {
                     Route.End = null;
-                    Viewer.ViewPort.SelectStartVertex(lastClickCoordX, lastClickCoordY);
+                    MakeMap.ViewPort.SelectStartVertex(lastClickCoordX, lastClickCoordY);
                 }
                 else
                 {
-                    Viewer.ViewPort.SelectStartVertex(lastClickCoordX, lastClickCoordY);
+                    MakeMap.ViewPort.SelectStartVertex(lastClickCoordX, lastClickCoordY);
                 }
             }
 
@@ -612,26 +612,26 @@ namespace TProject
             //    }
             //    else
             //        Viewer.ViewPort.SelectStartVertex(lastClickCoordX, lastClickCoordY);
-                Viewer.ViewPort.Invalidate();
+                MakeMap.ViewPort.Invalidate();
         }
 
         private void ToolStripMenu_WayToВ_Click(object sender, EventArgs e)
         {
             if (Route.End == null)
             {
-                Viewer.ViewPort.SelectEndVertex(lastClickCoordX, lastClickCoordY);
+                MakeMap.ViewPort.SelectEndVertex(lastClickCoordX, lastClickCoordY);
             }
             else
             {
-                if (Viewer.ViewPort.SelectedVertex == Route.End)
+                if (MakeMap.ViewPort.SelectedVertex == Route.End)
                     Route.End = null;
-                else if (Viewer.ViewPort.SelectedVertex == Route.Start)
+                else if (MakeMap.ViewPort.SelectedVertex == Route.Start)
                 {
                     Route.Start = null;
-                    Viewer.ViewPort.SelectEndVertex(lastClickCoordX, lastClickCoordY);
+                    MakeMap.ViewPort.SelectEndVertex(lastClickCoordX, lastClickCoordY);
                 }
                 else { 
-                    Viewer.ViewPort.SelectEndVertex(lastClickCoordX, lastClickCoordY);
+                    MakeMap.ViewPort.SelectEndVertex(lastClickCoordX, lastClickCoordY);
                 }
             }
 
@@ -649,7 +649,7 @@ namespace TProject
             //}
             //else
             //    Viewer.ViewPort.SelectEndVertex(lastClickCoordX, lastClickCoordY);
-            Viewer.ViewPort.Invalidate();
+            MakeMap.ViewPort.Invalidate();
         }
 
         private void PanelSlide_Click(object sender, EventArgs e)
@@ -664,49 +664,49 @@ namespace TProject
             button_Ok_Сalibration.Enabled = true;
             button_Calibration.Enabled = false;
             callibrationEdge = new Edge(new Vertex(20.UnScaling(), 50.UnScaling()), new Vertex(60.UnScaling(), 50.UnScaling()));
-            Viewer.ViewPort.Invalidate();
+            MakeMap.ViewPort.Invalidate();
 
-            Viewer.ViewPort.View.MouseDown -= PictureBoxMap_MouseDown;
-            Viewer.ViewPort.View.MouseMove -= PictureBoxMap_MouseMove;
-            Viewer.ViewPort.View.MouseUp -= PictureBoxMap_MouseUp;
+            MakeMap.ViewPort.View.MouseDown -= PictureBoxMap_MouseDown;
+            MakeMap.ViewPort.View.MouseMove -= PictureBoxMap_MouseMove;
+            MakeMap.ViewPort.View.MouseUp -= PictureBoxMap_MouseUp;
 
-            Viewer.ViewPort.View.MouseDown += Сalibration_MouseDown;
-            Viewer.ViewPort.View.MouseMove += Сalibration_MouseMove;
-            Viewer.ViewPort.View.MouseUp += Сalibration_MouseUp;
+            MakeMap.ViewPort.View.MouseDown += Сalibration_MouseDown;
+            MakeMap.ViewPort.View.MouseMove += Сalibration_MouseMove;
+            MakeMap.ViewPort.View.MouseUp += Сalibration_MouseUp;
 
-            Viewer.ViewPort.View.Paint += View_Paint;
+            MakeMap.ViewPort.View.Paint += View_Paint;
         }
 
         private void Button_Ok_Сalibration_Click(object sender, EventArgs e)
         {
             Calibration(callibrationEdge.GetLength(1));
 
-            Viewer.ViewPort.View.MouseDown += PictureBoxMap_MouseDown;
-            Viewer.ViewPort.View.MouseMove += PictureBoxMap_MouseMove;
-            Viewer.ViewPort.View.MouseUp += PictureBoxMap_MouseUp;
+            MakeMap.ViewPort.View.MouseDown += PictureBoxMap_MouseDown;
+            MakeMap.ViewPort.View.MouseMove += PictureBoxMap_MouseMove;
+            MakeMap.ViewPort.View.MouseUp += PictureBoxMap_MouseUp;
 
-            Viewer.ViewPort.View.MouseDown -= Сalibration_MouseDown;
-            Viewer.ViewPort.View.MouseMove -= Сalibration_MouseMove;
-            Viewer.ViewPort.View.MouseUp -= Сalibration_MouseUp;
-            Viewer.ViewPort.View.Paint -= View_Paint;
+            MakeMap.ViewPort.View.MouseDown -= Сalibration_MouseDown;
+            MakeMap.ViewPort.View.MouseMove -= Сalibration_MouseMove;
+            MakeMap.ViewPort.View.MouseUp -= Сalibration_MouseUp;
+            MakeMap.ViewPort.View.Paint -= View_Paint;
 
             callibrationEdge = null;
-            Viewer.ViewPort.Invalidate();
+            MakeMap.ViewPort.Invalidate();
 
             button_Ok_Сalibration.Enabled = false;
             button_Calibration.Enabled = true;
         }
         private void Calibration(double value)
         {
-            Viewer.ViewPort.ScaleCoefficient = 100 / (value);
+            MakeMap.ViewPort.ScaleCoefficient = 100 / (value);
 
-            textBox_CurrentCoefficient.Text = Viewer.ViewPort.ScaleCoefficient.ToString();
+            textBox_CurrentCoefficient.Text = MakeMap.ViewPort.ScaleCoefficient.ToString();
         }
 
         #region Калибровка
         private void View_Paint(object sender, PaintEventArgs e)
         {
-            int dX = Viewer.Width;
+            int dX = StaticViewer.Width;
             if (selectedLabel != null)
             {
                 e.Graphics.FillEllipse(PensCase.SelectedVertex, selectedLabel.X.UnScaling(), selectedLabel.Y.UnScaling(), dX, dX);
@@ -744,32 +744,32 @@ namespace TProject
         #region Управление слоями
         private void CheckBox__TrafficLight_CheckedChanged(object sender, EventArgs e)
         {
-            Viewer.ViewPort.IsTrafficLight_Visible = ((CheckBox)sender).Checked;
-            Viewer.ViewPort.Invalidate();
+            MakeMap.ViewPort.IsTrafficLight_Visible = ((CheckBox)sender).Checked;
+            MakeMap.ViewPort.Invalidate();
         }
 
         private void CheckBox_Police_CheckedChanged(object sender, EventArgs e)
         {
-            Viewer.ViewPort.IsPolice_Visible = ((CheckBox)sender).Checked;
-            Viewer.ViewPort.Invalidate();
+            MakeMap.ViewPort.IsPolice_Visible = ((CheckBox)sender).Checked;
+            MakeMap.ViewPort.Invalidate();
         }
 
         private void CheckBox_Sign_CheckedChanged(object sender, EventArgs e)
         {
-            Viewer.ViewPort.IsSign_Visible = ((CheckBox)sender).Checked;
-            Viewer.ViewPort.Invalidate();
+            MakeMap.ViewPort.IsSign_Visible = ((CheckBox)sender).Checked;
+            MakeMap.ViewPort.Invalidate();
         }
 
         private void CheckBox_StreetLength_CheckedChanged(object sender, EventArgs e)
         {
-            Viewer.ViewPort.IsStreetLength_Visible = ((CheckBox)sender).Checked;
-            Viewer.ViewPort.Invalidate();
+            MakeMap.ViewPort.IsStreetLength_Visible = ((CheckBox)sender).Checked;
+            MakeMap.ViewPort.Invalidate();
         }
 
         private void CheckBox_StreetName_CheckedChanged(object sender, EventArgs e)
         {
-            Viewer.ViewPort.IsStreetName_Visible = ((CheckBox)sender).Checked;
-            Viewer.ViewPort.Invalidate();
+            MakeMap.ViewPort.IsStreetName_Visible = ((CheckBox)sender).Checked;
+            MakeMap.ViewPort.Invalidate();
         }
         #endregion
 
@@ -881,17 +881,17 @@ namespace TProject
 
         private void ToolStripMenuItem_DeleteEdge_Click(object sender, EventArgs e)
         {
-            Viewer.ViewPort.DeleteEdge(lastClickCoordX, lastClickCoordY);
+            MakeMap.ViewPort.DeleteEdge(lastClickCoordX, lastClickCoordY);
         }
 
         private void ToolStripMenuItem_DeleteVertex_Click(object sender, EventArgs e)
         {
-            Viewer.ViewPort.DelteVertex(lastClickCoordX, lastClickCoordY);
+            MakeMap.ViewPort.DelteVertex(lastClickCoordX, lastClickCoordY);
         }
 
         private void ToolStripMenuItem_MakeStaticRoute_Click(object sender, EventArgs e)
         {
-            Viewer.ViewPort.MakeStaticRoute();
+            MakeMap.ViewPort.MakeStaticRoute();
         }
 
         public enum Criterial { Time, Length, Price }
@@ -933,45 +933,45 @@ namespace TProject
             int w = 0;
             int h = 0;
 
-            if (Viewer.ViewPort != null)
+            if (MakeMap.ViewPort != null)
             {
-                w = Viewer.ViewPort.View.Width;
-                h = Viewer.ViewPort.View.Height;
-                Map.vertexes.RePaint -= Viewer.ViewPort.Invalidate;
-                Map.edges.RePaint -= Viewer.ViewPort.Invalidate;
-                Viewer.ViewPort.View.MouseDown -= PictureBoxMap_MouseDown;
-                Viewer.ViewPort.View.MouseMove -= PictureBoxMap_MouseMove;
-                Viewer.ViewPort.View.MouseUp -= PictureBoxMap_MouseUp;
+                w = MakeMap.ViewPort.View.Width;
+                h = MakeMap.ViewPort.View.Height;
+                Map.vertexes.RePaint -= MakeMap.ViewPort.Invalidate;
+                Map.edges.RePaint -= MakeMap.ViewPort.Invalidate;
+                MakeMap.ViewPort.View.MouseDown -= PictureBoxMap_MouseDown;
+                MakeMap.ViewPort.View.MouseMove -= PictureBoxMap_MouseMove;
+                MakeMap.ViewPort.View.MouseUp -= PictureBoxMap_MouseUp;
             }
             else
             {
                 Map.InitMap();
             }
-            Viewer.CreateViewer(pictureBoxMap, panelMapSubstrate, Font);
+            MakeMap.CreateViewer(pictureBoxMap, panelMapSubstrate, Font);
 
-            Map.vertexes.RePaint += Viewer.ViewPort.Invalidate;
-            Map.edges.RePaint += Viewer.ViewPort.Invalidate;
+            Map.vertexes.RePaint += MakeMap.ViewPort.Invalidate;
+            Map.edges.RePaint += MakeMap.ViewPort.Invalidate;
 
             if (path == null)
             {
-                Viewer.ViewPort.OpenPicture(h, w, img);
+                MakeMap.ViewPort.OpenPicture(h, w, img);
             }
             else
             {
-                Viewer.ViewPort.OpenPicture(h, w, path);
+                MakeMap.ViewPort.OpenPicture(h, w, path);
             }
 
-            Viewer.ViewPort.IsStreetLength_Visible = checkBox_StreetLength.Checked;
-            Viewer.ViewPort.IsPolice_Visible = checkBox_Police.Checked;
-            Viewer.ViewPort.IsSign_Visible = checkBox_Sign.Checked;
-            Viewer.ViewPort.IsStreetName_Visible = checkBox_StreetName.Checked;
-            Viewer.ViewPort.IsTrafficLight_Visible = checkBox__TrafficLight.Checked;
+            MakeMap.ViewPort.IsStreetLength_Visible = checkBox_StreetLength.Checked;
+            MakeMap.ViewPort.IsPolice_Visible = checkBox_Police.Checked;
+            MakeMap.ViewPort.IsSign_Visible = checkBox_Sign.Checked;
+            MakeMap.ViewPort.IsStreetName_Visible = checkBox_StreetName.Checked;
+            MakeMap.ViewPort.IsTrafficLight_Visible = checkBox__TrafficLight.Checked;
 
-            Viewer.ViewPort.View.MouseDown += PictureBoxMap_MouseDown;
-            Viewer.ViewPort.View.MouseMove += PictureBoxMap_MouseMove;
-            Viewer.ViewPort.View.MouseUp += PictureBoxMap_MouseUp;
+            MakeMap.ViewPort.View.MouseDown += PictureBoxMap_MouseDown;
+            MakeMap.ViewPort.View.MouseMove += PictureBoxMap_MouseMove;
+            MakeMap.ViewPort.View.MouseUp += PictureBoxMap_MouseUp;
 
-            Viewer.ViewPort.View.ContextMenuStrip = contextMenuVertex;
+            MakeMap.ViewPort.View.ContextMenuStrip = contextMenuVertex;
             Calibration(100);
 
             ToolStripMenuItem_Save.Enabled = true;
@@ -980,7 +980,7 @@ namespace TProject
         }
         private void ToolStripMenuItem_Save_Click(object sender, EventArgs e)
         {
-            DAO.InsertMap(Map.vertexes, Map.edges, Viewer.ViewPort.View.Image, Map.Name);
+            DAO.InsertMap(Map.vertexes, Map.edges, MakeMap.ViewPort.View.Image, Map.Name);
         }
 
         private void ToolStripMenuItem_SaveAS_Click(object sender, EventArgs e)
@@ -1009,8 +1009,8 @@ namespace TProject
                 Map.vertexes = vert;
                 Map.edges = edg;
 
-                Map.vertexes.RePaint += Viewer.ViewPort.Invalidate;
-                Map.edges.RePaint += Viewer.ViewPort.Invalidate;
+                Map.vertexes.RePaint += MakeMap.ViewPort.Invalidate;
+                Map.edges.RePaint += MakeMap.ViewPort.Invalidate;
 
                 ToolStripMenuItem_Save.Enabled = true;
                 ToolStripMenuItem_SaveAs.Enabled = true;
@@ -1033,8 +1033,8 @@ namespace TProject
             Map.vertexes = vert;
             Map.edges = edg;
 
-            Map.vertexes.RePaint += Viewer.ViewPort.Invalidate;
-            Map.edges.RePaint += Viewer.ViewPort.Invalidate;
+            Map.vertexes.RePaint += MakeMap.ViewPort.Invalidate;
+            Map.edges.RePaint += MakeMap.ViewPort.Invalidate;
 
             ToolStripMenuItem_Save.Enabled = true;
             ToolStripMenuItem_SaveAs.Enabled = true;
@@ -1049,7 +1049,7 @@ namespace TProject
         {
             string path = System.IO.Directory.GetCurrentDirectory();
             path = path.Replace(@"bin\Debug", "");
-            Process.Start("chrome.exe", path + "Resources\\index.html");
+            Process.Start(path + "Resources\\index.html");
         }
 
         private void ToolStripMenuItem_AboutDeveloper_Click(object sender, EventArgs e)
@@ -1060,8 +1060,8 @@ namespace TProject
 
         private void ToolStripMenuItem_DynamicView_Click(object sender, EventArgs e)
         {
-            Viewer.ViewPort.MakeStaticRoute();
-            Viewer.ViewPort.ViewInDynamic();
+            MakeMap.ViewPort.MakeStaticRoute();
+            Dynamic.ViewInDynamic();
         }
     }
 }

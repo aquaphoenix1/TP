@@ -9,14 +9,14 @@ namespace TProject.Coll
         {
             for (int i = 0; i < List.Count; i++)
             {
-                if (Viewer.IsPointInRectangle(List.ElementAt(i).X, List.ElementAt(i).Y, x, y))
+                if (MakeMap.IsPointInRectangle(List.ElementAt(i).X, List.ElementAt(i).Y, x, y))
                 {
-                    Viewer.ViewPort.SelectVertex(List.ElementAt(i));
+                    MakeMap.ViewPort.SelectVertex(List.ElementAt(i));
                     return true;
                 }
             }
 
-            Viewer.ViewPort.UnSelectAll();
+            MakeMap.ViewPort.UnSelectAll();
             return false;
         }
 
@@ -25,10 +25,10 @@ namespace TProject.Coll
             selected = null;
             for (int i = 0; i < List.Count; i++)
             {
-                if (Viewer.IsPointInRectangle(List.ElementAt(i).X, List.ElementAt(i).Y, x, y))
+                if (MakeMap.IsPointInRectangle(List.ElementAt(i).X, List.ElementAt(i).Y, x, y))
                 {
                     selected = List.ElementAt(i);
-                    Viewer.ViewPort.Invalidate();
+                    MakeMap.ViewPort.Invalidate();
                     return true;
                 }
             }

@@ -9,15 +9,15 @@ namespace TProject.Coll
         {
             for (int i = 0; i < List.Count; i++)
             {
-                if (Viewer.IsPointOnEdge(x, y, List.ElementAt(i).GetHead().X, List.ElementAt(i).GetHead().Y,
+                if (MakeMap.IsPointOnEdge(x, y, List.ElementAt(i).GetHead().X, List.ElementAt(i).GetHead().Y,
                     List.ElementAt(i).GetEnd().X, List.ElementAt(i).GetEnd().Y))
                 {
-                    Viewer.ViewPort.SelectEdge(List.ElementAt(i));
+                    MakeMap.ViewPort.SelectEdge(List.ElementAt(i));
                     return true;
                 }
             }
 
-            Viewer.ViewPort.UnSelectAll();
+            MakeMap.ViewPort.UnSelectAll();
             return false;
         }
         public bool TryCopy(long id1, double id2)

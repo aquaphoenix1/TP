@@ -110,9 +110,9 @@ namespace TProject.Forms
                     {
                         try
                         {
-                            if (Viewer.ViewPort != null)
+                            if (MakeMap.ViewPort != null)
                             {
-                                DAO.InsertMap(Map.vertexes, Map.edges, Viewer.ViewPort.View.Image, name);
+                                DAO.InsertMap(Map.vertexes, Map.edges, MakeMap.ViewPort.View.Image, name);
                             }
                             else
                             {

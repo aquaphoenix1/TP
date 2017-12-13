@@ -19,6 +19,9 @@ namespace TProject.Way
         public int step;
         private double path;
 
+        static Dynamic dynamic;
+
+
         public Driver.Driver driver;
         public Point Drive;
         private Edge currEdge;
@@ -28,6 +31,7 @@ namespace TProject.Way
         Vertex start;
         Vertex end;
 
+        public static Dynamic Dynamics { get => dynamic; set => dynamic = value; }
 
         public Dynamic(Driver.Driver dr)
         {
@@ -45,6 +49,21 @@ namespace TProject.Way
             timerTL.Start();
         }
 
+        public static void ViewInDynamic()
+        {
+            Dynamics = new Dynamic(Route.CurrentDriver);
+
+            foreach (var item in Map.vertexes.List)
+            {
+                if (item.TrafficLight != null)
+                {
+                    item.TrafficLight.IsRun = true;
+                    Dynamics.timerTL.Tick += (o, e) => item.TrafficLight.Inc();
+                }
+            }
+            Dynamics.Start();
+        }
+
         private void IncGlobalTime(object sender)
         {
             if (!isWait)
@@ -56,7 +75,7 @@ namespace TProject.Way
 
                     currEdge = Route.GetEdge(start, end, Map.edges);
 
-                    wayLengh = currEdge.GetLength(Viewer.ViewPort.ScaleCoefficient);
+                    wayLengh = currEdge.GetLength(MakeMap.ViewPort.ScaleCoefficient);
 
                     currSpeed = 60;
                     if (driver.IsViolateTL)
@@ -64,7 +83,7 @@ namespace TProject.Way
                     else if (currEdge.SignMaxSpeed != null)
                         currSpeed = Math.Min(currEdge.SignMaxSpeed.Count, driver.Car.Speed);
                     currSpeed *= currEdge.Coat.Coeff;
-                    currSpeed = (currSpeed/*Скорость*/ * 1000 / Viewer.ViewPort.ScaleCoefficient) / 60 / 60 / 10 /*Interval 100ms*/;
+                    currSpeed = (currSpeed/*Скорость*/ * 1000 / MakeMap.ViewPort.ScaleCoefficient) / 60 / 60 / 10 /*Interval 100ms*/;
                 }
 
                 double cos = (start.X - end.X) / wayLengh;
@@ -94,7 +113,7 @@ namespace TProject.Way
                 ((Timer)(sender)).Stop();
             }
 
-            Viewer.ViewPort.Invalidate();
+            MakeMap.ViewPort.Invalidate();
         }
     }
 }

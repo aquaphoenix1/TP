@@ -81,7 +81,7 @@ namespace TProject
                 }                         
                 Vertex.TrafficLight = new TrafficLight(green, red);
             }
-            Viewer.ViewPort.Invalidate();
+            MakeMap.ViewPort.Invalidate();
             DialogResult = DialogResult.OK;
         }
 
