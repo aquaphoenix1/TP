@@ -1,6 +1,4 @@
-﻿using TProject.AddAndEditForms;
-
-namespace TProject
+﻿namespace TProject
 {
     partial class FineForm
     {

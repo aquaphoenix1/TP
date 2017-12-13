@@ -82,7 +82,6 @@
     <Compile Include="AddAndEditForms\CoatingForm.Designer.cs">
       <DependentUpon>CoatingForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddAndEditForms\Validator.cs" />
     <Compile Include="Coll\AbstractCollection.cs" />
     <Compile Include="Coll\Edges.cs" />
     <Compile Include="Coll\Vertexes.cs" />

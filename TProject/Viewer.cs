@@ -20,7 +20,6 @@ namespace TProject
         private PictureBox view;
         private Font mainFormFont;
         public PictureBox View => view;
-        private int globalTime = 0;
         Dynamic dynamic;
 
         /// <summary>
@@ -78,6 +77,7 @@ namespace TProject
         public static Viewer ViewPort = null;
 
         private Vertex selectedVertex = null;
+        public Vertex SelectedVertex => selectedVertex;
         private Edge selectedEdge = null;
 
         private Viewer(PictureBox pb, Panel panel, Font font)
@@ -429,20 +429,28 @@ namespace TProject
             }
             if (IsSign_Visible)
             {
-                foreach (var item in Map.edges.List.Where(o => o.SignMaxSpeed != null))
+                foreach (var item in Map.edges.List.Where(o => o.SignMaxSpeed != null || o.SignOneWay))
                 {
-                    graph.FillEllipse(new SolidBrush(Color.White),
-                        (item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 + 24)
-                        , (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 11), Width * 2 + 3, Width * 2 + 3);
-                    graph.DrawEllipse(new Pen(Color.Red, (float)(Width / 2 - 2)),
-                        (item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 + 24)
-                        , (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 11), Width * 2 + 3, Width * 2 + 3);
+                    if (item.SignMaxSpeed != null)
+                    {
+                        graph.FillEllipse(new SolidBrush(Color.White),
+                            (item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 + 24)
+                            , (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 11), Width * 2 + 3, Width * 2 + 3);
+                        graph.DrawEllipse(new Pen(Color.Red, (float)(Width / 2 - 2)),
+                            (item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 + 24)
+                            , (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 11), Width * 2 + 3, Width * 2 + 3);
 
 
-                    graph.DrawString(item.SignMaxSpeed.Count.ToString(), new Font(mainFormFont.FontFamily, 10f, FontStyle.Bold,
-                       GraphicsUnit.Point, mainFormFont.GdiCharSet), blackFontBrush,
-                       (item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 + 26),
-                       (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 7));
+                        graph.DrawString(item.SignMaxSpeed.Count.ToString(), new Font(mainFormFont.FontFamily, 10f, FontStyle.Bold,
+                           GraphicsUnit.Point, mainFormFont.GdiCharSet), blackFontBrush,
+                           (item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 + 26),
+                           (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 7));
+                    }
+                    if (item.SignOneWay)
+                    {
+                        graph.DrawImage(Resources.oneWaySign, new Rectangle(item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 + 54,
+                           (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2  - 11), Width * 2 + 3, Width * 2 + 3));
+                    }
                 }
             }
 

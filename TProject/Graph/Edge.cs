@@ -15,7 +15,7 @@ namespace TProject.Graph
 
         public bool IsBilateral { get; set; }
 
-        public bool SignTwoWay { get; set; }
+        public bool SignOneWay { get; set; }
         public Sign SignMaxSpeed { get; set; }
 
         public Police Policemen { get; set; }
@@ -110,6 +110,8 @@ namespace TProject.Graph
             double speed = SignMaxSpeed != null ? SignMaxSpeed.Count : 60;
             speed = driver.IsViolateTL ? driver.Car.Speed : speed;
 
+            speed = speed * 1000 / 3600;
+
             double time = GetLength(Viewer.ViewPort.ScaleCoefficient) / speed * Coat.Coeff;
 
             if (end.TrafficLight != null)
@@ -162,7 +164,7 @@ namespace TProject.Graph
             return this.EndVertex == vertex;
         }
         
-        internal static Edge CreateEdge(long ID, Vertex head, Vertex end, Coating coat, string name, bool isBelaterial, bool signTwoWay, Sign signMaxSpeed, Police polieceman)
+        internal static Edge CreateEdge(long ID, Vertex head, Vertex end, Coating coat, string name, bool isBelaterial, bool signOneWay, Sign signMaxSpeed, Police polieceman)
         {
             return new Edge
             {
@@ -172,7 +174,7 @@ namespace TProject.Graph
                 NameStreet = name,
                 Coat = coat,
                 IsBilateral = isBelaterial,
-                SignTwoWay = signTwoWay,
+                SignOneWay = signOneWay,
                 SignMaxSpeed = signMaxSpeed,
                 Policemen = polieceman
             };

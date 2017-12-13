@@ -27,8 +27,8 @@ namespace TProject
 
         public DriverForm(string FIO, string typeDriver, Car car) : this(false)
         {
-            driver = Driver.Driver.CreateDriver(FIO, typeDriver.Equals("Нарушитель"), car);
-            checkBoxIsIntruder.Checked = typeDriver.Equals("Нарушитель");
+            driver = Driver.Driver.CreateDriver(FIO, typeDriver.Equals("True"), car);
+            checkBoxIsIntruder.Checked = typeDriver.Equals("True");
             comboBoxIDAuto.SelectedIndex = comboBoxIDAuto.FindString(car.TypeName);
 
             textBoxFIO.Text = FIO;

@@ -8,7 +8,6 @@ namespace TProject.Way
         public int RedSeconds { get; set; }
 
         public delegate void TLightTurnMethod();
-        public event TLightTurnMethod TLightTurn;
 
         public bool IsGreen { get; set; }
         public bool IsRun { get; set; }

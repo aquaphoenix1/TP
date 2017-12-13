@@ -432,6 +432,18 @@ namespace TProject
                             if (Map.vertexes.GetSelected(e.X, e.Y))
                             {
                                 Viewer.ViewPort.View.ContextMenuStrip = contextMenuVertex;
+                                if (Viewer.ViewPort.SelectedVertex == Route.Start)
+                                {
+                                    wayFromToolStripMenuItem.Text = "Удалить флаг начала маршрута.";
+                                } else if (Viewer.ViewPort.SelectedVertex == Route.End)
+                                {
+                                    wayToВToolStripMenuItem.Text = "Удалить флаг конца маршрута.";
+                                }
+                                else
+                                {
+                                    wayFromToolStripMenuItem.Text = "Маршрут из...";
+                                    wayToВToolStripMenuItem.Text = "Маршрут в...";
+                                }
                             }
                             else if (Map.edges.GetSelected(e.X, e.Y))
                             {
@@ -567,12 +579,77 @@ namespace TProject
 
         private void ToolStripMenu_WayFrom_Click(object sender, EventArgs e)
         {
-            Viewer.ViewPort.SelectStartVertex(lastClickCoordX, lastClickCoordY);
+            if (Route.Start == null)
+            {
+                Viewer.ViewPort.SelectStartVertex(lastClickCoordX, lastClickCoordY);
+            }
+            else
+            {
+                if (Viewer.ViewPort.SelectedVertex == Route.Start)
+                    Route.Start = null;
+                else if (Viewer.ViewPort.SelectedVertex == Route.End)
+                {
+                    Route.End = null;
+                    Viewer.ViewPort.SelectStartVertex(lastClickCoordX, lastClickCoordY);
+                }
+                else
+                {
+                    Viewer.ViewPort.SelectStartVertex(lastClickCoordX, lastClickCoordY);
+                }
+            }
+
+
+            //{
+            //    if (Route.Start != null)
+            //    {
+            //        if (Route.Start == Viewer.ViewPort.SelectedVertex)
+            //            Route.Start = null;
+            //        else if (Route.End == Viewer.ViewPort.SelectedVertex)
+            //        {
+            //            Route.End = null;
+            //            Viewer.ViewPort.SelectStartVertex(lastClickCoordX, lastClickCoordY);
+            //        }
+            //    }
+            //    else
+            //        Viewer.ViewPort.SelectStartVertex(lastClickCoordX, lastClickCoordY);
+                Viewer.ViewPort.Invalidate();
         }
 
         private void ToolStripMenu_WayToВ_Click(object sender, EventArgs e)
         {
-            Viewer.ViewPort.SelectEndVertex(lastClickCoordX, lastClickCoordY);
+            if (Route.End == null)
+            {
+                Viewer.ViewPort.SelectEndVertex(lastClickCoordX, lastClickCoordY);
+            }
+            else
+            {
+                if (Viewer.ViewPort.SelectedVertex == Route.End)
+                    Route.End = null;
+                else if (Viewer.ViewPort.SelectedVertex == Route.Start)
+                {
+                    Route.Start = null;
+                    Viewer.ViewPort.SelectEndVertex(lastClickCoordX, lastClickCoordY);
+                }
+                else { 
+                    Viewer.ViewPort.SelectEndVertex(lastClickCoordX, lastClickCoordY);
+                }
+            }
+
+
+
+
+            //if (Route.End != null) {
+            //    if(Route.End == Viewer.ViewPort.SelectedVertex)
+            //        Route.End = null;
+            //    else if (Route.Start == Viewer.ViewPort.SelectedVertex)
+            //    {
+            //        Route.Start = null;
+            //        Viewer.ViewPort.SelectEndVertex(lastClickCoordX, lastClickCoordY);
+            //    }
+            //}
+            //else
+            //    Viewer.ViewPort.SelectEndVertex(lastClickCoordX, lastClickCoordY);
+            Viewer.ViewPort.Invalidate();
         }
 
         private void PanelSlide_Click(object sender, EventArgs e)
@@ -839,11 +916,13 @@ namespace TProject
         {
             if (Route.Start == null || Route.End == null)
             {
+                ToolStripMenuItem_DynamicView.Enabled = false;
                 ToolStripMenuItem_StaticView.Enabled = false;
                 ToolStripMenuItem_RouteParameters.Enabled = false;
             }
             else
             {
+                ToolStripMenuItem_DynamicView.Enabled = true;
                 ToolStripMenuItem_StaticView.Enabled = true;
                 ToolStripMenuItem_RouteParameters.Enabled = true;
             }
