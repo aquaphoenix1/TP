@@ -151,7 +151,7 @@ namespace TProject.Graph
             return EndVertex;
         }
 
-        public Edge() : base() {
+        private Edge() : base() {
             IsBilateral = true;
         }
 
@@ -167,7 +167,7 @@ namespace TProject.Graph
             return this.EndVertex == vertex;
         }
         
-        internal static Edge CreateEdge(long ID, Vertex head, Vertex end, Coating coat, string name, bool isBelaterial, bool signOneWay, Sign signMaxSpeed, Police polieceman)
+        public static Edge CreateEdge(long ID, Vertex head, Vertex end, Coating coat, string name, bool isBelaterial, Sign signMaxSpeed, Police polieceman)
         {
             return new Edge
             {
@@ -177,7 +177,6 @@ namespace TProject.Graph
                 NameStreet = name,
                 Coat = coat,
                 IsBilateral = isBelaterial,
-                //SignOneWay = signOneWay,
                 SignMaxSpeed = signMaxSpeed,
                 Policemen = polieceman
             };
