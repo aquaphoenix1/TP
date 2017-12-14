@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using TProject.Graph;
 
 namespace TProject
 {
@@ -112,7 +111,7 @@ namespace TProject
 
         private void ButtonAccept_KeyUp(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 Accept();
             }

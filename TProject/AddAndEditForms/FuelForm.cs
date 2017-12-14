@@ -130,25 +130,12 @@ namespace TProject
             }
         }
 
-        private void TextBoxPrice_KeyUp(object sender, KeyEventArgs e)
-        {
-            if(e.KeyCode == Keys.Enter)
-            {
-                Accept();
-            }
-        }
-
         private void ButtonAccept_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 Accept();
             }
-        }
-
-        private void TextBoxPrice_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            
         }
     }
 }

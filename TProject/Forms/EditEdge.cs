@@ -110,8 +110,6 @@ namespace TProject
                 List<object> coat = Coating.ListSurface.First(coating => coating[0].ToString().Equals(coatingComboBox.SelectedItem.ToString()));
                 Edge.Coat = Coating.CreateCoating(coat[0].ToString(), double.Parse(coat[1].ToString()));
 
-
-
                 Edge.IsBilateral= !signOneWayCheckBox.Checked;
             }
 

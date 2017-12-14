@@ -262,7 +262,7 @@ namespace TProject
                         List<object> l = listTF.First(fl => fl[0].ToString().Equals(vert[4].ToString()) && fl[3].ToString().Equals(vert[3].ToString()));
                         tf = TrafficLight.CreateTrafficLight(long.Parse(l[0].ToString()), int.Parse(l[1].ToString()), int.Parse(l[2].ToString()));
                     }
-                    vertexes.AddNoEvent(Vertex.CreateVertex(long.Parse(vert[0].ToString()), int.Parse(vert[1].ToString()),int.Parse(vert[2].ToString()), tf));
+                    vertexes.AddNoEvent(Vertex.CreateVertex(long.Parse(vert[0].ToString()), int.Parse(vert[1].ToString()), int.Parse(vert[2].ToString()), tf));
                 }
 
                 edges = new Edges();

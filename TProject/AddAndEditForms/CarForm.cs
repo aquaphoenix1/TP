@@ -94,93 +94,93 @@ namespace TProject
                     {
                         Edit();
                     }
-                }                                                         
+                }
             }
         }
 
-    private void ButtonAccept_Click(object sender, EventArgs e)
-    {
-        Accept();
-    }
-
-    private void Add()
-    {
-        if (new CarDAO().Insert(car))
-        {
-            Main.IsChanged = true;
-
-            Close();
-        }
-        else
-        {
-            MessageBox.Show("Данная запись уже существует!");
-        }
-    }
-
-    private void Edit()
-    {
-        if (new CarDAO().Update(car, ID))
-        {
-            Main.IsChanged = true;
-
-            Close();
-        }
-        else
-        {
-            MessageBox.Show("Данная запись уже существует!");
-        }
-    }
-
-    private void TextBoxModel_TextChanged(object sender, EventArgs e)
-    {
-        if (string.IsNullOrWhiteSpace(textBoxModel.Text) || string.IsNullOrEmpty(textBoxModel.Text))
-        {
-            textBoxModel.BackColor = Color.Red;
-        }
-        else
-        {
-            textBoxModel.BackColor = Color.White;
-        }
-    }
-
-    private void TextBoxModel_KeyUp(object sender, KeyEventArgs e)
-    {
-        if (e.KeyCode == Keys.Enter)
+        private void ButtonAccept_Click(object sender, EventArgs e)
         {
             Accept();
         }
-    }
 
-    private void ComboBoxIDFuel_KeyUp(object sender, KeyEventArgs e)
-    {
-        if (e.KeyCode == Keys.Enter)
+        private void Add()
         {
-            Accept();
+            if (new CarDAO().Insert(car))
+            {
+                Main.IsChanged = true;
+
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Данная запись уже существует!");
+            }
+        }
+
+        private void Edit()
+        {
+            if (new CarDAO().Update(car, ID))
+            {
+                Main.IsChanged = true;
+
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Данная запись уже существует!");
+            }
+        }
+
+        private void TextBoxModel_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBoxModel.Text) || string.IsNullOrEmpty(textBoxModel.Text))
+            {
+                textBoxModel.BackColor = Color.Red;
+            }
+            else
+            {
+                textBoxModel.BackColor = Color.White;
+            }
+        }
+
+        private void TextBoxModel_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Accept();
+            }
+        }
+
+        private void ComboBoxIDFuel_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Accept();
+            }
+        }
+
+        private void TextBoxConsumption_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Accept();
+            }
+        }
+
+        private void TextBoxSpeed_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Accept();
+            }
+        }
+
+        private void ButtonAccept_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Accept();
+            }
         }
     }
-
-    private void TextBoxConsumption_KeyUp(object sender, KeyEventArgs e)
-    {
-        if (e.KeyCode == Keys.Enter)
-        {
-            Accept();
-        }
-    }
-
-    private void TextBoxSpeed_KeyUp(object sender, KeyEventArgs e)
-    {
-        if (e.KeyCode == Keys.Enter)
-        {
-            Accept();
-        }
-    }
-
-    private void ButtonAccept_KeyUp(object sender, KeyEventArgs e)
-    {
-        if (e.KeyCode == Keys.Enter)
-        {
-            Accept();
-        }
-    }
-}
 }
