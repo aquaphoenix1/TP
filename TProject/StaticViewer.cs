@@ -115,7 +115,7 @@ namespace TProject
                 if (item.Policemen != null && MakeMap.ViewPort.IsPolice_Visible)
                 {
                     graph.DrawImage(Resources.star, new Rectangle(item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 + 25,
-                            (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 + 10), Width * 2, Width * 2));
+                            (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 + 22), Width * 2, Width * 2));
                 }
             }
             if (MakeMap.ViewPort.IsSign_Visible)

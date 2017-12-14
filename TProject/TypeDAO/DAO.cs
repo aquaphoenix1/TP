@@ -275,7 +275,7 @@ namespace TProject
                     Vertex end = vertexes.GetForId(long.Parse(edge[4].ToString()));
                     Way.Coating coat = Way.Coating.GetCoatingByName(edge[6].ToString());
                     Way.Sign sign = Way.Sign.GetSignBySpeed(int.Parse(edge[2].ToString()));
-                    Way.Police police = Way.Police.GetPoliceByName(edge[8].ToString());
+                    Way.Police police = Way.Police.GetPoliceByName(edge[7].ToString());
 
                     edges.AddNoEvent(Edge.CreateEdge(long.Parse(edge[0].ToString()), head, end, coat, edge[5].ToString(), bool.Parse(edge[1].ToString()), sign, police));
                 }
