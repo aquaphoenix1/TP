@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace TProject.Way
@@ -8,11 +7,6 @@ namespace TProject.Way
     {
         public static List<List<object>> ListSigns { get; set; }
         public int Count { get; set; }
-
-        public Sign(int count)
-        {
-            this.Count = count;
-        }
 
         private Sign() { }
 
@@ -24,7 +18,7 @@ namespace TProject.Way
             };
         }
 
-        internal static Sign GetSignBySpeed(int speed)
+        public static Sign GetSignBySpeed(int speed)
         {
             List<object> sign = ListSigns.FirstOrDefault(sgn => int.Parse(sgn[0].ToString()) == speed);
 

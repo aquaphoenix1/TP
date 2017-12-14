@@ -7,14 +7,10 @@ namespace TProject.Way
         public int GreenSeconds { get; set; }
         public int RedSeconds { get; set; }
 
-        public delegate void TLightTurnMethod();
-
         public bool IsGreen { get; set; }
         public bool IsRun { get; set; }
 
         public int CurrentTime { get; set; }
-
-
 
         public TrafficLight(int greenSeconds, int redSeconds) : base()
         {
@@ -37,8 +33,6 @@ namespace TProject.Way
                 int time = CurrentTime++;
                 if (IsGreen && (time + 1) > GreenSeconds || !IsGreen && (time + 1) > RedSeconds)
                 {
-                  //  TLightTurn?.Invoke();
-
                     CurrentTime = 0;
                     IsGreen = !IsGreen;
                 }

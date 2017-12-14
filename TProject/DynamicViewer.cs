@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TProject.Graph;
 
@@ -77,9 +74,14 @@ namespace TProject.Way
 
                     currSpeed = 60;
                     if (driver.IsViolateTL)
+                    {
                         currSpeed = driver.Car.Speed;
+                    }
                     else if (currEdge.SignMaxSpeed != null)
+                    {
                         currSpeed = Math.Min(currEdge.SignMaxSpeed.Count, driver.Car.Speed);
+                    }
+
                     currSpeed *= currEdge.Coat.Coeff;
                     currSpeed = (currSpeed/*Скорость*/ * 1000 / MakeMap.ViewPort.ScaleCoefficient) / 60 / 60 / 10 /*Interval 100ms*/;
                 }

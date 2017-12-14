@@ -115,12 +115,6 @@
     <Compile Include="Forms\ConductingForm.Designer.cs">
       <DependentUpon>ConductingForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SystemInfoForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SystemInfoForm.Designer.cs">
-      <DependentUpon>SystemInfoForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="AddAndEditForms\FuelForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,6 +133,11 @@
     </Compile>
     <Compile Include="Forms\OptionsRouteForm.Designer.cs">
       <DependentUpon>OptionsRouteForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="StaticViewer.cs" />
     <Compile Include="TypeDAO\CarDAO.cs" />
@@ -174,15 +173,9 @@
     </Compile>
     <Compile Include="MakeMap.cs" />
     <Compile Include="DynamicViewer.cs" />
-    <Compile Include="Way\Fine.cs" />
     <Compile Include="Way\Police.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Way\Sign.cs" />
     <Compile Include="Way\TrafficLight.cs" />
     <Compile Include="Type.cs" />
@@ -221,9 +214,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ConductingForm.resx">
       <DependentUpon>ConductingForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SystemInfoForm.resx">
-      <DependentUpon>SystemInfoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddAndEditForms\FuelForm.resx">
       <DependentUpon>FuelForm.cs</DependentUpon>
@@ -296,20 +286,11 @@
     <None Include="Resources\img1.jpg" />
     <None Include="Resources\img.png" />
     <None Include="Resources\Car.jpg" />
-    <None Include="Resources\limitSpeedSign.jpeg" />
     <None Include="Resources\star.jpg" />
     <None Include="Resources\Image1.bmp" />
-    <None Include="icon\greenLight.jpg" />
-    <None Include="icon\greenLight2.jpg" />
-    <None Include="icon\nonLight.jpg" />
     <None Include="icon\greenLight3.jpg" />
     <None Include="icon\nonLight3.jpg" />
-    <None Include="icon\load.gif" />
-    <Content Include="icon\point.jpg" />
     <None Include="Resources\Image1.png" />
-    <None Include="icon\VertexIcon.tif" />
-    <None Include="icon\redLight.jpg" />
-    <None Include="icon\redLight2.jpg" />
     <None Include="icon\redLight3.jpg" />
     <Content Include="Properties\DataSources\point.jpg" />
   </ItemGroup>

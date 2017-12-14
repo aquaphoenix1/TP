@@ -122,7 +122,7 @@ namespace TProject
 
         private void TextBoxTypeCoating_KeyUp(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 Accept();
             }

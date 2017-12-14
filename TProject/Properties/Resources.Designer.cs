@@ -19,7 +19,7 @@ namespace TProject.Properties {
     // с помощью такого средства, как ResGen или Visual Studio.
     // Чтобы добавить или удалить член, измените файл .ResX и снова запустите ResGen
     // с параметром /str или перестройте свой проект VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -184,26 +184,6 @@ namespace TProject.Properties {
         internal static System.Drawing.Bitmap goodPolice {
             get {
                 object obj = ResourceManager.GetObject("goodPolice", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap greenLight {
-            get {
-                object obj = ResourceManager.GetObject("greenLight", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap greenLight2 {
-            get {
-                object obj = ResourceManager.GetObject("greenLight2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -486,26 +466,6 @@ namespace TProject.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap load {
-            get {
-                object obj = ResourceManager.GetObject("load", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap nonLight {
-            get {
-                object obj = ResourceManager.GetObject("nonLight", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap nonLight3 {
             get {
                 object obj = ResourceManager.GetObject("nonLight3", resourceCulture);
@@ -519,26 +479,6 @@ namespace TProject.Properties {
         internal static System.Drawing.Bitmap oneWaySign {
             get {
                 object obj = ResourceManager.GetObject("oneWaySign", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap redLight {
-            get {
-                object obj = ResourceManager.GetObject("redLight", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap redLight2 {
-            get {
-                object obj = ResourceManager.GetObject("redLight2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

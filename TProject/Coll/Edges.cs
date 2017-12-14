@@ -20,17 +20,21 @@ namespace TProject.Coll
             MakeMap.ViewPort.UnSelectAll();
             return false;
         }
+
         public bool TryCopy(long id1, double id2)
         {
             foreach (var o in List)
             {
                 if ((o.GetHead().ID == id1 && o.GetEnd().ID == id2) ||
                     (o.GetEnd().ID == id1 && o.GetHead().ID == id2))
+                {
                     return false;
+                }
             }
 
             return true;
         }
+
         public void DeleteAllConnection(Vertex vertex)
         {
             List.RemoveAll(o => o.GetHead().Equals(vertex) || o.GetEnd().Equals(vertex));

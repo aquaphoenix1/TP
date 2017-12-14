@@ -42,9 +42,7 @@ namespace TProject
             panelContainer.Enabled = ((CheckBox)sender).Checked;
             timeGreenLightComboBox.Enabled = panelContainer.Enabled;
             timeRedLightComboBox.Enabled = panelContainer.Enabled;
-
         }
-
 
         private void OkEditCrossroadButton_Click(object sender, EventArgs e)
         {
@@ -56,17 +54,17 @@ namespace TProject
             }
             else
             {
-                if(timeGreenLightComboBox.Text=="")
+                if (timeGreenLightComboBox.Text == "")
                 {
                     MessageBox.Show("Введите значение длительности зеленой фазы");
                     return;
                 }
-                int.TryParse(timeGreenLightComboBox.Text,out green);               
+                int.TryParse(timeGreenLightComboBox.Text, out green);
                 if (green < 10 || green > 40)
                 {
-                     MessageBox.Show("Допустимый диапазон значений зеленой фазы от 10 до 40");
-                     return;
-                }                               
+                    MessageBox.Show("Допустимый диапазон значений зеленой фазы от 10 до 40");
+                    return;
+                }
 
                 if (timeRedLightComboBox.Text == "")
                 {
@@ -76,9 +74,9 @@ namespace TProject
                 int.TryParse(timeRedLightComboBox.Text, out red);
                 if (red < 20 || red > 70)
                 {
-                     MessageBox.Show("Допустимый диапазон значений красной фазы от 20 до 70");
-                     return;
-                }                         
+                    MessageBox.Show("Допустимый диапазон значений красной фазы от 20 до 70");
+                    return;
+                }
                 Vertex.TrafficLight = new TrafficLight(green, red);
             }
             MakeMap.ViewPort.Invalidate();

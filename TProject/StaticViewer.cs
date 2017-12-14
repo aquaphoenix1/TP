@@ -118,7 +118,7 @@ namespace TProject
                 }
                 if (item.Policemen != null && MakeMap.ViewPort.IsPolice_Visible)
                 {
-                    if(item.Policemen.TypeName.Equals("Жадный"))
+                    if (item.Policemen.TypeName.Equals("Жадный"))
                         graph.DrawImage(Resources.goodBadPolice, new Rectangle(item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 + 25,
                                 (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 + 21), Width * 2, Width * 2));
                     if (item.Policemen.TypeName.Equals("Добрый"))
@@ -151,7 +151,7 @@ namespace TProject
                     if (!item.IsBilateral)
                     {
                         graph.DrawImage(Resources.oneWaySign, new Rectangle(item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 + 24,
-                           (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2-30), Width * 2 + 3, Width * 2 + 3));
+                           (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 30), Width * 2 + 3, Width * 2 + 3));
                     }
                 }
             }

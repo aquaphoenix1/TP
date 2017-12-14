@@ -9,7 +9,7 @@ namespace TProject.Forms
     {
         public string nameMap;
         private Act act;
-        Image img;
+        private Image img;
         public ConductingForm(Image img, Act act) : this()
         {
             this.img = img;
@@ -134,7 +134,7 @@ namespace TProject.Forms
                     }
                 }
             }
-            else if(act == Act.Load)
+            else if (act == Act.Load)
             {
                 if (comboBoxNames.SelectedItem != null)
                 {
@@ -152,7 +152,7 @@ namespace TProject.Forms
             {
                 if (comboBoxNames.SelectedItem != null)
                 {
-                    if(DAO.RemoveMap(comboBoxNames.SelectedItem.ToString()))
+                    if (DAO.RemoveMap(comboBoxNames.SelectedItem.ToString()))
                     {
                         comboBoxNames.Items.RemoveAt(comboBoxNames.SelectedIndex);
                         pictureBoxMiniMap.Image = null;

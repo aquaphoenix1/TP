@@ -20,7 +20,7 @@ namespace TProject
 
         private void OkRouteButton_Click(object sender, System.EventArgs e)
         {
-            if(driverComboBox.SelectedItem == null)
+            if (driverComboBox.SelectedItem == null)
             {
                 MessageBox.Show("Выберите водителя!");
             }
@@ -32,7 +32,7 @@ namespace TProject
             {
                 System.Collections.Generic.List<object> driver = Driver.Driver.ListDriver.First(dv => dv[0].ToString().Equals(driverComboBox.SelectedItem.ToString()));
 
-                
+
                 switch (critSearchComboBox.SelectedItem.ToString())
                 {
                     case "Время":

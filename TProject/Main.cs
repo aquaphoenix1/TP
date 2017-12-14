@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using TProject.Coll;
 using TProject.Driver;
 using TProject.Forms;
 using TProject.Graph;
-using TProject.Properties;
 using TProject.TypeDAO;
 using TProject.Way;
 
@@ -22,7 +20,6 @@ namespace TProject
         /// </summary>
         bool isMapMoved = false;
         bool isVertexMoved = false;
-        bool isWayRun = false;
 
         bool isCreatedEdge = false;
 
@@ -531,14 +528,6 @@ namespace TProject
             catch (Exception) { }
         }
 
-        public void OpenPicture()
-        {
-            if (openSubMapFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                Init(path: openSubMapFileDialog.FileName);
-            }
-        }
-
         private void ToolStripMenu_AddVertex_Click(object sender, EventArgs e)
         {
             MakeMap.ViewPort.CreateVertex(lastClickCoordX, lastClickCoordY);
@@ -597,7 +586,7 @@ namespace TProject
             ClearWay();
             if (Route.End == null)
             {
-                if(MakeMap.ViewPort.SelectedVertex == Route.Start)
+                if (MakeMap.ViewPort.SelectedVertex == Route.Start)
                 {
                     Route.Start = null;
                 }
@@ -930,7 +919,6 @@ namespace TProject
                     item.IsInWay = false;
                 }
                 new Route().FindMinLengthWay(Map.vertexes, Map.edges, criterial, driver);
-                isWayRun = true;
                 ToolStripMenuItem_StaticView.Enabled = true;
                 ToolStripMenuItem_DynamicView.Enabled = true;
             }
@@ -1051,7 +1039,7 @@ namespace TProject
             }
             return sa.DialogResult;
         }
-      
+
         private void ToolStripMenuItem_Open_Click(object sender, EventArgs e)
         {
             Open(Act.Load);
@@ -1128,28 +1116,17 @@ namespace TProject
             MakeMap.ViewPort.Invalidate();
         }
 
-        private void выходToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void menuStrip2_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         public void ClearWay()
         {
             Dynamic.Dynamics = null;
             Map.Way = new List<Vertex>();
             if (Map.edges != null)
+            {
                 foreach (var o in Map.edges.List)
+                {
                     o.IsInWay = false;
+                }
+            }
         }
 
         private void очиститьМаршрутToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1169,7 +1146,7 @@ namespace TProject
             Route.Start = null;
             Route.End = null;
             Route.CurrentDriver = null;
-            
+
             DialogResult = DialogResult.Abort;
         }
     }
