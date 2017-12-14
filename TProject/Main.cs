@@ -910,7 +910,14 @@ namespace TProject
 
         private void ToolStripMenuItem_MakeStaticRoute_Click(object sender, EventArgs e)
         {
-            MakeMap.ViewPort.MakeStaticRoute();
+            if (Route.Way != null)
+            {
+                MakeMap.ViewPort.MakeStaticRoute();
+            }
+            else
+            {
+                MessageBox.Show("Невозможно построить маршрут");
+            }
         }
 
         public enum Criterial { Time, Length, Price }
@@ -1097,9 +1104,15 @@ namespace TProject
 
         private void ToolStripMenuItem_DynamicView_Click(object sender, EventArgs e)
         {
-            MakeMap.ViewPort.MakeStaticRoute();
-            Dynamic.ViewInDynamic();
-      
+            if (Route.Way != null)
+            {
+                MakeMap.ViewPort.MakeStaticRoute();
+                Dynamic.ViewInDynamic();
+            }
+            else
+            {
+                MessageBox.Show("Невозможно построить маршрут");
+            }
         }
 
         private void button_OnConfig_Click(object sender, EventArgs e)
