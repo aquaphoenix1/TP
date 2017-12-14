@@ -925,22 +925,19 @@ namespace TProject
                 isWayRun = true;
                 ToolStripMenuItem_StaticView.Enabled = true;
                 ToolStripMenuItem_DynamicView.Enabled = true;
-                ToolStripMenuItem_ClearWay.Enabled = true;
             }
         }
 
         private void ToolStripMenuItem_Route_Click(object sender, EventArgs e)
         {
-            if (isWayRun)
-            {
-                ToolStripMenuItem_Route.Enabled = false;
-            } else if (!isMapCreated)
+            if (!isMapCreated)
             {
                 ToolStripMenuItem_Route.Enabled = true;
                 if (Route.Start == null || Route.End == null)
                 {
                     ToolStripMenuItem_DynamicView.Enabled = false;
                     ToolStripMenuItem_StaticView.Enabled = false;
+                    ToolStripMenuItem_ClearWay.Enabled = false;
                     ToolStripMenuItem_RouteParameters.Enabled = false;
                     if (Map.Way != null && Map.Way.Count != 0)
                         ToolStripMenuItem_ClearWay.Enabled = false;
@@ -1090,7 +1087,7 @@ namespace TProject
         {
             MakeMap.ViewPort.MakeStaticRoute();
             Dynamic.ViewInDynamic();
-            ToolStripMenuItem_Route.Enabled = true;
+      
         }
 
         private void button_OnConfig_Click(object sender, EventArgs e)
@@ -1104,6 +1101,20 @@ namespace TProject
             addEdgeToolStripMenuItem.Visible = true;
             ToolStripMenuItem_DeleteVertex.Enabled = true;
             ToolStripMenuItem_DeleteVertex.Visible = true;
+
+            ToolStripMenuItem_DeleteEdge.Enabled = true;
+            ToolStripMenuItem_DeleteEdge.Visible = true;
+            addEdgeToolStripMenuItem.Enabled = true;
+            addEdgeToolStripMenuItem.Visible = true;
+            ToolStripMenuItem_DeleteVertex.Enabled = true;
+            ToolStripMenuItem_DeleteVertex.Visible = true;
+
+            ToolStripMenuItem_Route.Enabled = false;
+
+            Route.Start = null;
+            Route.End = null;
+
+            MakeMap.ViewPort.Invalidate();
         }
 
         private void OffConfig()
@@ -1112,19 +1123,16 @@ namespace TProject
             button_OnConfig.Enabled = true;
             isMapCreated = false;
 
-            ToolStripMenuItem_DeleteEdge.Enabled = false;
-            ToolStripMenuItem_DeleteEdge.Visible = false;
-            addEdgeToolStripMenuItem.Enabled = false;
-            addEdgeToolStripMenuItem.Visible = false;
-            ToolStripMenuItem_DeleteVertex.Enabled = false;
-            ToolStripMenuItem_DeleteVertex.Visible = false;
+            ToolStripMenuItem_Route.Enabled = true;
+
+            ClearWay();
 
         }
         private void button_OffConfig_Click(object sender, EventArgs e)
         {
             MakeMap.ViewPort.View.ContextMenuStrip = null;
             OffConfig();
-
+            MakeMap.ViewPort.Invalidate();
         }
 
         private void выходToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -1146,13 +1154,15 @@ namespace TProject
         {
             Dynamic.Dynamics = null;
             Map.Way = new List<Vertex>();
-            foreach (var o in Map.edges.List)
-                o.IsInWay = false;
+            if (Map.edges != null)
+                foreach (var o in Map.edges.List)
+                    o.IsInWay = false;
         }
 
         private void очиститьМаршрутToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ClearWay();
+
             ToolStripMenuItem_StaticView.Enabled = false;
             ToolStripMenuItem_DynamicView.Enabled = false;
             ToolStripMenuItem_ClearWay.Enabled = false;
@@ -1163,6 +1173,9 @@ namespace TProject
             Map.edges = new Edges();
             Map.vertexes = new Vertexes();
             Map.Way = new List<Vertex>();
+            Route.Start = null;
+            Route.End = null;
+            Route.CurrentDriver = null;
             
             DialogResult = DialogResult.Abort;
         }
