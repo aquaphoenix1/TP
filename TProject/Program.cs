@@ -22,8 +22,6 @@ namespace TProject
                     DAO.CreateDataBase();
                 }
 
-                //Application.Run(new FirstForm());
-
                 Start();
             }
             catch (System.Data.SQLite.SQLiteException ex) { MessageBox.Show(ex.Message); }
@@ -32,13 +30,7 @@ namespace TProject
 
         static void Start()
         {
-            FirstForm f = new FirstForm();
-            Application.Run(f);
-
-            if(!(f.DialogResult == DialogResult.None))
-            {
-                Start();
-            }
+            Application.Run(new FirstForm());
 
             if (FirstForm.formMain != null)
             {
