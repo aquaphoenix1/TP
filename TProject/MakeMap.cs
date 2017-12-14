@@ -27,9 +27,21 @@ namespace TProject
         Brush blackFontBrush = new SolidBrush(Color.Black);
         Brush redFontBrush = new SolidBrush(Color.Red);
 
+
+        /// <summary>
+        /// Х координата точки в которой была нажата клавиша мыши
+        /// </summary>
         public int VertexLocationX { get; set; }
+
+        /// <summary>
+        /// У координата точки в которой была нажата клавиша мыши
+        /// </summary>
         public int VertexLocationY { get; set; }
 
+
+        /// <summary>
+        /// Тип метода, используемого для перерисовки
+        /// </summary>
         public delegate void ReDraw();
 
         /// <summary>
@@ -37,6 +49,10 @@ namespace TProject
         /// </summary>
         public double ScaleCoefficient { get; set; }
 
+
+        /// <summary>
+        /// Кэш, хранящий заранне отмасштабированные заготовки подложки карты
+        /// </summary>
         private SortedList<double, Image> cache;
         private Image sourceImage;
 
@@ -56,6 +72,10 @@ namespace TProject
         /// Текущий масштаб
         /// </summary>
         public double ZoomCurValue { private set; get; }
+
+        /// <summary>
+        /// Переключатели отображения слоев
+        /// </summary>
         public bool IsPolice_Visible { get; set; }
         public bool IsTrafficLight_Visible { get; set; }
         public bool IsSign_Visible { get; set; }
@@ -64,11 +84,23 @@ namespace TProject
 
         public static MakeMap ViewPort = null;
 
+        /// <summary>
+        /// Вершина, выбранная мышью
+        /// </summary>
         private Vertex selectedVertex = null;
         public Vertex SelectedVertex => selectedVertex;
+
+        /// <summary>
+        /// Дуга, выбранная мышью
+        /// </summary>
         private Edge selectedEdge = null;
         public Edge SelectedEdge => selectedEdge;
-
+        /// <summary>
+        /// Создает контроллер создания и управления картой
+        /// </summary>
+        /// <param name="pb"></param>
+        /// <param name="panel"></param>
+        /// <param name="font"></param>
         private MakeMap(PictureBox pb, Panel panel, Font font)
         {
             {
@@ -106,6 +138,9 @@ namespace TProject
             }
         }
 
+        /// <summary>
+        /// Запускает диалог редактирования выбранной вершины
+        /// </summary>
         public void EditVertexOptions()
         {
             if (selectedVertex != null)
@@ -113,7 +148,9 @@ namespace TProject
                 new EditVertex(selectedVertex).ShowDialog();
             }
         }
-
+        /// <summary>
+        /// Запускает диалог редактирования выбранной дуги
+        /// </summary>
         public void EditEdgeOptions()
         {
             if (selectedEdge != null)
@@ -199,7 +236,12 @@ namespace TProject
         {
             view.Location = new Point(view.Location.X + x - MapLocationX, view.Location.Y + y - MapLocationY);
         }
-
+        /// <summary>
+        /// выполняет действия, необходимые для открытия картинки
+        /// </summary>
+        /// <param name="h"></param>
+        /// <param name="w"></param>
+        /// <param name="img"></param>
         public void OpenPicture(int h, int w, Image img)
         {
             view.Image = img;
@@ -263,6 +305,11 @@ namespace TProject
             selectedEdge = new Edge(selectedVertex, new Vertex(x.Scaling() + StaticViewer.Viewer.dX, y.Scaling() + StaticViewer.Viewer.dY));
         }
 
+        /// <summary>
+        /// Удаляет выбранную дугу
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void DeleteEdge(int x, int y)
         {
             if (Map.edges.GetSelected(x, y))
@@ -271,7 +318,11 @@ namespace TProject
                 selectedEdge = null;
             }
         }
-
+        /// <summary>
+        /// Удаляет выбранную вершину
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void DelteVertex(int x, int y)
         {
             if (Map.vertexes.GetSelected(x, y))
@@ -317,7 +368,9 @@ namespace TProject
 
         #endregion
 
-
+        /// <summary>
+        /// подготавливает построенный маршрут, для его отобпражения на карте 
+        /// </summary>
         public void MakeStaticRoute()
         {
             Map.Way = new List<Vertex>();
@@ -385,6 +438,10 @@ namespace TProject
         {
             selectedVertex = vertex;
         }
+        /// <summary>
+        /// Выделет указанную дугу
+        /// </summary>
+        /// <param name="edge"></param>
         public void SelectEdge(Edge edge)
         {
             selectedEdge = edge;
@@ -398,10 +455,18 @@ namespace TProject
             selectedVertex = null;
             selectedEdge = null;
         }
+
+        /// <summary>
+        /// Сбрасывает выделенные вершины
+        /// </summary>
         public void UnSelectVertex()
         {
             selectedVertex = null;
         }
+
+        /// <summary>
+        /// Сбрасывает выделенные ребра
+        /// </summary>
         public void UnSelectEdge()
         {
             selectedEdge = null;
@@ -430,6 +495,16 @@ namespace TProject
         {
             return x1.UnScaling() + StaticViewer.Width >= x2 && y1.UnScaling() + StaticViewer.Width >= y2 && x2 >= x1.UnScaling() && y2 >= y1.UnScaling();
         }
+        /// <summary>
+        /// Опрделяет, находится ли точка, по которой произошел клик на дуге
+        /// </summary>
+        /// <param name="x">  Х координата выбранной точки</param>
+        /// <param name="y"> У координата выбранной точки</param>
+        /// <param name="x1"></param>
+        /// <param name="y1"></param>
+        /// <param name="x2"></param>
+        /// <param name="y2"></param>
+        /// <returns></returns>
         public static bool IsPointOnEdge(int x, int y, int x1, int y1, int x2, int y2)
         {
             if (x.Scaling() - StaticViewer.Width <= Math.Max(x1, x2) && x.Scaling() + StaticViewer.Width >= Math.Min(x1, x2) && y.Scaling() - StaticViewer.Width <= Math.Max(y1, y2) && y.Scaling() + StaticViewer.Width >= Math.Min(y1, y2))
@@ -453,10 +528,24 @@ namespace TProject
         }
 
         #endregion
+
+        /// <summary>
+        /// Возвращает вершину из списка по заданным координатам и помещает её
+        /// в маршрут, как точку начала
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void SelectStartVertex(int x, int y)
         {
             Map.vertexes.GetSelected(x, y, out Route.Start);
         }
+
+        /// <summary>
+        /// Возвращает вершину из списка по заданным координатам и помещает её
+        /// в маршрут, как точку конца
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void SelectEndVertex(int x, int y)
         {
             Map.vertexes.GetSelected(x, y, out Route.End);

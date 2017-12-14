@@ -26,7 +26,7 @@ namespace TProject
         private static int width;
         public static int Width { get { return width; } set { width = value; } }
         Brush blackFontBrush = new SolidBrush(Color.Black);
-        Brush redFontBrush = new SolidBrush(Color.Red);
+        Brush redFontBrush = new SolidBrush(Color.Crimson);
         // #region Отрисовка элементов, содержащихся на карте
         /// <summary>
         /// Происходит при перерисовке pictureBox, содержащего карту
@@ -53,9 +53,16 @@ namespace TProject
         {
             this.font = font;
         }
+
         private static StaticViewer viewer;
         public static StaticViewer Viewer => viewer;
 
+
+        /// <summary>
+        /// Создание конроллера отрисовки статичных объектов
+        /// </summary>
+        /// <param name="font"></param>
+        /// <returns></returns>
         public static StaticViewer CreateViewer(Font font)
         {
             return (viewer = new StaticViewer(font));
@@ -102,6 +109,15 @@ namespace TProject
                         item.GetEnd().X.UnScaling() + dX, item.GetEnd().Y.UnScaling() + dY);
                     graph.DrawLine(penTwo, item.GetHead().X.UnScaling() + dX, item.GetHead().Y.UnScaling() + dY,
                         item.GetEnd().X.UnScaling() + dX, item.GetEnd().Y.UnScaling() + dY);
+
+                    if (MakeMap.ViewPort.IsStreetName_Visible)
+                    {
+                        graph.DrawString(item.NameStreet, new Font(font.FontFamily, 11f, FontStyle.Italic | FontStyle.Bold,
+                               GraphicsUnit.Point, font.GdiCharSet), redFontBrush,
+                               (item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 - 25),
+                               (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 10));
+                    }
+
                     if (item.IsInWay)
                     {
                         graph.DrawLine(pen,
@@ -113,7 +129,7 @@ namespace TProject
                         graph.DrawString(Math.Round(item.GetLength(MakeMap.ViewPort.ScaleCoefficient), 2).ToString(), new Font(font.FontFamily, 10f, FontStyle.Italic | FontStyle.Bold,
                             GraphicsUnit.Point, font.GdiCharSet), blackFontBrush,
                             (item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 - 25),
-                            (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 10));
+                            (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 + 5));
                     }
                 }
                 if (item.Policemen != null && MakeMap.ViewPort.IsPolice_Visible)
@@ -209,11 +225,23 @@ namespace TProject
             }
         }
 
+        /// <summary>
+        /// отметить вершину флагом "Начало"
+        /// </summary>
+        /// <param name="graph"></param>
         public void DrawStartPoint(Graphics graph)
         {
             Pen pen = new Pen(Color.Red);
             DrawPointFlag(graph, pen, Route.Start.X - Width / 2, Route.Start.Y - Width / 2);
         }
+
+        /// <summary>
+        /// Отрисовка флагов
+        /// </summary>
+        /// <param name="graph"></param>
+        /// <param name="pen"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         private void DrawPointFlag(Graphics graph, Pen pen, int x, int y)
         {
             pen.Width = 8;
@@ -224,6 +252,10 @@ namespace TProject
                 new Point((x  + Width  / 2).UnScaling(), (y - (Width * 2)).UnScaling())
             });
         }
+        /// <summary>
+        /// отметить вершину флагом "Конец"
+        /// </summary>
+        /// <param name="graph"></param>
         public void DrawEndPoint(Graphics graph)
         {
             Pen pen = new Pen(Color.Blue);

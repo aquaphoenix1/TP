@@ -5,6 +5,13 @@ namespace TProject.Coll
 {
     public class Edges : AbstractCollection<Edge>
     {
+        /// <summary>
+        /// Возвращает из списка дугу, которой принадлежит
+        /// точка, указанная парой координат
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
         public bool GetSelected(int x, int y)
         {
             for (int i = 0; i < List.Count; i++)
@@ -20,7 +27,12 @@ namespace TProject.Coll
             MakeMap.ViewPort.UnSelectAll();
             return false;
         }
-
+        /// <summary>
+        /// Проверяет являются ли дуги клоном друг друга
+        /// </summary>
+        /// <param name="id1"></param>
+        /// <param name="id2"></param>
+        /// <returns></returns>
         public bool TryCopy(long id1, double id2)
         {
             foreach (var o in List)
@@ -35,6 +47,10 @@ namespace TProject.Coll
             return true;
         }
 
+        /// <summary>
+        /// Удаляет все элементы из коллекции
+        /// </summary>
+        /// <param name="vertex"></param>
         public void DeleteAllConnection(Vertex vertex)
         {
             List.RemoveAll(o => o.GetHead().Equals(vertex) || o.GetEnd().Equals(vertex));

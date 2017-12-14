@@ -8,26 +8,70 @@ namespace TProject.Way
 {
     class Dynamic
     {
+        /// <summary>
+        /// Таймер, считающий модельное время
+        /// Каждое его переполнение выполняет изменение положения иконки автомобиля,
+        /// фаз светофоров (по необходимости) и выполняется перерисовка
+        /// </summary>
         public Timer timerTL;
 
+        /// <summary>
+        /// Находится ли водитель в ожидании переключения светофора
+        /// </summary>
         public bool isWait = false;
 
+        /// <summary>
+        /// Глобальное время
+        /// </summary>
         public int GlobalTime;
+        /// <summary>
+        /// Текущий шаг прохождения маршрута (индекс дуги в пути)
+        /// </summary>
         public int step;
+        /// <summary>
+        /// Длина пути
+        /// </summary>
         private double path;
 
-
+        /// <summary>
+        /// Водитель, двигающийся по маршруту
+        /// </summary>
         public Driver.Driver driver;
+        /// <summary>
+        /// точка расположения иконки водителя на карте
+        /// </summary>
         public Point Drive;
+        /// <summary>
+        /// Вершина, являющаяся началом текущего шага
+        /// </summary>
         private Edge currEdge;
+        /// <summary>
+        /// скорость перемещения иконки по карте на текущем шаге
+        /// </summary>
         private double currSpeed;
 
+        /// <summary>
+        /// Длина пути на текущем шаге
+        /// </summary>
         double wayLengh = 0;
+        /// <summary>
+        /// Вершина начала текущего шага
+        /// </summary>
         Vertex start;
+        /// <summary>
+        /// Вершина конца текущего шага
+        /// </summary>
         Vertex end;
 
+        /// <summary>
+        /// Контроллер динамического отображения движения водителя и переключения фаз светофоров
+        /// </summary>
         public static Dynamic Dynamics { get; set; }
 
+        /// <summary>
+        /// создает контроллер динамического отображения движения водителя и переключения фаз светофоров
+        /// </summary>
+        /// <param name="dr"></param>
         public Dynamic(Driver.Driver dr)
         {
             timerTL = new Timer();
@@ -39,11 +83,16 @@ namespace TProject.Way
             timerTL.Interval = 30;
             timerTL.Tick += (o, e) => IncGlobalTime(o);
         }
+        /// <summary>
+        /// Запускает таймер модельного времени
+        /// </summary>
         public void Start()
         {
             timerTL.Start();
         }
-
+        /// <summary>
+        /// Запустить динамическое отображение прохождения маршрута
+        /// </summary>
         public static void ViewInDynamic()
         {
             Dynamics = new Dynamic(Route.CurrentDriver);
@@ -59,6 +108,11 @@ namespace TProject.Way
             Dynamics.Start();
         }
 
+        /// <summary>
+        /// Пересчет глобального времени, переключение фаз светофоров, определение положения водителя и
+        /// определение его скорости на данном этапе
+        /// </summary>
+        /// <param name="sender"></param>
         private void IncGlobalTime(object sender)
         {
             if (!isWait)
