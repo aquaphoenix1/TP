@@ -185,11 +185,11 @@ namespace TProject
                             if (vert.TrafficLight != null)
                             {
                                 new SQLiteCommand(string.Format("Insert into TrafficLight values ({0}, {1}, {2}, '{3}')", vert.TrafficLight.ID, vert.TrafficLight.GreenSeconds, vert.TrafficLight.RedSeconds, name), GetConnection()).ExecuteNonQuery();
-                                new SQLiteCommand(string.Format("Insert into Vertex values ({0}, {1}, {2}, '{3}', {4})", vert.ID, vert.X, vert.Y, name, vert.TrafficLight.ID), GetConnection()).ExecuteNonQuery();
+                                new SQLiteCommand(string.Format("Insert into Vertex values ({0}, {1}, {2}, '{3}', {4})", vert.ID, vert.X.UnScaling(), vert.Y.UnScaling(), name, vert.TrafficLight.ID), GetConnection()).ExecuteNonQuery();
                             }
                             else
                             {
-                                new SQLiteCommand(string.Format("Insert into Vertex values ({0}, {1}, {2}, '{3}', {4})", vert.ID, vert.X, vert.Y, name, "null"), GetConnection()).ExecuteNonQuery();
+                                new SQLiteCommand(string.Format("Insert into Vertex values ({0}, {1}, {2}, '{3}', {4})", vert.ID, vert.X.UnScaling(), vert.Y.UnScaling(), name, "null"), GetConnection()).ExecuteNonQuery();
                             }
                         }
 

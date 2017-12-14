@@ -740,11 +740,49 @@ namespace TProject
         }
         private void Сalibration_MouseDown(object sender, MouseEventArgs e)
         {
-
+            int X = e.X;
+            int Y = e.Y;
+            if (!isVertexMoved && e.Button == MouseButtons.Left)
+            {
+                if (MakeMap.IsPointInRectangle(callibrationEdge.GetHead().X, callibrationEdge.GetHead().Y, e.X, e.Y))
+                {
+                    selectedLabel = callibrationEdge.GetHead();
+                    isVertexMoved = true;
+                }
+                else if (MakeMap.IsPointInRectangle(callibrationEdge.GetEnd().X, callibrationEdge.GetEnd().Y, e.X, e.Y))
+                {
+                    isVertexMoved = true;
+                    selectedLabel = callibrationEdge.GetEnd();
+                }
+                else if (MakeMap.IsPointOnEdge(e.X, e.Y, callibrationEdge.GetHead().X, callibrationEdge.GetHead().Y,
+                  callibrationEdge.GetEnd().X, callibrationEdge.GetEnd().Y + StaticViewer.Width))
+                {
+                    isCreatedEdge = true;
+                }
+            }
+            else
+            {
+                lastClickCoordX = e.X;
+                lastClickCoordY = e.Y;
+            }
         }
         private void Сalibration_MouseMove(object sender, MouseEventArgs e)
         {
-
+            if (isVertexMoved)
+            {
+                selectedLabel.X = e.X.Scaling();
+                callibrationEdge.GetHead().Y = callibrationEdge.GetEnd().Y = e.Y.Scaling();
+                MakeMap.ViewPort.Invalidate();
+                textBox_CurrentCoefficient.Text = (100 / (callibrationEdge.GetLength(1))).ToString();
+            }
+            else if (isCreatedEdge)
+            {
+                int dx = Math.Abs(callibrationEdge.GetHead().X - callibrationEdge.GetEnd().X);
+                callibrationEdge.GetHead().X = (e.X.Scaling() - dx / 2);
+                callibrationEdge.GetEnd().X = (e.X.Scaling() + dx / 2);
+                callibrationEdge.GetHead().Y = callibrationEdge.GetEnd().Y = e.Y.Scaling();
+                MakeMap.ViewPort.Invalidate();
+            }
         }
         private void Сalibration_MouseUp(object sender, MouseEventArgs e)
         {
@@ -1052,7 +1090,7 @@ namespace TProject
             }
             return sa.DialogResult;
         }
-        public void Open(string name)
+        /*public void Open(string name)
         {
             Vertexes vert = new Vertexes();
             Edges edg = new Edges();
@@ -1073,7 +1111,7 @@ namespace TProject
             ToolStripMenuItem_Save.Enabled = true;
             ToolStripMenuItem_SaveAs.Enabled = true;
             ToolStripMenuItem_ChooseSubstrate.Enabled = true;
-        }
+        }*/
         private void ToolStripMenuItem_Open_Click(object sender, EventArgs e)
         {
             Open(Act.Load);
@@ -1162,6 +1200,11 @@ namespace TProject
             ToolStripMenuItem_StaticView.Enabled = false;
             ToolStripMenuItem_DynamicView.Enabled = false;
             ToolStripMenuItem_ClearWay.Enabled = false;
+        }
+
+        private void Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            DialogResult = DialogResult.Abort;
         }
     }
 }

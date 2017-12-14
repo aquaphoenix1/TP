@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using TProject.Forms;
 
@@ -23,10 +22,24 @@ namespace TProject
                     DAO.CreateDataBase();
                 }
 
-                Application.Run(new FirstForm());
+                Start();
             }
             catch (System.Data.SQLite.SQLiteException ex) { MessageBox.Show(ex.Message); }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        static void Start()
+        {
+            Application.Run(new FirstForm());
+
+            if (FirstForm.formMain != null)
+            {
+                if (FirstForm.formMain.DialogResult == DialogResult.Abort)
+                {
+                    FirstForm.formMain = null;
+                    Start();
+                }
+            }
         }
     }
 }
