@@ -528,14 +528,6 @@ namespace TProject
             catch (Exception) { }
         }
 
-        public void OpenPicture()
-        {
-            if (openSubMapFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                Init(path: openSubMapFileDialog.FileName);
-            }
-        }
-
         private void ToolStripMenu_AddVertex_Click(object sender, EventArgs e)
         {
             MakeMap.ViewPort.CreateVertex(lastClickCoordX, lastClickCoordY);
