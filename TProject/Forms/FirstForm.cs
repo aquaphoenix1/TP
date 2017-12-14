@@ -8,6 +8,8 @@ namespace TProject.Forms
 
     public partial class FirstForm : Form
     {
+        public static Main formMain;
+
         public FirstForm()
         {
             InitializeComponent();
@@ -18,6 +20,7 @@ namespace TProject.Forms
             Main form = new Main();
             if (form.Open(Act.Load) == DialogResult.OK)
             {
+                formMain = form;
                 this.Hide();
                 form.ShowDialog();
                 this.Close();

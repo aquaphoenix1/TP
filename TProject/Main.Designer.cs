@@ -123,7 +123,7 @@
             this.wayToВToolStripMenuItem,
             this.удалитьПерекрестокToolStripMenuItem});
             this.contextMenuVertex.Name = "contextMenuStripPictBox";
-            this.contextMenuVertex.Size = new System.Drawing.Size(210, 136);
+            this.contextMenuVertex.Size = new System.Drawing.Size(210, 114);
             // 
             // addEdgeToolStripMenuItem
             // 
@@ -690,6 +690,7 @@
             this.Name = "Main";
             this.ShowIcon = false;
             this.Text = "Поиск оптимального маршрута";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.SizeChanged += new System.EventHandler(this.Main_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMap)).EndInit();
             this.contextMenuVertex.ResumeLayout(false);
