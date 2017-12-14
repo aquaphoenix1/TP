@@ -7,16 +7,46 @@ namespace TProject.Way
 {
     public class Route
     {
+        /// <summary>
+        /// Маршрут из ID
+        /// </summary>
         public static List<long> Way { private set; get; }
+
+        /// <summary>
+        /// Цена маршрута
+        /// </summary>
         public static double Value { private set; get; }
 
+        /// <summary>
+        /// Стартовая вершина
+        /// </summary>
         public static Vertex Start;
+
+        /// <summary>
+        /// КОнечная вершина
+        /// </summary>
         public static Vertex End;
 
+        /// <summary>
+        /// Критерий поиска
+        /// </summary>
         public static Main.Criterial Criterial { get; set; }
 
+        /// <summary>
+        /// Текущий водитель
+        /// </summary>
         public static Driver.Driver CurrentDriver;
 
+        /// <summary>
+        /// Получение матрицы стоимости
+        /// </summary>
+        /// <param name="parents">Матрица предков</param>
+        /// <param name="arrayOfID">Массив ID вершин (для восстановления не по порядку из коллекции)</param>
+        /// <param name="vertexes">Коллекция вершин</param>
+        /// <param name="edges">Коллекция дуг</param>
+        /// <param name="criterial">Критерий поиска</param>
+        /// <param name="driver">Водитель</param>
+        /// <returns></returns>
         private double[,] GetMatrixWay(out long[,] parents, out long[] arrayOfID, Vertexes vertexes, Edges edges, Main.Criterial criterial, Driver.Driver driver)
         {
             int count = vertexes.GetCountElements();
@@ -40,7 +70,7 @@ namespace TProject.Way
                     else
                     {
                         Edge edge = GetEdge(vertexList[i], vertexList[j], edges);
-                        array[i, j] = (edge != null) ? edge.GetCriterialValue(criterial, driver) : Double.MaxValue;
+                        array[i, j] = (edge != null) ? edge.GetCriterialValue(criterial, driver) : Double.MaxValue; //Текущее значение матрицы = критерий текущей дуги
 
                         parents[i, j] = i;
                     }
@@ -49,6 +79,16 @@ namespace TProject.Way
             }
             return array;
         }
+
+        /// <summary>
+        /// Восстановление маршрута
+        /// 
+        /// Итерационное восстановление маршрута из конца в начало
+        /// </summary>
+        /// <param name="from">ID точки отправления</param>
+        /// <param name="to">ID точки прибытия</param>
+        /// <param name="arrayOfParents">Матрица предков</param>
+        /// <returns></returns>
         private List<long> GetWay(long from, long to, long[,] arrayOfParents)
         {
 
@@ -69,6 +109,16 @@ namespace TProject.Way
             return list;
         }
 
+        /// <summary>
+        /// Поиск оптимального маршрута
+        /// 
+        /// Route.Way содержит путь, null, если пути нет
+        /// Route.Value - цена маршрута
+        /// </summary>
+        /// <param name="vertColl">Коллекция вершин</param>
+        /// <param name="edgColl">Коллекция дуг</param>
+        /// <param name="criterial">Критерий поиска</param>
+        /// <param name="driver">Водитель</param>
         public void FindMinLengthWay(Vertexes vertColl, Edges edgColl, Main.Criterial criterial, Driver.Driver driver)
         {
             CurrentDriver = new Driver.Driver(driver.FIO, driver.IsViolateTL, driver.Car);
@@ -105,8 +155,8 @@ namespace TProject.Way
                     }
                 }
             }
-
-            if (matrix[fromVertex, toVertex] == Double.MaxValue)
+            
+            if (matrix[fromVertex, toVertex] == Double.MaxValue) //Путь не найден
             {
                 Way = null;
             }
@@ -127,6 +177,13 @@ namespace TProject.Way
             }
         }
 
+        /// <summary>
+        /// ПОлучение дуги между вершинами
+        /// </summary>
+        /// <param name="one">Первая вершина</param>
+        /// <param name="two">Вторая вершина</param>
+        /// <param name="edges">Коллекция дуг</param>
+        /// <returns></returns>
         public static Edge GetEdge(Vertex one, Vertex two, Edges edges)
         {
             List<Edge> list = edges.List;

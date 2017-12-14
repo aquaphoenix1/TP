@@ -59,6 +59,9 @@ namespace TProject
             Initialize();
         }
 
+        /// <summary>
+        /// Заполнение списков
+        /// </summary>
         private void Initialize()
         {
             Coating.ListSurface = DAO.GetAll("Surface");
@@ -81,6 +84,11 @@ namespace TProject
             listWithData.ForEach(val => dataGridViewDataBase.Rows.Add(val.ToArray()));
         }
 
+        /// <summary>
+        /// Перерисовка таблицы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ComboBoxSelectTable_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControlMain.SelectedIndex == 1)
@@ -174,6 +182,11 @@ namespace TProject
 
         public static bool IsChanged { private get; set; }
 
+        /// <summary>
+        /// Добавление в БД
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
             if (comboBoxSelectTable.SelectedItem != null)
@@ -277,6 +290,11 @@ namespace TProject
             }
         }
 
+        /// <summary>
+        /// Удаление из БД
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
             if (comboBoxSelectTable.SelectedItem != null)
@@ -550,6 +568,11 @@ namespace TProject
             MakeMap.ViewPort.EditEdgeOptions();
         }
 
+        /// <summary>
+        /// Маршрут из
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ToolStripMenu_WayFrom_Click(object sender, EventArgs e)
         {
             ClearWay();
@@ -581,6 +604,11 @@ namespace TProject
             MakeMap.ViewPort.Invalidate();
         }
 
+        /// <summary>
+        /// Маршрут в
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ToolStripMenu_WayToВ_Click(object sender, EventArgs e)
         {
             ClearWay();
@@ -632,6 +660,11 @@ namespace TProject
             panelSlide.SendToBack();
         }
 
+        /// <summary>
+        /// Калибровка
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Calibration_Click(object sender, EventArgs e)
         {
             button_Ok_Сalibration.Enabled = true;
@@ -669,6 +702,7 @@ namespace TProject
             button_Ok_Сalibration.Enabled = false;
             button_Calibration.Enabled = true;
         }
+
         private void Calibration(double value)
         {
             MakeMap.ViewPort.ScaleCoefficient = 100 / (value);
@@ -784,6 +818,11 @@ namespace TProject
         }
         #endregion
 
+        /// <summary>
+        /// Изменение в БД
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonEdit_Click(object sender, EventArgs e)
         {
             if (comboBoxSelectTable.SelectedItem != null && dataGridViewDataBase.SelectedRows.Count > 0)
@@ -886,6 +925,11 @@ namespace TProject
             MakeMap.ViewPort.DelteVertex(lastClickCoordX, lastClickCoordY);
         }
 
+        /// <summary>
+        /// Отображение статического пути
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ToolStripMenuItem_MakeStaticRoute_Click(object sender, EventArgs e)
         {
             if (Route.Way != null)
@@ -898,8 +942,18 @@ namespace TProject
             }
         }
 
+        /// <summary>
+        /// Критерий поиска
+        /// </summary>
         public enum Criterial { Time, Length, Price }
+
         Driver.Driver driver;
+
+        /// <summary>
+        /// Составление маршрута
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ПараметрыМаршрутаToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OptionsRouteForm optionsRouteForm = new OptionsRouteForm();
@@ -936,12 +990,17 @@ namespace TProject
                     ToolStripMenuItem_ClearWay.Enabled = false;
                     ToolStripMenuItem_RouteParameters.Enabled = false;
                     if (Map.Way != null && Map.Way.Count != 0)
+                    {
                         ToolStripMenuItem_ClearWay.Enabled = false;
+                    }
                 }
                 else
                 {
                     if (Map.Way != null && Map.Way.Count != 0)
+                    {
                         ToolStripMenuItem_ClearWay.Enabled = true;
+                    }
+
                     ToolStripMenuItem_DynamicView.Enabled = true;
                     ToolStripMenuItem_StaticView.Enabled = true;
                     ToolStripMenuItem_RouteParameters.Enabled = true;
@@ -949,6 +1008,11 @@ namespace TProject
             }
         }
 
+        /// <summary>
+        /// Инициализация карты
+        /// </summary>
+        /// <param name="img"></param>
+        /// <param name="path"></param>
         public void Init(Image img = null, string path = null)
         {
             int w = 0;
@@ -1015,6 +1079,11 @@ namespace TProject
             return Map.Name;
         }
 
+        /// <summary>
+        /// Открытие карты, загрузка из БД
+        /// </summary>
+        /// <param name="act"></param>
+        /// <returns></returns>
         public DialogResult Open(Act act)
         {
             ConductingForm sa = new ConductingForm(act);
@@ -1071,7 +1140,7 @@ namespace TProject
             }
         }
 
-        private void button_OnConfig_Click(object sender, EventArgs e)
+        private void Button_OnConfig_Click(object sender, EventArgs e)
         {
             isMapCreated = true;
             button_OffConfig.Enabled = true;
@@ -1109,13 +1178,16 @@ namespace TProject
             ClearWay();
 
         }
-        private void button_OffConfig_Click(object sender, EventArgs e)
+        private void Button_OffConfig_Click(object sender, EventArgs e)
         {
             MakeMap.ViewPort.View.ContextMenuStrip = null;
             OffConfig();
             MakeMap.ViewPort.Invalidate();
         }
 
+        /// <summary>
+        /// Очистка пути
+        /// </summary>
         public void ClearWay()
         {
             Dynamic.Dynamics = null;
@@ -1129,7 +1201,7 @@ namespace TProject
             }
         }
 
-        private void очиститьМаршрутToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ToolStripMenuItem_Click_ClearWay(object sender, EventArgs e)
         {
             ClearWay();
 
@@ -1138,6 +1210,11 @@ namespace TProject
             ToolStripMenuItem_ClearWay.Enabled = false;
         }
 
+        /// <summary>
+        /// Чистка маршрутов, вершин и дуг, повторная возможность открыть карту
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Main_FormClosed(object sender, FormClosedEventArgs e)
         {
             Map.edges = new Edges();

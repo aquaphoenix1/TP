@@ -704,7 +704,7 @@
             this.button_OffConfig.TabIndex = 18;
             this.button_OffConfig.Text = "Выкл.";
             this.button_OffConfig.UseVisualStyleBackColor = true;
-            this.button_OffConfig.Click += new System.EventHandler(this.button_OffConfig_Click);
+            this.button_OffConfig.Click += new System.EventHandler(this.Button_OffConfig_Click);
             // 
             // button_OnConfig
             // 
@@ -716,14 +716,14 @@
             this.button_OnConfig.TabIndex = 17;
             this.button_OnConfig.Text = "Вкл.";
             this.button_OnConfig.UseVisualStyleBackColor = true;
-            this.button_OnConfig.Click += new System.EventHandler(this.button_OnConfig_Click);
+            this.button_OnConfig.Click += new System.EventHandler(this.Button_OnConfig_Click);
             // 
             // очиститьМаршрутToolStripMenuItem
             // 
             this.ToolStripMenuItem_ClearWay.Name = "очиститьМаршрутToolStripMenuItem";
             this.ToolStripMenuItem_ClearWay.Size = new System.Drawing.Size(215, 22);
             this.ToolStripMenuItem_ClearWay.Text = "Очистить маршрут";
-            this.ToolStripMenuItem_ClearWay.Click += new System.EventHandler(this.очиститьМаршрутToolStripMenuItem_Click);
+            this.ToolStripMenuItem_ClearWay.Click += new System.EventHandler(this.ToolStripMenuItem_Click_ClearWay);
             // 
             // Main
             // 
