@@ -15,6 +15,10 @@ namespace TProject
 
         private static SQLiteConnection connection;
 
+        /// <summary>
+        /// СОединение с БД
+        /// </summary>
+        /// <returns></returns>
         protected static SQLiteConnection GetConnection()
         {
             if (connection == null)
@@ -31,15 +35,27 @@ namespace TProject
                 }
             }
 
+            if(connection.State == System.Data.ConnectionState.Closed)
+            {
+                connection.Open();
+            }
+
             return connection;
         }
 
+        /// <summary>
+        /// Проверка существования БД
+        /// </summary>
+        /// <returns></returns>
         public static bool IsExistDataBase()
         {
             string path = System.IO.Directory.GetCurrentDirectory() + "\\" + DataBaseName;
             return System.IO.File.Exists(path);
         }
 
+        /// <summary>
+        /// Создание БД
+        /// </summary>
         public static void CreateDataBase()
         {
             string path = System.IO.Directory.GetCurrentDirectory() + "\\" + DataBaseName;
@@ -100,6 +116,11 @@ namespace TProject
             catch (Exception) { throw new Exception(String.Format("Не найден файл {0}, и отсутствует возможность его создать.", path)); }
         }
 
+        /// <summary>
+        /// Получение всех кортежей таблицы
+        /// </summary>
+        /// <param name="table">Имя таблицы</param>
+        /// <returns>Список списков объектов</returns>
         public static List<List<object>> GetAll(string table)
         {
             List<List<object>> list = new List<List<object>>();
@@ -120,6 +141,12 @@ namespace TProject
             return list;
         }
 
+        /// <summary>
+        /// Получение всех кортежей таблицы с заданным ограничением
+        /// </summary>
+        /// <param name="table">Имя таблицы</param>
+        /// <param name="where">Ограничение</param>
+        /// <returns>Список списков объектов</returns>
         public static List<List<object>> GetAll(string table, string where)
         {
             List<List<object>> list = new List<List<object>>();
@@ -139,6 +166,12 @@ namespace TProject
 
             return list;
         }
+
+        /// <summary>
+        /// Удаление карты
+        /// </summary>
+        /// <param name="name">Имя карты</param>
+        /// <returns></returns>
         public static bool RemoveMap(string name)
         {
             try
@@ -153,7 +186,15 @@ namespace TProject
             }
         }
 
-        internal static bool InsertMap(Vertexes vertexes, Edges edges, Image img, string name)
+        /// <summary>
+        /// Сохранение карты
+        /// </summary>
+        /// <param name="vertexes">Список вершин</param>
+        /// <param name="edges">Список дуг</param>
+        /// <param name="img">Изображение карты</param>
+        /// <param name="name">Название карты</param>
+        /// <returns></returns>
+        public static bool InsertMap(Vertexes vertexes, Edges edges, Image img, string name)
         {
             try
             {
@@ -221,6 +262,11 @@ namespace TProject
             }
         }
 
+        /// <summary>
+        /// Загрузка картинки из БД
+        /// </summary>
+        /// <param name="name">Имя карты</param>
+        /// <returns>Изображение карты</returns>
         public static Bitmap LoadPicture(string name)
         {
             try
@@ -242,6 +288,13 @@ namespace TProject
             }
         }
 
+        /// <summary>
+        /// Загрузка карты
+        /// </summary>
+        /// <param name="name">Имя карты</param>
+        /// <param name="vertexes">Список вершин</param>
+        /// <param name="edges">Список дуг</param>
+        /// <returns>Изображение карты, список вершин и дуг</returns>
         public static Bitmap LoadMap(string name, out Vertexes vertexes, out Edges edges)
         {
             try

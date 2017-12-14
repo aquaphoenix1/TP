@@ -23,6 +23,12 @@ namespace TProject.Driver
 
         private Fuel() { }
 
+        /// <summary>
+        /// Создание топлива
+        /// </summary>
+        /// <param name="typeName">Название топлива</param>
+        /// <param name="price">Цена</param>
+        /// <returns></returns>
         public static Fuel CreateFuel(string typeName, double price)
         {
             return new Fuel
