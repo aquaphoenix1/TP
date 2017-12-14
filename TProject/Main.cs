@@ -495,6 +495,16 @@ namespace TProject
 
         private void PictureBoxMap_MouseMove(object sender, MouseEventArgs e)
         {
+            
+            if (e.X > pictureBoxMap.Location.X + pictureBoxMap.Width ||
+                e.Y > pictureBoxMap.Location.Y + pictureBoxMap.Height ||
+                e.X < pictureBoxMap.Location.X ||
+                e.Y < pictureBoxMap.Location.Y)
+            {
+                return;
+            }
+
+
             if (isMapMoved)
             {
                 MakeMap.ViewPort.MoveViewPort(e.X, e.Y);
@@ -622,6 +632,7 @@ namespace TProject
                 }
 
                 MakeMap.ViewPort.SelectEndVertex(lastClickCoordX, lastClickCoordY);
+                MakeMap.ViewPort.StatusLabel.Text = "Выбрано начало маршрута...";
             }
             else
             {
@@ -633,10 +644,12 @@ namespace TProject
                 {
                     Route.Start = null;
                     MakeMap.ViewPort.SelectEndVertex(lastClickCoordX, lastClickCoordY);
+                    MakeMap.ViewPort.StatusLabel.Text = "Выбрано начало маршрута...";
                 }
                 else
                 {
                     MakeMap.ViewPort.SelectEndVertex(lastClickCoordX, lastClickCoordY);
+                    MakeMap.ViewPort.StatusLabel.Text = "Выбрано начало маршрута...";
                 }
             }
 
@@ -705,6 +718,8 @@ namespace TProject
 
             button_Ok_Сalibration.Enabled = false;
             button_Calibration.Enabled = true;
+
+            MakeMap.ViewPort.StatusLabel.Text = "Масштаб карты отмасштабирован...";
         }
 
         private void Calibration(double value)
@@ -766,6 +781,14 @@ namespace TProject
         }
         private void Сalibration_MouseMove(object sender, MouseEventArgs e)
         {
+            if (e.X > pictureBoxMap.Location.X + pictureBoxMap.Width ||
+               e.Y > pictureBoxMap.Location.Y + pictureBoxMap.Height ||
+               e.X < pictureBoxMap.Location.X ||
+               e.Y < pictureBoxMap.Location.Y)
+            {
+                return;
+            }
+
             if (isVertexMoved)
             {
                 selectedLabel.X = e.X.Scaling();
@@ -775,6 +798,12 @@ namespace TProject
             }
             else if (isCreatedEdge)
             {
+                if (((e.X + Math.Abs(callibrationEdge.GetHead().X.Scaling() - callibrationEdge.GetEnd().X.Scaling())) > pictureBoxMap.Location.X + pictureBoxMap.Width) ||
+                    ((e.X - Math.Abs(callibrationEdge.GetHead().X.Scaling() - callibrationEdge.GetEnd().X.Scaling())) < pictureBoxMap.Location.X))
+                {
+                    return;
+                }
+
                 int dx = Math.Abs(callibrationEdge.GetHead().X - callibrationEdge.GetEnd().X);
                 callibrationEdge.GetHead().X = (e.X.Scaling() - dx / 2);
                 callibrationEdge.GetEnd().X = (e.X.Scaling() + dx / 2);
@@ -977,6 +1006,7 @@ namespace TProject
                     item.IsInWay = false;
                 }
                 new Route().FindMinLengthWay(Map.vertexes, Map.edges, criterial, driver);
+                MakeMap.ViewPort.StatusLabel.Text = "Маршрут построен...";
                 ToolStripMenuItem_StaticView.Enabled = true;
                 ToolStripMenuItem_DynamicView.Enabled = true;
             }
@@ -1036,7 +1066,7 @@ namespace TProject
             {
                 Map.InitMap();
             }
-            MakeMap.CreateViewer(pictureBoxMap, panelMapSubstrate, Font);
+            MakeMap.CreateViewer(pictureBoxMap, panelMapSubstrate, Font, toolStripStatusLabel);
 
             Map.vertexes.RePaint += MakeMap.ViewPort.Invalidate;
             Map.edges.RePaint += MakeMap.ViewPort.Invalidate;

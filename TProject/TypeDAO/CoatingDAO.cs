@@ -31,8 +31,23 @@ namespace TProject.TypeDAO
 
         public bool Delete(string nameSurface)
         {
+            bool flag = true;
             try
             {
+                List<List<object>> list = GetAll("Edge");
+                list.ForEach( (e) =>
+                {
+                    if (e[6].ToString().Equals(nameSurface))
+                    {
+                        flag = false;
+                    }
+                });
+
+                if (!flag)
+                {
+                    return false;
+                }
+
                 new SQLiteCommand(string.Format("DELETE from Surface where NameSurface = '{0}'", nameSurface.ToLower()), DAO.GetConnection()).ExecuteNonQuery();
 
                 Coating.ListSurface.RemoveAll(l => l.ElementAt(0).ToString().ToLower().Equals(nameSurface.ToLower()));
@@ -47,8 +62,23 @@ namespace TProject.TypeDAO
 
         public bool Update(object obj, string ID)
         {
+            bool flag = true;
             try
             {
+                List<List<object>> list = GetAll("Edge");
+                list.ForEach((e) =>
+                {
+                    if (e[6].ToString().Equals(ID))
+                    {
+                        flag = false;
+                    }
+                });
+
+                if (!flag)
+                {
+                    return false;
+                }
+
                 Coating c = (Coating)obj;
                 new SQLiteCommand(string.Format("UPDATE Surface SET [NameSurface] = '{0}', [KoefSurface] = {1} where NameSurface = '{2}'", c.TypeName.ToLower(), c.Coeff.ToString().Replace(',', '.'), ID), DAO.GetConnection()).ExecuteNonQuery();
 

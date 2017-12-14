@@ -52,7 +52,6 @@
             this.button_Ok_Сalibration = new System.Windows.Forms.Button();
             this.button_Calibration = new System.Windows.Forms.Button();
             this.panelSlide = new System.Windows.Forms.Panel();
-            this.label_Layers = new TProject.VerticalLabel();
             this.labelSlide = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkBox_StreetName = new System.Windows.Forms.CheckBox();
@@ -83,6 +82,7 @@
             this.ToolStripMenuItem_RouteParameters = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_StaticView = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_DynamicView = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_ClearWay = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuEdge = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_DeleteEdge = new System.Windows.Forms.ToolStripMenuItem();
@@ -91,7 +91,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button_OffConfig = new System.Windows.Forms.Button();
             this.button_OnConfig = new System.Windows.Forms.Button();
-            this.ToolStripMenuItem_ClearWay = new System.Windows.Forms.ToolStripMenuItem();
+            this.label_Layers = new TProject.VerticalLabel();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMap)).BeginInit();
             this.contextMenuVertex.SuspendLayout();
             this.tabPageWorkWithBD.SuspendLayout();
@@ -106,12 +108,13 @@
             this.menuStrip2.SuspendLayout();
             this.contextMenuEdge.SuspendLayout();
             this.contextMenuMap.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBoxMap
             // 
             this.pictureBoxMap.BackColor = System.Drawing.Color.Silver;
-            this.pictureBoxMap.Location = new System.Drawing.Point(-10, 3);
+            this.pictureBoxMap.Location = new System.Drawing.Point(0, 1);
             this.pictureBoxMap.Name = "pictureBoxMap";
             this.pictureBoxMap.Size = new System.Drawing.Size(722, 287);
             this.pictureBoxMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -346,17 +349,6 @@
             this.panelSlide.Size = new System.Drawing.Size(25, 298);
             this.panelSlide.TabIndex = 1;
             this.panelSlide.Click += new System.EventHandler(this.PanelSlide_Click);
-            // 
-            // label_Layers
-            // 
-            this.label_Layers.AutoSize = true;
-            this.label_Layers.Location = new System.Drawing.Point(3, 111);
-            this.label_Layers.Name = "label_Layers";
-            this.label_Layers.NewText = null;
-            this.label_Layers.RotateAngle = 0;
-            this.label_Layers.Size = new System.Drawing.Size(73, 13);
-            this.label_Layers.TabIndex = 1;
-            this.label_Layers.Text = "verticalLabel1";
             // 
             // labelSlide
             // 
@@ -605,15 +597,15 @@
             // ToolStripMenuItem_AboutCreators
             // 
             this.ToolStripMenuItem_AboutCreators.Name = "ToolStripMenuItem_AboutCreators";
-            this.ToolStripMenuItem_AboutCreators.Size = new System.Drawing.Size(167, 22);
+            this.ToolStripMenuItem_AboutCreators.Size = new System.Drawing.Size(221, 22);
             this.ToolStripMenuItem_AboutCreators.Text = "О разработчиках";
             this.ToolStripMenuItem_AboutCreators.Click += new System.EventHandler(this.ToolStripMenuItem_AboutDeveloper_Click);
             // 
             // ToolStripMenuItem_AboutSystem
             // 
             this.ToolStripMenuItem_AboutSystem.Name = "ToolStripMenuItem_AboutSystem";
-            this.ToolStripMenuItem_AboutSystem.Size = new System.Drawing.Size(167, 22);
-            this.ToolStripMenuItem_AboutSystem.Text = "О системе";
+            this.ToolStripMenuItem_AboutSystem.Size = new System.Drawing.Size(221, 22);
+            this.ToolStripMenuItem_AboutSystem.Text = "Руководство пользователя";
             this.ToolStripMenuItem_AboutSystem.Click += new System.EventHandler(this.ToolStripMenuItem_AboutSystem_Click);
             // 
             // ToolStripMenuItem_Route
@@ -648,6 +640,13 @@
             this.ToolStripMenuItem_DynamicView.Size = new System.Drawing.Size(215, 22);
             this.ToolStripMenuItem_DynamicView.Text = "Отобразить динамически";
             this.ToolStripMenuItem_DynamicView.Click += new System.EventHandler(this.ToolStripMenuItem_DynamicView_Click);
+            // 
+            // ToolStripMenuItem_ClearWay
+            // 
+            this.ToolStripMenuItem_ClearWay.Name = "ToolStripMenuItem_ClearWay";
+            this.ToolStripMenuItem_ClearWay.Size = new System.Drawing.Size(215, 22);
+            this.ToolStripMenuItem_ClearWay.Text = "Очистить маршрут";
+            this.ToolStripMenuItem_ClearWay.Click += new System.EventHandler(this.ToolStripMenuItem_Click_ClearWay);
             // 
             // contextMenuEdge
             // 
@@ -689,7 +688,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(551, 361);
+            this.label1.Location = new System.Drawing.Point(536, 365);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(131, 13);
             this.label1.TabIndex = 19;
@@ -698,9 +697,9 @@
             // button_OffConfig
             // 
             this.button_OffConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_OffConfig.Location = new System.Drawing.Point(688, 356);
+            this.button_OffConfig.Location = new System.Drawing.Point(673, 361);
             this.button_OffConfig.Name = "button_OffConfig";
-            this.button_OffConfig.Size = new System.Drawing.Size(46, 23);
+            this.button_OffConfig.Size = new System.Drawing.Size(46, 21);
             this.button_OffConfig.TabIndex = 18;
             this.button_OffConfig.Text = "Выкл.";
             this.button_OffConfig.UseVisualStyleBackColor = true;
@@ -710,20 +709,40 @@
             // 
             this.button_OnConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button_OnConfig.Enabled = false;
-            this.button_OnConfig.Location = new System.Drawing.Point(732, 356);
+            this.button_OnConfig.Location = new System.Drawing.Point(717, 361);
             this.button_OnConfig.Name = "button_OnConfig";
-            this.button_OnConfig.Size = new System.Drawing.Size(42, 23);
+            this.button_OnConfig.Size = new System.Drawing.Size(42, 21);
             this.button_OnConfig.TabIndex = 17;
             this.button_OnConfig.Text = "Вкл.";
             this.button_OnConfig.UseVisualStyleBackColor = true;
             this.button_OnConfig.Click += new System.EventHandler(this.Button_OnConfig_Click);
             // 
-            // очиститьМаршрутToolStripMenuItem
+            // label_Layers
             // 
-            this.ToolStripMenuItem_ClearWay.Name = "очиститьМаршрутToolStripMenuItem";
-            this.ToolStripMenuItem_ClearWay.Size = new System.Drawing.Size(215, 22);
-            this.ToolStripMenuItem_ClearWay.Text = "Очистить маршрут";
-            this.ToolStripMenuItem_ClearWay.Click += new System.EventHandler(this.ToolStripMenuItem_Click_ClearWay);
+            this.label_Layers.AutoSize = true;
+            this.label_Layers.Location = new System.Drawing.Point(3, 111);
+            this.label_Layers.Name = "label_Layers";
+            this.label_Layers.NewText = null;
+            this.label_Layers.RotateAngle = 0;
+            this.label_Layers.Size = new System.Drawing.Size(73, 13);
+            this.label_Layers.TabIndex = 1;
+            this.label_Layers.Text = "verticalLabel1";
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 360);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(778, 22);
+            this.statusStrip1.TabIndex = 20;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel
+            // 
+            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(60, 17);
+            this.toolStripStatusLabel.Text = "Готово.....";
             // 
             // Main
             // 
@@ -735,6 +754,7 @@
             this.Controls.Add(this.button_OnConfig);
             this.Controls.Add(this.menuStrip2);
             this.Controls.Add(this.tabControlMain);
+            this.Controls.Add(this.statusStrip1);
             this.Name = "Main";
             this.ShowIcon = false;
             this.Text = "Поиск оптимального маршрута";
@@ -759,6 +779,8 @@
             this.menuStrip2.PerformLayout();
             this.contextMenuEdge.ResumeLayout(false);
             this.contextMenuMap.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -829,5 +851,7 @@
         private System.Windows.Forms.Button button_OffConfig;
         private System.Windows.Forms.Button button_OnConfig;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_ClearWay;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
     }
 }

@@ -33,8 +33,24 @@ namespace TProject.TypeDAO
 
         public bool Delete(string model)
         {
+            bool flag = true;
+
             try
             {
+                List<List<object>> list = GetAll("Driver");
+                list.ForEach((e) =>
+                {
+                    if (e[2].ToString().Equals(model))
+                    {
+                        flag = false;
+                    }
+                });
+
+                if (!flag)
+                {
+                    return false;
+                }
+
                 new SQLiteCommand(string.Format("DELETE from Auto where Model = '{0}'", model.ToLower()), DAO.GetConnection()).ExecuteNonQuery();
 
                 Car.ListAuto.RemoveAll(l => l.ElementAt(0).ToString().ToLower().Equals(model.ToLower()));
@@ -49,8 +65,24 @@ namespace TProject.TypeDAO
 
         public bool Update(object obj, string ID)
         {
+            bool flag = true;
+
             try
             {
+                List<List<object>> list = GetAll("Driver");
+                list.ForEach((e) =>
+                {
+                    if (e[2].ToString().Equals(ID))
+                    {
+                        flag = false;
+                    }
+                });
+
+                if (!flag)
+                {
+                    return false;
+                }
+
                 Car c = (Car)obj;
                 new SQLiteCommand(string.Format("UPDATE Auto SET [Model] = '{0}', [Fuel] = '{1}', [Сonsumption] = {2}, [Speed] = {3} where Model = '{4}'", c.TypeName.ToLower(), c.CarFuel.TypeName, c.FuelConsumption.ToString().Replace(',', '.'), c.Speed.ToString().Replace(',', '.'), ID), DAO.GetConnection()).ExecuteNonQuery();
 

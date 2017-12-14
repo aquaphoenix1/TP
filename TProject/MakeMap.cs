@@ -15,6 +15,7 @@ namespace TProject
         /// основной на котором отрисовывается подложка и графPictureBox
         /// </summary>
         private PictureBox view;
+        private ToolStripStatusLabel statusLabel { get; set; }
 
         public PictureBox View => view;
 
@@ -95,16 +96,21 @@ namespace TProject
         /// </summary>
         private Edge selectedEdge = null;
         public Edge SelectedEdge => selectedEdge;
+
+        public ToolStripStatusLabel StatusLabel { get => statusLabel; set => statusLabel = value; }
+
         /// <summary>
         /// Создает контроллер создания и управления картой
         /// </summary>
         /// <param name="pb"></param>
         /// <param name="panel"></param>
         /// <param name="font"></param>
-        private MakeMap(PictureBox pb, Panel panel, Font font)
+        private MakeMap(PictureBox pb, Panel panel, Font font, ToolStripStatusLabel statusLabel)
         {
             {
                 StaticViewer.CreateViewer(font);
+
+                this.StatusLabel = statusLabel;
 
                 MapLocationX = 0;
                 MapLocationY = 0;
@@ -214,9 +220,9 @@ namespace TProject
         /// </summary>
         /// <param name="pb"></param>
         /// <param name="panel"></param>
-        public static void CreateViewer(PictureBox pb, Panel panel, Font font)
+        public static void CreateViewer(PictureBox pb, Panel panel, Font font, ToolStripStatusLabel statusLabel)
         {
-            ViewPort = new MakeMap(pb, panel, font);
+            ViewPort = new MakeMap(pb, panel, font, statusLabel);
         }
 
         /// <summary>
@@ -422,7 +428,10 @@ namespace TProject
 
             string criterial = (Route.Criterial == Main.Criterial.Length) ? "Длина" : (Route.Criterial == Main.Criterial.Price) ? "Цена" : "Время";
 
-            MessageBox.Show(string.Format("{0} пути {1}", criterial, Math.Round(Route.Value, 2).ToString()), "Цена маршрута");
+            string message = string.Format("{0} пути {1}", criterial, Math.Round(Route.Value, 2).ToString(), "Цена маршрута");
+            MakeMap.ViewPort.StatusLabel.Text = message;
+            
+            MessageBox.Show(message);
 
             ViewPort.Invalidate();
         }
@@ -509,19 +518,19 @@ namespace TProject
         {
             if (x.Scaling() - StaticViewer.Width <= Math.Max(x1, x2) && x.Scaling() + StaticViewer.Width >= Math.Min(x1, x2) && y.Scaling() - StaticViewer.Width <= Math.Max(y1, y2) && y.Scaling() + StaticViewer.Width >= Math.Min(y1, y2))
             {
-                if (x2 == x1)
+                if (x2 == x1 || x2 + 4 > x1 || x2 - 4 < x1 || x1 + 4 > x2 || x1 - 4 < x2 )
                 {
-                    return x.Scaling() >= x1 - StaticViewer.Width && x.Scaling() <= x1 + StaticViewer.Width;
+                    return x.Scaling() >= x1 - StaticViewer.Width.Scaling() && x.Scaling() <= x1 + StaticViewer.Width.Scaling();
                 }
-                else if (y2 == y1)
+                else if (y2 == y1 || y2 + 4 > y1 || y2 - 4 < y1 || y1 + 4 > y2 || y1 - 4 < y2)
                 {
-                    return y.Scaling() >= y1 - StaticViewer.Width && y.Scaling() <= y1 + StaticViewer.Width;
+                    return y.Scaling() >= y1 - StaticViewer.Width.Scaling() && y.Scaling() <= y1 + StaticViewer.Width.Scaling();
                 }
                 else
                 {
                     double k = (double)(y2 - y1) / (double)(x2 - x1);
                     double pointY = k * x.Scaling() + y1 - k * x1;
-                    return pointY - StaticViewer.Width <= y.Scaling() && pointY + StaticViewer.Width >= y.Scaling();
+                    return pointY - StaticViewer.Width.Scaling() <= y.Scaling() && pointY + StaticViewer.Width.Scaling() >= y.Scaling();
                 }
             }
             return false;

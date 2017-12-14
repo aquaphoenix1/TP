@@ -31,8 +31,24 @@ namespace TProject.TypeDAO
 
         public bool Delete(string name)
         {
+            bool flag = true;
+
             try
             {
+                List<List<object>> list = GetAll("Auto");
+                list.ForEach((e) =>
+                {
+                    if (e[1].ToString().Equals(name))
+                    {
+                        flag = false;
+                    }
+                });
+
+                if (!flag)
+                {
+                    return false;
+                }
+
                 new SQLiteCommand(string.Format("DELETE from Fuel where Name = '{0}'", name.ToUpper()), DAO.GetConnection()).ExecuteNonQuery();
 
                 Fuel.ListFuel.RemoveAll(l => l.ElementAt(0).ToString().ToUpper().Equals(name.ToUpper()));
@@ -47,8 +63,24 @@ namespace TProject.TypeDAO
 
         public bool Update(object obj, string ID)
         {
+            bool flag = true;
+
             try
             {
+                List<List<object>> list = GetAll("Auto");
+                list.ForEach((e) =>
+                {
+                    if (e[1].ToString().Equals(ID))
+                    {
+                        flag = false;
+                    }
+                });
+
+                if (!flag)
+                {
+                    return false;
+                }
+
                 Fuel f = (Fuel)obj;
                 new SQLiteCommand(string.Format("UPDATE Fuel SET [Name] = '{0}', [Cost] = {1} where Name = '{2}'", f.TypeName.ToUpper(), f.Price.ToString().Replace(',', '.'), ID), DAO.GetConnection()).ExecuteNonQuery();
 
