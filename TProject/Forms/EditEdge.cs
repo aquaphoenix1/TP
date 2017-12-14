@@ -27,7 +27,7 @@ namespace TProject
                 policemanComboBox.SelectedIndex = policemanComboBox.FindString(_edge.Policemen.TypeName);
             }
 
-            signOneWayCheckBox.Checked = _edge.SignOneWay;
+            signOneWayCheckBox.Checked =!_edge.IsBilateral;
 
             if (_edge.SignMaxSpeed != null)
             {
@@ -110,9 +110,9 @@ namespace TProject
                 List<object> coat = Coating.ListSurface.First(coating => coating[0].ToString().Equals(coatingComboBox.SelectedItem.ToString()));
                 Edge.Coat = Coating.CreateCoating(coat[0].ToString(), double.Parse(coat[1].ToString()));
 
-                Edge.IsBilateral = signOneWayCheckBox.Checked;
 
-                Edge.SignOneWay = signOneWayCheckBox.Checked;
+
+                Edge.IsBilateral= !signOneWayCheckBox.Checked;
             }
 
             DialogResult = DialogResult.OK;

@@ -204,7 +204,7 @@ namespace TProject
 
                             string police = (edge.Policemen != null) ? edge.Policemen.TypeName : "null";
 
-                            new SQLiteCommand(string.Format("Insert into Edge values ({0}, '{1}', '{2}', '{3}', {4}, {5}, '{6}', '{7}', '{8}', '{9}')", edge.ID, edge.IsBilateral.ToString(), idSign, edge.SignOneWay.ToString(), edge.GetHead().ID, edge.GetEnd().ID, edge.NameStreet, edge.Coat.TypeName, police, name), GetConnection()).ExecuteNonQuery();
+                            new SQLiteCommand(string.Format("Insert into Edge values ({0}, '{1}', '{2}', '{3}', {4}, {5}, '{6}', '{7}', '{8}', '{9}')", edge.ID, edge.IsBilateral.ToString(), idSign, edge.IsBilateral.ToString(), edge.GetHead().ID, edge.GetEnd().ID, edge.NameStreet, edge.Coat.TypeName, police, name), GetConnection()).ExecuteNonQuery();
                         }
                     }
 

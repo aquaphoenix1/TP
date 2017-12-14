@@ -74,9 +74,29 @@ namespace TProject
             {
                 if (!item.Equals(MakeMap.ViewPort.SelectedEdge))
                 {
-                    graph.DrawLine(PensCase.GetCustomPen(false, Width.UnScaling() + 3), item.GetHead().X.UnScaling() + dX, item.GetHead().Y.UnScaling() + dY,
+                    Pen penOne = PensCase.GetCustomPen(false, Width.UnScaling() + 3);
+                    Pen penTwo = PensCase.GetPenForEdge(false, false, Width.UnScaling());
+                    if (!item.IsBilateral)
+                    {
+                        penOne.StartCap = LineCap.Round;
+                        penTwo.StartCap = LineCap.Round;
+                        pen.StartCap = LineCap.Round;
+                        penOne.EndCap = LineCap.ArrowAnchor;
+                        penTwo.EndCap = LineCap.ArrowAnchor;
+                        pen.EndCap = LineCap.ArrowAnchor;
+                    }
+                    else
+                    {
+                        penOne.StartCap = LineCap.ArrowAnchor;
+                        penTwo.StartCap = LineCap.ArrowAnchor;
+                        pen.StartCap = LineCap.ArrowAnchor;
+                        penOne.EndCap = LineCap.ArrowAnchor;
+                        penTwo.EndCap = LineCap.ArrowAnchor;
+                        pen.EndCap = LineCap.ArrowAnchor;
+                    }
+                    graph.DrawLine(penOne, item.GetHead().X.UnScaling() + dX, item.GetHead().Y.UnScaling() + dY,
                         item.GetEnd().X.UnScaling() + dX, item.GetEnd().Y.UnScaling() + dY);
-                    graph.DrawLine(PensCase.GetPenForEdge(false, false, Width.UnScaling()), item.GetHead().X.UnScaling() + dX, item.GetHead().Y.UnScaling() + dY,
+                    graph.DrawLine(penTwo, item.GetHead().X.UnScaling() + dX, item.GetHead().Y.UnScaling() + dY,
                         item.GetEnd().X.UnScaling() + dX, item.GetEnd().Y.UnScaling() + dY);
                     if (item.IsInWay)
                     {
@@ -100,7 +120,7 @@ namespace TProject
             }
             if (MakeMap.ViewPort.IsSign_Visible)
             {
-                foreach (var item in Map.edges.List.Where(o => o.SignMaxSpeed != null || o.SignOneWay))
+                foreach (var item in Map.edges.List.Where(o => o.SignMaxSpeed != null || !o.IsBilateral))
                 {
                     if (item.SignMaxSpeed != null)
                     {
@@ -117,7 +137,7 @@ namespace TProject
                            (item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 + 26),
                            (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 7));
                     }
-                    if (item.SignOneWay)
+                    if (!item.IsBilateral)
                     {
                         graph.DrawImage(Resources.oneWaySign, new Rectangle(item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 + 54,
                            (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 11), Width * 2 + 3, Width * 2 + 3));
@@ -127,7 +147,19 @@ namespace TProject
 
             if (MakeMap.ViewPort.SelectedEdge != null)
             {
-                graph.DrawLine(PensCase.GetPenForEdge(true, false, Width.UnScaling()), MakeMap.ViewPort.SelectedEdge.GetHead().X.UnScaling() + dX, MakeMap.ViewPort.SelectedEdge.GetHead().Y.UnScaling() + dY,
+                Pen selectedPen = PensCase.GetPenForEdge(true, false, Width.UnScaling());
+                if (MakeMap.ViewPort.SelectedEdge.IsBilateral)
+                {
+                    selectedPen.StartCap = LineCap.ArrowAnchor;
+                    selectedPen.EndCap = LineCap.ArrowAnchor;
+                }
+                else
+                {
+                    selectedPen.StartCap = LineCap.Round;
+                    selectedPen.EndCap = LineCap.ArrowAnchor;
+                }
+
+                graph.DrawLine(selectedPen, MakeMap.ViewPort.SelectedEdge.GetHead().X.UnScaling() + dX, MakeMap.ViewPort.SelectedEdge.GetHead().Y.UnScaling() + dY,
                     MakeMap.ViewPort.SelectedEdge.GetEnd().X.UnScaling() + dX, MakeMap.ViewPort.SelectedEdge.GetEnd().Y.UnScaling() + dY);
                 if (MakeMap.ViewPort.IsStreetLength_Visible)
                 {

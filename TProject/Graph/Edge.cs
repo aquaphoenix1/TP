@@ -15,7 +15,7 @@ namespace TProject.Graph
 
         public bool IsBilateral { get; set; }
 
-        public bool SignOneWay { get; set; }
+        //public bool SignOneWay { get; set; }
         public Sign SignMaxSpeed { get; set; }
 
         public Police Policemen { get; set; }
@@ -151,10 +151,13 @@ namespace TProject.Graph
             return EndVertex;
         }
 
-        public Edge() : base() { }
+        public Edge() : base() {
+            IsBilateral = true;
+        }
 
         public Edge(Vertex v1, Vertex v2) : base()
         {
+            IsBilateral = true;
             HeadVertex = v1;
             EndVertex = v2;
         }
@@ -174,7 +177,7 @@ namespace TProject.Graph
                 NameStreet = name,
                 Coat = coat,
                 IsBilateral = isBelaterial,
-                SignOneWay = signOneWay,
+                //SignOneWay = signOneWay,
                 SignMaxSpeed = signMaxSpeed,
                 Policemen = polieceman
             };

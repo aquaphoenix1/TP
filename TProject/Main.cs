@@ -475,6 +475,7 @@ namespace TProject
                                 {
                                     isVertexMoved = false;
                                     MakeMap.ViewPort.SaveCreatedEdge();
+                                    MakeMap.ViewPort.Invalidate();
                                 }
                                 Cursor = Cursors.Arrow;
                             }
@@ -1204,6 +1205,10 @@ namespace TProject
 
         private void Main_FormClosed(object sender, FormClosedEventArgs e)
         {
+            Map.edges = new Edges();
+            Map.vertexes = new Vertexes();
+            Map.Way = new List<Vertex>();
+            
             DialogResult = DialogResult.Abort;
         }
     }
