@@ -32,7 +32,7 @@ namespace TProject
             {
                 System.Collections.Generic.List<object> driver = Driver.Driver.ListDriver.First(dv => dv[0].ToString().Equals(driverComboBox.SelectedItem.ToString()));
 
-
+                
                 switch (critSearchComboBox.SelectedItem.ToString())
                 {
                     case "Время":
@@ -84,7 +84,6 @@ namespace TProject
         private void CancelRouteButton_Click(object sender, System.EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
-
             Close();
         }
     }

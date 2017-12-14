@@ -18,7 +18,7 @@ namespace TProject
         /// основной на котором отрисовывается подложка и графPictureBox
         /// </summary>
         private PictureBox view;
-       
+
         public PictureBox View => view;
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace TProject
         public Edge SelectedEdge => selectedEdge;
 
         private MakeMap(PictureBox pb, Panel panel, Font font)
-        { 
+        {
             {
                 StaticViewer.CreateViewer(font);
 
@@ -88,7 +88,7 @@ namespace TProject
                 view.Hide();
                 view.Enabled = false;
 
-               StaticViewer.Viewer.Resize();
+                StaticViewer.Viewer.Resize();
                 ViewPort = this;
             }
         }
@@ -170,7 +170,7 @@ namespace TProject
             }
         }
 
-       
+
         #endregion
 
         #region Методы работы с контроллером (инициализация pictureBox для карты и тд.)
@@ -210,7 +210,7 @@ namespace TProject
 
             if (h != 0 && w != 0)
             {
-                view.Paint -=  StaticViewer.Viewer.Paint;
+                view.Paint -= StaticViewer.Viewer.Paint;
                 view.MouseWheel -= Zoom;
 
                 this.View.Height = startHeightPB = h;
@@ -320,9 +320,11 @@ namespace TProject
 
         #endregion
 
-    
+
         public void MakeStaticRoute()
         {
+          
+
             if (Route.Way != null)
             {
                 Map.Way = new List<Vertex>();
@@ -336,7 +338,7 @@ namespace TProject
 
                     for (int i = 0; i < Map.vertexes.GetCountElements(); i++)
                     {
-                        if(Map.vertexes.GetElement(i).ID == Route.Way[k])
+                        if (Map.vertexes.GetElement(i).ID == Route.Way[k])
                         {
                             first = Map.vertexes.GetElement(i);
                             break;
@@ -356,7 +358,7 @@ namespace TProject
 
                     Edge edge = Route.GetEdge(first, second, Map.edges);
 
-                    if (edge.GetHead().ID == Route.Way.ElementAt(k-1))
+                    if (edge.GetHead().ID == Route.Way.ElementAt(k - 1))
                     {
                         Map.Way.Add(edge.GetHead());
                         Map.Way.Add(edge.GetEnd());
@@ -410,7 +412,7 @@ namespace TProject
                 MessageBox.Show(string.Format("{0} пути {1}", criterial, Math.Round(Route.Value, 2).ToString()), "Цена маршрута");
             }*/
 
-            
+
             else
             {
                 MessageBox.Show("Невозможно построить маршрут");

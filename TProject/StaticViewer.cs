@@ -166,7 +166,7 @@ namespace TProject
             }
         }
 
-        public  void DrawStartPoint(Graphics graph)
+        public void DrawStartPoint(Graphics graph)
         {
             Pen pen = new Pen(Color.Red);
             DrawPointFlag(graph, pen, Route.Start.X - Width / 2, Route.Start.Y - Width / 2);
@@ -181,7 +181,7 @@ namespace TProject
                 new Point((x  + Width  / 2).UnScaling(), (y - (Width * 2)).UnScaling())
             });
         }
-        public  void DrawEndPoint(Graphics graph)
+        public void DrawEndPoint(Graphics graph)
         {
             Pen pen = new Pen(Color.Blue);
             DrawPointFlag(graph, pen, Route.End.X - Width / 2, Route.End.Y - Width / 2);
@@ -190,7 +190,7 @@ namespace TProject
         /// Пересчитывает величину смещения реальных координат точки, 
         /// относительно положения курсора
         /// </summary>
-        public  void Resize()
+        public void Resize()
         {
             Viewer.dX = Width / 2;
             Viewer.dY = Width / 2;

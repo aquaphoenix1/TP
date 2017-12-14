@@ -35,7 +35,7 @@
             this.editVertexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wayFromToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wayToВToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.удалитьПерекрестокToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_DeleteVertex = new System.Windows.Forms.ToolStripMenuItem();
             this.openSubMapFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.tabPageWorkWithBD = new System.Windows.Forms.TabPage();
             this.buttonRemove = new System.Windows.Forms.Button();
@@ -85,9 +85,13 @@
             this.ToolStripMenuItem_DynamicView = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuEdge = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.удалитьПерегонToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_DeleteEdge = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuMap = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
+            this.button_OffConfig = new System.Windows.Forms.Button();
+            this.button_OnConfig = new System.Windows.Forms.Button();
+            this.ToolStripMenuItem_ClearWay = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMap)).BeginInit();
             this.contextMenuVertex.SuspendLayout();
             this.tabPageWorkWithBD.SuspendLayout();
@@ -121,9 +125,9 @@
             this.editVertexToolStripMenuItem,
             this.wayFromToolStripMenuItem,
             this.wayToВToolStripMenuItem,
-            this.удалитьПерекрестокToolStripMenuItem});
+            this.ToolStripMenuItem_DeleteVertex});
             this.contextMenuVertex.Name = "contextMenuStripPictBox";
-            this.contextMenuVertex.Size = new System.Drawing.Size(210, 136);
+            this.contextMenuVertex.Size = new System.Drawing.Size(210, 114);
             // 
             // addEdgeToolStripMenuItem
             // 
@@ -153,12 +157,12 @@
             this.wayToВToolStripMenuItem.Text = "Маршрут в...";
             this.wayToВToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenu_WayToВ_Click);
             // 
-            // удалитьПерекрестокToolStripMenuItem
+            // ToolStripMenuItem_DeleteVertex
             // 
-            this.удалитьПерекрестокToolStripMenuItem.Name = "удалитьПерекрестокToolStripMenuItem";
-            this.удалитьПерекрестокToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
-            this.удалитьПерекрестокToolStripMenuItem.Text = "Удалить перекресток";
-            this.удалитьПерекрестокToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItem_DeleteVertex_Click);
+            this.ToolStripMenuItem_DeleteVertex.Name = "ToolStripMenuItem_DeleteVertex";
+            this.ToolStripMenuItem_DeleteVertex.Size = new System.Drawing.Size(209, 22);
+            this.ToolStripMenuItem_DeleteVertex.Text = "Удалить перекресток";
+            this.ToolStripMenuItem_DeleteVertex.Click += new System.EventHandler(this.ToolStripMenuItem_DeleteVertex_Click);
             // 
             // openSubMapFileDialog
             // 
@@ -617,7 +621,8 @@
             this.ToolStripMenuItem_Route.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolStripMenuItem_RouteParameters,
             this.ToolStripMenuItem_StaticView,
-            this.ToolStripMenuItem_DynamicView});
+            this.ToolStripMenuItem_DynamicView,
+            this.ToolStripMenuItem_ClearWay});
             this.ToolStripMenuItem_Route.Name = "ToolStripMenuItem_Route";
             this.ToolStripMenuItem_Route.Size = new System.Drawing.Size(72, 20);
             this.ToolStripMenuItem_Route.Text = "Маршрут";
@@ -648,7 +653,7 @@
             // 
             this.contextMenuEdge.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem5,
-            this.удалитьПерегонToolStripMenuItem});
+            this.ToolStripMenuItem_DeleteEdge});
             this.contextMenuEdge.Name = "contextMenuStripPictBox";
             this.contextMenuEdge.Size = new System.Drawing.Size(193, 48);
             // 
@@ -659,12 +664,12 @@
             this.toolStripMenuItem5.Text = "Параметры перегона";
             this.toolStripMenuItem5.Click += new System.EventHandler(this.ToolStripMenu_EditEdge_Click);
             // 
-            // удалитьПерегонToolStripMenuItem
+            // ToolStripMenuItem_DeleteEdge
             // 
-            this.удалитьПерегонToolStripMenuItem.Name = "удалитьПерегонToolStripMenuItem";
-            this.удалитьПерегонToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            this.удалитьПерегонToolStripMenuItem.Text = "Удалить перегон";
-            this.удалитьПерегонToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItem_DeleteEdge_Click);
+            this.ToolStripMenuItem_DeleteEdge.Name = "ToolStripMenuItem_DeleteEdge";
+            this.ToolStripMenuItem_DeleteEdge.Size = new System.Drawing.Size(192, 22);
+            this.ToolStripMenuItem_DeleteEdge.Text = "Удалить перегон";
+            this.ToolStripMenuItem_DeleteEdge.Click += new System.EventHandler(this.ToolStripMenuItem_DeleteEdge_Click);
             // 
             // contextMenuMap
             // 
@@ -680,11 +685,54 @@
             this.toolStripMenuItem9.Text = "Добавить перекресток";
             this.toolStripMenuItem9.Click += new System.EventHandler(this.ToolStripMenu_AddVertex_Click);
             // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(551, 361);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(131, 13);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Режим редактирования:";
+            // 
+            // button_OffConfig
+            // 
+            this.button_OffConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_OffConfig.Location = new System.Drawing.Point(688, 356);
+            this.button_OffConfig.Name = "button_OffConfig";
+            this.button_OffConfig.Size = new System.Drawing.Size(46, 23);
+            this.button_OffConfig.TabIndex = 18;
+            this.button_OffConfig.Text = "Выкл.";
+            this.button_OffConfig.UseVisualStyleBackColor = true;
+            this.button_OffConfig.Click += new System.EventHandler(this.button_OffConfig_Click);
+            // 
+            // button_OnConfig
+            // 
+            this.button_OnConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_OnConfig.Enabled = false;
+            this.button_OnConfig.Location = new System.Drawing.Point(732, 356);
+            this.button_OnConfig.Name = "button_OnConfig";
+            this.button_OnConfig.Size = new System.Drawing.Size(42, 23);
+            this.button_OnConfig.TabIndex = 17;
+            this.button_OnConfig.Text = "Вкл.";
+            this.button_OnConfig.UseVisualStyleBackColor = true;
+            this.button_OnConfig.Click += new System.EventHandler(this.button_OnConfig_Click);
+            // 
+            // очиститьМаршрутToolStripMenuItem
+            // 
+            this.ToolStripMenuItem_ClearWay.Name = "очиститьМаршрутToolStripMenuItem";
+            this.ToolStripMenuItem_ClearWay.Size = new System.Drawing.Size(215, 22);
+            this.ToolStripMenuItem_ClearWay.Text = "Очистить маршрут";
+            this.ToolStripMenuItem_ClearWay.Click += new System.EventHandler(this.очиститьМаршрутToolStripMenuItem_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(778, 382);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.button_OffConfig);
+            this.Controls.Add(this.button_OnConfig);
             this.Controls.Add(this.menuStrip2);
             this.Controls.Add(this.tabControlMain);
             this.Name = "Main";
@@ -769,12 +817,16 @@
         private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Label labelEditor;
-        private System.Windows.Forms.ToolStripMenuItem удалитьПерегонToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem удалитьПерекрестокToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DeleteEdge;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DeleteVertex;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_StaticView;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_RouteParameters;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_AboutCreators;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_AboutSystem;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DynamicView;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button_OffConfig;
+        private System.Windows.Forms.Button button_OnConfig;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_ClearWay;
     }
 }

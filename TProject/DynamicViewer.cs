@@ -42,7 +42,7 @@ namespace TProject.Way
             GlobalTime = 0;
             step = 0;
             timerTL.Interval = 30;
-            timerTL.Tick += (o,e) => IncGlobalTime(o);
+            timerTL.Tick += (o, e) => IncGlobalTime(o);
         }
         public void Start()
         {
