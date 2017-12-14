@@ -58,7 +58,7 @@ namespace TProject
                 new SQLiteCommand("Create table Surface ([NameSurface] char(20) primary key, [KoefSurface] real not null)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Street ([Name] char(50) primary key)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Policeman ([TypePolice] char(20) primary key, [Koefficient] real not null)", GetConnection()).ExecuteNonQuery();
-                new SQLiteCommand("Create table Edge ([ID] Integer, [Direction] bool not null, [SignMaxSpeed] Integer References Sign ([Value]), [SignTwoWay] bool, [IDVertexFirst] Integer References Vertex ([ID]), [IDVertexSecond] Integer References Vertex ([ID]),  [Name] char(50) References Street ([Name]), [Surface] char(20) References Surface ([NameSurface]), [Police] char(20) references Policeman([TypePolice]), [Map] char(30) References Maps ([Name]), Primary Key([ID], [Map]))", GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand("Create table Edge ([ID] Integer, [Direction] bool not null, [SignMaxSpeed] Integer References Sign ([Value]), [IDVertexFirst] Integer References Vertex ([ID]), [IDVertexSecond] Integer References Vertex ([ID]), [Name] char(50) References Street ([Name]), [Surface] char(20) References Surface ([NameSurface]), [Police] char(20) references Policeman([TypePolice]), [Map] char(30) References Maps ([Name]), Primary Key([ID], [Map]))", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Auto ([Model] char(30) primary key, [Fuel] char(30) References Fuel ([Name]), [Сonsumption] real not null, [Speed] real not null)", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Driver ([FIO] char(30) primary key, [TypeDriver] char(20) not null, [Model] char(30) References Auto ([Model]))", GetConnection()).ExecuteNonQuery();
                 new SQLiteCommand("Create table Fuel ([Name] char(30) primary key, [Cost] real not null)", GetConnection()).ExecuteNonQuery();
@@ -204,7 +204,7 @@ namespace TProject
 
                             string police = (edge.Policemen != null) ? edge.Policemen.TypeName : "null";
 
-                            new SQLiteCommand(string.Format("Insert into Edge values ({0}, '{1}', '{2}', '{3}', {4}, {5}, '{6}', '{7}', '{8}', '{9}')", edge.ID, edge.IsBilateral.ToString(), idSign, edge.IsBilateral.ToString(), edge.GetHead().ID, edge.GetEnd().ID, edge.NameStreet, edge.Coat.TypeName, police, name), GetConnection()).ExecuteNonQuery();
+                            new SQLiteCommand(string.Format("Insert into Edge values ({0}, '{1}', '{2}', {3}, {4}, '{5}', '{6}', '{7}', '{8}')", edge.ID, edge.IsBilateral.ToString(), idSign, edge.GetHead().ID, edge.GetEnd().ID, edge.NameStreet, edge.Coat.TypeName, police, name), GetConnection()).ExecuteNonQuery();
                         }
                     }
 
@@ -271,13 +271,13 @@ namespace TProject
 
                 foreach (var edge in list)
                 {
-                    Vertex head = vertexes.GetForId(long.Parse(edge[4].ToString()));
-                    Vertex end = vertexes.GetForId(long.Parse(edge[5].ToString()));
-                    Way.Coating coat = Way.Coating.GetCoatingByName(edge[7].ToString());
+                    Vertex head = vertexes.GetForId(long.Parse(edge[3].ToString()));
+                    Vertex end = vertexes.GetForId(long.Parse(edge[4].ToString()));
+                    Way.Coating coat = Way.Coating.GetCoatingByName(edge[6].ToString());
                     Way.Sign sign = Way.Sign.GetSignBySpeed(int.Parse(edge[2].ToString()));
                     Way.Police police = Way.Police.GetPoliceByName(edge[8].ToString());
 
-                    edges.AddNoEvent(Edge.CreateEdge(long.Parse(edge[0].ToString()), head, end, coat, edge[6].ToString(), bool.Parse(edge[1].ToString()), bool.Parse(edge[3].ToString()), sign, police));
+                    edges.AddNoEvent(Edge.CreateEdge(long.Parse(edge[0].ToString()), head, end, coat, edge[5].ToString(), bool.Parse(edge[1].ToString()), sign, police));
                 }
 
                 return bmp;

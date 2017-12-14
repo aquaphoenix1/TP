@@ -409,10 +409,12 @@ namespace TProject
                                 MakeMap.ViewPort.View.ContextMenuStrip = contextMenuVertex;
                                 if (MakeMap.ViewPort.SelectedVertex == Route.Start)
                                 {
+                                    wayToВToolStripMenuItem.Text = "Маршрут в...";
                                     wayFromToolStripMenuItem.Text = "Удалить флаг начала маршрута.";
                                 }
                                 else if (MakeMap.ViewPort.SelectedVertex == Route.End)
                                 {
+                                    wayFromToolStripMenuItem.Text = "Маршрут из...";
                                     wayToВToolStripMenuItem.Text = "Удалить флаг конца маршрута.";
                                 }
                                 else
@@ -563,6 +565,11 @@ namespace TProject
         {
             if (Route.Start == null)
             {
+                if (MakeMap.ViewPort.SelectedVertex == Route.End)
+                {
+                    Route.End = null;
+                }
+
                 MakeMap.ViewPort.SelectStartVertex(lastClickCoordX, lastClickCoordY);
             }
             else
@@ -601,6 +608,11 @@ namespace TProject
         {
             if (Route.End == null)
             {
+                if(MakeMap.ViewPort.SelectedVertex == Route.Start)
+                {
+                    Route.Start = null;
+                }
+
                 MakeMap.ViewPort.SelectEndVertex(lastClickCoordX, lastClickCoordY);
             }
             else

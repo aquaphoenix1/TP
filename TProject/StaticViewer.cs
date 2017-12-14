@@ -126,21 +126,21 @@ namespace TProject
                     {
                         graph.FillEllipse(new SolidBrush(Color.White),
                             (item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 + 24)
-                            , (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 11), Width * 2 + 3, Width * 2 + 3);
+                            , (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 4), Width * 2 + 3, Width * 2 + 3);
                         graph.DrawEllipse(new Pen(Color.Red, (float)(Width / 2 - 2)),
                             (item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 + 24)
-                            , (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 11), Width * 2 + 3, Width * 2 + 3);
+                            , (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 4), Width * 2 + 3, Width * 2 + 3);
 
 
                         graph.DrawString(item.SignMaxSpeed.Count.ToString(), new Font(font.FontFamily, 10f, FontStyle.Bold,
                            GraphicsUnit.Point, font.GdiCharSet), blackFontBrush,
                            (item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 + 26),
-                           (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 7));
+                           (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2));
                     }
                     if (!item.IsBilateral)
                     {
-                        graph.DrawImage(Resources.oneWaySign, new Rectangle(item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 + 54,
-                           (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2 - 11), Width * 2 + 3, Width * 2 + 3));
+                        graph.DrawImage(Resources.oneWaySign, new Rectangle(item.GetHead().X.UnScaling() + (item.GetEnd().X.UnScaling() - item.GetHead().X.UnScaling()) / 2 + 24,
+                           (item.GetHead().Y.UnScaling() + (item.GetEnd().Y.UnScaling() - item.GetHead().Y.UnScaling()) / 2-30), Width * 2 + 3, Width * 2 + 3));
                     }
                 }
             }
