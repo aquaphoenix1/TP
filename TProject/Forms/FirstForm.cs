@@ -43,6 +43,7 @@ namespace TProject.Forms
                 if (saForm.DialogResult == DialogResult.OK)
                 {
                     Main form = new Main();
+                    formMain = form;
                     form.Init(backPicture);
                     this.Hide();
                     form.ShowDialog();
