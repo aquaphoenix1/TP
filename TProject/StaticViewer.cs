@@ -15,6 +15,10 @@ namespace TProject
         /// Смещение курсора от центра точки
         /// </summary>
         public int dX, dY;
+
+        /// <summary>
+        /// Шрифт, наследуется от шрифта, используемого на главной форме
+        /// </summary>
         private Font font;
         /// <summary>
         /// Ширина точки
