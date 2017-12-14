@@ -116,6 +116,7 @@ namespace TProject
             }
 
             DialogResult = DialogResult.OK;
+            MakeMap.ViewPort.Invalidate();
             Close();
         }
 

@@ -563,6 +563,7 @@ namespace TProject
 
         private void ToolStripMenu_WayFrom_Click(object sender, EventArgs e)
         {
+            ClearWay();
             if (Route.Start == null)
             {
                 if (MakeMap.ViewPort.SelectedVertex == Route.End)
@@ -588,24 +589,12 @@ namespace TProject
             }
 
 
-            //{
-            //    if (Route.Start != null)
-            //    {
-            //        if (Route.Start == Viewer.ViewPort.SelectedVertex)
-            //            Route.Start = null;
-            //        else if (Route.End == Viewer.ViewPort.SelectedVertex)
-            //        {
-            //            Route.End = null;
-            //            Viewer.ViewPort.SelectStartVertex(lastClickCoordX, lastClickCoordY);
-            //        }
-            //    }
-            //    else
-            //        Viewer.ViewPort.SelectStartVertex(lastClickCoordX, lastClickCoordY);
             MakeMap.ViewPort.Invalidate();
         }
 
         private void ToolStripMenu_WayToВ_Click(object sender, EventArgs e)
         {
+            ClearWay();
             if (Route.End == null)
             {
                 if(MakeMap.ViewPort.SelectedVertex == Route.Start)
@@ -1062,28 +1051,7 @@ namespace TProject
             }
             return sa.DialogResult;
         }
-        /*public void Open(string name)
-        {
-            Vertexes vert = new Vertexes();
-            Edges edg = new Edges();
-
-            Image image = DAO.LoadMap(name, out vert, out edg) as Image;
-            if (image == null)
-            {
-                return;
-            }
-
-            Init(img: image);
-            Map.vertexes = vert;
-            Map.edges = edg;
-
-            Map.vertexes.RePaint += MakeMap.ViewPort.Invalidate;
-            Map.edges.RePaint += MakeMap.ViewPort.Invalidate;
-
-            ToolStripMenuItem_Save.Enabled = true;
-            ToolStripMenuItem_SaveAs.Enabled = true;
-            ToolStripMenuItem_ChooseSubstrate.Enabled = true;
-        }*/
+      
         private void ToolStripMenuItem_Open_Click(object sender, EventArgs e)
         {
             Open(Act.Load);
