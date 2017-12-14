@@ -136,14 +136,6 @@ namespace TProject
 
                             break;
                         }
-                    case "Штрафы":
-                        {
-                            dataGridViewDataBase.Columns.Add("name", "Название штрафа");
-                            dataGridViewDataBase.Columns.Add("cost", "Цена");
-
-                            FillGrid(Fine.ListFine);
-                            break;
-                        }
                     case "Водители":
                         {
                             dataGridViewDataBase.Columns.Add("name", "ФИО");
@@ -206,17 +198,6 @@ namespace TProject
                                     dataGridViewDataBase.Rows.Clear();
                                     FillGrid(Coating.ListSurface);
                                 }
-                            }
-                            break;
-                        }
-                    case "Штрафы":
-                        {
-                            IsChanged = false;
-                            new FineForm(true).ShowDialog();
-                            if (IsChanged)
-                            {
-                                dataGridViewDataBase.Rows.Clear();
-                                FillGrid(Fine.ListFine);
                             }
                             break;
                         }
@@ -322,18 +303,6 @@ namespace TProject
                                     MessageBox.Show("Невозможно удалить");
                                 }
                             }
-                            break;
-                        }
-                    case "Штрафы":
-                        {
-                            //if (new FineDAO().Delete(dataGridViewDataBase.CurrentRow.Cells[0].Value.ToString()))
-                            //{
-                            //    dataGridViewDataBase.Rows.RemoveAt(dataGridViewDataBase.CurrentRow.Index);
-                            //}
-                            //else
-                            //{
-                            //    MessageBox.Show("Невозможно удалить");
-                            //}
                             break;
                         }
                     case "Топливо":
@@ -845,20 +814,6 @@ namespace TProject
                             {
                                 dataGridViewDataBase.Rows.Clear();
                                 FillGrid(Coating.ListSurface);
-                            }
-
-                            break;
-                        }
-                    case "Штрафы":
-                        {
-                            string name = dataGridViewDataBase.SelectedRows[0].Cells["name"].Value.ToString();
-                            List<object> fine = Fine.ListFine.First(fin => fin[0].ToString().Equals(name));
-                            new FineForm(fine[0].ToString(), double.Parse(fine[1].ToString())).ShowDialog();
-
-                            if (IsChanged)
-                            {
-                                dataGridViewDataBase.Rows.Clear();
-                                FillGrid(Fine.ListFine);
                             }
 
                             break;
