@@ -588,7 +588,9 @@ namespace TProject
             else
             {
                 if (MakeMap.ViewPort.SelectedVertex == Route.Start)
+                {
                     Route.Start = null;
+                }
                 else if (MakeMap.ViewPort.SelectedVertex == Route.End)
                 {
                     Route.End = null;
@@ -624,7 +626,9 @@ namespace TProject
             else
             {
                 if (MakeMap.ViewPort.SelectedVertex == Route.End)
+                {
                     Route.End = null;
+                }
                 else if (MakeMap.ViewPort.SelectedVertex == Route.Start)
                 {
                     Route.Start = null;

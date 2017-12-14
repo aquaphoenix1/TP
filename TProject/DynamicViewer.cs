@@ -153,7 +153,9 @@ namespace TProject.Way
             if (path >= wayLengh)
             {
                 if (end.TrafficLight != null && !end.TrafficLight.IsGreen)
+                {
                     isWait = true;
+                }
                 else
                 {
                     isWait = false;
