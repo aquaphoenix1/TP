@@ -323,100 +323,56 @@ namespace TProject
 
         public void MakeStaticRoute()
         {
-          
+            Map.Way = new List<Vertex>();
 
-            if (Route.Way != null)
+            int k = 0;
+
+            while (k != Route.Way.Count - 1)
             {
-                Map.Way = new List<Vertex>();
+                Vertex first = null,
+                    second = null;
 
-                int k = 0;
-
-                while (k != Route.Way.Count - 1)
+                for (int i = 0; i < Map.vertexes.GetCountElements(); i++)
                 {
-                    Vertex first = null,
-                        second = null;
-
-                    for (int i = 0; i < Map.vertexes.GetCountElements(); i++)
+                    if (Map.vertexes.GetElement(i).ID == Route.Way[k])
                     {
-                        if (Map.vertexes.GetElement(i).ID == Route.Way[k])
-                        {
-                            first = Map.vertexes.GetElement(i);
-                            break;
-                        }
-                    }
-
-                    k++;
-
-                    for (int i = 0; i < Map.vertexes.GetCountElements(); i++)
-                    {
-                        if (Map.vertexes.GetElement(i).ID == Route.Way[k])
-                        {
-                            second = Map.vertexes.GetElement(i);
-                            break;
-                        }
-                    }
-
-                    Edge edge = Route.GetEdge(first, second, Map.edges);
-
-                    if (edge.GetHead().ID == Route.Way.ElementAt(k - 1))
-                    {
-                        Map.Way.Add(edge.GetHead());
-                        Map.Way.Add(edge.GetEnd());
-
-                        edge.IsInWay = true;
-                    }
-                    else
-                    {
-                        Map.Way.Add(edge.GetEnd());
-                        Map.Way.Add(edge.GetHead());
-
-                        edge.IsInWay = true;
+                        first = Map.vertexes.GetElement(i);
+                        break;
                     }
                 }
 
-                string criterial = (Route.Criterial == Main.Criterial.Length) ? "Длина" : (Route.Criterial == Main.Criterial.Price) ? "Цена" : "Время";
+                k++;
 
-                MessageBox.Show(string.Format("{0} пути {1}", criterial, Math.Round(Route.Value, 2).ToString()), "Цена маршрута");
-            }
-
-            /*if (Route.Way != null)
-            {
-                for (var  i = 0; i < Map.edges.GetCountElements(); i++)
+                for (int i = 0; i < Map.vertexes.GetCountElements(); i++)
                 {
-                    bool fl = false;
-                    int k = 0;
-                    while (!fl && k < Route.Way.Count - 1)
+                    if (Map.vertexes.GetElement(i).ID == Route.Way[k])
                     {
-                        if (fl = Map.edges.GetElement(i).GetHead().ID == Route.Way.ElementAt(k) &&
-                              Map.edges.GetElement(i).GetEnd().ID == Route.Way.ElementAt(k + 1) ||
-                              Map.edges.GetElement(i).GetHead().ID == Route.Way.ElementAt(k + 1) &&
-                              Map.edges.GetElement(i).GetEnd().ID == Route.Way.ElementAt(k))
-                        {
-                            if (Map.edges.GetElement(i).GetHead().ID == Route.Way.ElementAt(k))
-                            {
-                                Map.Way.Add(Map.edges.GetElement(i).GetHead());
-                                Map.Way.Add(Map.edges.GetElement(i).GetEnd());
-                            }
-                            else
-                            {
-                                Map.Way.Add(Map.edges.GetElement(i).GetEnd());
-                                Map.Way.Add(Map.edges.GetElement(i).GetHead());
-                            }
-                        }
-                        k++;
+                        second = Map.vertexes.GetElement(i);
+                        break;
                     }
-                    Map.edges.GetElement(i).IsInWay = fl;
                 }
-                string criterial = (Route.Criterial == Main.Criterial.Length) ? "Длина" : (Route.Criterial == Main.Criterial.Price) ? "Цена" : "Время";
 
-                MessageBox.Show(string.Format("{0} пути {1}", criterial, Math.Round(Route.Value, 2).ToString()), "Цена маршрута");
-            }*/
+                Edge edge = Route.GetEdge(first, second, Map.edges);
 
+                if (edge.GetHead().ID == Route.Way.ElementAt(k - 1))
+                {
+                    Map.Way.Add(edge.GetHead());
+                    Map.Way.Add(edge.GetEnd());
 
-            else
-            {
-                MessageBox.Show("Невозможно построить маршрут");
+                    edge.IsInWay = true;
+                }
+                else
+                {
+                    Map.Way.Add(edge.GetEnd());
+                    Map.Way.Add(edge.GetHead());
+
+                    edge.IsInWay = true;
+                }
             }
+
+            string criterial = (Route.Criterial == Main.Criterial.Length) ? "Длина" : (Route.Criterial == Main.Criterial.Price) ? "Цена" : "Время";
+
+            MessageBox.Show(string.Format("{0} пути {1}", criterial, Math.Round(Route.Value, 2).ToString()), "Цена маршрута");
 
             ViewPort.Invalidate();
         }
