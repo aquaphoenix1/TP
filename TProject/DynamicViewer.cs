@@ -19,8 +19,6 @@ namespace TProject.Way
         public int step;
         private double path;
 
-        static Dynamic dynamic;
-
 
         public Driver.Driver driver;
         public Point Drive;
@@ -31,7 +29,7 @@ namespace TProject.Way
         Vertex start;
         Vertex end;
 
-        public static Dynamic Dynamics { get => dynamic; set => dynamic = value; }
+        public static Dynamic Dynamics { get; set; }
 
         public Dynamic(Driver.Driver dr)
         {
