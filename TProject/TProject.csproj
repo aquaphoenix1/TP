@@ -261,6 +261,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\goodBadPolice.jpg" />
+    <None Include="Resources\badPolice.jpg" />
+    <None Include="Resources\goodPolice.jpg" />
     <None Include="Resources\oneWaySign.jpg" />
     <None Include="Resources\start.html" />
     <None Include="Resources\route.html" />

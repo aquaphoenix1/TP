@@ -61,6 +61,16 @@ namespace TProject.Properties {
         }
         
         /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap badPolice {
+            get {
+                object obj = ResourceManager.GetObject("badPolice", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на &lt;!DOCTYPE html&gt;
         ///&lt;html&gt;
         ///	&lt;head&gt;
@@ -155,6 +165,26 @@ namespace TProject.Properties {
         internal static string db {
             get {
                 return ResourceManager.GetString("db", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap goodBadPolice {
+            get {
+                object obj = ResourceManager.GetObject("goodBadPolice", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap goodPolice {
+            get {
+                object obj = ResourceManager.GetObject("goodPolice", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
