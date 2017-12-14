@@ -92,7 +92,7 @@ namespace TProject
             }
             else
             {
-                MessageBox.Show("Нарушение первичного ключа");
+                MessageBox.Show("Данная запись уже существует!");
             }
         }
 
@@ -105,7 +105,7 @@ namespace TProject
             }
             else
             {
-                MessageBox.Show("Нарушение первичного ключа");
+                MessageBox.Show("Данная запись уже существует!");
             }
         }
 

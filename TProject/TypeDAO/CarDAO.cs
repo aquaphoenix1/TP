@@ -13,11 +13,11 @@ namespace TProject.TypeDAO
             try
             {
                 Car c = (Car)obj;
-                new SQLiteCommand(string.Format("Insert into Auto values ('{0}','{1}',{2},{3})", c.TypeName, c.CarFuel.TypeName, c.FuelConsumption.ToString().Replace(',', '.'), c.Speed.ToString().Replace(',', '.')), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("Insert into Auto values ('{0}','{1}',{2},{3})", c.TypeName.ToLower(), c.CarFuel.TypeName, c.FuelConsumption.ToString().Replace(',', '.'), c.Speed.ToString().Replace(',', '.')), DAO.GetConnection()).ExecuteNonQuery();
 
                 List<object> list = new List<object>
                 {
-                    c.TypeName,
+                    c.TypeName.ToLower(),
                     c.CarFuel.TypeName,
                     c.FuelConsumption,
                     c.Speed
@@ -36,9 +36,9 @@ namespace TProject.TypeDAO
         {
             try
             {
-                new SQLiteCommand(string.Format("DELETE from Auto where Model = '{0}'", model), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("DELETE from Auto where Model = '{0}'", model.ToLower()), DAO.GetConnection()).ExecuteNonQuery();
 
-                Car.ListAuto.RemoveAll(l => l.ElementAt(0).ToString().Equals(model));
+                Car.ListAuto.RemoveAll(l => l.ElementAt(0).ToString().ToLower().Equals(model.ToLower()));
 
                 return true;
             }
@@ -53,12 +53,12 @@ namespace TProject.TypeDAO
             try
             {
                 Car c = (Car)obj;
-                new SQLiteCommand(string.Format("UPDATE Auto SET [Model] = '{0}', [Fuel] = '{1}', [Сonsumption] = {2}, [Speed] = {3} where Model = '{4}'", c.TypeName, c.CarFuel.TypeName, c.FuelConsumption.ToString().Replace(',', '.'), c.Speed.ToString().Replace(',', '.'), ID), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("UPDATE Auto SET [Model] = '{0}', [Fuel] = '{1}', [Сonsumption] = {2}, [Speed] = {3} where Model = '{4}'", c.TypeName.ToLower(), c.CarFuel.TypeName, c.FuelConsumption.ToString().Replace(',', '.'), c.Speed.ToString().Replace(',', '.'), ID), DAO.GetConnection()).ExecuteNonQuery();
 
-                var updatedCar = Car.ListAuto.FirstOrDefault(l => l.ElementAt(0).ToString().Equals(ID));
+                var updatedCar = Car.ListAuto.FirstOrDefault(l => l.ElementAt(0).ToString().ToLower().Equals(ID.ToLower()));
                 if (updatedCar != null)
                 {
-                    updatedCar[0] = c.TypeName;
+                    updatedCar[0] = c.TypeName.ToLower();
                     updatedCar[1] = c.CarFuel.TypeName;
                     updatedCar[2] = c.FuelConsumption;
                     updatedCar[3] = c.Speed;

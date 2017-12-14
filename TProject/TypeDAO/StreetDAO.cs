@@ -11,11 +11,11 @@ namespace TProject.TypeDAO
             try
             {
                 string str = obj.ToString();
-                new SQLiteCommand(string.Format("Insert into Street values ('{0}')", str), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("Insert into Street values ('{0}')", str.ToLower()), DAO.GetConnection()).ExecuteNonQuery();
 
                 System.Collections.Generic.List<object> list = new System.Collections.Generic.List<object>
                 {
-                    str
+                    str.ToLower()
                 };
 
                 Graph.Edge.StreetList.Add(list);
@@ -32,9 +32,9 @@ namespace TProject.TypeDAO
         {
             try
             {
-                new SQLiteCommand(string.Format("DELETE from Street where Name = '{0}'", name), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("DELETE from Street where Name = '{0}'", name.ToLower()), DAO.GetConnection()).ExecuteNonQuery();
 
-                Graph.Edge.StreetList.RemoveAll(l => l.ElementAt(0).ToString().Equals(name));
+                Graph.Edge.StreetList.RemoveAll(l => l.ElementAt(0).ToString().ToLower().Equals(name.ToLower()));
 
                 return true;
             }
@@ -48,9 +48,9 @@ namespace TProject.TypeDAO
         {
             try
             {
-                new SQLiteCommand(string.Format("UPDATE Street SET [Name] = '{0}' where Name = '{1}'", obj.ToString(), ID), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("UPDATE Street SET [Name] = '{0}' where Name = '{1}'", obj.ToString().ToLower(), ID.ToLower()), DAO.GetConnection()).ExecuteNonQuery();
 
-                var updatedStreet = Graph.Edge.StreetList.First(l => l.ElementAt(0).ToString().Equals(ID));
+                var updatedStreet = Graph.Edge.StreetList.First(l => l.ElementAt(0).ToString().ToLower().Equals(ID.ToLower()));
                 if (updatedStreet != null)
                 {
                     updatedStreet[0] = obj;

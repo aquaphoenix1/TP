@@ -13,11 +13,11 @@ namespace TProject.TypeDAO
             try
             {
                 Fuel f = (Fuel)obj;
-                new SQLiteCommand(string.Format("Insert into Fuel values ('{0}', {1})", f.TypeName, f.Price.ToString().Replace(',', '.')), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("Insert into Fuel values ('{0}', {1})", f.TypeName.ToLower(), f.Price.ToString().Replace(',', '.')), DAO.GetConnection()).ExecuteNonQuery();
 
                 List<object> list = new List<object>
                 {
-                    f.TypeName,
+                    f.TypeName.ToLower(),
                     f.Price
                 };
                 Fuel.ListFuel.Add(list);
@@ -34,9 +34,9 @@ namespace TProject.TypeDAO
         {
             try
             {
-                new SQLiteCommand(string.Format("DELETE from Fuel where Name = '{0}'", name), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("DELETE from Fuel where Name = '{0}'", name.ToLower()), DAO.GetConnection()).ExecuteNonQuery();
 
-                Fuel.ListFuel.RemoveAll(l => l.ElementAt(0).ToString().Equals(name));
+                Fuel.ListFuel.RemoveAll(l => l.ElementAt(0).ToString().ToLower().Equals(name.ToLower()));
 
                 return true;
             }
@@ -51,12 +51,12 @@ namespace TProject.TypeDAO
             try
             {
                 Fuel f = (Fuel)obj;
-                new SQLiteCommand(string.Format("UPDATE Fuel SET [Name] = '{0}', [Cost] = {1} where Name = '{2}'", f.TypeName, f.Price.ToString().Replace(',', '.'), ID), DAO.GetConnection()).ExecuteNonQuery();
+                new SQLiteCommand(string.Format("UPDATE Fuel SET [Name] = '{0}', [Cost] = {1} where Name = '{2}'", f.TypeName.ToLower(), f.Price.ToString().Replace(',', '.'), ID), DAO.GetConnection()).ExecuteNonQuery();
 
-                var updatedFuel = Fuel.ListFuel.FirstOrDefault(l => l.ElementAt(0).ToString().Equals(ID));
+                var updatedFuel = Fuel.ListFuel.FirstOrDefault(l => l.ElementAt(0).ToString().ToLower().Equals(ID.ToLower()));
                 if (updatedFuel != null)
                 {
-                    updatedFuel[0] = f.TypeName;
+                    updatedFuel[0] = f.TypeName.ToLower();
                     updatedFuel[1] = f.Price;
                 }
 
