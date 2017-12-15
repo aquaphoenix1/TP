@@ -97,7 +97,7 @@ namespace TProject
         private Edge selectedEdge = null;
         public Edge SelectedEdge => selectedEdge;
 
-        public ToolStripStatusLabel StatusLabel { get => statusLabel; set => statusLabel = value; }
+        public ToolStripStatusLabel StatusLabel { get; set; }
 
         /// <summary>
         /// Создает контроллер создания и управления картой
