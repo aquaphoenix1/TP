@@ -172,11 +172,15 @@ namespace TProject
                 ToolStripMenuItem_Route.Enabled = true;
 
                 comboBoxSelectTable.SelectedItem = null;
+                MakeMap.ViewPort.StatusLabel.Visible = true;
+                panel1.Visible = true;
             }
             else
             {
+                MakeMap.ViewPort.StatusLabel.Visible = false;
                 toolStripMenuItem_Main.Enabled = false;
                 ToolStripMenuItem_Route.Enabled = false;
+                panel1.Visible = false;
             }
         }
 
@@ -698,6 +702,8 @@ namespace TProject
             MakeMap.ViewPort.View.MouseUp += Сalibration_MouseUp;
 
             MakeMap.ViewPort.View.Paint += View_Paint;
+
+            MakeMap.ViewPort.StatusLabel.Text = "Калибровка...";
         }
 
         private void Button_Ok_Сalibration_Click(object sender, EventArgs e)
@@ -719,7 +725,7 @@ namespace TProject
             button_Ok_Сalibration.Enabled = false;
             button_Calibration.Enabled = true;
 
-            MakeMap.ViewPort.StatusLabel.Text = "Масштаб карты отмасштабирован...";
+            MakeMap.ViewPort.StatusLabel.Text = "Масштаб карты откалиброван...";
         }
 
         private void Calibration(double value)
@@ -1100,11 +1106,13 @@ namespace TProject
         private void ToolStripMenuItem_Save_Click(object sender, EventArgs e)
         {
             DAO.InsertMap(Map.vertexes, Map.edges, MakeMap.ViewPort.View.Image, Map.Name);
+            MakeMap.ViewPort.StatusLabel.Text = "Карта сохранена...";
         }
 
         private void ToolStripMenuItem_SaveAS_Click(object sender, EventArgs e)
         {
             SaveAs();
+            MakeMap.ViewPort.StatusLabel.Text = "Карта сохранена...";
         }
 
         public string SaveAs()
@@ -1140,6 +1148,7 @@ namespace TProject
                 ToolStripMenuItem_SaveAs.Enabled = true;
                 ToolStripMenuItem_ChooseSubstrate.Enabled = true;
             }
+            MakeMap.ViewPort.StatusLabel.Text = "Карта открыта";
             return sa.DialogResult;
         }
 
@@ -1259,6 +1268,11 @@ namespace TProject
             Route.CurrentDriver = null;
 
             DialogResult = DialogResult.Abort;
+        }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

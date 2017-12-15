@@ -52,6 +52,7 @@
             this.button_Ok_Сalibration = new System.Windows.Forms.Button();
             this.button_Calibration = new System.Windows.Forms.Button();
             this.panelSlide = new System.Windows.Forms.Panel();
+            this.label_Layers = new TProject.VerticalLabel();
             this.labelSlide = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkBox_StreetName = new System.Windows.Forms.CheckBox();
@@ -91,9 +92,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button_OffConfig = new System.Windows.Forms.Button();
             this.button_OnConfig = new System.Windows.Forms.Button();
-            this.label_Layers = new TProject.VerticalLabel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMap)).BeginInit();
             this.contextMenuVertex.SuspendLayout();
             this.tabPageWorkWithBD.SuspendLayout();
@@ -109,6 +110,7 @@
             this.contextMenuEdge.SuspendLayout();
             this.contextMenuMap.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBoxMap
@@ -349,6 +351,17 @@
             this.panelSlide.Size = new System.Drawing.Size(25, 298);
             this.panelSlide.TabIndex = 1;
             this.panelSlide.Click += new System.EventHandler(this.PanelSlide_Click);
+            // 
+            // label_Layers
+            // 
+            this.label_Layers.AutoSize = true;
+            this.label_Layers.Location = new System.Drawing.Point(3, 111);
+            this.label_Layers.Name = "label_Layers";
+            this.label_Layers.NewText = null;
+            this.label_Layers.RotateAngle = 0;
+            this.label_Layers.Size = new System.Drawing.Size(73, 13);
+            this.label_Layers.TabIndex = 1;
+            this.label_Layers.Text = "verticalLabel1";
             // 
             // labelSlide
             // 
@@ -688,7 +701,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(536, 365);
+            this.label1.Location = new System.Drawing.Point(1, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(131, 13);
             this.label1.TabIndex = 19;
@@ -697,7 +710,7 @@
             // button_OffConfig
             // 
             this.button_OffConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_OffConfig.Location = new System.Drawing.Point(673, 361);
+            this.button_OffConfig.Location = new System.Drawing.Point(138, 2);
             this.button_OffConfig.Name = "button_OffConfig";
             this.button_OffConfig.Size = new System.Drawing.Size(46, 21);
             this.button_OffConfig.TabIndex = 18;
@@ -709,24 +722,13 @@
             // 
             this.button_OnConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button_OnConfig.Enabled = false;
-            this.button_OnConfig.Location = new System.Drawing.Point(717, 361);
+            this.button_OnConfig.Location = new System.Drawing.Point(182, 2);
             this.button_OnConfig.Name = "button_OnConfig";
             this.button_OnConfig.Size = new System.Drawing.Size(42, 21);
             this.button_OnConfig.TabIndex = 17;
             this.button_OnConfig.Text = "Вкл.";
             this.button_OnConfig.UseVisualStyleBackColor = true;
             this.button_OnConfig.Click += new System.EventHandler(this.Button_OnConfig_Click);
-            // 
-            // label_Layers
-            // 
-            this.label_Layers.AutoSize = true;
-            this.label_Layers.Location = new System.Drawing.Point(3, 111);
-            this.label_Layers.Name = "label_Layers";
-            this.label_Layers.NewText = null;
-            this.label_Layers.RotateAngle = 0;
-            this.label_Layers.Size = new System.Drawing.Size(73, 13);
-            this.label_Layers.TabIndex = 1;
-            this.label_Layers.Text = "verticalLabel1";
             // 
             // statusStrip1
             // 
@@ -744,21 +746,34 @@
             this.toolStripStatusLabel.Size = new System.Drawing.Size(60, 17);
             this.toolStripStatusLabel.Text = "Готово.....";
             // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.button_OffConfig);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.button_OnConfig);
+            this.panel1.Location = new System.Drawing.Point(528, 359);
+            this.panel1.MinimumSize = new System.Drawing.Size(225, 23);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(225, 23);
+            this.panel1.TabIndex = 22;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(778, 382);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button_OffConfig);
-            this.Controls.Add(this.button_OnConfig);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip2);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.statusStrip1);
+            this.MinimumSize = new System.Drawing.Size(794, 421);
             this.Name = "Main";
             this.ShowIcon = false;
             this.Text = "Поиск оптимального маршрута";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
+            this.Load += new System.EventHandler(this.Main_Load);
             this.SizeChanged += new System.EventHandler(this.Main_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMap)).EndInit();
             this.contextMenuVertex.ResumeLayout(false);
@@ -781,6 +796,8 @@
             this.contextMenuMap.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -853,5 +870,6 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_ClearWay;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
+        private System.Windows.Forms.Panel panel1;
     }
 }
