@@ -117,4 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="richTextBox1.Text" xml:space="preserve">
+    <value>        Разработчики системы - студенты группы 6401-090301D:
+	Бербасов О.Д.
+	Лякишев	А.А.
+	Михеева А.А.
+	Тараторкин Д.О.
+       Руководитель: Зеленко Л.С.
+
+
+федеральное государственное автономное образовательное
+ учреждение высшего образования
+«Самарский национальный исследовательский университет
+ имени академика С.П. Королева»</value>
+  </data>
 </root>
