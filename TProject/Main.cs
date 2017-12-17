@@ -1027,19 +1027,19 @@ namespace TProject
                 {
                     ToolStripMenuItem_DynamicView.Enabled = false;
                     ToolStripMenuItem_StaticView.Enabled = false;
-                    ToolStripMenuItem_ClearWay.Enabled = false;
+                    //ToolStripMenuItem_ClearWay.Enabled = false;
                     ToolStripMenuItem_RouteParameters.Enabled = false;
-                    if (Map.Way != null && Map.Way.Count != 0)
-                    {
-                        ToolStripMenuItem_ClearWay.Enabled = false;
-                    }
+                   // if (Map.Way != null && Map.Way.Count != 0)
+                   // {
+                   ////    ToolStripMenuItem_ClearWay.Enabled = false;
+                   // }
                 }
                 else
                 {
-                    if (Map.Way != null && Map.Way.Count != 0)
-                    {
-                        ToolStripMenuItem_ClearWay.Enabled = true;
-                    }
+                //    if (Map.Way != null && Map.Way.Count != 0)
+                //    {
+                //        ToolStripMenuItem_ClearWay.Enabled = true;
+                //    }
 
                     ToolStripMenuItem_DynamicView.Enabled = true;
                     ToolStripMenuItem_StaticView.Enabled = true;
@@ -1202,6 +1202,9 @@ namespace TProject
             ToolStripMenuItem_DeleteVertex.Enabled = true;
             ToolStripMenuItem_DeleteVertex.Visible = true;
 
+
+            ClearWay();
+
             ToolStripMenuItem_Route.Enabled = false;
 
             Route.Start = null;
@@ -1250,7 +1253,7 @@ namespace TProject
 
             ToolStripMenuItem_StaticView.Enabled = false;
             ToolStripMenuItem_DynamicView.Enabled = false;
-            ToolStripMenuItem_ClearWay.Enabled = false;
+            //ToolStripMenuItem_ClearWay.Enabled = false;
         }
 
         /// <summary>

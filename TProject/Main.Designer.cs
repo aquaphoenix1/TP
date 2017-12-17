@@ -83,7 +83,6 @@
             this.ToolStripMenuItem_RouteParameters = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_StaticView = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_DynamicView = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItem_ClearWay = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuEdge = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_DeleteEdge = new System.Windows.Forms.ToolStripMenuItem();
@@ -626,8 +625,7 @@
             this.ToolStripMenuItem_Route.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolStripMenuItem_RouteParameters,
             this.ToolStripMenuItem_StaticView,
-            this.ToolStripMenuItem_DynamicView,
-            this.ToolStripMenuItem_ClearWay});
+            this.ToolStripMenuItem_DynamicView});
             this.ToolStripMenuItem_Route.Name = "ToolStripMenuItem_Route";
             this.ToolStripMenuItem_Route.Size = new System.Drawing.Size(72, 20);
             this.ToolStripMenuItem_Route.Text = "Маршрут";
@@ -653,13 +651,6 @@
             this.ToolStripMenuItem_DynamicView.Size = new System.Drawing.Size(215, 22);
             this.ToolStripMenuItem_DynamicView.Text = "Отобразить динамически";
             this.ToolStripMenuItem_DynamicView.Click += new System.EventHandler(this.ToolStripMenuItem_DynamicView_Click);
-            // 
-            // ToolStripMenuItem_ClearWay
-            // 
-            this.ToolStripMenuItem_ClearWay.Name = "ToolStripMenuItem_ClearWay";
-            this.ToolStripMenuItem_ClearWay.Size = new System.Drawing.Size(215, 22);
-            this.ToolStripMenuItem_ClearWay.Text = "Очистить маршрут";
-            this.ToolStripMenuItem_ClearWay.Click += new System.EventHandler(this.ToolStripMenuItem_Click_ClearWay);
             // 
             // contextMenuEdge
             // 
@@ -867,7 +858,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button_OffConfig;
         private System.Windows.Forms.Button button_OnConfig;
-        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_ClearWay;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.Panel panel1;
