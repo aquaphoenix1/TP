@@ -598,6 +598,7 @@ namespace TProject
                 }
 
                 MakeMap.ViewPort.SelectStartVertex(lastClickCoordX, lastClickCoordY);
+                MakeMap.ViewPort.StatusLabel.Text = "Выбрано начало маршрута...";
             }
             else
             {
@@ -609,10 +610,12 @@ namespace TProject
                 {
                     Route.End = null;
                     MakeMap.ViewPort.SelectStartVertex(lastClickCoordX, lastClickCoordY);
+                    MakeMap.ViewPort.StatusLabel.Text = "Выбрано начало маршрута...";
                 }
                 else
                 {
                     MakeMap.ViewPort.SelectStartVertex(lastClickCoordX, lastClickCoordY);
+                    MakeMap.ViewPort.StatusLabel.Text = "Выбрано начало маршрута...";
                 }
             }
 
@@ -636,7 +639,7 @@ namespace TProject
                 }
 
                 MakeMap.ViewPort.SelectEndVertex(lastClickCoordX, lastClickCoordY);
-                MakeMap.ViewPort.StatusLabel.Text = "Выбрано начало маршрута...";
+                MakeMap.ViewPort.StatusLabel.Text = "Выбрана точка прибытия...";
             }
             else
             {
@@ -648,12 +651,12 @@ namespace TProject
                 {
                     Route.Start = null;
                     MakeMap.ViewPort.SelectEndVertex(lastClickCoordX, lastClickCoordY);
-                    MakeMap.ViewPort.StatusLabel.Text = "Выбрано начало маршрута...";
+                    MakeMap.ViewPort.StatusLabel.Text = "Выбрана точка прибытия...";
                 }
                 else
                 {
                     MakeMap.ViewPort.SelectEndVertex(lastClickCoordX, lastClickCoordY);
-                    MakeMap.ViewPort.StatusLabel.Text = "Выбрано начало маршрута...";
+                    MakeMap.ViewPort.StatusLabel.Text = "Выбрана точка прибытия...";
                 }
             }
 
