@@ -38,11 +38,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox1.Location = new System.Drawing.Point(12, 12);
-            this.richTextBox1.MaximumSize = new System.Drawing.Size(371, 185);
             this.richTextBox1.MinimumSize = new System.Drawing.Size(371, 114);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(371, 185);
+            this.richTextBox1.Size = new System.Drawing.Size(421, 204);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             // 
@@ -50,10 +49,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(395, 213);
+            this.ClientSize = new System.Drawing.Size(445, 228);
             this.Controls.Add(this.richTextBox1);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(411, 252);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(411, 177);
             this.Name = "AboutDeveloperForm";
